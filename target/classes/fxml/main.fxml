@@ -31,7 +31,7 @@
 				<Button fx:id="HC" text="Histórico de Clientes" styleClass="menu-items" onAction="#ClickHistorico"/>
 			</VBox>
 			
-			<!-- Content -->
+			<!-- Conteúdo Dinâmico entra aqui ao ser clicado  -->
 			<VBox fx:id="contentBox" styleClass="Content" xmlns:fx="http://javafx.com/fxml">
 
 			</VBox>

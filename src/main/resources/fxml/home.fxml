@@ -3,6 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<!-- Contéudo da Página inicial (ainda não sei o que colocar) -->
 <VBox xmlns:fx="http://javafx.com/fxml" alignment="CENTER">
     <Label text="Bem vindo, usuário!" styleClass="Welcome" />
 </VBox>

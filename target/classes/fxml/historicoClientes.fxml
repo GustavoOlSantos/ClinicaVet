@@ -3,6 +3,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<!-- 
+	• Implementar a tabela com a lista de TODOS os clientes  aqui
+	• Tabela com os clientes ativos, cancelados e finalizados obtidos do MySQL
+		• Dados Básicos, nome, telefone, pets, status pagamento e status
+		• Botão para ver todos os dados, como se fosse em uma folha 
+	• Input para pesquisar um cliente
+-->
 <VBox xmlns:fx="http://javafx.com/fxml" alignment="CENTER">
     <Label text="Histórico!" styleClass="Welcome" />
 </VBox>
