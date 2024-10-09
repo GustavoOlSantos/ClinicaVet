@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Built-By: casa
+Built-By: Gustavo Profissional
 Build-Jdk: 21.0.3
 Main-Class: sistem.vet.Main
 Created-By: Maven Integration for Eclipse

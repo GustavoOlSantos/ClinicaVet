@@ -26,15 +26,9 @@
 		<HBox styleClass="Container" xmlns:fx="http://javafx.com/fxml">
 			<VBox styleClass="Left-menu" xmlns:fx="http://javafx.com/fxml">
         		
-        		<Button text="Página Inicial" styleClass="menu-itemss" 		onAction="#ClickHome"/>		
-				<Button text="Lista de Clientes" styleClass="menu-items" 	onAction="#ClickLista"/>
-				<Button text="Histórico de Clientes" styleClass="menu-items" onAction="#ClickHistorico"/>
-				
-				
-				<children>
-			        <Button layoutX="128.0" layoutY="107.0" onAction="#btnClickAction" text="Click Me!" />
-			        <Label fx:id="lblOut" layoutX="53.0" layoutY="30.0" minHeight="16" minWidth="69" prefHeight="52.0" prefWidth="215.0" />
-			    </children>
+        		<Button fx:id="PI" text="Página Inicial" styleClass="menu-itemss" 		onAction="#ClickHome"/>		
+				<Button fx:id="LC" text="Lista de Clientes" styleClass="menu-items" 	onAction="#ClickLista"/>
+				<Button fx:id="HC" text="Histórico de Clientes" styleClass="menu-items" onAction="#ClickHistorico"/>
 			</VBox>
 			
 			<!-- Content -->
