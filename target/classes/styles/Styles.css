@@ -38,42 +38,80 @@
 }
 
 .Left-menu{
-	-fx-pref-width: 300; /* Largura preferencial */
-    -fx-min-width: 200;  /* Largura mínima */
-    -fx-max-width: 400;  /* Largura máxima */
+	-fx-pref-width: 350; /* Largura preferencial */
+    -fx-min-width: 250;  /* Largura mínima */
+    -fx-max-width: 450;  /* Largura máxima */
 	-fx-pref-height: 100%; /* Garante que o VBox prefira 100% da altura */
 	-fx-background-color: #9e9e9e;
 }
 
+
+.menu-items-opener{
+	
+	-fx-pref-width: 350; /* Largura preferencial */
+    -fx-pref-height: 200;
+	-fx-padding: 15 0 15 15;
+    -fx-background-color: transparent;
+    
+}
+
+.menu-opener{
+	-fx-pref-width: 200; /* Largura preferencial */
+    -fx-pref-height: 50;
+    
+	-fx-font-size: 20px;
+	-fx-font-weight: bold;
+	-fx-text-fill: #fff;
+	
+	-fx-background-color: transparent;
+	-fx-padding: 0 0 0 10;
+	-fx-alignment: CENTER_LEFT; /* Aligns the text to the left */
+}
+
 .menu-items{
 	
-	-fx-pref-width: 300; /* Largura preferencial */
-    -fx-min-width: 200;  /* Largura mínima */
-    -fx-max-width: 400;  /* Largura máxima */
+	-fx-pref-width: 350; /* Largura preferencial */
+    -fx-min-width: 250;  /* Largura mínima */
+    -fx-max-width: 450;  /* Largura máxima */
+    -fx-pref-height: 50;
     
-	-fx-font-size: 16px;
+	-fx-font-size: 14px;
 	-fx-font-weight: bold;
 	-fx-text-fill: #fff;
 	-fx-padding: 15 0 15 15;
-	-fx-border-width: 0 0 1 0; /* Define apenas a borda inferior */
-    -fx-border-color: #858585;    /* Define a cor da borda */
-    -fx-border-style: solid;     /* Define o estilo da borda */
     -fx-background-color: #9e9e9e;
+    
+    -fx-alignment: CENTER;
 }
 
 .menu-itemss{
-	-fx-pref-width: 300; /* Largura preferencial */
+	-fx-pref-width: 350; /* Largura preferencial */
+    -fx-min-width: 250;  /* Largura mínima */
+    -fx-max-width: 450;  /* Largura máxima */
+    -fx-pref-height: 50;
+    
+	-fx-font-size: 14px;
+	-fx-font-weight: bold;
+	-fx-text-fill: #fff;
+	-fx-padding: 15 0 15 15;
+	-fx-background-color: #646464;
+	
+	-fx-alignment: CENTER;
+}
+
+.menu-buttons{
+	-fx-pref-width: 200; /* Largura preferencial */
     -fx-min-width: 200;  /* Largura mínima */
-    -fx-max-width: 400;  /* Largura máxima */
+    -fx-max-width: 200;  /* Largura máxima */
+    -fx-pref-height: 50;
     
 	-fx-font-size: 16px;
 	-fx-font-weight: bold;
 	-fx-text-fill: #fff;
-	-fx-padding: 15 0 15 15;
-	-fx-border-width: 0 0 1 0; /* Define apenas a borda inferior */
-    -fx-border-color: #858585;    /* Define a cor da borda */
-    -fx-border-style: solid;     /* Define o estilo da borda */
-	-fx-background-color: #646464;
+	-fx-background-color: transparent;
+	
+	-fx-padding: 0 0 0 10;
+	-fx-alignment: CENTER_LEFT; /* Aligns the text to the left */
 }
 
 .menu-items:hover{

@@ -33,6 +33,7 @@ public class App extends Application {
         scene.getStylesheets().add(App.class.getResource("/styles/Styles.css").toExternalForm());
         
         stage.setTitle(title);
+        //stage.getIcons().add(new Image("/path/to/javaicon.png")); //=> Ícone Personalizado
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.setResizable(true);

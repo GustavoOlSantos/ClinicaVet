@@ -12,7 +12,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class MainController implements Initializable {
@@ -20,11 +20,11 @@ public class MainController implements Initializable {
     @FXML
     public VBox contentBox; // This should be the VBox where you want to load the content
     @FXML
-    public Button PI;
+    public HBox PI;
     @FXML
-    public Button LC;
+    public HBox LC;
     @FXML
-    public Button HC;
+    public HBox HC;
     
     @FXML
     public void ClickHome() {

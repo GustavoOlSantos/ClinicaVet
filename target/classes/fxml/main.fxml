@@ -3,6 +3,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.image.ImageView?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import org.kordamp.ikonli.javafx.StackedFontIcon?>
 
 <AnchorPane id="Welcome" prefWidth="Infinity" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.2-internal" fx:controller="sistem.vet.controllers.MainController">
     
@@ -26,9 +28,28 @@
 		<HBox styleClass="Container" xmlns:fx="http://javafx.com/fxml">
 			<VBox styleClass="Left-menu" xmlns:fx="http://javafx.com/fxml">
         		
-        		<Button fx:id="PI" text="Página Inicial" styleClass="menu-itemss" 		onAction="#ClickHome"/>		
-				<Button fx:id="LC" text="Lista de Clientes" styleClass="menu-items" 	onAction="#ClickLista"/>
-				<Button fx:id="HC" text="Histórico de Clientes" styleClass="menu-items" onAction="#ClickHistorico"/>
+        		<VBox fx:id="" styleClass="menu-items-opener" alignment="TOP_LEFT">
+        			
+        			<HBox alignment="CENTER_LEFT" layoutX="0" layoutY="0">
+		        		<FontIcon iconLiteral="fa-bars" iconColor="white" iconSize="35"/>
+		        		<Button text="Menu" styleClass="menu-opener" onAction="#ClickHome"/>	
+	        		</HBox>	
+        		</VBox>  
+        		
+   				<HBox fx:id="PI" styleClass="menu-itemss">
+	        		<FontIcon iconLiteral="fa-home" iconColor="white" iconSize="25"/>
+	        		<Button text="Página Inicial" styleClass="menu-buttons" onAction="#ClickHome"/>		
+        		</HBox>     
+        		
+        		<HBox fx:id="LC" styleClass="menu-items">
+	        		<FontIcon iconLiteral="fa-list" iconColor="white" iconSize="25"/>
+	        		<Button text="Lista de Clientes" styleClass="menu-buttons" onAction="#ClickLista"/>
+        		</HBox>     
+        		
+        		<HBox fx:id="HC" styleClass="menu-items">
+	        		<FontIcon iconLiteral="fa-book" iconColor="white" iconSize="28"/>
+	        		<Button text="Histórico de Clientes" styleClass="menu-buttons" onAction="#ClickHistorico"/>
+        		</HBox>     	
 			</VBox>
 			
 			<!-- Conteúdo Dinâmico entra aqui ao ser clicado  -->
