@@ -26,29 +26,29 @@
 	<HBox styleClass="Body" xmlns:fx="http://javafx.com/fxml" prefHeight="Infinity" prefWidth="Infinity" AnchorPane.topAnchor="50" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
 		
 		<HBox styleClass="Container" xmlns:fx="http://javafx.com/fxml">
-			<VBox styleClass="Left-menu" xmlns:fx="http://javafx.com/fxml">
+			<VBox fx:id="leftMenu" styleClass="Left-menu" xmlns:fx="http://javafx.com/fxml">
         		
-        		<VBox fx:id="" styleClass="menu-items-opener" alignment="TOP_LEFT">
+        		<VBox styleClass="menu-items-opener" alignment="TOP_LEFT">
         			
-        			<HBox alignment="CENTER_LEFT" layoutX="0" layoutY="0">
+        			<HBox fx:id="MenuBox" alignment="CENTER_LEFT" layoutX="0" layoutY="0" onMouseClicked="#ClickMenu">
 		        		<FontIcon iconLiteral="fa-bars" iconColor="white" iconSize="35"/>
-		        		<Button text="Menu" styleClass="menu-opener" onAction="#ClickHome"/>	
+		        		<Label text="Menu" styleClass="menu-opener"/>	
 	        		</HBox>	
         		</VBox>  
         		
-   				<HBox fx:id="PI" styleClass="menu-itemss">
+   				<HBox fx:id="PI" styleClass="menu-itemss" onMouseClicked="#ClickHome">
 	        		<FontIcon iconLiteral="fa-home" iconColor="white" iconSize="25"/>
-	        		<Button text="Página Inicial" styleClass="menu-buttons" onAction="#ClickHome"/>		
+	        		<Label text="Página Inicial" styleClass="menu-buttons"/>		
         		</HBox>     
         		
-        		<HBox fx:id="LC" styleClass="menu-items">
+        		<HBox fx:id="LC" styleClass="menu-items" onMouseClicked="#ClickLista">
 	        		<FontIcon iconLiteral="fa-list" iconColor="white" iconSize="25"/>
-	        		<Button text="Lista de Clientes" styleClass="menu-buttons" onAction="#ClickLista"/>
+	        		<Label text="Lista de Clientes" styleClass="menu-buttons"/>
         		</HBox>     
         		
-        		<HBox fx:id="HC" styleClass="menu-items">
+        		<HBox fx:id="HC" styleClass="menu-items" onMouseClicked="#ClickHistorico">
 	        		<FontIcon iconLiteral="fa-book" iconColor="white" iconSize="28"/>
-	        		<Button text="Histórico de Clientes" styleClass="menu-buttons" onAction="#ClickHistorico"/>
+	        		<Label text="Histórico de Clientes" styleClass="menu-buttons"/>
         		</HBox>     	
 			</VBox>
 			
