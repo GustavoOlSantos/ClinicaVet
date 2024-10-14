@@ -30,10 +30,10 @@ public class App extends Application {
     static void setRoot(String fxml, String title) throws IOException {
         Scene scene = new Scene(loadFXML(fxml));
         
-        scene.getStylesheets().add(App.class.getResource("/styles/Styles.css").toExternalForm());
-        
+        scene.getStylesheets().add(App.class.getResource("/styles/Styles.css").toExternalForm());  
+    
         stage.setTitle(title);
-        //stage.getIcons().add(new Image("/path/to/javaicon.png")); //=> Ícone Personalizado
+        stage.getIcons().add(new Image("file:src/main/resources/imgs/app-icon.png"));
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.setResizable(true);

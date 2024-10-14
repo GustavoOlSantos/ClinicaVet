@@ -10,8 +10,12 @@
     
     <!-- header -->
     <HBox styleClass="Header" xmlns:fx="http://javafx.com/fxml" prefWidth="Infinity" alignment="CENTER_LEFT" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+
+    	<HBox styleClass="header-logo">
+    	<!-- <Label text="LOGO" styleClass="header-logo" /> -->
+    		<ImageView fx:id="LOGO" styleClass="header-logo"/>
+    	</HBox>
     	
-    	<Label text="LOGO" styleClass="header-logo" />
     	<Label text="Clínica Veterinária" styleClass="header-title" />
     	
     	<HBox spacing="20">
