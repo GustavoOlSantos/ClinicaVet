@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<!-- 
+	• Implementar a tabela com a lista de TODOS os pacientes ATIVOS  aqui
+	• Tabela com os pets ativos (pagamento pendente, algum retorno pendente, trabalhando, internados) obtidos do MySQL
+		• Dados Básicos, nome do pet, tipo, situação(Pendencia, Internação e classe, trabalhando)
+		• Botão para ver todos os dados, como se fosse em uma folha 
+	• Input para pesquisar um pet
+-->
+<VBox xmlns:fx="http://javafx.com/fxml" alignment="CENTER">
+    <Label text="Pacientes!" styleClass="Welcome" />
+</VBox>

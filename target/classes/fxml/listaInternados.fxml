@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<!-- 
+	• Implementar a tabela com a lista dos pets atualmente Internados
+	• Tabela com pets ainda ativos, com serviço internado 
+		• Dados Básicos, nome do pet, tipo, urgência, data de entrada, previsao de saída e ficha
+		• Botão para ver todos os dados, como se fosse em uma folha (ficha)
+	• Input para pesquisar um pet (opcional)
+-->
+<VBox xmlns:fx="http://javafx.com/fxml" alignment="CENTER">
+    <Label text="Internados!" styleClass="Welcome" />
+</VBox>

@@ -48,12 +48,17 @@
         		<HBox fx:id="LC" styleClass="menu-items" onMouseClicked="#ClickLista">
 	        		<FontIcon iconLiteral="fa-list" iconColor="white" iconSize="25"/>
 	        		<Label text="Lista de Clientes" styleClass="menu-buttons"/>
-        		</HBox>     
+        		</HBox> 
         		
-        		<HBox fx:id="HC" styleClass="menu-items" onMouseClicked="#ClickHistorico">
-	        		<FontIcon iconLiteral="fa-book" iconColor="white" iconSize="28"/>
-	        		<Label text="Histórico de Clientes" styleClass="menu-buttons"/>
-        		</HBox>     	
+        		<HBox fx:id="PC" styleClass="menu-items" onMouseClicked="#ClickPets">
+	        		<FontIcon iconLiteral="fa-paw" iconColor="white" iconSize="25"/>
+	        		<Label text="Pacientes" styleClass="menu-buttons"/>
+        		</HBox> 
+        		
+        		<HBox fx:id="IT" styleClass="menu-items" onMouseClicked="#ClickInternados">
+	        		<FontIcon iconLiteral="fa-medkit" iconColor="white" iconSize="25"/>
+	        		<Label text="Internações" styleClass="menu-buttons"/>
+        		</HBox>     	     	
 			</VBox>
 			
 			<!-- Conteúdo Dinâmico entra aqui ao ser clicado  -->

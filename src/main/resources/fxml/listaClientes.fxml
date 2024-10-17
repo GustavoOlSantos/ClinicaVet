@@ -2,6 +2,9 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import org.kordamp.ikonli.javafx.StackedFontIcon?>
 
 <!-- 
 	Implementar a tabela com a lista de clientes aqui
@@ -10,7 +13,14 @@
 		• Dados Básicos, nome, telefone, pets, status pagamento e status
 		• Botão para ver todos os dados, como se fosse em uma folha (botão para editar)
 	• Input para pesquisar um cliente
+	• Botão para Acessar o histórico de clientes
 -->
-<VBox xmlns:fx="http://javafx.com/fxml" alignment="CENTER">
+<VBox xmlns:fx="http://javafx.com/fxml" alignment="CENTER"  fx:controller="sistem.vet.controllers.clientesController">
     <Label text="Lista clientes!" styleClass="Welcome" />
+    
+   <HBox fx:id="HC" styleClass="menu-items" onMouseClicked="#ClickHistorico">
+		<FontIcon iconLiteral="fa-book" iconColor="white" iconSize="28"/>
+		<Label text="Histórico de Clientes" styleClass="menu-buttons"/>
+	</HBox>
+	
 </VBox>

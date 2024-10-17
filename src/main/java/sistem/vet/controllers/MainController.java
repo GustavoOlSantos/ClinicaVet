@@ -19,10 +19,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
@@ -38,81 +40,27 @@ public class MainController implements Initializable {
     @FXML
     public HBox LC;			//=> Lista de Clientes
     @FXML
-    public HBox HC;			//=> Histórico de Clientes
+    public HBox PC;			//=> Pacientes (Pets) 
+    @FXML
+    public HBox IT;			//=> Internações
     @FXML
     public HBox MenuBox;	//=> Container do Menu
     @FXML
     public VBox leftMenu; //=> Menu Lateral
     private boolean isDisplay = true; //=> Estado do menu
     
+	public static menuDataSaver menu;	//=> Classe que transporta os Dados
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     	
-    	loadContent("home.fxml"); //=> Carrega o Conteúdo da Página Inicial
+    	menu = new menuDataSaver(contentBox, PI, LC, PC, IT, MenuBox, getClass());	//=> Carrega os Dados na classe
+    	menu.loadContent("home.fxml", menu.classe); 								//=> Carrega o Conteúdo da Página Inicial
     							  //=> Path, Width, Height, preserveRatio, Smooth
     	LOGO.setImage(new Image("file:src/main/resources/imgs/app-icon.png", 30, 30, true, true));
     	toggleMenu();
     } 
     
-    @FXML
-    public void ClickHome() {
-        loadContent("home.fxml");
-        
-        if(!PI.getStyleClass().contains("menu-itemss")) {
-        	PI.getStyleClass().remove("menu-items"); 
-	        PI.getStyleClass().add("menu-itemss");   
-	        
-	        if(LC.getStyleClass().contains("menu-itemss")) {
-	        	LC.getStyleClass().remove("menu-itemss"); 
-	        	LC.getStyleClass().add("menu-items");   
-	        }
-	        
-	        if(HC.getStyleClass().contains("menu-itemss")) {
-	        	HC.getStyleClass().remove("menu-itemss"); 
-	        	HC.getStyleClass().add("menu-items");   
-	        }
-        }
-    }
-
-    @FXML
-    public void ClickLista() {
-        loadContent("listaClientes.fxml");
-        
-        if(!LC.getStyleClass().contains("menu-itemss")) {
-        	LC.getStyleClass().remove("menu-items"); 
-	        LC.getStyleClass().add("menu-itemss");   
-	        
-	        if(PI.getStyleClass().contains("menu-itemss")) {
-	        	PI.getStyleClass().remove("menu-itemss"); 
-	        	PI.getStyleClass().add("menu-items");   
-	        }
-	        
-	        if(HC.getStyleClass().contains("menu-itemss")) {
-	        	HC.getStyleClass().remove("menu-itemss"); 
-	        	HC.getStyleClass().add("menu-items");   
-	        }
-        }
-    }
-
-    @FXML
-    public void ClickHistorico() {
-        loadContent("historicoClientes.fxml");
-        
-        if(!HC.getStyleClass().contains("menu-itemss")) {
-        	HC.getStyleClass().remove("menu-items"); 
-	        HC.getStyleClass().add("menu-itemss");   
-	        
-	        if(PI.getStyleClass().contains("menu-itemss")) {
-	        	PI.getStyleClass().remove("menu-itemss"); 
-	        	PI.getStyleClass().add("menu-items");   
-	        }
-	        
-	        if(LC.getStyleClass().contains("menu-itemss")) {
-	        	LC.getStyleClass().remove("menu-itemss"); 
-	        	LC.getStyleClass().add("menu-items");   
-	        }
-        }
-    }
     
     @FXML
     public void ClickMenu() {
@@ -135,45 +83,69 @@ public class MainController implements Initializable {
         timeline.getKeyFrames().addAll(keys);
         timeline.play(); // Inicie a animação
         toggleMenu();
-        
-//        // Toggle visibility
-//        if (isDisplay) {
-//            leftMenu.setPrefWidth(65); 
-//            leftMenu.setMinWidth(65);
-//            leftMenu.setMaxWidth(65);      
-//            
-//            toggleMenu();
-//        } 
-//        else {
-//            leftMenu.setPrefWidth(350); // Show the menu by setting it back to its width
-//            leftMenu.setMinWidth(250);
-//            leftMenu.setMaxWidth(450);
-//            
-//            toggleMenu();
-//        }
-        
+       
         isDisplay = !isDisplay; // Update the menu state
     }
-
-    private void loadContent(String fxmlFile) {
-        try {
-            // Clear existing content
-            contentBox.getChildren().clear();
-            
-            // Load new content
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/" + fxmlFile));
-            VBox newContent = loader.load();
-            contentBox.getChildren().add(newContent);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    
+    @FXML
+    public void ClickHome() {
+        menu.loadContent("home.fxml", menu.classe);
+        
+        leftMenu.getChildren().forEach(children -> menu.style(children, PI));
+        
+        /*if(!PI.getStyleClass().contains("menu-itemss")) {
+        	PI.getStyleClass().remove("menu-items"); 
+	        PI.getStyleClass().add("menu-itemss");   
+	        
+	        if(LC.getStyleClass().contains("menu-itemss")) {
+	        	LC.getStyleClass().remove("menu-itemss"); 
+	        	LC.getStyleClass().add("menu-items");   
+	        }
+	        
+	        if(PC.getStyleClass().contains("menu-itemss")) {
+	        	PC.getStyleClass().remove("menu-itemss"); 
+	        	PC.getStyleClass().add("menu-items");   
+	        }
+	        
+	        if(IT.getStyleClass().contains("menu-itemss")) {
+	        	IT.getStyleClass().remove("menu-itemss"); 
+	        	IT.getStyleClass().add("menu-items");   
+	        }
+        }*/
     }
-
-    private void toggleMenu() {
-    	MenuBox.getChildren().forEach(node -> isLabel(node, isDisplay));
-        PI.getChildren().forEach(node -> isLabel(node, isDisplay));
-        LC.getChildren().forEach(node -> isLabel(node, isDisplay));
-        HC.getChildren().forEach(node -> isLabel(node, isDisplay));
+    
+    @FXML
+    public void ClickLista() {
+    	
+    	menu.loadContent("listaClientes.fxml", menu.classe);
+    	leftMenu.getChildren().forEach(children -> menu.style(children, LC));
+    }
+      
+    @FXML
+    public void ClickPets() {
+    	
+    	menu.loadContent("listaPacientes.fxml", menu.classe);
+    	leftMenu.getChildren().forEach(children -> menu.style(children, PC));
+    }
+       
+    @FXML
+    public void ClickInternados() {
+    	
+    	menu.loadContent("listaInternados.fxml", menu.classe);
+    	leftMenu.getChildren().forEach(children -> menu.style(children, IT));
+    }
+    
+    private void toggleMenu() {    
+    	
+    	leftMenu.getChildren().forEach(children -> {
+    		((Pane) children).getChildren().forEach(node -> isLabel(node, isDisplay));
+    	});
+    	
+//    	  MenuBox.getChildren().forEach(node -> isLabel(node, isDisplay));
+//        PI.getChildren().forEach(node -> isLabel(node, isDisplay));
+//        LC.getChildren().forEach(node -> isLabel(node, isDisplay));
+//        PC.getChildren().forEach(node -> isLabel(node, isDisplay));
+//        IT.getChildren().forEach(node -> isLabel(node, isDisplay));
         
         Rectangle clip = new Rectangle(leftMenu.getPrefWidth(), leftMenu.getHeight());
         leftMenu.setClip(clip);
