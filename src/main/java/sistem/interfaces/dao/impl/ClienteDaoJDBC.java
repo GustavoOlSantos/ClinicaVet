@@ -34,6 +34,10 @@ public class ClienteDaoJDBC implements ClienteDAO {
 		this.in = in;
 	}
 	
+	public ClienteDaoJDBC(Connection conn) {
+		this.conn = conn;
+	}
+	
 	@Override
 	public void insert(Cliente cli) throws IOException {
 		PreparedStatement st = null;
@@ -294,7 +298,7 @@ public class ClienteDaoJDBC implements ClienteDAO {
 		cliente.setTelefone(rs.getString("telefone"));
 		cliente.setCpf(rs.getString("cpfCnpj"));
 		cliente.setOrcamento(rs.getDouble("orcamentoTotal"));
-		cliente.setFormaPagamento(rs.getInt("formaPagamento"), in);
+		cliente.setFormaPagamento(rs.getInt("formaPagamento"));
 		cliente.setStatusPagamento(rs.getInt("statusPagamento"));
 		cliente.setSituacao(rs.getInt("situacao"));
 		cliente.setDataCadastro(rs.getObject("dataCadastro", LocalDateTime.class));

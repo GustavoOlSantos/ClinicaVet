@@ -18,9 +18,19 @@
 <VBox xmlns:fx="http://javafx.com/fxml" alignment="CENTER"  fx:controller="sistem.vet.controllers.clientesController">
     <Label text="Lista clientes!" styleClass="Welcome" />
     
-   <HBox fx:id="HC" styleClass="menu-items" onMouseClicked="#ClickHistorico">
+   <!-- <HBox fx:id="HC" styleClass="menu-items" onMouseClicked="#ClickHistorico">
 		<FontIcon iconLiteral="fa-book" iconColor="white" iconSize="28"/>
 		<Label text="Histórico de Clientes" styleClass="menu-buttons"/>
-	</HBox>
+	</HBox> -->
+	
+	<TableView fx:id="tableView" prefWidth="600" prefHeight="400">
+        <columns>
+       		<TableColumn fx:id="columnId" text="#" />
+            <TableColumn fx:id="columnNome" text="Nome" />
+         	<TableColumn fx:id="columnTelefone" text="Telefone" />
+            <TableColumn fx:id="columnStatusPagamento" text="Pagamento" />
+         	<TableColumn fx:id="columnStatus" text="Status" />
+        </columns>
+    </TableView>
 	
 </VBox>

@@ -1,9 +1,4 @@
 package sistem.vet.controllers;
-/*
-Put header here
-
-
- */
 
 import java.io.IOException;
 import java.net.URL;
@@ -34,7 +29,7 @@ public class MainController implements Initializable {
 	@FXML
     public ImageView LOGO;
     @FXML
-    public VBox contentBox; //=> Divisão que deve receber os conteúdos atualizáveis
+    public VBox contentBox; //=> Div que deve receber os conteúdos atualizáveis
     @FXML
     public HBox PI;			//=> Pagina Inicial
     @FXML
@@ -46,8 +41,8 @@ public class MainController implements Initializable {
     @FXML
     public HBox MenuBox;	//=> Container do Menu
     @FXML
-    public VBox leftMenu; //=> Menu Lateral
-    private boolean isDisplay = true; //=> Estado do menu
+    public VBox leftMenu; 	//=> Menu Lateral
+    private boolean isDisplay = true; //=> Estado do menu lateral
     
 	public static menuDataSaver menu;	//=> Classe que transporta os Dados
     
@@ -60,8 +55,7 @@ public class MainController implements Initializable {
     	LOGO.setImage(new Image("file:src/main/resources/imgs/app-icon.png", 30, 30, true, true));
     	toggleMenu();
     } 
-    
-    
+        
     @FXML
     public void ClickMenu() {
     	
@@ -92,26 +86,6 @@ public class MainController implements Initializable {
         menu.loadContent("home.fxml", menu.classe);
         
         leftMenu.getChildren().forEach(children -> menu.style(children, PI));
-        
-        /*if(!PI.getStyleClass().contains("menu-itemss")) {
-        	PI.getStyleClass().remove("menu-items"); 
-	        PI.getStyleClass().add("menu-itemss");   
-	        
-	        if(LC.getStyleClass().contains("menu-itemss")) {
-	        	LC.getStyleClass().remove("menu-itemss"); 
-	        	LC.getStyleClass().add("menu-items");   
-	        }
-	        
-	        if(PC.getStyleClass().contains("menu-itemss")) {
-	        	PC.getStyleClass().remove("menu-itemss"); 
-	        	PC.getStyleClass().add("menu-items");   
-	        }
-	        
-	        if(IT.getStyleClass().contains("menu-itemss")) {
-	        	IT.getStyleClass().remove("menu-itemss"); 
-	        	IT.getStyleClass().add("menu-items");   
-	        }
-        }*/
     }
     
     @FXML
@@ -140,12 +114,6 @@ public class MainController implements Initializable {
     	leftMenu.getChildren().forEach(children -> {
     		((Pane) children).getChildren().forEach(node -> isLabel(node, isDisplay));
     	});
-    	
-//    	  MenuBox.getChildren().forEach(node -> isLabel(node, isDisplay));
-//        PI.getChildren().forEach(node -> isLabel(node, isDisplay));
-//        LC.getChildren().forEach(node -> isLabel(node, isDisplay));
-//        PC.getChildren().forEach(node -> isLabel(node, isDisplay));
-//        IT.getChildren().forEach(node -> isLabel(node, isDisplay));
         
         Rectangle clip = new Rectangle(leftMenu.getPrefWidth(), leftMenu.getHeight());
         leftMenu.setClip(clip);
@@ -168,6 +136,14 @@ public class MainController implements Initializable {
             node.setOpacity(1);
             node.prefWidth(200);
         }
+    	
+    	else if((node instanceof VBox || node instanceof HBox) && isDisplay) {
+    		((Pane) node).getChildren().forEach(children -> isLabel(children, isDisplay));
+    	}
+    	
+    	else if((node instanceof VBox || node instanceof HBox) && !isDisplay) {
+    		((Pane) node).getChildren().forEach(children -> isLabel(children, isDisplay));
+    	}
     	
     	else {
     		return;

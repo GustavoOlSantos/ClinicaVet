@@ -151,13 +151,13 @@ public class Cliente implements Serializable {
         return fpg;
     }
     
-    public void setFormaPagamento(int formaPg, Scanner in) throws DomainException {
+    public void setFormaPagamento(int formaPg) throws DomainException {
     	
     	switch(formaPg) {
 			case 0: this.formaPagamento = FormaPagamento.DEBITO; break;
 			case 1: 
 				this.formaPagamento = FormaPagamento.CREDITO; 
-				int parcela;
+				/*int parcela;
 				
 				System.out.print("\n\nSerá parcelado em quantas vezes?(Limite "+ LIMITE_PARCELA  +")\nR:");
 				parcela = in.nextInt();
@@ -167,7 +167,7 @@ public class Cliente implements Serializable {
 				}
 				
 				this.parcelaPagamento = parcela; 
-				in.nextLine();
+				in.nextLine();*/
 			break;
 			case 2: this.formaPagamento = FormaPagamento.DINHEIRO; break;
 			case 3: this.formaPagamento = FormaPagamento.PIX; break;

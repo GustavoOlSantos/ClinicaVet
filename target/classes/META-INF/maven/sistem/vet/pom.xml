@@ -29,7 +29,15 @@
 	
     <dependencies>
     
-		    <!-- https://mvnrepository.com/artifact/org.apache.xmlgraphics/batik-script -->
+    	<!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
+		<dependency>
+		    <groupId>com.mysql</groupId>
+		    <artifactId>mysql-connector-j</artifactId>
+		    <version>9.0.0</version>
+		</dependency>
+
+    
+	    <!-- https://mvnrepository.com/artifact/org.apache.xmlgraphics/batik-script -->
 		<dependency>
 		    <groupId>org.apache.xmlgraphics</groupId>
 		    <artifactId>batik-script</artifactId>

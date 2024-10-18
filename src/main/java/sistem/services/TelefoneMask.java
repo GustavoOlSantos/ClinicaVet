@@ -34,7 +34,7 @@ public class TelefoneMask {
 	}
 
 	public static String Unmask(String telefone) {
-		return telefone.replace("\\.", "").replace("\\/", "").replace("-", "");
+		return telefone.replace("\\.", "").replace("\\/", "").replace("-", "").replace("(", "").replace(")", "").replace(" ", "");
 	}
 
 }
