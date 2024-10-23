@@ -3,6 +3,10 @@ package sistem.entities;
 import java.io.Serializable;
 import java.util.Arrays;
 
+import sistem.enums.AnimalEmergencia;
+import sistem.enums.AnimalInternado;
+import sistem.enums.AnimalSexo;
+import sistem.enums.AnimalTipo;
 import sistem.exceptions.DomainException;
 
 public class Animal implements Serializable {
@@ -11,10 +15,9 @@ public class Animal implements Serializable {
 	
 	private String nome;
 	private AnimalSexo sexo;
-	public enum AnimalSexo{MACHO, FÊMEA, HERMAFRODITA};
-	
 	private AnimalTipo tipo; 
-	public enum AnimalTipo {GATO, CACHORRO, AVE, COELHO, TARTARUGA, COBRA, LAGARTO, OUTROS_SILVESTRES};
+	private AnimalEmergencia emergencia;
+	private AnimalInternado internado;
 	
 	public int[] servicos = new int[9];
 	private double orcamento;
@@ -106,6 +109,54 @@ public class Animal implements Serializable {
 		}
 		
 		return type;
+	}
+	
+	public AnimalEmergencia getEmergencia() {
+		return emergencia;
+	}
+	
+	public int getIntEmergencia() {
+		
+		int emergencia = -1;
+		
+		switch(this.emergencia){
+			case SIM: emergencia = 0; break;
+			case NÃO: emergencia = 1; break;
+		}
+		
+		return emergencia;
+	}
+	
+	public void setEmergencia(int emergencia) throws DomainException {
+		switch(emergencia) {
+			case 0: this.emergencia = AnimalEmergencia.SIM; 		 break;
+			case 1: this.emergencia = AnimalEmergencia.NÃO; 		 break;
+			default: throw new DomainException("Opção Inválida para Emergência.");
+		}
+	}
+	
+	public AnimalInternado getInternado() {
+		return internado;
+	}
+	
+	public int getIntInternado() {
+		
+		int internado = -1;
+		
+		switch(this.internado){
+			case SIM: internado = 0; break;
+			case NÃO: internado = 1; break;
+		}
+		
+		return internado;
+	}
+	
+	public void setInternado(int internado) throws DomainException {
+		switch(internado) {
+			case 0: this.internado = AnimalInternado.SIM; 		 break;
+			case 1: this.internado = AnimalInternado.NÃO; 		 break;
+			default: throw new DomainException("Opção Inválida para Internação.");
+		}
 	}
 	
 	//======> Orçamento

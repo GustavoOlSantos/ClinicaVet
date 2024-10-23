@@ -1,10 +1,6 @@
 package sistem.interfaces.dao.impl;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,12 +13,21 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import sistem.db.DB;
 import sistem.db.DbException;
 import sistem.entities.Animal;
 import sistem.entities.Cliente;
 import sistem.exceptions.DomainException;
 import sistem.interfaces.dao.ClienteDAO;
+import sistem.vet.App;
 
 public class ClienteDaoJDBC implements ClienteDAO {
 	
@@ -57,7 +62,7 @@ public class ClienteDaoJDBC implements ClienteDAO {
 			st.setString(2, cli.getCpf()); 				//=> Cpf/Cnpj
 			st.setString(3, cli.getTelefone()); 		//=> Telefone
 			st.setInt(4, cli.qtdAnimal); 	   			//=> QtdAnimal
-			st.setDouble(5, cli.getOrcamento());	   	//=> OrçamentoTotal
+			st.setDouble(5, cli.getOrcamentoTotal());	   	//=> OrçamentoTotal
 			st.setInt(6, cli.getIntFormaPagamento());	//=> Forma de Pagamento
 			st.setInt(7, cli.parcelaPagamento);			//=> Parcelas
 			st.setInt(8, cli.getIntStatusPagamento());	//=> Status do Pagamento
@@ -82,17 +87,19 @@ public class ClienteDaoJDBC implements ClienteDAO {
 			
 			for(int i = 0; i < cli.qtdAnimal; i++) {
 				st = conn.prepareStatement(
-						"INSERT INTO animal (idCliente, nome, sexo, tipo, orcamento, servicos ) "
-						+ "VALUES (?, ? ,?, ?, ?, ?)");
+						"INSERT INTO animal (idCliente, nome, sexo, tipo, emergencia, internado, orcamento, servicos ) "
+						+ "VALUES (?, ? ,?, ?, ?, ?, ?, ?)");
 				
-				st.setInt	(1, id);							//=> IdCliente
-				st.setString(2, cli.animal[i].getNome());		//=> Nome Pet
-				st.setInt	(3, cli.animal[i].getIntSexo());	//=> Sexo Pet
-				st.setInt	(4, cli.animal[i].getIntTipo());	//=> TipoPet
-				st.setDouble(5, cli.animal[i].getOrcamento());	//=> Orçamento pet
+				st.setInt	(1, id);								   //=> IdCliente
+				st.setString(2, cli.animal[i].getNome());			  //=> Nome Pet
+				st.setInt	(3, cli.animal[i].getIntSexo());		 //=> Sexo Pet
+				st.setInt	(4, cli.animal[i].getIntTipo());		//=> TipoPet
+				st.setInt	(5, cli.animal[i].getIntEmergencia()); //=> É emergência
+				st.setInt	(6, cli.animal[i].getIntInternado()); //=> Pet Internado
+				st.setDouble(7, cli.animal[i].getOrcamento());	 //=> Orçamento pet
 				
 				String intString = Arrays.toString(cli.animal[i].getServicos());
-				st.setString(6, intString);
+				st.setString(8, intString);
 				
 				st.executeUpdate();
 				conn.commit();
@@ -131,7 +138,7 @@ public class ClienteDaoJDBC implements ClienteDAO {
 			st.setString(2, cli.getCpf()); 				//=> Cpf/Cnpj
 			st.setString(3, cli.getTelefone()); 		//=> Telefone
 			st.setInt(4, cli.qtdAnimal); 	   			//=> QtdAnimal
-			st.setDouble(5, cli.getOrcamento());	   	//=> OrçamentoTotal
+			st.setDouble(5, cli.getOrcamentoTotal());	   	//=> OrçamentoTotal
 			st.setInt(6, cli.getIntFormaPagamento());	//=> Forma de Pagamento
 			st.setInt(7, cli.parcelaPagamento);			//=> Parcelas
 			st.setInt(8, cli.getIntStatusPagamento());	//=> Status do Pagamento
@@ -290,6 +297,62 @@ public class ClienteDaoJDBC implements ClienteDAO {
 		}
 	}
 	
+	public List<Cliente> findByNameOrCpf(String text) throws DomainException{
+		PreparedStatement st = null;
+		ResultSet rs = null; 
+		
+		try {
+			conn.setAutoCommit(true);
+			st = conn.prepareStatement(
+					"SELECT cliente.*, animal.* "
+					+ "FROM cliente "
+					+ "INNER JOIN animal "
+					+ "ON cliente.id = animal.idCliente "
+					+ "WHERE (cliente.nome LIKE '%"+ text +"%' OR cliente.cpfCnpj LIKE '%"+ text +"%') "
+					+ "ORDER BY dataCadastro");
+			
+			rs = st.executeQuery();
+			
+			List<Cliente> listaClientes = new ArrayList<Cliente>();
+			int rows = 0;
+			
+			while(rs.next()) {
+	
+				Cliente cliente = instCliente(rs);	
+				rows++;
+				
+				for(int i = 0; i < cliente.qtdAnimal; i++) {
+					cliente.animal[i] = instAnimal(rs, cliente, i);
+					
+					if(i == cliente.qtdAnimal - 1) {
+						continue;
+					}
+					
+					if(!rs.next()) {
+						break;
+					}
+				}
+				
+				listaClientes.add(cliente);
+			}
+			
+
+			if(rows == 0) {
+				App.modalAlert("Busca de Clientes", "Nenhum Cliente encontrado com o nome ou Cpf/Cnpj fornecidos!");
+			}
+			
+			return listaClientes;
+					
+		}
+		catch(SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally{
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}
+	}
+	
 	private Cliente instCliente(ResultSet rs) throws SQLException, DomainException {
 		Cliente cliente = new Cliente();
 		
@@ -297,7 +360,7 @@ public class ClienteDaoJDBC implements ClienteDAO {
 		cliente.setNome(rs.getString("nome"));
 		cliente.setTelefone(rs.getString("telefone"));
 		cliente.setCpf(rs.getString("cpfCnpj"));
-		cliente.setOrcamento(rs.getDouble("orcamentoTotal"));
+		cliente.setOrcamentoTotal(rs.getDouble("orcamentoTotal"));
 		cliente.setFormaPagamento(rs.getInt("formaPagamento"));
 		cliente.setStatusPagamento(rs.getInt("statusPagamento"));
 		cliente.setSituacao(rs.getInt("situacao"));
@@ -342,4 +405,5 @@ public class ClienteDaoJDBC implements ClienteDAO {
 		
 		return animal;
 	}
+
 }

@@ -5,9 +5,11 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import sistem.interfaces.dao.AnimalDAO;
+import sistem.interfaces.dao.ClienteDAO;
+import sistem.interfaces.dao.DaoFactory;
 
 public class menuDataSaver {
 	
@@ -23,7 +25,10 @@ public class menuDataSaver {
     public HBox IT;			//=> Internações
     @FXML
     public HBox MenuBox;	//=> Container do Menu
-    public Class classe;	//=> Registro da Classe Main	
+    public Class classe;	//=> Registro da Classe Main
+    
+    public ClienteDAO clienteDAO;
+    public AnimalDAO animalDAO;
     
     //=> Construtor
 	public menuDataSaver(VBox contentBox, HBox pI, HBox lC, HBox pC, HBox iT, HBox menuBox, Class classe) {
@@ -34,6 +39,9 @@ public class menuDataSaver {
 		this.IT = iT;
 		this.MenuBox = menuBox;
 		this.classe = classe;
+				
+		this.clienteDAO = DaoFactory.createClienteDao();
+		this.animalDAO = DaoFactory.createAnimalDao();
 	}
 	
 	public void style(Node el, HBox target) {

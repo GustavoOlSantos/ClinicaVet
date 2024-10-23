@@ -124,8 +124,9 @@
 
 .Content{
 	-fx-pref-width: 100%; /* Largura preferencial */
-    -fx-min-width: 90%;  /* Largura mínima */
+    -fx-min-width: 100%;  /* Largura mínima */
     -fx-max-width: 100%;  /* Largura máxima */
+    -fx-hgrow: ALWAYS; /* Allow the TableView to grow horizontally */
 	-fx-pref-height: 100%; /* Garante que o VBox prefira 100% da altura */
 	-fx-background-color: rgb(223, 223, 223) !important;
 }
@@ -137,6 +138,42 @@
     -fx-font-weight: bold; /* Negrito */
     -fx-text-fill: #000; /* Cor do texto */
     -fx-padding: 20 10 10 10; /* Espaçamento */
+}
+
+.table-header{
+	-fx-pref-width: 100%;
+	-fx-pref-height: 30;
+	-fx-padding: 20 0 5 0;
+	
+}
+
+.table-header-title{
+	-fx-font-size: 20px; /* Tamanho do texto */
+    -fx-font-weight: bold; /* Negrito */
+    -fx-text-fill: #000; /* Cor do texto */
+}
+
+.TableContent{
+	-fx-pref-width: 100%;  /* Ensure the TableView uses full width */
+	-fx-padding: 10;
+}
+
+.Table{
+	-fx-pref-width: 100%;
+	-fx-hgrow: ALWAYS; /* Allow the TableView to grow horizontally */
+}
+
+.alertaDiv{
+	-fx-alignment: CENTER;
+}
+
+.alertaMessage{
+	-fx-min-width: 300; /* Largura preferencial */
+    
+	-fx-font-size: 15px; /* Tamanho do texto */
+    -fx-font-weight: bold; /* Negrito */
+    -fx-text-fill: #000; /* Cor do texto */
+    -fx-padding: 0 0 20 0; /* Espaçamento */
 }
 
 

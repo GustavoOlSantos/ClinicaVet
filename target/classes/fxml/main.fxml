@@ -62,7 +62,7 @@
 			</VBox>
 			
 			<!-- Conteúdo Dinâmico entra aqui ao ser clicado  -->
-			<VBox fx:id="contentBox" styleClass="Content" xmlns:fx="http://javafx.com/fxml">
+			<VBox fx:id="contentBox" styleClass="Content" prefWidth="Infinity" xmlns:fx="http://javafx.com/fxml">
 
 			</VBox>
 		</HBox>
