@@ -1,0 +1,63 @@
+.modal{
+	-fx-padding: 10;
+}
+
+.modalHeader{
+	-fx-pref-width: 100%;
+	-fx-pref-height: 30;
+	-fx-padding: 5 0 5 0;
+	
+	-fx-border-width: 0 0 1 0; /* top right bottom left */
+    -fx-border-color: transparent transparent #cecece transparent; /* colors for each side */
+}
+
+.infoModal{
+	-fx-font-size: 15px; /* Tamanho do texto */
+    -fx-font-weight: bold; /* Negrito */
+    -fx-text-fill: #000; /* Cor do texto */
+}
+
+.modalBody{
+	-fx-pref-width: 100%; /* Largura preferencial */
+    -fx-hgrow: ALWAYS;
+    -fx-vgrow: ALWAYS; 
+	-fx-pref-height: 100%; /* Garante que o VBox prefira 100% da altura */
+}
+
+
+.infoContainer{
+	-fx-pref-width: 300;
+	-fx-padding: 5; /* Espaçamento */
+}
+
+.sectionLabel{
+	-fx-font-size: 16px; /* Tamanho do texto */
+    -fx-font-weight: bold; /* Negrito */
+    -fx-text-fill: #000; /* Cor do texto */
+    
+    -fx-padding: 10 0 5 0;
+}
+
+.infoLabel{
+	-fx-font-size: 13px; /* Tamanho do texto */
+    -fx-font-weight: bold; /* Negrito */
+    -fx-text-fill: #000; /* Cor do texto */
+}
+
+.infoData{
+	-fx-font-size: 13px; /* Tamanho do texto */
+}
+
+.modalFooter{
+	-fx-pref-width: 100%;
+	-fx-pref-height: 20;
+	-fx-padding: 5 0 5 0;
+	
+	-fx-border-width: 1 0 0 0; /* top right bottom left */
+    -fx-border-color: #cecece transparent transparent transparent; /* colors for each side */
+    
+	-fx-alignment: BOTTOM_RIGHT;
+}
+
+
+

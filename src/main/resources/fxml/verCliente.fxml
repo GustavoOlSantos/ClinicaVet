@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<!-- 
+	• Implementar a tabela com a lista de TODOS os clientes  aqui
+	• Tabela com os clientes ativos, cancelados e finalizados obtidos do MySQL
+		• Dados Básicos, nome, telefone, pets, status pagamento e status
+		• Botão para ver todos os dados, como se fosse em uma folha 
+	• Input para pesquisar um cliente
+-->
+<VBox styleClass="modal" xmlns:fx="http://javafx.com/fxml" alignment="TOP_LEFT" fx:controller="sistem.vet.controllers.verClientesController">
+	
+	<HBox styleClass="modalHeader">
+		<Label text="Dados do Cliente cadastrado" styleClass="infoModal" />
+	</HBox>
+	
+	<HBox styleClass="modalBody" VBox.vgrow="ALWAYS">
+	
+		<VBox VBox.vgrow="ALWAYS">
+			
+			<Label text="Informações do cliente" styleClass="sectionLabel" />
+		
+			<HBox styleClass="infoContainer">
+				<Label text="Nome: " 		styleClass="infoLabel" />
+				<Label fx:id="nome" text="" styleClass="infoData" />
+			</HBox>
+			
+			<HBox styleClass="infoContainer">
+				<Label text="CPF/CNPJ: " 		styleClass="infoLabel" />
+				<Label fx:id="cpfCnpj" text="" styleClass="infoData" />
+			</HBox>
+			
+			<HBox styleClass="infoContainer">
+				<Label text="Telefone: " 		styleClass="infoLabel" />
+				<Label fx:id="telefone" text="" styleClass="infoData" />
+			</HBox>
+			
+			<Label text="Status do cliente e Pagamento" styleClass="sectionLabel" />
+			
+			
+		</VBox>
+		
+		<VBox VBox.vgrow="ALWAYS">
+			
+			<Label text="Animais do cliente" styleClass="sectionLabel" />
+		
+			<HBox styleClass="infoContainer">
+				<Label text="Nome: " 		styleClass="infoLabel" />
+				<Label fx:id="nomePet" text="" styleClass="infoData" />
+			</HBox>
+			
+		</VBox>
+	</HBox>
+	
+	<HBox styleClass="modalFooter">
+		<Button fx:id="close" text="fechar" />
+	</HBox>
+</VBox>

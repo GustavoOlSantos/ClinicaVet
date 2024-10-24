@@ -30,6 +30,8 @@ public class menuDataSaver {
     public ClienteDAO clienteDAO;
     public AnimalDAO animalDAO;
     
+    public Integer sharedId;
+    
     //=> Construtor
 	public menuDataSaver(VBox contentBox, HBox pI, HBox lC, HBox pC, HBox iT, HBox menuBox, Class classe) {
 		this.contentBox = contentBox;
@@ -63,6 +65,17 @@ public class menuDataSaver {
 		}
 		
 		
+	}
+	
+	public int getSharedId() {	
+		int id = sharedId;
+		sharedId = null;
+		
+		return id;
+	}
+	
+	public void setSharedId(Integer id) {
+		this.sharedId = id;
 	}
 	
 	

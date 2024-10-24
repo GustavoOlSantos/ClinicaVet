@@ -1,5 +1,6 @@
 package sistem.vet.controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,17 +9,16 @@ import java.util.ResourceBundle;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sistem.entities.Cliente;
@@ -28,6 +28,7 @@ import sistem.exceptions.DomainException;
 import sistem.interfaces.dao.AnimalDAO;
 import sistem.interfaces.dao.ClienteDAO;
 import sistem.services.CpfCnpjMask;
+import sistem.vet.App;
 
 
 
@@ -169,25 +170,30 @@ public class clientesController implements Initializable {
 	@FXML
     public void verCliente(Cliente target) {
 		int id = target.getId();
-		System.out.println(id);
+		menu.setSharedId(id);
 		
 		Stage modalStage = new Stage();
 
         // Definindo a modalidade
         modalStage.initModality(Modality.APPLICATION_MODAL);
-        modalStage.setTitle("Janela Modal");
-
-        Label label = new Label("Este é um modal!");
-        Button closeButton = new Button("Fechar");
-        closeButton.setOnAction(e -> modalStage.close());
-
-        VBox modalLayout = new VBox(10);
-        modalLayout.getChildren().addAll(label, closeButton);
+        modalStage.setTitle("Visualizando Cliente");
+      
+       FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/verCliente.fxml"));
+       Scene modalScene;
+		try {
+			modalScene = new Scene(fxmlLoader.load(), 1000, 800);
+			modalScene.getStylesheets().add(App.class.getResource("/styles/StylesModal.css").toExternalForm());  
+			modalStage.setScene(modalScene);
+			
+			verClientesController controller = fxmlLoader.getController();
+			controller.setStage(modalStage);
+			
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
         
-        Scene modalScene = new Scene(modalLayout, 200, 100);
-        modalStage.setScene(modalScene);
-
-        // Mostrando a janela modal
+		// Mostrando a janela modal
         modalStage.showAndWait();
     }
 	
