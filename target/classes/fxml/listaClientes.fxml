@@ -72,6 +72,7 @@
 	            <TableColumn fx:id="StatusPagamento" 	text="Pagamento" minWidth="50" maxWidth="100" 	/>
 	         	<TableColumn fx:id="Status" 			text="Status" 	 minWidth="50" maxWidth="120"	/>
 	         	<TableColumn fx:id="See" 				text="Ver" 	 	 minWidth="30" maxWidth="40"	/>
+	         	<TableColumn fx:id="Ban" 				text="Cancelar"  minWidth="30" maxWidth="40"	/>
 	         	<TableColumn fx:id="Del" 				text="Del" 	 	 minWidth="30" maxWidth="40"	/>
 	        </columns>
 	    </TableView>

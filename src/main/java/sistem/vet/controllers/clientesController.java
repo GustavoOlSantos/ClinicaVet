@@ -60,6 +60,8 @@ public class clientesController implements Initializable {
     @FXML
     public TableColumn<Cliente, Void> See;
     @FXML
+    public TableColumn<Cliente, Void> Ban;
+    @FXML
     public TableColumn<Cliente, Void> Del;
     
     //=> Elementos para Buscar Cliente
@@ -126,6 +128,32 @@ public class clientesController implements Initializable {
                 }
             }
         });
+        
+        //=> Cria o botão para a coluna Ban
+        Ban.setCellFactory(col -> new TableCell<Cliente, Void>() {
+            private final Button block = new Button("");
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } 
+                else {
+                    FontIcon icon = new FontIcon("fas-ban"); //=> Criar Ícone
+                    icon.setIconSize(15); 					//=> Tamanho do Ícone
+                    block.setGraphic(icon);		   //=> Seta o Ícone como gráfico do botão
+                    setGraphic(block);				  //=> Seta o Botão como gráfico da coluna
+                    
+                    //=> Controller do Botão (Talvez seja removido)
+                    block.setOnAction(event -> {
+                        Cliente selectedCliente = getTableRow().getItem();
+                        
+                    });
+                }
+            }
+        });
+                
         
         //=> Cria o botão para a coluna Del
         Del.setCellFactory(col -> new TableCell<Cliente, Void>() {

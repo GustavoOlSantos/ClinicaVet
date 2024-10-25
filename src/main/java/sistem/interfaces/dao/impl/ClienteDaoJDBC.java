@@ -284,7 +284,7 @@ public class ClienteDaoJDBC implements ClienteDAO {
 				listaClientes.add(cliente);
 			}
 			
-			System.out.println("Clientes Encontrados: " + rows + "\n");
+			//System.out.println("Clientes Encontrados: " + rows + "\n");
 			return listaClientes;
 					
 		}
@@ -374,9 +374,12 @@ public class ClienteDaoJDBC implements ClienteDAO {
 	
 	private Animal instAnimal(ResultSet rs, Cliente cliente, int i) throws SQLException, DomainException {
 		Animal animal = new Animal();
+		animal.setId(rs.getInt("animal.idAnimal"));
 		animal.setNome(rs.getString("animal.nome"));
 		animal.setSexo(rs.getInt("animal.sexo"));
 		animal.setTipo(rs.getInt("animal.tipo"));
+		animal.setEmergencia(rs.getInt("animal.emergencia"));
+		animal.setInternado(rs.getInt("animal.internado"));
 		animal.setOrcamento(rs.getDouble("animal.orcamento"));
 		String intStr = rs.getString("animal.servicos");
 		

@@ -8,11 +8,13 @@ import sistem.enums.AnimalInternado;
 import sistem.enums.AnimalSexo;
 import sistem.enums.AnimalTipo;
 import sistem.exceptions.DomainException;
+import sistem.vet.controllers.menuDataSaver;
 
 public class Animal implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
+	private int id;
 	private String nome;
 	private AnimalSexo sexo;
 	private AnimalTipo tipo; 
@@ -20,6 +22,7 @@ public class Animal implements Serializable {
 	private AnimalInternado internado;
 	
 	public int[] servicos = new int[9];
+	public String stringServicos;
 	private double orcamento;
 	
 	public Animal() {
@@ -38,6 +41,14 @@ public class Animal implements Serializable {
 		
 		
 		Arrays.fill(this.servicos, -1); //=> Define toda a array como não incializada
+	}
+	
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	
@@ -179,6 +190,31 @@ public class Animal implements Serializable {
 	
 	public int[] getServicos() {
 		return servicos;
+	}
+	
+	public void transformServicos(Object[] serv) {
+		
+		stringServicos = "";
+		boolean flag = false;
+		
+		for(Integer servicoSelecionado : this.servicos) {
+			
+			if(servicoSelecionado >= 0 && servicoSelecionado < serv.length && servicoSelecionado != -1) {
+				
+				if(flag == true) {
+					stringServicos += " | ";
+				}
+				
+				String nome = ((Servicos)serv[servicoSelecionado]).nome;
+				stringServicos += nome;
+				flag = true;
+			}
+		}
+	}
+	
+	
+	public String getStringServicos() {
+		return stringServicos;
 	}
 }
 

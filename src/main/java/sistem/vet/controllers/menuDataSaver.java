@@ -7,9 +7,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import sistem.entities.Servicos;
+import sistem.exceptions.DomainException;
 import sistem.interfaces.dao.AnimalDAO;
 import sistem.interfaces.dao.ClienteDAO;
 import sistem.interfaces.dao.DaoFactory;
+import sistem.interfaces.dao.ServicosDAO;
 
 public class menuDataSaver {
 	
@@ -29,6 +32,8 @@ public class menuDataSaver {
     
     public ClienteDAO clienteDAO;
     public AnimalDAO animalDAO;
+    public ServicosDAO servicoDAO;
+    public Object[] serv = new Servicos[9];
     
     public Integer sharedId;
     
@@ -44,6 +49,13 @@ public class menuDataSaver {
 				
 		this.clienteDAO = DaoFactory.createClienteDao();
 		this.animalDAO = DaoFactory.createAnimalDao();
+		this.servicoDAO = DaoFactory.createServicosDao();
+		
+		try {
+			serv = servicoDAO.findAll().stream().toArray();
+		} catch (DomainException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void style(Node el, HBox target) {

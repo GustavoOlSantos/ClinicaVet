@@ -1,10 +1,9 @@
 package sistem.interfaces.dao;
 
-import java.util.Scanner;
-
 import sistem.db.DB;
 import sistem.interfaces.dao.impl.AnimalDaoJDBC;
 import sistem.interfaces.dao.impl.ClienteDaoJDBC;
+import sistem.interfaces.dao.impl.ServicosDaoJDBC;
 
 public class DaoFactory {
 	
@@ -15,5 +14,9 @@ public class DaoFactory {
 	
 	public static AnimalDAO createAnimalDao() {
 		return new AnimalDaoJDBC();
+	}
+	
+	public static ServicosDAO createServicosDao() {
+		return new ServicosDaoJDBC(DB.getConnection());
 	}
 }
