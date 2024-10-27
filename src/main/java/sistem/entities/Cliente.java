@@ -40,32 +40,11 @@ public class Cliente implements Serializable {
 	private LocalDateTime dataCadastro;
 	
 	public Animal[] animal;
-	public int qtdAnimal;
-	
-	Servicos[] serv = new Servicos[9];
-	
+	public int qtdAnimal;	
 	
 	//=> Constrututor 
 	public Cliente() {
-		//this.id = UUID.randomUUID().hashCode();		   //=> Gera um ID para o cliente
-		//this.NAO_INICIALIZADO = -1;
-
-	
-		
-		//this.trabalho = Situacao.TRABALHANDO; 		 //=> Define a situação do cliente como trabalhando
-		//this.status = StatusPagamento.PENDENTE;		//=> Deixa o pagamento como pendente
-		//this.dataCadastro = LocalDateTime.now();
-		
-		//=> Temporario
-				serv[0] = new Servicos(0, "Consulta", 50.00);
-				serv[1] = new Servicos(1, "Exame de Sangue", 67.50);
-				serv[2] = new Servicos(2, "Vacinação", 150.00);
-				serv[3] = new Servicos(3, "Remoção de Tártaro", 300.00);
-				serv[4] = new Servicos(4, "Castração - Gato", 200.00);
-				serv[5] = new Servicos(5, "Castração - Cachorro", 400.00);
-				serv[6] = new Servicos(6, "Ultrassom/Raio X", 100.00);;
-				serv[7] = new Servicos(7, "Internação", 250.00);
-				serv[8] = new Servicos(8, "Eutanásia", 300.00);
+				
 	}
 
 	public Cliente(String nome, String cpf, String num, int qtd) throws DomainException {
@@ -96,16 +75,6 @@ public class Cliente implements Serializable {
 		this.status = StatusPagamento.PENDENTE;		    //=> Deixa o pagamento como pendente
 		this.dataCadastro = LocalDateTime.now();
 		
-		//=> Temporario
-		serv[0] = new Servicos(0, "Consulta", 50.00);
-		serv[1] = new Servicos(1, "Exame de Sangue", 67.50);
-		serv[2] = new Servicos(2, "Vacinação", 150.00);
-		serv[3] = new Servicos(3, "Remoção de Tártaro", 300.00);
-		serv[4] = new Servicos(4, "Castração - Gato", 200.00);
-		serv[5] = new Servicos(5, "Castração - Cachorro", 400.00);
-		serv[6] = new Servicos(6, "Ultrassom/Raio X", 100.00);;
-		serv[7] = new Servicos(7, "Internação", 250.00);
-		serv[8] = new Servicos(8, "Eutanásia", 300.00);
 	}
 	
 	//===> MÉTODOS
@@ -307,41 +276,6 @@ public class Cliente implements Serializable {
     	return objStr;
     }
     
-    public void printClienteSheet() {
-    	//System.out.println("id: " + this.getId());
-		System.out.println("Nome: " + this.getNome());
-		System.out.print("CPF: " + this.getCpf());
-		System.out.println(" ".repeat(5) + "Telefone: " + this.getTelefone());
-		
-		System.out.println("\n===========> Pets Cadastrados");
-		
-		for(Animal pet : this.animal) {
-			System.out.print("\nNome do pet: " + pet.getNome());
-			System.out.print(" ".repeat(5) + "Tipo: " + pet.getTipo());
-			
-			
-			System.out.println("\n\nServiços do pet:");
-			pet.printServicos(serv);
-			System.out.println(" ".repeat(34) + "Orçamento do pet: R$" + pet.getOrcamento());
-			
-			System.out.println("========================================================>");
-			
-		}
-		
-		
-		System.out.println("\n" + " ".repeat(34) + "Orçamento Total: R$" + this.getOrcamentoTotal());
-		System.out.print("Forma de Pagamento: " + this.getFormaPagamento());
-		
-		if(this.getFormaPagamento().toString() == "CREDITO") {
-			System.out.print(" ".repeat(8) +"Parcelas: " + this.parcelaPagamento + "x");
-		}
-		System.out.println("");
-		
-		System.out.println("Status Pagamento: " + this.getStatusPagamento());
-		System.out.println("\nSituação do Cliente: " + this.getSituacao());
-		System.out.println("\n\nData de Cadastro: " + this.getDataCadastro().format(timeFormat));
-		System.out.println("\n\n");
-    }
     
     public String getAnimal() {
     	String objStr = "";
