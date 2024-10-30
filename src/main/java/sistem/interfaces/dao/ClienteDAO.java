@@ -14,4 +14,5 @@ public interface ClienteDAO {
 	Cliente findById(Integer id) throws DomainException;
 	List<Cliente> findAll() throws DomainException;
 	List<Cliente> findByNameOrCpf(String text) throws DomainException;
+	List<Cliente> findActive() throws DomainException;
 }

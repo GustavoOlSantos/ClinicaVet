@@ -151,15 +151,17 @@ public class ClienteDaoJDBC implements ClienteDAO {
 			
 			for(int i = 0; i < cli.qtdAnimal; i++) {
 				st = conn.prepareStatement(
-						"UPDATE animal SET idCliente = ?, nome = ?, sexo = ?, tipo = ?, orcamento = ? "
+						"UPDATE animal SET idCliente = ?, nome = ?, sexo = ?, tipo = ?, emergencia = ?, internado = ?, orcamento = ? "
 						+ "WHERE idCliente = ?");
 				
 				st.setInt	(1, cli.getId());					//=> IdCliente
 				st.setString(2, cli.animal[i].getNome());		//=> Nome Pet
 				st.setInt	(3, cli.animal[i].getIntSexo());	//=> Sexo Pet
 				st.setInt	(4, cli.animal[i].getIntTipo());	//=> TipoPet
-				st.setDouble(5, cli.animal[i].getOrcamento());	//=> Orçamento pet
-				st.setInt	(6, cli.getId());					//=> IdCliente
+				st.setInt	(5, cli.animal[i].getIntEmergencia()); //=> É emergência
+				st.setInt	(6, cli.animal[i].getIntInternado()); //=> Pet Internado
+				st.setDouble(7, cli.animal[i].getOrcamento());	//=> Orçamento pet
+				st.setInt	(8, cli.getId());					//=> IdCliente
 				
 				st.executeUpdate();
 			}
@@ -255,7 +257,60 @@ public class ClienteDaoJDBC implements ClienteDAO {
 					"SELECT cliente.*, animal.* "
 					+ "FROM cliente INNER JOIN animal "
 					+ "ON cliente.id = animal.idCliente "
-					+ "ORDER BY dataCadastro");
+					+ "ORDER BY id DESC");
+			
+			rs = st.executeQuery();
+			
+			List<Cliente> listaClientes = new ArrayList<Cliente>();
+			int rows = 0;
+			
+			while(rs.next()) {
+				
+				Cliente cliente = instCliente(rs);	
+				rows++;
+				
+				for(int i = 0; i < cliente.qtdAnimal; i++) {
+					cliente.animal[i] = instAnimal(rs, cliente, i);
+					
+					if(i == cliente.qtdAnimal - 1) {
+						continue;
+					}
+					
+					if(!rs.next()) {
+						break;
+					}
+					
+
+				}
+				
+				listaClientes.add(cliente);
+			}
+			
+			//System.out.println("Clientes Encontrados: " + rows + "\n");
+			return listaClientes;
+					
+		}
+		catch(SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally{
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}
+	}
+	
+	@Override
+	public List<Cliente> findActive() throws DomainException {
+		PreparedStatement st = null;
+		ResultSet rs = null; 
+		
+		try {
+			st = conn.prepareStatement(
+					"SELECT cliente.*, animal.* "
+					+ "FROM cliente INNER JOIN animal "
+					+ "ON cliente.id = animal.idCliente "
+					+ "WHERE situacao = 0 "
+					+ "ORDER BY id DESC");
 			
 			rs = st.executeQuery();
 			

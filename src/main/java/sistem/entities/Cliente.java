@@ -201,7 +201,7 @@ public class Cliente implements Serializable {
         return trabalho;
     }
     
-    public int getIntSituacao() {
+    public Integer getIntSituacao() {
     	int stt = -1;
     	
         switch(trabalho) {

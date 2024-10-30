@@ -27,7 +27,7 @@
 		<HBox styleClass="table-header">
 		
 			<HBox alignment="BOTTOM_LEFT">
-				<Label text="Lista de clientes ativos" styleClass="table-header-title" />
+				<Label fx:id="lblTitle" text="Lista de clientes ativos" styleClass="table-header-title" />
 			</HBox>	
 			
 			<HBox HBox.hgrow="ALWAYS" alignment="BOTTOM_CENTER" spacing="10">
@@ -41,11 +41,18 @@
 	    			</Button>
     			</HBox>
     			
-				<Button onAction="#clickHistorico">
+				<Button fx:id="btnHC" styleClass="" onAction="#clickHistorico">
 					<graphic>
 						<FontIcon iconLiteral="fa-history" iconColor="black" iconSize="15"/>
 					</graphic>
 					Histórico
+				 </Button>
+				 
+				 <Button fx:id="btnLC" styleClass="" onAction="#listarClientesAtivos">
+					<graphic>
+						<FontIcon iconLiteral="fa-list" iconColor="black" iconSize="15"/>
+					</graphic>
+					Clientes
 				 </Button>
 			</HBox>			
 			

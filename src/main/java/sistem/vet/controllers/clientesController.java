@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -70,24 +71,46 @@ public class clientesController implements Initializable {
     @FXML
     public Button buscaBtn;
     
+    //=> Qual TableView recarregar após alguma operação
+    private int view;
+    @FXML
+    public Label lblTitle;
+    @FXML
+    public Button btnLC;
+    @FXML
+    public Button btnHC;
+    
     @Override	//=> Atualiza a Tabela ao inicializar
     public void initialize(URL location, ResourceBundle resources) {
+    	listarClientesAtivos();
     	
-        List<Cliente> cliList = new ArrayList<>();
-
-        try {
-			cliList = clienteDAO.findAll();
-		} catch (DomainException e) {
-			e.printStackTrace();
-		}
-        
-        renderTable(cliList);
-        
-        buscaField.setOnKeyPressed(event -> {
+    	buscaField.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 buscarCliente(); // Call the handleSubmit method on Enter key press
             }
         });
+    }
+    
+    public void listarClientesAtivos() {
+    	List<Cliente> cliList = new ArrayList<>();
+		
+		try {
+			cliList = clienteDAO.findActive();
+			view = 0;
+			
+			lblTitle.setText("Lista de clientes ativos");
+						
+			btnLC.setManaged(false); // Node won't take space in the layout
+			btnLC.setVisible(false);  // Node is hidden
+			
+			btnHC.setManaged(true);
+			btnHC.setVisible(true);
+		} catch (DomainException e) {			
+			e.printStackTrace();
+		}
+		
+    	tableView.getItems().clear();
+    	renderTable(cliList);  
     }
     
     @FXML
@@ -118,7 +141,7 @@ public class clientesController implements Initializable {
                     visualizar.setGraphic(icon);		   //=> Seta o Ícone como gráfico do botão
                     setGraphic(visualizar);				  //=> Seta o Botão como gráfico da coluna
                     
-                    //=> Controller do Botão (Talvez seja removido)
+                    //=> Controller do Botão
                     visualizar.setOnAction(event -> {
                         Cliente selectedCliente = getTableRow().getItem();
                         if (selectedCliente != null) {
@@ -139,22 +162,45 @@ public class clientesController implements Initializable {
                 if (empty) {
                     setGraphic(null);
                 } 
+                
                 else {
-                    FontIcon icon = new FontIcon("fas-ban"); //=> Criar Ícone
-                    icon.setIconSize(15); 					//=> Tamanho do Ícone
-                    block.setGraphic(icon);		   //=> Seta o Ícone como gráfico do botão
-                    setGraphic(block);				  //=> Seta o Botão como gráfico da coluna
-                    
-                    //=> Controller do Botão (Talvez seja removido)
-                    block.setOnAction(event -> {
-                        Cliente selectedCliente = getTableRow().getItem();
-                        
-                    });
+                	
+                	Cliente cli = getTableRow().getItem();	//=> Cada cliente, conforme renderiza a tabela
+                	//=> Checa se o cliente não está cancelado
+                	FontIcon icon;
+   	
+                	if(cli != null) {
+                		
+                		Integer situacao = cli.getIntSituacao();
+                		if(situacao != 2) {
+                    		icon = new FontIcon("fas-ban"); //=> Criar Ícone
+                    	}
+                    	else{
+                    		icon = new FontIcon("fa-arrow-circle-left"); //=> Criar Ícone
+                    	}
+                		
+                		icon.setIconSize(15); 					 //=> Tamanho do Ícone
+    	                block.setGraphic(icon);		   		//=> Seta o Ícone como gráfico do botão
+    	                setGraphic(block);				  	    //=> Seta o Botão como gráfico da coluna
+                	}
+                	
+                	else {
+                		setGraphic(null);
+                	}
+	        		
+	                
+	                 
+	                //=> Controller do Botão (Talvez seja removido)
+	                block.setOnAction(event -> {
+	                	Cliente selectedCliente = getTableRow().getItem();
+	                    if (selectedCliente != null) {
+	                    	cancelarCliente(selectedCliente);
+	                    }
+	                });
                 }
             }
         });
-                
-        
+
         //=> Cria o botão para a coluna Del
         Del.setCellFactory(col -> new TableCell<Cliente, Void>() {
             private final Button excluir = new Button("");
@@ -185,9 +231,66 @@ public class clientesController implements Initializable {
         tableView.getItems().addAll(clientes);
     }
     	 
+    public void reloadTable() {	
+    	List<Cliente> cliList = new ArrayList<>();
+		try {
+			if(view == 0) {
+				cliList = clienteDAO.findActive();
+				view = 0;
+				
+				lblTitle.setText("Lista de clientes ativos");
+				
+				btnLC.setManaged(false); // Node won't take space in the layout
+				btnLC.setVisible(false);  // Node is hidden
+				
+				btnHC.setManaged(true);
+				btnHC.setVisible(true);
+			}
+			else if(view == 1) {
+				cliList = clienteDAO.findAll();
+				view = 1;
+				lblTitle.setText("Histórico de Clientes");
+				
+				btnLC.setManaged(true); // Node won't take space in the layout
+				btnLC.setVisible(true);  // Node is hidden
+				
+				btnHC.setManaged(false);
+				btnHC.setVisible(false);
+
+			}	
+		} catch (DomainException e) {
+			e.printStackTrace();
+		}
+		
+		tableView.getItems().clear();
+		renderTable(cliList);  
+    }
+    
 	@FXML
     public void clickHistorico() {
-    	menu.loadContent("historicoClientes.fxml", menu.classe); 
+		
+		List<Cliente> cliList = new ArrayList<>();
+		
+		try {
+			cliList = clienteDAO.findAll();
+			view = 1;
+			
+			lblTitle.setText("Histórico de Clientes");
+			
+			btnLC.setManaged(true); // Node won't take space in the layout
+			btnLC.setVisible(true);  // Node is hidden
+			
+			btnHC.setManaged(false);
+			btnHC.setVisible(false);
+			
+		} catch (DomainException e) {
+			
+			App.modalAlert("Exception", "Falha ao gerar o Histórico - " + e.getMessage());
+			e.printStackTrace();
+		}
+		
+    	tableView.getItems().clear();
+    	renderTable(cliList);  
     }
 	
 	@FXML
@@ -242,20 +345,27 @@ public class clientesController implements Initializable {
 		renderTable(cliList);  
     }
 	
+	public void cancelarCliente(Cliente target) {
+		int id = target.getId();
+		
+		if(target.getIntSituacao() == 2) {
+			target.setSituacao(0);
+		}
+		else if(target.getIntSituacao() != 2) {
+			target.setSituacao(2);
+		}
+		
+		clienteDAO.update(target);
+		
+		reloadTable();
+	}
+	
 	@FXML
     public void excluirCliente(Cliente target) {
 		int id = target.getId();
 		clienteDAO.deleteById(id);
 		
-		List<Cliente> cliList = new ArrayList<>();
-		try {
-			cliList = clienteDAO.findAll();
-		} catch (DomainException e) {
-			e.printStackTrace();
-		}
-		
-		tableView.getItems().clear();
-		renderTable(cliList);  
+		reloadTable();
     }
 
 }
