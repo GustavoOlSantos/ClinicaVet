@@ -15,34 +15,24 @@ import sistem.services.TelefoneMask;
 public class Cliente implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
+	
+	private final int NAO_INICIALIZADO = -1;
+	private final int LIMITE_PARCELA = 6;
+	public final DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm");
 
 	private int id;
-	
 	private String nome;
 	private String cpf;
 	private String telefone;
-	
-	//public int[] servicos = new int[8];
-	private int NAO_INICIALIZADO;
-	
-	private double orcamentoTotal;
-	
-	private FormaPagamento formaPagamento; 
-	
-	public int parcelaPagamento;
-	private final int LIMITE_PARCELA = 6;
-	
-	private StatusPagamento status;
-	
-	private Situacao trabalho;
-	
-	public DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm");
-	private LocalDateTime dataCadastro;
-	
+	public int qtdAnimal;
 	public Animal[] animal;
-	public int qtdAnimal;	
-	
-	//=> Constrututor 
+	private double orcamentoTotal;
+	private StatusPagamento status;
+	private FormaPagamento formaPagamento;
+	public int parcelaPagamento;
+	private Situacao trabalho;
+	private LocalDateTime dataCadastro;
+
 	public Cliente() {
 				
 	}
@@ -60,24 +50,18 @@ public class Cliente implements Serializable {
 			throw new DomainException("Não é possível cadastrar um Cliente sem nenhum animal.");
 		}
 		
-		
 		this.nome 		= nome;
 		this.cpf 		= CpfCnpjMask.Mask(cpf);
 		this.telefone 	= TelefoneMask.Mask(TelefoneMask.Unmask(num));
 		this.qtdAnimal 	= qtd;
-		
-		animal = new Animal[qtd];
-		
-		//this.id = UUID.randomUUID().hashCode();		   //=> Gera um ID para o cliente
-		this.NAO_INICIALIZADO = -1;
-		
-		this.trabalho = Situacao.TRABALHANDO; 		 	 //=> Define a situação do cliente como trabalhando
-		this.status = StatusPagamento.PENDENTE;		    //=> Deixa o pagamento como pendente
+
+		this.animal 	= new Animal[qtd];
+		this.trabalho = Situacao.TRABALHANDO; 		 	
+		this.status = StatusPagamento.PENDENTE;
 		this.dataCadastro = LocalDateTime.now();
 		
 	}
 	
-	//===> MÉTODOS
 	
 	//======> Id
 	public int getId() {
@@ -98,7 +82,6 @@ public class Cliente implements Serializable {
 	}
 	
 	//======> CPF
-
 	public String getCpf() {
 		return cpf;
 	}
@@ -108,7 +91,6 @@ public class Cliente implements Serializable {
 	}
 	
 	//======> Telefone
-
 	public String getTelefone() {
 		return telefone;
 	}
@@ -196,6 +178,18 @@ public class Cliente implements Serializable {
     	}
     }
     
+    //======> Parcelas
+    public int getParcelas() {
+    	return parcelaPagamento;
+    }
+    
+    public void setParcela(int parcela) throws DomainException {
+    	if(parcela > LIMITE_PARCELA) {
+    		throw new DomainException("Quantidade Inválida de parcelas.");
+    	}
+    	this.parcelaPagamento = parcela;
+    }
+    
     ///======> Finalizado
     public Situacao getSituacao() {
         return trabalho;
@@ -232,6 +226,7 @@ public class Cliente implements Serializable {
     	return dataCadastro;
     }
     
+    //=> Provável descarte
     public void listaEdit() {
     	System.out.println("[0] Nome: " + nome);
     	System.out.println("[1] CPF: " + cpf);
@@ -261,6 +256,7 @@ public class Cliente implements Serializable {
     	}*/
     }
     
+    //=> Pode ser útil se modificar
     public String toString() {
     	
     	String objStr;
@@ -276,7 +272,13 @@ public class Cliente implements Serializable {
     	return objStr;
     }
     
-    
+    /* MANTER ESSA FUNÇÂO
+     * Serve para reunir o nome
+     * e espécie de todos os 
+     * animais de um cliente
+     * em uma string
+     * (Usado em tabelas de cliente)
+     */
     public String getAnimal() {
     	String objStr = "";
     	//=> Printa o Nome dos Animais

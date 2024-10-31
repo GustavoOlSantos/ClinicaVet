@@ -16,6 +16,7 @@ import sistem.interfaces.dao.ServicosDAO;
 
 public class menuDataSaver {
 	
+	//====> Controle de Conteúdo (Controlam a sidebar e o conteúdo)
 	@FXML
     public VBox contentBox; //=> Divisão que deve receber os conteúdos atualizáveis
     @FXML
@@ -30,14 +31,16 @@ public class menuDataSaver {
     public HBox MenuBox;	//=> Container do Menu
     public Class classe;	//=> Registro da Classe Main
     
+    //====> DAOs para acesso ao banco de dados (Centralizar as DAOs)
     public ClienteDAO clienteDAO;
     public AnimalDAO animalDAO;
     public ServicosDAO servicoDAO;
-    public Object[] serv = new Servicos[9];
     
-    public Integer sharedId;
+    //====> Armazena dados que serão usados em múltiplas páginas
+    public Object[] serv = new Servicos[9]; //=> Array de Serviços		 (Para exibir e consultar)
+    private Integer sharedId;				//=> Id do cliente ou Animal (Para buscas)
     
-    //=> Construtor
+    //=> Construtor (Inicialização do programa)
 	public menuDataSaver(VBox contentBox, HBox pI, HBox lC, HBox pC, HBox iT, HBox menuBox, Class classe) {
 		this.contentBox = contentBox;
 		this.PI = pI;
@@ -46,7 +49,8 @@ public class menuDataSaver {
 		this.IT = iT;
 		this.MenuBox = menuBox;
 		this.classe = classe;
-				
+		
+		// Cria as DAOs usando a DaoFactory
 		this.clienteDAO = DaoFactory.createClienteDao();
 		this.animalDAO = DaoFactory.createAnimalDao();
 		this.servicoDAO = DaoFactory.createServicosDao();
@@ -58,6 +62,7 @@ public class menuDataSaver {
 		}
 	}
 	
+	//=> Estiliza os Botões do Menu
 	public void style(Node el, HBox target) {
 		if(el instanceof HBox) {
 			
@@ -79,6 +84,7 @@ public class menuDataSaver {
 		
 	}
 	
+	//=> Obtém o Id e limpa
 	public int getSharedId() {	
 		int id = sharedId;
 		sharedId = null;
@@ -86,11 +92,12 @@ public class menuDataSaver {
 		return id;
 	}
 	
+	//=> Define o Id
 	public void setSharedId(Integer id) {
 		this.sharedId = id;
 	}
 	
-	
+	//=> Carrega o Conteúdo na divisão setada
 	//=> Classe que carrega o conteúdo dentro da VBox
     public void loadContent(String fxmlFile, Class classe) {
         try {
