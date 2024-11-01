@@ -13,6 +13,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -84,14 +87,16 @@ public class clientesController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
     	listarClientesAtivos();
     	
+    	//=> Checa o input de buscar cliente
     	buscaField.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
-                buscarCliente(); // Call the handleSubmit method on Enter key press
+                buscarCliente(); 
             }
         });
     }
     
     public void listarClientesAtivos() {
+    	
     	List<Cliente> cliList = new ArrayList<>();
 		
 		try {
@@ -100,12 +105,14 @@ public class clientesController implements Initializable {
 			
 			lblTitle.setText("Lista de clientes ativos");
 						
-			btnLC.setManaged(false); // Node won't take space in the layout
-			btnLC.setVisible(false);  // Node is hidden
+			btnLC.setManaged(false); // Elimina o botão do Layout
+			btnLC.setVisible(false); // Esconde o botão
 			
-			btnHC.setManaged(true);
-			btnHC.setVisible(true);
-		} catch (DomainException e) {			
+			btnHC.setManaged(true); // Insere o botão no Layout
+			btnHC.setVisible(true); // Exibe o botão
+		} 
+		catch (DomainException e) {	
+			System.out.println("Erro: " + e.getMessage());
 			e.printStackTrace();
 		}
 		
@@ -115,6 +122,7 @@ public class clientesController implements Initializable {
     
     @FXML
     public void renderTable(List<Cliente> clientes) {
+    	
     	Id.setCellValueFactory(new PropertyValueFactory<>("Id"));
     	Nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         Telefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
@@ -232,6 +240,7 @@ public class clientesController implements Initializable {
     }
     	 
     public void reloadTable() {	
+    	
     	List<Cliente> cliList = new ArrayList<>();
 		try {
 			if(view == 0) {
@@ -240,25 +249,27 @@ public class clientesController implements Initializable {
 				
 				lblTitle.setText("Lista de clientes ativos");
 				
-				btnLC.setManaged(false); // Node won't take space in the layout
-				btnLC.setVisible(false);  // Node is hidden
+				btnLC.setManaged(false); // Elimina o botão do Layout
+				btnLC.setVisible(false); // Esconde o botão
 				
-				btnHC.setManaged(true);
-				btnHC.setVisible(true);
+				btnHC.setManaged(true); // Insere o botão no Layout
+				btnHC.setVisible(true); // Exibe o botão
 			}
 			else if(view == 1) {
 				cliList = clienteDAO.findAll();
 				view = 1;
 				lblTitle.setText("Histórico de Clientes");
 				
-				btnLC.setManaged(true); // Node won't take space in the layout
-				btnLC.setVisible(true);  // Node is hidden
+				btnLC.setManaged(true); // Insere o botão no Layout
+				btnLC.setVisible(true); // Exibe o botão
 				
-				btnHC.setManaged(false);
-				btnHC.setVisible(false);
+				btnHC.setManaged(false); // Elimina o botão do Layout
+				btnHC.setVisible(false); // Esconde o botão
 
 			}	
-		} catch (DomainException e) {
+		} 
+		catch (DomainException e) {
+			System.out.println("Erro: " + e.getMessage());
 			e.printStackTrace();
 		}
 		
@@ -277,11 +288,11 @@ public class clientesController implements Initializable {
 			
 			lblTitle.setText("Histórico de Clientes");
 			
-			btnLC.setManaged(true); // Node won't take space in the layout
-			btnLC.setVisible(true);  // Node is hidden
+			btnLC.setManaged(true); // Insere o botão no Layout
+			btnLC.setVisible(true); // Exibe o botão
 			
-			btnHC.setManaged(false);
-			btnHC.setVisible(false);
+			btnHC.setManaged(false); // Elimina o botão do Layout
+			btnHC.setVisible(false); // Esconde o botão
 			
 		} catch (DomainException e) {
 			
@@ -319,8 +330,8 @@ public class clientesController implements Initializable {
 			verClientesController controller = fxmlLoader.getController();
 			controller.setStage(modalStage);
 			
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
+		} 
+		catch (IOException e1) {
 			e1.printStackTrace();
 		}
         
@@ -346,26 +357,56 @@ public class clientesController implements Initializable {
     }
 	
 	public void cancelarCliente(Cliente target) {
-		int id = target.getId();
 		
-		if(target.getIntSituacao() == 2) {
-			target.setSituacao(0);
+		int situacao = target.getIntSituacao();
+		String operacao = situacao == 2 ? "reestabelecer" : "cancelar";
+		boolean confirmar = dialogConfirmar(0, operacao);
+		
+		if(confirmar) {
+			if(situacao == 2) {
+				target.setSituacao(0);
+			}
+			else if(situacao != 2) {
+				target.setSituacao(2);
+			}
+			
+			clienteDAO.update(target);	
+			reloadTable();
 		}
-		else if(target.getIntSituacao() != 2) {
-			target.setSituacao(2);
-		}
-		
-		clienteDAO.update(target);
-		
-		reloadTable();
+
 	}
 	
 	@FXML
     public void excluirCliente(Cliente target) {
-		int id = target.getId();
-		clienteDAO.deleteById(id);
+		boolean confirmar = dialogConfirmar(0, "excluir");	
 		
-		reloadTable();
+		if(confirmar) {
+			clienteDAO.deleteById(target.getId());
+			reloadTable();
+		}
     }
+	
+	
+	public Boolean dialogConfirmar(int operacaoId, String operacaoNome) {
+		
+		Dialog<Boolean> dialog = new Dialog<>();
+        dialog.setTitle("Confirmar Operação");
+        dialog.setHeaderText("Tem certeza que deseja "+ operacaoNome +" esse cliente?");
 
+        ButtonType btnAllowType = new ButtonType("Confirmar");
+        ButtonType btnFecharType = new ButtonType("Retornar", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        dialog.getDialogPane().getButtonTypes().addAll(btnAllowType, btnFecharType);
+        dialog.getDialogPane().getStyleClass().add("centerAlert");
+
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == btnAllowType) {    
+            	return true; // Return type must match Dialog<Void>
+            } 
+            return false;
+        });
+               
+        dialog.showAndWait(); // This will block until the dialog is closed
+        return dialog.getResult() != null && dialog.getResult();
+	}
 }
