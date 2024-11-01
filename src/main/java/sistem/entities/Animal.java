@@ -1,6 +1,5 @@
 package sistem.entities;
 
-import java.io.Serializable;
 import java.util.Arrays;
 
 import sistem.enums.AnimalEmergencia;
@@ -8,22 +7,20 @@ import sistem.enums.AnimalInternado;
 import sistem.enums.AnimalSexo;
 import sistem.enums.AnimalTipo;
 import sistem.exceptions.DomainException;
-import sistem.vet.controllers.menuDataSaver;
 
-public class Animal implements Serializable {
-	
-	private static final long serialVersionUID = 1L;
+public class Animal{
 	
 	private int id;
 	private String nome;
 	private AnimalSexo sexo;
 	private AnimalTipo tipo; 
-	private AnimalEmergencia emergencia;
 	private AnimalInternado internado;
-	
+	private AnimalEmergencia emergencia;
 	public int[] servicos = new int[9];
-	public String stringServicos;
 	private double orcamento;
+	
+	public String stringServicos;
+	
 	
 	public Animal() {
 		Arrays.fill(this.servicos, -1); //=> Define toda a array como não incializada
@@ -43,6 +40,7 @@ public class Animal implements Serializable {
 		Arrays.fill(this.servicos, -1); //=> Define toda a array como não incializada
 	}
 	
+	//======> Id
 	public int getId() {
 		return id;
 	}
@@ -51,7 +49,7 @@ public class Animal implements Serializable {
 		this.id = id;
 	}
 	
-	
+	//======> Nome
 	public String getNome() {
 		return nome;
 	}
@@ -60,6 +58,7 @@ public class Animal implements Serializable {
 		this.nome = nome;
 	}
 	
+	//======> Sexo
 	public AnimalSexo getSexo() {
 		return sexo;
 	}
@@ -86,6 +85,7 @@ public class Animal implements Serializable {
 		}
 	}
 	
+	//======> Tipo
 	public void setTipo(int tipo) throws DomainException {
 		switch(tipo) {
 			case 0: this.tipo = AnimalTipo.GATO; 				break;
@@ -122,6 +122,7 @@ public class Animal implements Serializable {
 		return type;
 	}
 	
+	//======> Emergência
 	public AnimalEmergencia getEmergencia() {
 		return emergencia;
 	}
@@ -146,6 +147,7 @@ public class Animal implements Serializable {
 		}
 	}
 	
+	//======> Internado
 	public AnimalInternado getInternado() {
 		return internado;
 	}

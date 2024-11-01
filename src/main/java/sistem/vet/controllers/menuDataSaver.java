@@ -62,6 +62,21 @@ public class menuDataSaver {
 		}
 	}
 	
+	//=> Carrega o Conteúdo na divisão setada
+    public void loadContent(String fxmlFile, Class classe) {
+        try {
+            // Clear existing content
+            contentBox.getChildren().clear();
+   
+            // Load new content
+            FXMLLoader loader = new FXMLLoader(classe.getResource("/fxml/" + fxmlFile));
+            VBox newContent = loader.load();
+            contentBox.getChildren().add(newContent);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+	
 	//=> Estiliza os Botões do Menu
 	public void style(Node el, HBox target) {
 		if(el instanceof HBox) {
@@ -95,23 +110,5 @@ public class menuDataSaver {
 	//=> Define o Id
 	public void setSharedId(Integer id) {
 		this.sharedId = id;
-	}
-	
-	//=> Carrega o Conteúdo na divisão setada
-	//=> Classe que carrega o conteúdo dentro da VBox
-    public void loadContent(String fxmlFile, Class classe) {
-        try {
-            // Clear existing content
-            contentBox.getChildren().clear();
-   
-            // Load new content
-            FXMLLoader loader = new FXMLLoader(classe.getResource("/fxml/" + fxmlFile));
-            VBox newContent = loader.load();
-            contentBox.getChildren().add(newContent);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    	
-    
+	} 
 }

@@ -1,6 +1,5 @@
 package sistem.entities;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -12,9 +11,7 @@ import sistem.services.CpfCnpjMask;
 import sistem.services.TelefoneMask;
 
 
-public class Cliente implements Serializable {
-	
-	private static final long serialVersionUID = 1L;
+public class Cliente{
 	
 	private final int NAO_INICIALIZADO = -1;
 	private final int LIMITE_PARCELA = 6;
@@ -61,7 +58,6 @@ public class Cliente implements Serializable {
 		this.dataCadastro = LocalDateTime.now();
 		
 	}
-	
 	
 	//======> Id
 	public int getId() {
