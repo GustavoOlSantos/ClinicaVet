@@ -152,7 +152,7 @@ public class ClienteDaoJDBC implements ClienteDAO {
 			for(int i = 0; i < cli.qtdAnimal; i++) {
 				st = conn.prepareStatement(
 						"UPDATE animal SET idCliente = ?, nome = ?, sexo = ?, tipo = ?, emergencia = ?, internado = ?, orcamento = ? "
-						+ "WHERE idCliente = ?");
+						+ "WHERE idCliente = ? AND idAnimal = ?");
 				
 				st.setInt	(1, cli.getId());					//=> IdCliente
 				st.setString(2, cli.animal[i].getNome());		//=> Nome Pet
@@ -162,7 +162,7 @@ public class ClienteDaoJDBC implements ClienteDAO {
 				st.setInt	(6, cli.animal[i].getIntInternado()); //=> Pet Internado
 				st.setDouble(7, cli.animal[i].getOrcamento());	//=> Orçamento pet
 				st.setInt	(8, cli.getId());					//=> IdCliente
-				
+				st.setInt	(9, cli.animal[i].getId());			//=> IdPet
 				st.executeUpdate();
 			}
 		}
