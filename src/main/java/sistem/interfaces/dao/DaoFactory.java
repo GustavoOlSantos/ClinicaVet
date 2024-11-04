@@ -13,7 +13,7 @@ public class DaoFactory {
 	}
 	
 	public static AnimalDAO createAnimalDao() {
-		return new AnimalDaoJDBC();
+		return new AnimalDaoJDBC(DB.getConnection());
 	}
 	
 	public static ServicosDAO createServicosDao() {
