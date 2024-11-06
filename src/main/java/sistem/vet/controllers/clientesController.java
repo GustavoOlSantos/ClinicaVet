@@ -306,7 +306,7 @@ public class clientesController implements Initializable {
 	
 	@FXML
     public void cadCliente() {
-    	//menu.loadContent("cadastrarCliente.fxml", menu.classe); 
+    	menu.loadContent("cadastro.fxml", menu.classe); 
     }
 	
 	@FXML
