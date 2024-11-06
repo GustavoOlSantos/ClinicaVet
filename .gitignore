@@ -16,11 +16,15 @@ db.properties
 # Maven
 log/
 target/
+target\
+target/*
 
 # Inclusions
 !lib/**
 
 # Compiled Files
+*.MF
+*.properties
 *.class
 bin/
 build/
