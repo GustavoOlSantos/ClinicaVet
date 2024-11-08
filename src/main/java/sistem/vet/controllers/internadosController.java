@@ -8,11 +8,14 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import sistem.entities.Animal;
+import sistem.entities.Cliente;
 import sistem.enums.AnimalEmergencia;
 import sistem.enums.AnimalInternado;
 import sistem.enums.AnimalSexo;
@@ -54,6 +57,9 @@ public class internadosController implements Initializable {
 	Button close;
 	
 	private Stage modal;
+        
+    @FXML
+    public TextField buscaField;
     
     @Override	//=> Atualiza a Tabela ao inicializar
     public void initialize(URL location, ResourceBundle resources) {
@@ -61,12 +67,18 @@ public class internadosController implements Initializable {
     	 List<Animal> cliList = new ArrayList<>();
 
          try {
- 			cliList = animalDAO.findAll();
+ 			cliList = animalDAO.findInternados();
  		 } catch (DomainException e) {
  			e.printStackTrace();
  		 }
          
          renderTable(cliList);
+         
+         buscaField.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                buscarAnimal(); 
+            }
+        });
 	
     }  
     
@@ -88,5 +100,23 @@ public class internadosController implements Initializable {
     
     public void setStage(Stage stage) {
     	modal = stage;
+    }
+    
+    public void buscarAnimal() {
+        
+        String nome = buscaField.getText();
+        
+        List<Animal> aniList = new ArrayList<>();
+		
+            try {
+                aniList = animalDAO.findByName(nome);
+            } catch (DomainException e) {
+                e.printStackTrace();
+            }
+
+            tableView.getItems().clear();
+            renderTable(aniList);  
+
+        
     }
 }

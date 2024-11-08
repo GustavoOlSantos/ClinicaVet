@@ -33,13 +33,13 @@
 			<HBox HBox.hgrow="ALWAYS" alignment="BOTTOM_CENTER" spacing="10">
 				
 				<HBox alignment="BOTTOM_CENTER">
-					<TextField fx:id="buscaField" promptText="Buscar nome/CPF/CNPJ" />
-	    			<Button fx:id="buscaBtn" onAction="#buscarCliente">
-	    				<graphic>
-							<FontIcon iconLiteral="fa-search" iconColor="black" iconSize="15"/>
-						</graphic>
-	    			</Button>
-    			</HBox>
+                                    <TextField fx:id="buscaField" promptText="Buscar nome/CPF/CNPJ" />
+                                        <Button fx:id="buscaBtn" onAction="#buscarCliente">
+                                            <graphic>
+                                               <FontIcon iconLiteral="fa-search" iconColor="black" iconSize="15"/>
+                                            </graphic>
+                                        </Button>
+                                </HBox>
     			
 				<Button fx:id="btnHC" styleClass="" onAction="#clickHistorico">
 					<graphic>
