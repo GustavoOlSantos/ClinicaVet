@@ -16,12 +16,6 @@
 	• Botão para Acessar o histórico de clientes
 -->
 <VBox xmlns:fx="http://javafx.com/fxml" VBox.vgrow="ALWAYS" alignment="CENTER" fx:controller="sistem.vet.controllers.clientesController">
-    <!-- <Label text="Lista clientes" styleClass="Welcome" />
-    
-    <HBox fx:id="HC" styleClass="menu-items" onMouseClicked="#ClickHistorico">
-		<FontIcon iconLiteral="fa-book" iconColor="white" iconSize="28"/>
-		<Label text="Histórico de Clientes" styleClass="menu-buttons"/>
-	</HBox> -->
 	
 	<VBox styleClass="TableContent" VBox.vgrow="ALWAYS"> 
 		<HBox styleClass="table-header">
