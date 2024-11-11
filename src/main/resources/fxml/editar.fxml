@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import org.kordamp.ikonli.javafx.StackedFontIcon?>
+
+
+
+
+<VBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistem.vet.controllers.cadastroController"> 
+    
+
+    
+        <HBox HBox.hgrow="ALWAYS" alignment="BOTTOM_CENTER" spacing="10">
+            <VBox spacing="10">
+                <!-- Campos do Cliente -->
+                <TextField fx:id="nomeField" promptText="Nome do Cliente" />
+                <TextField fx:id="cpfField" promptText="CPF/CNPJ" />
+                <TextField fx:id="emailField" promptText="Email" />
+                <TextField fx:id="telefoneField" promptText="Telefone" />
+
+                <!-- Campos do Animal -->
+                <TextField fx:id="nomeAnimalField" promptText="Nome do Animal" />
+
+                <!-- Botões de seleção de Sexo -->
+                <HBox spacing="5">
+                    <Label text="Sexo:" />
+                    <Button fx:id="machoButton" text="Macho" />
+                    <Button fx:id="femeaButton" text="Fêmea" />
+                </HBox>
+
+                <!-- Campo de seleção de Tipo -->
+                <TextField fx:id="tipoField" promptText="Tipo (e.g., cachorro, gato)" />
+
+                <!-- Botões de Emergência -->
+                <HBox spacing="5">
+                    <Label text="Emergência:" />
+                    <Button fx:id="simButton" text="Sim" />
+                    <Button fx:id="naoButton" text="Não" />
+                </HBox>
+
+                <!-- Campo de Serviços -->
+                <TextField fx:id="servicosField" promptText="Serviços (e.g., consulta, vacinação)" />
+
+                <!-- Botão Salvar -->
+                <Button fx:id="btnSalvar" text="Salvar" onAction="#salvarCadastro">
+                    <graphic>
+                        <FontIcon iconLiteral="fa-save" iconColor="black" iconSize="15"/>
+                    </graphic>
+                </Button>
+            </VBox>
+        </HBox>
+    
+</VBox>
+

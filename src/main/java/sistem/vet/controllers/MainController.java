@@ -23,6 +23,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+import sistem.vet.App;
 
 public class MainController implements Initializable {
     
@@ -44,12 +45,12 @@ public class MainController implements Initializable {
     public VBox leftMenu; 	//=> Menu Lateral
     private boolean isDisplay = true; //=> Estado do menu lateral
     
-	public static menuDataSaver menu;	//=> Classe que transporta os Dados
+	public static menuDataSaver menu = App.menu;//=> Classe que transporta os Dados
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     	
-    	menu = new menuDataSaver(contentBox, PI, LC, PC, IT, MenuBox, getClass());	//=> Carrega os Dados na classe
+    	menu.menuDataSaverFiller(contentBox, PI, LC, PC, IT, MenuBox, getClass());	//=> Carrega os Dados na classe
     	menu.loadContent("home.fxml", menu.classe); 								//=> Carrega o Conteúdo da Página Inicial
     							  //=> Path, Width, Height, preserveRatio, Smooth
     	LOGO.setImage(new Image("file:src/main/resources/imgs/app-icon.png", 30, 30, true, true));

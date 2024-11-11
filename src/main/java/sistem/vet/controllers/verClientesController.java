@@ -70,7 +70,7 @@ public class verClientesController implements Initializable {
     @FXML
     public TableColumn<Animal, AnimalInternado> Internado;
     @FXML
-    public TableColumn<Animal, Double> Orcamento;
+    public TableColumn<Animal, String> Orcamento;
     @FXML
     public TableColumn<Animal, String> Servicos;
 	
@@ -109,7 +109,7 @@ public class verClientesController implements Initializable {
 		        Tipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
 		        Emergencia.setCellValueFactory(new PropertyValueFactory<>("Emergencia"));
 		        Internado.setCellValueFactory(new PropertyValueFactory<>("Internado"));
-		        Orcamento.setCellValueFactory(new PropertyValueFactory<>("Orcamento"));
+		        Orcamento.setCellValueFactory(new PropertyValueFactory<>("OrcamentoStr"));
 		        
 		        pet.transformServicos(menu.serv);
 		        Servicos.setCellValueFactory(new PropertyValueFactory<>("StringServicos"));

@@ -11,10 +11,10 @@ import org.kordamp.ikonli.javafx.FontIcon;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
@@ -23,6 +23,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sistem.entities.Cliente;
@@ -55,7 +58,7 @@ public class clientesController implements Initializable {
     @FXML
     public TableColumn<Cliente, String> Pets;
     @FXML
-    public TableColumn<Cliente, Double> Orcamento;
+    public TableColumn<Cliente, String> Orcamento;
     @FXML
     public TableColumn<Cliente, StatusPagamento> StatusPagamento;
     @FXML
@@ -63,6 +66,8 @@ public class clientesController implements Initializable {
     
     @FXML
     public TableColumn<Cliente, Void> See;
+    @FXML
+    public TableColumn<Cliente, Void> Edit;
     @FXML
     public TableColumn<Cliente, Void> Ban;
     @FXML
@@ -85,6 +90,7 @@ public class clientesController implements Initializable {
     
     @Override	//=> Atualiza a Tabela ao inicializar
     public void initialize(URL location, ResourceBundle resources) {
+    	menu.scene.getStylesheets().add(App.class.getResource("/styles/Styles.css").toExternalForm());  
     	listarClientesAtivos();
     	
     	//=> Checa o input de buscar cliente
@@ -127,9 +133,13 @@ public class clientesController implements Initializable {
     	Nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         Telefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
         Pets.setCellValueFactory(new PropertyValueFactory<>("animal"));
-        Orcamento.setCellValueFactory(new PropertyValueFactory<>("orcamentoTotal"));
+        Orcamento.setCellValueFactory(new PropertyValueFactory<>("orcamentoTotalStr"));
         StatusPagamento.setCellValueFactory(new PropertyValueFactory<>("StatusPagamento"));
         Status.setCellValueFactory(new PropertyValueFactory<>("Situacao"));
+        
+        Id.getStyleClass().add("centered");
+        StatusPagamento.getStyleClass().add("centered");
+        Status.getStyleClass().add("centered");
         
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         
@@ -148,6 +158,15 @@ public class clientesController implements Initializable {
                     icon.setIconSize(15); 					//=> Tamanho do Ícone
                     visualizar.setGraphic(icon);		   //=> Seta o Ícone como gráfico do botão
                     setGraphic(visualizar);				  //=> Seta o Botão como gráfico da coluna
+                    setAlignment(Pos.CENTER);
+
+                    visualizar.setMaxWidth(Double.MAX_VALUE);
+                    visualizar.setPrefWidth(65); // Adjust this value as needed
+                    
+                    // Use HBox to center and size the button
+                    HBox hbox = new HBox(visualizar);
+                    hbox.setAlignment(Pos.CENTER);
+                    HBox.setHgrow(visualizar, Priority.ALWAYS);
                     
                     //=> Controller do Botão
                     visualizar.setOnAction(event -> {
@@ -160,6 +179,42 @@ public class clientesController implements Initializable {
             }
         });
         
+      //=> Cria o botão para a coluna See
+        Edit.setCellFactory(col -> new TableCell<Cliente, Void>() {
+            private final Button editar = new Button("");
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } 
+                else {
+                    FontIcon icon = new FontIcon("fa-pencil"); //=> Criar Ícone
+                    icon.setIconSize(15); 					//=> Tamanho do Ícone
+                    editar.setGraphic(icon);		   //=> Seta o Ícone como gráfico do botão
+                    setGraphic(editar);				  //=> Seta o Botão como gráfico da coluna
+                    setAlignment(Pos.CENTER);
+
+                    editar.setMaxWidth(Double.MAX_VALUE);
+                    editar.setPrefWidth(65); // Adjust this value as needed
+                    
+                    // Use HBox to center and size the button
+                    HBox hbox = new HBox(editar);
+                    hbox.setAlignment(Pos.CENTER);
+                    HBox.setHgrow(editar, Priority.ALWAYS);
+                    
+                    //=> Controller do Botão
+                    editar.setOnAction(event -> {
+                        Cliente selectedCliente = getTableRow().getItem();
+                        if (selectedCliente != null) {
+                        	editarCliente(selectedCliente);
+                        }
+                    });
+                }
+            }
+        });
+          
         //=> Cria o botão para a coluna Ban
         Ban.setCellFactory(col -> new TableCell<Cliente, Void>() {
             private final Button block = new Button("");
@@ -190,7 +245,16 @@ public class clientesController implements Initializable {
                 		icon.setIconSize(15); 					 //=> Tamanho do Ícone
     	                block.setGraphic(icon);		   		//=> Seta o Ícone como gráfico do botão
     	                setGraphic(block);				  	    //=> Seta o Botão como gráfico da coluna
-                	}
+    	                setAlignment(Pos.CENTER);
+
+    	                block.setMaxWidth(Double.MAX_VALUE);
+                        block.setPrefWidth(65); // Adjust this value as needed
+                        
+                        // Use HBox to center and size the button
+                        HBox hbox = new HBox(block);
+                        hbox.setAlignment(Pos.CENTER);
+                        HBox.setHgrow(block, Priority.ALWAYS);
+                	}	
                 	
                 	else {
                 		setGraphic(null);
@@ -224,6 +288,16 @@ public class clientesController implements Initializable {
                     icon.setIconSize(15); 					//=> Tamanho do Ícone
                     excluir.setGraphic(icon);		   //=> Seta o Ícone como gráfico do botão
                     setGraphic(excluir);				  //=> Seta o Botão como gráfico da coluna
+                    setAlignment(Pos.CENTER);
+                    
+                    
+                    excluir.setMaxWidth(Double.MAX_VALUE);
+                    excluir.setPrefWidth(65); // Adjust this value as needed
+                    
+                    // Use HBox to center and size the button
+                    HBox hbox = new HBox(excluir);
+                    hbox.setAlignment(Pos.CENTER);
+                    HBox.setHgrow(excluir, Priority.ALWAYS);
                     
                     //=> Controller do Botão (Talvez seja removido)
                     excluir.setOnAction(event -> {
@@ -309,6 +383,13 @@ public class clientesController implements Initializable {
     	menu.loadContent("cadastro.fxml", menu.classe); 
     }
 	
+	public void editarCliente(Cliente target) {
+		int id = target.getId();
+		menu.setSharedId(id);
+		
+		menu.loadContent("editar.fxml", menu.classe); 
+	}
+	
 	@FXML
     public void verCliente(Cliente target) {
 		int id = target.getId();
@@ -393,20 +474,19 @@ public class clientesController implements Initializable {
         dialog.setTitle("Confirmar Operação");
         dialog.setHeaderText("Tem certeza que deseja "+ operacaoNome +" esse cliente?");
 
-        ButtonType btnAllowType = new ButtonType("Confirmar");
-        ButtonType btnFecharType = new ButtonType("Retornar", ButtonBar.ButtonData.CANCEL_CLOSE);
+        Button confirmButton = new Button("Confirmar");
+        Button closeButton = new Button("Retornar");
+        
+        confirmButton.setOnAction(e -> dialog.setResult(true));
+        closeButton.setOnAction(e -> dialog.setResult(false));
 
-        dialog.getDialogPane().getButtonTypes().addAll(btnAllowType, btnFecharType);
-        dialog.getDialogPane().getStyleClass().add("centerAlert");
-
-        dialog.setResultConverter(dialogButton -> {
-            if (dialogButton == btnAllowType) {    
-            	return true; // Return type must match Dialog<Void>
-            } 
-            return false;
-        });
+        HBox buttonBox = new HBox(10, confirmButton, closeButton); // Spacing between buttons
+        buttonBox.setSpacing(50);
+        buttonBox.setPadding(new Insets(20, 0, 0, 0));
+        buttonBox.setAlignment(Pos.CENTER); // Center buttons
+        dialog.getDialogPane().setContent(buttonBox);
                
         dialog.showAndWait(); // This will block until the dialog is closed
-        return dialog.getResult() != null && dialog.getResult();
+        return dialog.getResult();
 	}
 }

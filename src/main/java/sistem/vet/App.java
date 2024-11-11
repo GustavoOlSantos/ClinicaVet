@@ -15,10 +15,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import sistem.vet.controllers.menuDataSaver;
 
 
 public class App extends Application {
     private static Stage stage;
+    public static menuDataSaver menu;	//=> Classe que transporta os Dados
 
     @Override
     public void start(@SuppressWarnings("exports") Stage s) throws IOException {
@@ -32,9 +34,12 @@ public class App extends Application {
 
     @FXML
     static void setRoot(String fxml, String title) throws IOException {
+    	menu = new menuDataSaver();	//=> Carrega os Dados na classe
         Scene scene = new Scene(loadFXML(fxml));
+        menu.scene = scene;
         
         scene.getStylesheets().add(App.class.getResource("/styles/Styles.css").toExternalForm());  
+        
     
         stage.setTitle(title);
         stage.getIcons().add(new Image("file:src/main/resources/imgs/app-icon.png"));
@@ -42,6 +47,7 @@ public class App extends Application {
         stage.setMaximized(true);
         stage.setResizable(true);
         stage.show();
+        
     }
 
     private static Parent loadFXML(String fxml) throws IOException {

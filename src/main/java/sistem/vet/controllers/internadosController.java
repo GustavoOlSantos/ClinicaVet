@@ -49,7 +49,7 @@ public class internadosController implements Initializable {
     // @FXML
     //public TableColumn<Animal, AnimalInternado> Internado;
     @FXML
-    public TableColumn<Animal, Double> Orcamento;
+    public TableColumn<Animal, String> Orcamento;
     @FXML
     public TableColumn<Animal, String> Servicos;
 	
@@ -64,15 +64,15 @@ public class internadosController implements Initializable {
     @Override	//=> Atualiza a Tabela ao inicializar
     public void initialize(URL location, ResourceBundle resources) {
     	
-    	 List<Animal> cliList = new ArrayList<>();
+    	 List<Animal> aniList = new ArrayList<>();
 
          try {
- 			cliList = animalDAO.findInternados();
+ 			aniList = animalDAO.findInternados();
  		 } catch (DomainException e) {
  			e.printStackTrace();
  		 }
          
-         renderTable(cliList);
+         renderTable(aniList);
          
          buscaField.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
@@ -82,20 +82,22 @@ public class internadosController implements Initializable {
 	
     }  
     
-    public void renderTable(List<Animal> animal) {
+    public void renderTable(List<Animal> animais) {
     
     	Id.setCellValueFactory(new PropertyValueFactory<>("Id"));
     	Nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         Sexo.setCellValueFactory(new PropertyValueFactory<>("sexo"));
         Tipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
         Emergencia.setCellValueFactory(new PropertyValueFactory<>("Emergencia"));
-       // Internado.setCellValueFactory(new PropertyValueFactory<>("Internado"));
-        Orcamento.setCellValueFactory(new PropertyValueFactory<>("Orcamento"));
+        Orcamento.setCellValueFactory(new PropertyValueFactory<>("OrcamentoStr"));
         
-     //   ((Animal) animal).transformServicos(menu.serv);
-     //   Servicos.setCellValueFactory(new PropertyValueFactory<>("StringServicos"));
+        for(Animal animal : animais) {
+        	animal.transformServicos(menu.serv);
+        }
+    
+        Servicos.setCellValueFactory(new PropertyValueFactory<>("StringServicos"));
         
-        tableView.getItems().addAll(animal);
+        tableView.getItems().addAll(animais);
     }
     
     public void setStage(Stage stage) {

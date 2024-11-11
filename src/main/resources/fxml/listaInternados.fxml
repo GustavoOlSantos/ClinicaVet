@@ -36,13 +36,13 @@
         
         <TableView fx:id="tableView" styleClass="Table" VBox.vgrow="ALWAYS" prefWidth="Infinity" minWidth="1300" maxWidth="Infinity">
 	    <columns>
-	        <TableColumn fx:id="Id" 	 text="#"          minWidth="20"  maxWidth="30"/>
+	        <TableColumn fx:id="Id" 	 	 text="#"          minWidth="20"  maxWidth="30"/>
 	        <TableColumn fx:id="Nome"        text="Nome" 	   minWidth="100" maxWidth="150"/>
-	        <TableColumn fx:id="Sexo"	 text="Sexo" 	   minWidth="100" maxWidth="150"/>
+	        <TableColumn fx:id="Sexo"	     text="Sexo" 	   minWidth="100" maxWidth="150"/>
 	        <TableColumn fx:id="Tipo"        text="Tipo" 	   minWidth="50"  maxWidth="100"/>
 	        <TableColumn fx:id="Emergencia"  text="Emergencia" minWidth="50"  maxWidth="100"/>
 	        <TableColumn fx:id="Orcamento" 	 text="Orcamento"  minWidth="30"  maxWidth="100"/>
-	        <TableColumn fx:id="Servicos" 	 text="Servicos"   minWidth="30"  maxWidth="100"/>
+	        <TableColumn fx:id="Servicos" 	 text="Servicos"   minWidth="30"  maxWidth="Infinity"/>
 	    </columns>
 	</TableView>
 	    

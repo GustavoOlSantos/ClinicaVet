@@ -5,8 +5,10 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import sistem.entities.Servicos;
 import sistem.exceptions.DomainException;
 import sistem.interfaces.dao.AnimalDAO;
@@ -31,6 +33,8 @@ public class menuDataSaver {
     public HBox MenuBox;	//=> Container do Menu
     public Class classe;	//=> Registro da Classe Main
     
+    public Scene scene;
+    
     //====> DAOs para acesso ao banco de dados (Centralizar as DAOs)
     public ClienteDAO clienteDAO;
     public AnimalDAO animalDAO;
@@ -41,14 +45,23 @@ public class menuDataSaver {
     private Integer sharedId;				//=> Id do cliente ou Animal (Para buscas)
     
     //=> Construtor (Inicialização do programa)
-	public menuDataSaver(VBox contentBox, HBox pI, HBox lC, HBox pC, HBox iT, HBox menuBox, Class classe) {
-		this.contentBox = contentBox;
-		this.PI = pI;
-		this.LC = lC;
-		this.PC = pC;
-		this.IT = iT;
-		this.MenuBox = menuBox;
-		this.classe = classe;
+	public menuDataSaver() {
+		// Cria as DAOs usando a DaoFactory
+		this.clienteDAO = DaoFactory.createClienteDao();
+		this.animalDAO = DaoFactory.createAnimalDao();
+		this.servicoDAO = DaoFactory.createServicosDao();
+		
+		try {
+			serv = servicoDAO.findAll().stream().toArray();
+		} catch (DomainException e) {
+			e.printStackTrace();
+		}
+	}
+    			
+    
+	//=> Construtor (Inicialização do programa)
+	public menuDataSaver(Scene scene) {
+		this.scene = scene;
 		
 		// Cria as DAOs usando a DaoFactory
 		this.clienteDAO = DaoFactory.createClienteDao();
@@ -60,6 +73,16 @@ public class menuDataSaver {
 		} catch (DomainException e) {
 			e.printStackTrace();
 		}
+	}
+		
+	public void menuDataSaverFiller(VBox contentBox, HBox pI, HBox lC, HBox pC, HBox iT, HBox menuBox, Class classe) {
+		this.contentBox = contentBox;
+		this.PI = pI;
+		this.LC = lC;
+		this.PC = pC;
+		this.IT = iT;
+		this.MenuBox = menuBox;
+		this.classe = classe;
 	}
 	
 	//=> Carrega o Conteúdo na divisão setada

@@ -99,6 +99,10 @@ public class Cliente{
 	public double getOrcamentoTotal(){
 		return this.orcamentoTotal;
 	}
+	
+	public String getOrcamentoTotalStr(){
+		return "R$ " + this.orcamentoTotal;
+	}
 
 	public void setOrcamentoTotal(double value){
 		orcamentoTotal += value;

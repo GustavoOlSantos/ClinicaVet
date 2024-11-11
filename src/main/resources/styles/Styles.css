@@ -153,12 +153,14 @@
 }
 
 .TableContent{
-	-fx-pref-width: 100%;  /* Ensure the TableView uses full width */
+	-fx-hgrow: ALWAYS;
+	-fx-pref-width: Infinity;  /* Ensure the TableView uses full width */
 	-fx-padding: 10;
 }
 
 .Table{
 	-fx-pref-width: 100%;
+	-fx-vgrow: ALWAYS;
 	-fx-hgrow: ALWAYS; /* Allow the TableView to grow horizontally */
 }
 
@@ -173,6 +175,10 @@
     -fx-font-weight: bold; /* Negrito */
     -fx-text-fill: #000; /* Cor do texto */
     -fx-padding: 0 0 20 0; /* Espaçamento */
+}
+
+.centered {
+    -fx-alignment: CENTER;
 }
 
 

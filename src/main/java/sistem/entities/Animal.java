@@ -177,6 +177,10 @@ public class Animal{
 		return this.orcamento;
 	}
 	
+	public String getOrcamentoStr(){
+		return "R$ " + this.orcamento;
+	}
+	
 	public void setOrcamento(double value){
 		orcamento += value;
 	}
@@ -213,7 +217,7 @@ public class Animal{
 			}
 		}
 	}
-	
+
 	
 	public String getStringServicos() {
 		return stringServicos;
