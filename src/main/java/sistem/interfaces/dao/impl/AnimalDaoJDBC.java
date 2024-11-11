@@ -131,12 +131,15 @@ public class AnimalDaoJDBC implements AnimalDAO {
 	private Animal instAnimal(ResultSet rs) throws SQLException, DomainException {
 		Animal animal = new Animal();
 		animal.setId(rs.getInt("animal.idAnimal"));
+		animal.setIdCliente(rs.getInt("animal.idCliente"));
 		animal.setNome(rs.getString("animal.nome"));
 		animal.setSexo(rs.getInt("animal.sexo"));
 		animal.setTipo(rs.getInt("animal.tipo"));
+		animal.setSituacao(rs.getInt("animal.status"));
 		animal.setEmergencia(rs.getInt("animal.emergencia"));
 		animal.setInternado(rs.getInt("animal.internado"));
 		animal.setOrcamento(rs.getDouble("animal.orcamento"));
+		animal.setObservacoes(rs.getString("animal.observacoes"));
 		String intStr = rs.getString("animal.servicos");
 		
 		intStr = intStr.replaceAll(" ", "");

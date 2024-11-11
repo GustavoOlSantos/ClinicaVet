@@ -419,7 +419,9 @@ public class ClienteDaoJDBC implements ClienteDAO {
 		cliente.setFormaPagamento(rs.getInt("formaPagamento"));
 		cliente.setStatusPagamento(rs.getInt("statusPagamento"));
 		cliente.setSituacao(rs.getInt("situacao"));
+		cliente.setObservacao(rs.getString("observacao"));
 		cliente.setDataCadastro(rs.getObject("dataCadastro", LocalDateTime.class));
+		cliente.setDataFinalizado(rs.getObject("dataEncerramento", LocalDateTime.class));
 		
 		cliente.qtdAnimal = rs.getInt("qtdAnimal");
 		cliente.animal = new Animal[cliente.qtdAnimal];
@@ -430,12 +432,15 @@ public class ClienteDaoJDBC implements ClienteDAO {
 	private Animal instAnimal(ResultSet rs, Cliente cliente, int i) throws SQLException, DomainException {
 		Animal animal = new Animal();
 		animal.setId(rs.getInt("animal.idAnimal"));
+		animal.setIdCliente(rs.getInt("animal.idCliente"));
 		animal.setNome(rs.getString("animal.nome"));
 		animal.setSexo(rs.getInt("animal.sexo"));
 		animal.setTipo(rs.getInt("animal.tipo"));
+		animal.setSituacao(rs.getInt("animal.status"));
 		animal.setEmergencia(rs.getInt("animal.emergencia"));
 		animal.setInternado(rs.getInt("animal.internado"));
 		animal.setOrcamento(rs.getDouble("animal.orcamento"));
+		animal.setObservacoes(rs.getString("animal.observacoes"));
 		String intStr = rs.getString("animal.servicos");
 		
 		intStr = intStr.replaceAll(" ", "");

@@ -6,18 +6,23 @@ import sistem.enums.AnimalEmergencia;
 import sistem.enums.AnimalInternado;
 import sistem.enums.AnimalSexo;
 import sistem.enums.AnimalTipo;
+import sistem.enums.Situacao;
+import sistem.enums.SituacaoPet;
 import sistem.exceptions.DomainException;
 
 public class Animal{
 	
 	private int id;
+	private int idCliente;
 	private String nome;
 	private AnimalSexo sexo;
 	private AnimalTipo tipo; 
+	private SituacaoPet situacao;
 	private AnimalInternado internado;
 	private AnimalEmergencia emergencia;
-	public int[] servicos = new int[9];
+	public int[] servicos = new int[18];
 	private double orcamento;
+	private String observacoes;
 	
 	public String stringServicos;
 	
@@ -47,6 +52,15 @@ public class Animal{
 	
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	//======> Id Cliente
+	public int getIdCliente() {
+		return idCliente;
+	}
+	
+	public void setIdCliente(int id) {
+		this.idCliente = id;
 	}
 	
 	//======> Nome
@@ -122,6 +136,52 @@ public class Animal{
 		return type;
 	}
 	
+	///======> Finalizado
+    public SituacaoPet getSituacao() {
+        return situacao;
+    }
+    
+    public Integer getIntSituacao() {
+    	int stt = -1;
+    	
+        switch(situacao) {
+	        case SAUDAVEL: 				 stt = 0; break;
+			case DOENTE: 				 stt = 1; break;
+			case EM_RECUPERACAO: 		 stt = 2; break;
+			case CRITICO: 				 stt = 3; break;
+			case FALECIDO:				 stt = 4; break;
+			case AGUARDANDO_ATENDIMENTO: stt = 5; break;
+			case EM_ATENDIMENTO: 		 stt = 6; break;
+			case INTERNADO: 			 stt = 7; break;
+			case ALTA_MEDICA: 			 stt = 8; break;
+			case ATIVO: 				 stt = 9; break;
+			case INATIVO: 				 stt = 10; break;
+
+        }
+        
+        return stt;
+    }
+    
+    public void setSituacao(int stts) {
+    	switch(stts) {
+		    case 0: this.situacao = SituacaoPet.SAUDAVEL; break;
+			case 1: this.situacao = SituacaoPet.DOENTE; break;
+			case 2: this.situacao = SituacaoPet.EM_RECUPERACAO; break;
+			case 3: this.situacao = SituacaoPet.CRITICO; break;
+			case 4: this.situacao = SituacaoPet.FALECIDO; break;
+			case 5: this.situacao = SituacaoPet.AGUARDANDO_ATENDIMENTO; break;
+			case 6: this.situacao = SituacaoPet.EM_ATENDIMENTO; break;
+			case 7: this.situacao = SituacaoPet.INTERNADO; break;
+			case 8: this.situacao = SituacaoPet.ALTA_MEDICA; break;
+			case 9: this.situacao = SituacaoPet.ATIVO; break;
+			case 10: this.situacao = SituacaoPet.INATIVO; break;
+
+    	}
+    }	
+    
+    
+    
+	
 	//======> Emergência
 	public AnimalEmergencia getEmergencia() {
 		return emergencia;
@@ -184,6 +244,16 @@ public class Animal{
 	public void setOrcamento(double value){
 		orcamento += value;
 	}
+	
+	//======> Observações
+	public void setObservacoes(String observacoes){
+		this.observacoes = observacoes;
+	}
+	
+	public String getObservacoes(){
+		return this.observacoes;
+	}
+		
 	
 	//======> Serviços
 	public void printServicos(Servicos[] serv) {

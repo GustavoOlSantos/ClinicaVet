@@ -41,7 +41,7 @@ public class menuDataSaver {
     public ServicosDAO servicoDAO;
     
     //====> Armazena dados que serão usados em múltiplas páginas
-    public Object[] serv = new Servicos[9]; //=> Array de Serviços		 (Para exibir e consultar)
+    public Object[] serv = new Servicos[18]; //=> Array de Serviços		 (Para exibir e consultar)
     private Integer sharedId;				//=> Id do cliente ou Animal (Para buscas)
     
     //=> Construtor (Inicialização do programa)
@@ -53,6 +53,10 @@ public class menuDataSaver {
 		
 		try {
 			serv = servicoDAO.findAll().stream().toArray();
+			
+//			for(Object s : serv) {
+//				((Servicos) s).Exibir();
+//			}
 		} catch (DomainException e) {
 			e.printStackTrace();
 		}

@@ -28,7 +28,9 @@ public class Cliente{
 	private FormaPagamento formaPagamento;
 	public int parcelaPagamento;
 	private Situacao trabalho;
+	private String observacao;
 	private LocalDateTime dataCadastro;
+	private LocalDateTime dataFinalizado;
 
 	public Cliente() {
 				
@@ -130,20 +132,7 @@ public class Cliente{
     	
     	switch(formaPg) {
 			case 0: this.formaPagamento = FormaPagamento.DEBITO; break;
-			case 1: 
-				this.formaPagamento = FormaPagamento.CREDITO; 
-				/*int parcela;
-				
-				System.out.print("\n\nSerá parcelado em quantas vezes?(Limite "+ LIMITE_PARCELA  +")\nR:");
-				parcela = in.nextInt();
-				
-				if(parcela <= 0 || parcela > LIMITE_PARCELA) {
-					throw new DomainException("Quantidade Inválida de Parcelas.");
-				}
-				
-				this.parcelaPagamento = parcela; 
-				in.nextLine();*/
-			break;
+			case 1: this.formaPagamento = FormaPagamento.CREDITO; break;
 			case 2: this.formaPagamento = FormaPagamento.DINHEIRO; break;
 			case 3: this.formaPagamento = FormaPagamento.PIX; break;
 			default: throw new DomainException("Forma de Pagamento Inválida");
@@ -217,13 +206,35 @@ public class Cliente{
     	}
     }	
     
+    
+    //======> Observações do Cliente
+  	public void setObservacao(String obs) {
+  		this.observacao = obs;
+  		
+  	}
+  	
+  	public String getObservacao() {
+      	return observacao;
+      }
+    
+    //======> Data de Cadastro
 	public void setDataCadastro(LocalDateTime date) {
 		this.dataCadastro = date;
 		
 	}
-    
-    public LocalDateTime getDataCadastro() {
+	
+	public LocalDateTime getDataCadastro() {
     	return dataCadastro;
+    }
+	
+	//======> Data Finalizado
+	public void setDataFinalizado(LocalDateTime date) {
+		this.dataFinalizado = date;
+		
+	}
+	
+	public LocalDateTime getDataFinalizado() {
+    	return dataFinalizado;
     }
     
     //=> Provável descarte
