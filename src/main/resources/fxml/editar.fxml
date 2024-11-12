@@ -6,52 +6,84 @@
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 <?import org.kordamp.ikonli.javafx.StackedFontIcon?>
 
+<VBox xmlns:fx="http://javafx.com/fxml" alignment="TOP_LEFT" fx:controller="sistem.vet.controllers.editarController">
 
-
-
-<VBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistem.vet.controllers.cadastroController"> 
+    <Label text="Edição de Cliente" styleClass="Welcome" />
     
-
-    
-        <HBox HBox.hgrow="ALWAYS" alignment="BOTTOM_CENTER" spacing="10">
-            <VBox spacing="10">
-                <!-- Campos do Cliente -->
-                <TextField fx:id="nomeField" promptText="Nome do Cliente" />
-                <TextField fx:id="cpfField" promptText="CPF/CNPJ" />
-                <TextField fx:id="emailField" promptText="Email" />
-                <TextField fx:id="telefoneField" promptText="Telefone" />
-
-                <!-- Campos do Animal -->
-                <TextField fx:id="nomeAnimalField" promptText="Nome do Animal" />
-
-                <!-- Botões de seleção de Sexo -->
-                <HBox spacing="5">
-                    <Label text="Sexo:" />
-                    <Button fx:id="machoButton" text="Macho" />
-                    <Button fx:id="femeaButton" text="Fêmea" />
-                </HBox>
-
-                <!-- Campo de seleção de Tipo -->
-                <TextField fx:id="tipoField" promptText="Tipo (e.g., cachorro, gato)" />
-
-                <!-- Botões de Emergência -->
-                <HBox spacing="5">
-                    <Label text="Emergência:" />
-                    <Button fx:id="simButton" text="Sim" />
-                    <Button fx:id="naoButton" text="Não" />
-                </HBox>
-
-                <!-- Campo de Serviços -->
-                <TextField fx:id="servicosField" promptText="Serviços (e.g., consulta, vacinação)" />
-
-                <!-- Botão Salvar -->
-                <Button fx:id="btnSalvar" text="Salvar" onAction="#salvarCadastro">
-                    <graphic>
-                        <FontIcon iconLiteral="fa-save" iconColor="black" iconSize="15"/>
-                    </graphic>
-                </Button>
-            </VBox>
-        </HBox>
+    <VBox styleClass="TableContent" VBox.vgrow="ALWAYS">
+    	
+    	<!-- INFORMAÇÕES" DO CLIENTE -->
+	    <HBox styleClass="data-row" HBox.hgrow="ALWAYS" spacing="25">
+	    	
+	    	<VBox>
+	    		<Label text="Nome do Cliente/Tutor" styleClass="data-name" />
+	    		<TextField fx:id="nomeField" promptText="Nome do Cliente" minWidth="220"/>
+	    	</VBox>
+	    	
+	    	<VBox>
+	    		<Label text="CPF/CNPJ" styleClass="data-name" />
+	    		<TextField fx:id="cpfField" promptText="Apenas Números"  minWidth="150"/>
+	    	</VBox>
+	    	
+	    	<VBox>
+	    		<Label text="Email" styleClass="data-name" />
+	    		<TextField fx:id="emailField" promptText="seu@email.com" minWidth="220"/>
+	    	</VBox>
+	    	
+	    	<VBox>
+	    		<Label text="Telefone" styleClass="data-name" />
+	    		<TextField fx:id="telefoneField" promptText="Apenas Números"  minWidth="130"/>
+	    	</VBox>
+	    	
+	    	<VBox>
+	    		<Label text="Forma de Pagamento" styleClass="data-name" />
+	    		<ComboBox fx:id="formaPgField" minWidth="200" />
+	    	</VBox>
+	    	
+	    	<VBox>
+	    		<Label text="Parcelas" styleClass="data-name" />
+	    		<TextField fx:id="parcelasField" promptText="6"  minWidth="80"/>
+	    	</VBox>	    	
+	    </HBox>
+	    
+	    <HBox styleClass="data-row" HBox.hgrow="ALWAYS" spacing="25">
+	    
+	    	<VBox>
+	    		<Label text="Status de Pagamento" styleClass="data-name" />
+	    		<ComboBox fx:id="statusPgField" minWidth="200" />
+	    	</VBox>
+	    	
+	    	<VBox>
+	    		<Label text="Situação do Cliente" styleClass="data-name" />
+	    		<ComboBox fx:id="situacaoField" minWidth="200" />
+	    	</VBox>
+	    	
+	    	<VBox>
+	    		<Label text="Data de Cadastro"  disable="true" styleClass="data-name" />
+	    		<TextField fx:id="dataCadField" disable="true" promptText="dd/mm/yyyy"  minWidth="130"/>
+	    	</VBox>
+	    	
+	    	<VBox>
+	    		<Label text="Data de Finalização" disable="true" styleClass="data-name" />
+	    		<TextField fx:id="dataEndField" disable="true" promptText="dd/mm/yyyy"  minWidth="130"/>
+	    	</VBox>
+	    	
+	    	<VBox>
+	    		<Label text="Observações do Cliente" styleClass="data-name" />
+	    		<TextField fx:id="obsField" promptText=""  minWidth="350" minHeight="100"/>
+	    	</VBox>
+	    	
+	    </HBox>
+	    
+	    <!-- INFORMAÇÕES DO PET -->
+	    
+	    <HBox HBox.hgrow="ALWAYS" spacing="15">
+	    	<VBox>
+	    		
+	    	</VBox>
+	    </HBox>
+	    
+    </VBox>
     
 </VBox>
 

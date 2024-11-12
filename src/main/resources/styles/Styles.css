@@ -181,5 +181,15 @@
     -fx-alignment: CENTER;
 }
 
+.data-name{
+	-fx-font-size: 13px; /* Tamanho do texto */
+	-fx-font-weight: bold; /* Negrito */
+	-fx-text-fill: #000; /* Cor do texto */
+}
+
+.data-row{
+	-fx-padding: 10 0 10 0;
+}
+
 
 

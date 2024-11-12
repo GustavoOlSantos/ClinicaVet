@@ -144,6 +144,10 @@ public class Cliente{
         }
     }
     
+	public void setFormaPagamento(FormaPagamento selecionado) {
+		this.formaPagamento = selecionado;
+	}
+    
     //======> Status do Pagamento
     public StatusPagamento getStatusPagamento() {
     	return status;
