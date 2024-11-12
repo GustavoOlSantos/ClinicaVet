@@ -156,6 +156,7 @@ public class Animal{
 			case ALTA_MEDICA: 			 stt = 8; break;
 			case ATIVO: 				 stt = 9; break;
 			case INATIVO: 				 stt = 10; break;
+			case NAO_LISTADO:			 stt = 11; break;
 
         }
         
@@ -175,9 +176,14 @@ public class Animal{
 			case 8: this.situacao = SituacaoPet.ALTA_MEDICA; break;
 			case 9: this.situacao = SituacaoPet.ATIVO; break;
 			case 10: this.situacao = SituacaoPet.INATIVO; break;
+			case 11: this.situacao = SituacaoPet.NAO_LISTADO; break;
 
     	}
     }	
+    
+	public void setSituacao(SituacaoPet situacao) {
+		this.situacao = situacao;
+	}
     
     
     

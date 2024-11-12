@@ -1,6 +1,7 @@
 package sistem.enums;
 
 public enum SituacaoPet {
+	NAO_LISTADO,
     SAUDAVEL,
     DOENTE,
     EM_RECUPERACAO,

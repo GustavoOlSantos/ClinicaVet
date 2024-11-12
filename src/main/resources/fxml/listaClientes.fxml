@@ -27,26 +27,19 @@
 			<HBox HBox.hgrow="ALWAYS" alignment="BOTTOM_CENTER" spacing="10">
 				
 				<HBox alignment="BOTTOM_CENTER">
-                                    <TextField fx:id="buscaField" promptText="Buscar nome/CPF/CNPJ" />
-                                        <Button fx:id="buscaBtn" onAction="#buscarCliente">
-                                            <graphic>
-                                               <FontIcon iconLiteral="fa-search" iconColor="black" iconSize="15"/>
-                                            </graphic>
-                                        </Button>
-                                </HBox>
+                    <TextField fx:id="buscaField" promptText="Buscar nome/CPF/CNPJ" />
+                        <Button fx:id="buscaBtn" onAction="#buscarCliente">
+                            <graphic>
+                               <FontIcon iconLiteral="fa-search" iconColor="black" iconSize="15"/>
+                            </graphic>
+                        </Button>
+                </HBox>
     			
 				<Button fx:id="btnHC" styleClass="" onAction="#clickHistorico">
 					<graphic>
 						<FontIcon iconLiteral="fa-history" iconColor="black" iconSize="15"/>
 					</graphic>
 					Histórico
-				 </Button>
-				 
-				 <Button fx:id="btnLC" styleClass="" onAction="#listarClientesAtivos">
-					<graphic>
-						<FontIcon iconLiteral="fa-list" iconColor="black" iconSize="15"/>
-					</graphic>
-					Clientes
 				 </Button>
 			</HBox>			
 			
@@ -63,15 +56,15 @@
 		</HBox>
 	
 		
-		<TableView fx:id="tableView" styleClass="Table" VBox.vgrow="ALWAYS" prefWidth="Infinity" minWidth="1300" maxWidth="Infinity">
+		<TableView fx:id="tableView" styleClass="Table" VBox.vgrow="ALWAYS" prefWidth="Infinity" minWidth="1350" maxWidth="Infinity">
 	        <columns>
 	       		<TableColumn fx:id="Id" 				text="#" 		 minWidth="20" maxWidth="30"	/>
 	            <TableColumn fx:id="Nome"				text="Nome" 	 minWidth="100" maxWidth="150"	/>
 	         	<TableColumn fx:id="Telefone" 			text="Telefone"	 minWidth="50" maxWidth="100"	/>
 	         	<TableColumn fx:id="Pets" 				text="Pets" 	 minWidth="50" maxWidth="400"	/>
 	         	<TableColumn fx:id="Orcamento" 			text="Orçamento" minWidth="50" maxWidth="80" 	/>
-	            <TableColumn fx:id="StatusPagamento" 	text="Pagamento" minWidth="50" maxWidth="100" 	/>
-	         	<TableColumn fx:id="Status" 			text="Status" 	 minWidth="50" maxWidth="120"	/>
+	            <TableColumn fx:id="StatusPg" 			text="Pagamento" minWidth="50" maxWidth="120" 	/>
+	         	<TableColumn fx:id="Status" 			text="Status" 	 minWidth="50" maxWidth="150"	/>
 	         	<TableColumn fx:id="See" 				text="Abrir" 	 minWidth="30" maxWidth="70"	/>
 	         	<TableColumn fx:id="Edit" 				text="Editar" 	 minWidth="30" maxWidth="70"  	/>
 	         	<TableColumn fx:id="Ban" 				text="Cancelar"  minWidth="30" maxWidth="70"	/>

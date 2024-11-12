@@ -15,31 +15,33 @@
 	• Input para pesquisar um cliente
 	• Botão para Acessar o histórico de clientes
 -->
-<VBox xmlns:fx="http://javafx.com/fxml" VBox.vgrow="ALWAYS" alignment="CENTER" fx:controller="sistem.vet.controllers.clientesController">
+<VBox xmlns:fx="http://javafx.com/fxml" VBox.vgrow="ALWAYS" alignment="CENTER" fx:controller="sistem.vet.controllers.historicoController">
 	
 	<VBox styleClass="TableContent" VBox.vgrow="ALWAYS"> 
 		<HBox styleClass="table-header">
 		
 			<HBox alignment="BOTTOM_LEFT">
-				<Label fx:id="lblTitle" text="Lista de clientes ativos" styleClass="table-header-title" />
+				<Label fx:id="lblTitle" text="Histórico de Clientes" styleClass="table-header-title" />
 			</HBox>	
 			
 			<HBox HBox.hgrow="ALWAYS" alignment="BOTTOM_CENTER" spacing="10">
-				
+			
 				<HBox alignment="BOTTOM_CENTER">
                     <TextField fx:id="buscaField" promptText="Buscar nome/CPF/CNPJ" />
-                        <Button fx:id="buscaBtn" onAction="#buscarCliente">
-                            <graphic>
-                               <FontIcon iconLiteral="fa-search" iconColor="black" iconSize="15"/>
-                            </graphic>
-                        </Button>
+                    
+                    <Button fx:id="buscaBtn" onAction="#buscarCliente">
+                        <graphic>
+                           <FontIcon iconLiteral="fa-search" iconColor="black" iconSize="15"/>
+                        </graphic>
+                    </Button>
                 </HBox>
-    			
-				<Button fx:id="btnHC" styleClass="" onAction="#clickHistorico">
+                
+                
+				 <Button fx:id="btnLC" styleClass="" onAction="#listarClientesAtivos">
 					<graphic>
-						<FontIcon iconLiteral="fa-history" iconColor="black" iconSize="15"/>
+						<FontIcon iconLiteral="fa-list" iconColor="black" iconSize="15"/>
 					</graphic>
-					Histórico
+					Clientes
 				 </Button>
 			</HBox>			
 			

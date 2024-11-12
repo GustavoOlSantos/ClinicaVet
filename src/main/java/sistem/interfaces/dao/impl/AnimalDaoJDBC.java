@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -30,14 +31,42 @@ public class AnimalDaoJDBC implements AnimalDAO {
 	}
 	
 	@Override
-	public void insert(Animal cli) {
+	public void insert(Animal pet) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void update(Animal cli) {
-		// TODO Auto-generated method stub
+	public void update(Animal pet) {
+		PreparedStatement st = null;
+		ResultSet rs = null; 
+		
+		try {
+			
+			conn.setAutoCommit(true);
+			st = conn.prepareStatement(
+					"UPDATE animal SET nome = ?, sexo = ?, tipo = ?, emergencia = ?, status = ?, orcamento = ?, "
+					+ "observacoes = ? "
+					+ "WHERE idCliente = ? AND idAnimal = ?");
+			
+			st.setString(1, pet.getNome());			 //=> Nome Pet
+			st.setInt	(2, pet.getIntSexo());		 //=> Sexo Pet
+			st.setInt	(3, pet.getIntTipo());		 //=> TipoPet
+			st.setInt	(4, pet.getIntEmergencia()); //=> É emergência
+			st.setInt	(5, pet.getIntSituacao());
+			st.setDouble(6, pet.getOrcamento());	//=> Orçamento pet
+			st.setString(7, pet.getObservacoes());
+			st.setInt	(8, pet.getIdCliente());	//=> IdCliente
+			st.setInt	(9, pet.getId());			//=> IdPet
+			st.executeUpdate();
+		}
+		catch(SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally{
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}
 		
 	}
 
@@ -62,7 +91,7 @@ public class AnimalDaoJDBC implements AnimalDAO {
 			st = conn.prepareStatement(
 					"SELECT * "
 					+ "FROM animal "
-					+ "WHERE internado = 0");
+					+ "WHERE status = 7");
 			
 			rs = st.executeQuery();
 			

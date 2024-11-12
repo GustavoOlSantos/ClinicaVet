@@ -41,7 +41,7 @@ import sistem.vet.App;
 
 
 
-public class clientesController implements Initializable {
+public class historicoController implements Initializable {
 	
 	//=> Coleta dados do MenuSaver
 	menuDataSaver menu = MainController.menu;
@@ -93,7 +93,7 @@ public class clientesController implements Initializable {
     @Override	//=> Atualiza a Tabela ao inicializar
     public void initialize(URL location, ResourceBundle resources) {
     	menu.scene.getStylesheets().add(App.class.getResource("/styles/Styles.css").toExternalForm());  
-    	listarClientesAtivos();
+    	clickHistorico();
     	
     	//=> Checa o input de buscar cliente
     	buscaField.setOnKeyPressed(event -> {
@@ -104,20 +104,7 @@ public class clientesController implements Initializable {
     }
     
     public void listarClientesAtivos() {
-    	
-    	List<Cliente> cliList = new ArrayList<>();
-		
-		try {
-			cliList = clienteDAO.findActive();
-			view = 0;
-		} 
-		catch (DomainException e) {	
-			System.out.println("Erro: " + e.getMessage());
-			e.printStackTrace();
-		}
-		
-    	tableView.getItems().clear();
-    	renderTable(cliList);  
+    	menu.loadContent("listaClientes.fxml", menu.classe); 
     }
     
     @FXML
@@ -465,7 +452,19 @@ public class clientesController implements Initializable {
 	@FXML
     public void clickHistorico() {
 		
-		menu.loadContent("listaHistórico.fxml", menu.classe); 
+		List<Cliente> cliList = new ArrayList<>();
+		
+		try {
+			cliList = clienteDAO.findAll();
+			view = 1;
+			
+		} catch (DomainException e) {
+			
+			App.modalAlert("Exception", "Falha ao gerar o Histórico - " + e.getMessage());
+			e.printStackTrace();
+		}	
+    	tableView.getItems().clear();
+    	renderTable(cliList);  
     }
 	
 	@FXML

@@ -167,6 +167,10 @@ public class Cliente{
     	}
     }
     
+	public void setStatusPagamento(StatusPagamento stts) {
+		this.status = stts;
+	}
+    
     //======> Parcelas
     public int getParcelas() {
     	return parcelaPagamento;
@@ -205,6 +209,10 @@ public class Cliente{
 			case 3: this.trabalho = Situacao.EXCLUÍDO; break;
     	}
     }	
+    
+	public void setSituacao(Situacao stts) {
+		this.trabalho = stts;
+	}
     
     
     //======> Observações do Cliente
@@ -272,13 +280,13 @@ public class Cliente{
     	
     	String objStr;
     	
-    	objStr = "Nome: " + nome;
+    	objStr = "Nome: " + nome + " / Status: " + trabalho  + " / statusPg: " + status;
     	
-    	//=> Printa o Nome dos Animais
+    	/* Printa o Nome dos Animais
 		for(int j = 0; j < qtdAnimal; j++) {
 			
 			objStr += " - pet: " + animal[j].getNome() + " ("+ animal[j].getTipo() +")";
-		}
+		} */
     	
     	return objStr;
     }
