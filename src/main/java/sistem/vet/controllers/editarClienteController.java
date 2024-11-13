@@ -107,7 +107,7 @@ public class editarClienteController implements Initializable {
 			
 			nomeField.setText(cliente.getNome());
 			cpfField.setText(CpfCnpjMask.Unmask(cliente.getCpf()));
-			//emailField.setText(cliente.getEmail());
+			emailField.setText(cliente.getEmail());
 			telefoneField.setText(TelefoneMask.Unmask(cliente.getTelefone()));
 			
 			formaPgField.getItems().addAll(FormaPagamento.values());
@@ -268,7 +268,7 @@ public class editarClienteController implements Initializable {
     	
     	cliente.setNome(nomeField.getText());
     	cliente.setCpf(cpfField.getText());
-    	//cliente.setEmail(emailField.getText());
+    	cliente.setEmail(emailField.getText());
     	cliente.setTelefone(telefoneField.getText());
     	cliente.setFormaPagamento(formaPgField.getValue());
     	cliente.setParcela(Integer.parseInt(parcelasField.getText()));

@@ -38,6 +38,8 @@ public class verClientesController implements Initializable {
 	Label cpfCnpj;
 	@FXML
 	Label telefone;
+	@FXML
+	Label email;
 	
 	@FXML
 	Label status;
@@ -90,6 +92,9 @@ public class verClientesController implements Initializable {
 			nome.setText(cli.getNome());
 			cpfCnpj.setText(cli.getCpf());
 			telefone.setText(cli.getTelefone());
+			
+			email.setText(cli.getEmail());
+			
 			dataCadastro.setText(cli.getDataCadastro().format(cli.timeFormat).toString());
 			dataFinalizado.setText(null);
 			

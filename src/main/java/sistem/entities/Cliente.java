@@ -20,6 +20,7 @@ public class Cliente{
 	private int id;
 	private String nome;
 	private String cpf;
+	private String email;
 	private String telefone;
 	public int qtdAnimal;
 	public Animal[] animal;
@@ -96,6 +97,15 @@ public class Cliente{
 	public void setTelefone(String telefone) throws DomainException{
 		this.telefone = TelefoneMask.Mask(TelefoneMask.Unmask(telefone));
 	}
+	
+	//======> Email
+		public String getEmail() {
+			return email;
+		}
+
+		public void setEmail(String email){
+			this.email = email;
+		}
 	
 	//======> Orçamento
 	public double getOrcamentoTotal(){

@@ -38,6 +38,11 @@
 			</HBox>
 			
 			<HBox styleClass="infoContainer">
+				<Label text="Email: " 		styleClass="infoLabel" />
+				<Label fx:id="email" text="" styleClass="infoData" />
+			</HBox>
+			
+			<HBox styleClass="infoContainer">
 				<Label text="Data de Cadastro: " 		styleClass="infoLabel" />
 				<Label fx:id="dataCadastro" text="" styleClass="infoData" />
 			</HBox>

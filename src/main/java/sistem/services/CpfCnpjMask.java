@@ -30,7 +30,7 @@ public class CpfCnpjMask {
 	}
 
 	public static String Unmask(String cpfCnpj) {
-		return cpfCnpj.replace("\\.", "").replace("\\/", "").replace("-", "");
+		return cpfCnpj.replace(".", "").replace("\\/", "").replace("-", "");
 	}
 
 	public static boolean isCnpj(String cpfCnpj) {
