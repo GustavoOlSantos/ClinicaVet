@@ -155,11 +155,15 @@ public class AnimalDaoJDBC implements AnimalDAO {
 			while(rs.next()) {
 				
 				Animal animal = instAnimal(rs);	
+				rows++;
 							
 				listaAnimal.add(animal);
 			}
 			
-			//System.out.println("Clientes Encontrados: " + rows + "\n");
+			if(rows == 0) {
+				throw new DomainException("Nenhum animal com o nome fornecido encontrado.");
+			}
+			
 			return listaAnimal;
 					
 		}

@@ -176,6 +176,7 @@ public class internadosController implements Initializable {
             try {
                 aniList = animalDAO.findByName(nome);
             } catch (DomainException e) {
+            	menu.dialogAvisos("Erro: " + e.getMessage());
                 e.printStackTrace();
             }
 

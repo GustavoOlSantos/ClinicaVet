@@ -320,6 +320,15 @@ public class editarController implements Initializable {
 		if(confirmar) {
 	    	int idPet = pet.getId();
 	    	animalDAO.deleteById(idPet, idCliente);
+	    	
+	    	cliente.qtdAnimal -= 1;
+	    	cliente.setOrcamentoInc(-(pet.getOrcamento()));
+	    	clienteDAO.update(cliente);
+	    	
+	    	
+	    	qtdPetField.setText(String.valueOf(cliente.qtdAnimal));
+	    	orcamentoField.setText(((Double) cliente.getOrcamentoTotal()).toString());
+	    	
 	    	reloadTable();
 		}
     	
