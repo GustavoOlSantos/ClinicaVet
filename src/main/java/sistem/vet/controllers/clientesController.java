@@ -290,7 +290,7 @@ public class clientesController implements Initializable {
             }
         });
         
-      //=> Cria o botão para a coluna See
+        //=> Cria o botão para a coluna See
         Edit.setCellFactory(col -> new TableCell<Cliente, Void>() {
             private final Button editar = new Button("");
 
@@ -477,7 +477,7 @@ public class clientesController implements Initializable {
 		int id = target.getId();
 		menu.setSharedId(id);
 		
-		menu.loadContent("editar.fxml", menu.classe); 
+		menu.loadContent("editarCliente.fxml", menu.classe); 
 	}
 	
 	@FXML
@@ -520,6 +520,7 @@ public class clientesController implements Initializable {
 		try {
 			cliList = clienteDAO.findByNameOrCpf(text);
 		} catch (DomainException e) {
+			menu.dialogAvisos("Erro: " + e.getMessage());
 			e.printStackTrace();
 		}
 		
@@ -531,7 +532,7 @@ public class clientesController implements Initializable {
 		
 		int situacao = target.getIntSituacao();
 		String operacao = situacao == 2 ? "reestabelecer" : "cancelar";
-		boolean confirmar = dialogConfirmar(0, operacao);
+		boolean confirmar = menu.dialogConfirmar(operacao, "cliente");
 		
 		if(confirmar) {
 			if(situacao == 2) {
@@ -549,33 +550,11 @@ public class clientesController implements Initializable {
 	
 	@FXML
     public void excluirCliente(Cliente target) {
-		boolean confirmar = dialogConfirmar(0, "excluir");	
+		boolean confirmar = menu.dialogConfirmar("excluir", "cliente");	
 		
 		if(confirmar) {
 			clienteDAO.deleteById(target.getId());
 			reloadTable();
 		}
     }
-		
-	public Boolean dialogConfirmar(int operacaoId, String operacaoNome) {
-		
-		Dialog<Boolean> dialog = new Dialog<>();
-        dialog.setTitle("Confirmar Operação");
-        dialog.setHeaderText("Tem certeza que deseja "+ operacaoNome +" esse cliente?");
-
-        Button confirmButton = new Button("Confirmar");
-        Button closeButton = new Button("Retornar");
-        
-        confirmButton.setOnAction(e -> dialog.setResult(true));
-        closeButton.setOnAction(e -> dialog.setResult(false));
-
-        HBox buttonBox = new HBox(10, confirmButton, closeButton); // Spacing between buttons
-        buttonBox.setSpacing(50);
-        buttonBox.setPadding(new Insets(20, 0, 0, 0));
-        buttonBox.setAlignment(Pos.CENTER); // Center buttons
-        dialog.getDialogPane().setContent(buttonBox);
-               
-        dialog.showAndWait(); // This will block until the dialog is closed
-        return dialog.getResult();
-	}
 }

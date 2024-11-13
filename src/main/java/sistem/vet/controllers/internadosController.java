@@ -89,6 +89,9 @@ public class internadosController implements Initializable {
     }  
     
     public void renderTable(List<Animal> animais) {
+    	
+    	Id.getStyleClass().add("centered");
+        Status.getStyleClass().add("centered");
     
     	Id.setCellValueFactory(new PropertyValueFactory<>("Id"));
     	Nome.setCellValueFactory(new PropertyValueFactory<>("nome"));

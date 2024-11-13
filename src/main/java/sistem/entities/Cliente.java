@@ -106,8 +106,12 @@ public class Cliente{
 		return "R$ " + this.orcamentoTotal;
 	}
 
-	public void setOrcamentoTotal(double value){
+	public void setOrcamentoInc(double value){
 		orcamentoTotal += value;
+	}
+	
+	public void setOrcamentoTotal(double value){
+		this.orcamentoTotal = value;
 	}
 	
 	//======> Forma de Pagamento
@@ -182,7 +186,7 @@ public class Cliente{
     
     public void setParcela(int parcela) throws DomainException {
     	if(parcela > LIMITE_PARCELA) {
-    		throw new DomainException("Quantidade Inválida de parcelas.");
+    		throw new DomainException("Erro: Quantidade Inválida de parcelas.");
     	}
     	this.parcelaPagamento = parcela;
     }

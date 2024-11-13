@@ -4,8 +4,12 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -42,7 +46,8 @@ public class menuDataSaver {
     
     //====> Armazena dados que serão usados em múltiplas páginas
     public Object[] serv = new Servicos[18]; //=> Array de Serviços		 (Para exibir e consultar)
-    private Integer sharedId;				//=> Id do cliente ou Animal (Para buscas)
+    private Integer sharedId;				//=> Id do cliente 			 (Para buscas e operacões)
+    private Integer sharedIdPet;		   //=> Id do animal			 (Para buscas e consultas)
     
     //=> Construtor (Inicialização do programa)
 	public menuDataSaver() {
@@ -122,8 +127,48 @@ public class menuDataSaver {
 				}
 			}
 		}
+	}
+	
+	public Boolean dialogConfirmar(String operacaoNome, String Objeto) {
 		
+		Dialog<Boolean> dialog = new Dialog<>();
+        dialog.setTitle("Confirmar Operação");
+        dialog.setHeaderText("Tem certeza que deseja "+ operacaoNome +" esse "+ Objeto +"?");
+
+        Button confirmButton = new Button("Confirmar");
+        Button closeButton = new Button("Retornar");
+        
+        confirmButton.setOnAction(e -> dialog.setResult(true));
+        closeButton.setOnAction(e -> dialog.setResult(false));
+
+        HBox buttonBox = new HBox(10, confirmButton, closeButton); // Spacing between buttons
+        buttonBox.setSpacing(50);
+        buttonBox.setPadding(new Insets(20, 0, 0, 0));
+        buttonBox.setAlignment(Pos.CENTER); // Center buttons
+        dialog.getDialogPane().setContent(buttonBox);
+               
+        dialog.showAndWait(); // This will block until the dialog is closed
+        return dialog.getResult();
+	}
+	
+	public Boolean dialogAvisos(String Mensagem) {
 		
+		Dialog<Boolean> dialog = new Dialog<>();
+        dialog.setTitle("Aviso Importante");
+        dialog.setHeaderText(Mensagem);
+
+        Button closeButton = new Button("OK");
+        
+        closeButton.setOnAction(e -> dialog.setResult(false));
+
+        HBox buttonBox = new HBox(10, closeButton); // Spacing between buttons
+        buttonBox.setSpacing(50);
+        buttonBox.setPadding(new Insets(20, 0, 0, 0));
+        buttonBox.setAlignment(Pos.CENTER); // Center buttons
+        dialog.getDialogPane().setContent(buttonBox);
+               
+        dialog.showAndWait(); // This will block until the dialog is closed
+        return dialog.getResult();
 	}
 	
 	//=> Obtém o Id e limpa
@@ -138,4 +183,17 @@ public class menuDataSaver {
 	public void setSharedId(Integer id) {
 		this.sharedId = id;
 	} 
+	
+	//=> Obtém o Id e limpa
+		public int getSharedIdPet() {	
+			int id = sharedIdPet;
+			sharedIdPet = null;
+			
+			return id;
+		}
+		
+		//=> Define o Id
+		public void setSharedIdPet(Integer id) {
+			this.sharedIdPet = id;
+		} 
 }

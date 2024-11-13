@@ -96,7 +96,7 @@ public class verClientesController implements Initializable {
 			status.setText(cli.getSituacao().toString());
 			formaPg.setText(cli.getFormaPagamento().toString());
 			
-			String parcela = cli.parcelaPagamento == 1 ? ", à vista" : cli.parcelaPagamento + "x";
+			String parcela = cli.getParcelas() == 1 ? ", à vista" : ", " + String.valueOf(cli.getParcelas()) + " x";
 			parcelas.setText(parcela);
 			
 			statusPg.setText(cli.getStatusPagamento().toString());

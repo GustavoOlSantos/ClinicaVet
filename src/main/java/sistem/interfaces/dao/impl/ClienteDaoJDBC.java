@@ -393,7 +393,7 @@ public class ClienteDaoJDBC implements ClienteDAO {
 			
 
 			if(rows == 0) {
-				App.modalAlert("Busca de Clientes", "Nenhum Cliente encontrado com o nome ou Cpf/Cnpj fornecidos!");
+				throw new DomainException("Nenhum cliente encontrado com os dados fornecidos!");
 			}
 			
 			return listaClientes;
@@ -416,6 +416,7 @@ public class ClienteDaoJDBC implements ClienteDAO {
 		cliente.setTelefone(rs.getString("telefone"));
 		cliente.setCpf(rs.getString("cpfCnpj"));
 		cliente.setOrcamentoTotal(rs.getDouble("orcamentoTotal"));
+		cliente.setParcela(rs.getInt("parcelas"));
 		cliente.setFormaPagamento(rs.getInt("formaPagamento"));
 		cliente.setStatusPagamento(rs.getInt("statusPagamento"));
 		cliente.setSituacao(rs.getInt("situacao"));

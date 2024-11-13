@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import org.kordamp.ikonli.javafx.StackedFontIcon?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" alignment="TOP_LEFT" fx:controller="sistem.vet.controllers.editarController">
+
+    <Label text="Edição de Cliente" styleClass="Welcome" />
+    
+    <VBox styleClass="TableContent" VBox.vgrow="ALWAYS">
+    	
+    	<!-- INFORMAÇÕES" DO CLIENTE -->
+	    <HBox styleClass="data-row" HBox.hgrow="ALWAYS" spacing="25">
+	    	
+	    	<VBox>
+	    		<Label text="Nome do Cliente/Tutor" styleClass="data-name" />
+	    		<TextField fx:id="nomeField" promptText="Nome do Cliente" minWidth="220"/>
+	    	</VBox>
+	    	
+	    	<VBox>
+	    		<Label text="CPF/CNPJ" styleClass="data-name" />
+	    		<TextField fx:id="cpfField" promptText="Apenas Números"  minWidth="150"/>
+	    	</VBox>
+	    	
+	    	<VBox>
+	    		<Label text="Email" styleClass="data-name" />
+	    		<TextField fx:id="emailField" promptText="seu@email.com" minWidth="220"/>
+	    	</VBox>
+	    	
+	    	<VBox>
+	    		<Label text="Telefone" styleClass="data-name" />
+	    		<TextField fx:id="telefoneField" promptText="Apenas Números"  minWidth="130"/>
+	    	</VBox>
+	    	
+	    	<VBox>
+	    		<Label text="Forma de Pagamento" styleClass="data-name" />
+	    		<ComboBox fx:id="formaPgField" minWidth="200" />
+	    	</VBox>
+	    	
+	    	<VBox>
+	    		<Label text="Parcelas" styleClass="data-name" />
+	    		<TextField fx:id="parcelasField" promptText="6"  minWidth="50" maxWidth="80"/>
+	    	</VBox>	    	
+	    </HBox>
+	    
+	    <HBox styleClass="data-row" HBox.hgrow="ALWAYS" spacing="25">
+	    	
+	    	<VBox>
+	    		<HBox styleClass="data-row" HBox.hgrow="ALWAYS" spacing="25">
+			    	<VBox>
+			    		<Label text="Status de Pagamento" styleClass="data-name" />
+			    		<ComboBox fx:id="statusPgField" minWidth="200" />
+			    	</VBox>
+			    	
+			    	<VBox>
+			    		<Label text="Situação do Cliente" styleClass="data-name" />
+			    		<ComboBox fx:id="situacaoField" minWidth="200" />
+			    	</VBox>
+			    	
+			    	<VBox>
+			    		<Label text="Data de Cadastro"  disable="true" styleClass="data-name" />
+			    		<TextField fx:id="dataCadField" disable="true" promptText="dd/mm/yyyy"  minWidth="130"/>
+			    	</VBox>
+			    	
+			    	<VBox>
+			    		<Label text="Data de Finalização" disable="true" styleClass="data-name" />
+			    		<TextField fx:id="dataEndField" disable="true" promptText="dd/mm/yyyy"  minWidth="130"/>
+			    	</VBox>
+		    		
+	    		</HBox>
+	    		
+	    		<HBox styleClass="data-row" HBox.hgrow="ALWAYS" spacing="25">
+	    			<VBox>
+			    		<Label text="Orçamento Total" styleClass="data-name" />
+			    		<TextField fx:id="orcamentoField" minWidth="100" />
+			    	</VBox>
+			    	
+			    	<VBox>
+			    		<Label text="Qtd. de Animais" disable="true" styleClass="data-name" />
+			    		<TextField fx:id="qtdPetField" minWidth="30" />
+			    	</VBox>
+	    		</HBox>
+	    	</VBox>
+	    	
+	    	<VBox>
+	    		<Label text="Observações do Cliente" styleClass="data-name" />
+	    		<TextField fx:id="obsField" promptText=""  minWidth="350" minHeight="100"/>
+	    	</VBox>
+	    	
+	    </HBox>
+	    
+	    <!-- Botão Salvar ou Voltar -->
+	    <HBox styleClass="data-row" HBox.hgrow="ALWAYS" spacing="30" alignment="BOTTOM_RIGHT">
+            <Button fx:id="btnSalvar" text="Salvar" onAction="#salvarEdicaoCliente" styleClass="submit-data" >
+                <graphic>
+                    <FontIcon iconLiteral="fa-save" iconColor="black" iconSize="13"/>
+                </graphic>
+            </Button>
+            
+            <Button fx:id="btnVoltar" text="Voltar" onAction="#voltarLista" styleClass="submit-data" >
+                <graphic>
+                    <FontIcon iconLiteral="fa-rotate-left" iconColor="black" iconSize="13"/>
+                </graphic>
+            </Button>
+	    </HBox>
+	    
+	    <!-- TABELA DO PET -->
+	    <Label text="Animais desse Tutor" styleClass="Welcome" />
+	    <TableView fx:id="tableView" styleClass="Table" VBox.vgrow="ALWAYS" prefWidth="Infinity" minWidth="1350" maxWidth="Infinity">
+	    	<columns>
+		        <TableColumn fx:id="Id" 	 	 text="#"          		minWidth="20"  maxWidth="30"/>
+		        <TableColumn fx:id="Nome"        text="Nome" 	   		minWidth="100" maxWidth="200"/>
+		        <TableColumn fx:id="Sexo"	     text="Sexo" 	   		minWidth="100" maxWidth="150"/>
+		        <TableColumn fx:id="Tipo"        text="Espécie" 	   	minWidth="50"  maxWidth="150"/>
+		        <TableColumn fx:id="Emergencia"  text="Emergencia" 		minWidth="50"  maxWidth="80"/>
+		        <TableColumn fx:id="Orcamento" 	 text="Orcamento"  		minWidth="50"  maxWidth="100"/>
+		        <TableColumn fx:id="Status" 	 text="Status do pet" 	minWidth="200" maxWidth="320"/>
+		        <TableColumn fx:id="Servicos" 	 text="Servicos"   		minWidth="400" maxWidth="600"/>
+		        <TableColumn fx:id="Edit" 		 text="Editar" 	 		minWidth="30"  maxWidth="70" />
+	         	<TableColumn fx:id="Del" 		 text="Apagar" 	 		minWidth="30"  maxWidth="70"	/>
+	    	</columns>
+
+		</TableView>
+    </VBox>
+</VBox>
+

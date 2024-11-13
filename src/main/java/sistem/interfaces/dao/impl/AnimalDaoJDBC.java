@@ -71,9 +71,25 @@ public class AnimalDaoJDBC implements AnimalDAO {
 	}
 
 	@Override
-	public void deleteById(Integer id) {
-		// TODO Auto-generated method stub
+	public void deleteById(Integer id, Integer idCliente) {
+		PreparedStatement st = null;
+		ResultSet rs = null;
 		
+		try {
+			conn.setAutoCommit(true);
+			st = conn.prepareStatement("DELETE FROM animal WHERE idAnimal = ? AND idCliente = ?");
+			st.setInt(1, id);
+			st.setInt(2, idCliente);
+			st.executeUpdate();
+			
+		}
+		catch(SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally{
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}
 	}
 
 	@Override

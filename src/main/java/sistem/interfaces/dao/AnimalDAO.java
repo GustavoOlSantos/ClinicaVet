@@ -8,7 +8,7 @@ import sistem.exceptions.DomainException;
 public interface AnimalDAO {
 	void insert(Animal cli);
 	void update(Animal cli);
-	void deleteById(Integer id);
+	void deleteById(Integer id, Integer idCliente);
 	Animal findById(Integer id);
 	List<Animal> findInternados() throws DomainException;      
         List<Animal> findByName(String nome) throws DomainException;
