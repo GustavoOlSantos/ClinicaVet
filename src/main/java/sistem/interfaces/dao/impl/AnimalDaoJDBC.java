@@ -4,8 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -32,7 +34,44 @@ public class AnimalDaoJDBC implements AnimalDAO {
 	
 	@Override
 	public void insert(Animal pet) {
-		// TODO Auto-generated method stub
+		PreparedStatement st = null;
+		ResultSet rs = null; 
+		
+		try {
+			conn.setAutoCommit(false);
+				st = conn.prepareStatement(
+						"INSERT INTO animal (idCliente, nome, sexo, tipo, status, emergencia, internado, orcamento, medicamentos, observacoes servicos ) "
+						+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+				
+				st.setInt	(1, pet.getIdCliente());				   //=> IdCliente
+				st.setString(2, pet.getNome());			  //=> Nome Pet
+				st.setInt	(3, pet.getIntSexo());		 //=> Sexo Pet
+				st.setInt	(4, pet.getIntTipo());		//=> TipoPet
+				st.setInt	(5, pet.getIntSituacao());	//=> SituacaoPet
+				st.setInt	(6, pet.getIntEmergencia()); //=> É emergência
+				st.setInt	(7, pet.getIntInternado()); //=> Pet Internado
+				st.setDouble(8, pet.getOrcamento());	 //=> Orçamento pet
+				st.setString(9, pet.getMedicamentos());	 //=> Orçamento pet
+				st.setString(10, pet.getObservacoes());	 //=> Orçamento pet
+				String intString = Arrays.toString(pet.getServicos());
+				st.setString(11, intString);
+				
+				st.executeUpdate();
+				conn.commit();
+		}
+		catch(SQLException e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				
+				System.out.println("Erro: Não foi possível realizar o RollBack.\n Stacktrace: " + e1.getMessage());
+			}
+			throw new DbException(e.getMessage());
+		}
+		finally{
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}
 		
 	}
 
@@ -46,7 +85,7 @@ public class AnimalDaoJDBC implements AnimalDAO {
 			conn.setAutoCommit(true);
 			st = conn.prepareStatement(
 					"UPDATE animal SET nome = ?, sexo = ?, tipo = ?, emergencia = ?, status = ?, orcamento = ?, "
-					+ "observacoes = ? "
+					+ "observacoes = ?, medicamentos = ?, servicos = ? "
 					+ "WHERE idCliente = ? AND idAnimal = ?");
 			
 			st.setString(1, pet.getNome());			 //=> Nome Pet
@@ -56,11 +95,18 @@ public class AnimalDaoJDBC implements AnimalDAO {
 			st.setInt	(5, pet.getIntSituacao());
 			st.setDouble(6, pet.getOrcamento());	//=> Orçamento pet
 			st.setString(7, pet.getObservacoes());
-			st.setInt	(8, pet.getIdCliente());	//=> IdCliente
-			st.setInt	(9, pet.getId());			//=> IdPet
+			st.setString(8, pet.getMedicamentos());
+			
+			String intString = Arrays.toString(pet.getServicos());
+			st.setString(9, intString);
+			
+			st.setInt	(10, pet.getIdCliente());	//=> IdCliente
+			st.setInt	(11, pet.getId());			//=> IdPet
+			
 			st.executeUpdate();
 		}
 		catch(SQLException e) {
+			e.printStackTrace();
 			throw new DbException(e.getMessage());
 		}
 		finally{
@@ -94,8 +140,38 @@ public class AnimalDaoJDBC implements AnimalDAO {
 
 	@Override
 	public Animal findById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement st = null;
+		ResultSet rs = null; 
+		
+		try {
+			conn.setAutoCommit(true);
+			st = conn.prepareStatement(
+					"SELECT * "
+					+ "FROM animal "
+					+ "WHERE idAnimal = ?");
+			
+			st.setInt(1, id);
+			rs = st.executeQuery();
+			
+			if(rs.next()) {
+				
+				Animal animal = instAnimal(rs);		
+				return animal;
+				
+			}
+			
+			return null;
+					
+		}
+		catch(SQLException e) {
+			throw new DbException(e.getMessage());
+		} catch (DomainException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally{
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}
 	}
 
 	@Override	
@@ -134,39 +210,39 @@ public class AnimalDaoJDBC implements AnimalDAO {
 		}
 	}
         
-              @Override  
-      public List<Animal> findByName(String nome) throws DomainException{
-          PreparedStatement st = null;
-		ResultSet rs = null; 
+	@Override  
+	public List<Animal> findByName(String nome) throws DomainException {
+      PreparedStatement st = null;
+      ResultSet rs = null; 
 		
-		try {
-			conn.setAutoCommit(true);
-			st = conn.prepareStatement(
-					"SELECT * "
-					+ "FROM animal "
-					+ "WHERE (animal.nome LIKE '%"+ nome +"%') "
-					+ "ORDER BY idAnimal");
+      try {
+		conn.setAutoCommit(true);
+		st = conn.prepareStatement(
+				"SELECT * "
+				+ "FROM animal "
+				+ "WHERE (animal.nome LIKE '%"+ nome +"%') "
+				+ "ORDER BY idAnimal");
+		
+		rs = st.executeQuery();
+                    
+                    List<Animal> listaAnimal = new ArrayList<>();
+		int rows = 0;
+		
+		while(rs.next()) {
 			
-			rs = st.executeQuery();
-                        
-                        List<Animal> listaAnimal = new ArrayList<>();
-			int rows = 0;
-			
-			while(rs.next()) {
-				
-				Animal animal = instAnimal(rs);	
-				rows++;
-							
-				listaAnimal.add(animal);
-			}
-			
-			if(rows == 0) {
-				throw new DomainException("Nenhum animal com o nome fornecido encontrado.");
-			}
-			
-			return listaAnimal;
-					
+			Animal animal = instAnimal(rs);	
+			rows++;
+						
+			listaAnimal.add(animal);
 		}
+		
+		if(rows == 0) {
+			throw new DomainException("Nenhum animal com o nome fornecido encontrado.");
+		}
+		
+		return listaAnimal;
+					
+      }
 		catch(SQLException e) {
 			throw new DbException(e.getMessage());
 		}
@@ -174,9 +250,8 @@ public class AnimalDaoJDBC implements AnimalDAO {
 			DB.closeStatement(st);
 			DB.closeResultSet(rs);
 		}
-      }
+	}
 
-	
 	private Animal instAnimal(ResultSet rs) throws SQLException, DomainException {
 		Animal animal = new Animal();
 		animal.setId(rs.getInt("animal.idAnimal"));
@@ -189,6 +264,7 @@ public class AnimalDaoJDBC implements AnimalDAO {
 		animal.setInternado(rs.getInt("animal.internado"));
 		animal.setOrcamento(rs.getDouble("animal.orcamento"));
 		animal.setObservacoes(rs.getString("animal.observacoes"));
+		animal.setMedicamentos(rs.getString("animal.medicamentos"));
 		String intStr = rs.getString("animal.servicos");
 		
 		intStr = intStr.replaceAll(" ", "");

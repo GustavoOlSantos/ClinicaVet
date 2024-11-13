@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import org.kordamp.ikonli.javafx.StackedFontIcon?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" alignment="TOP_LEFT" fx:controller="sistem.vet.controllers.editarPetController">
+
+    <Label text="Edição de Animal" styleClass="Welcome" />
+    
+    <VBox styleClass="TableContent" VBox.vgrow="ALWAYS">
+    	
+    	<!-- INFORMAÇÕES" DO CLIENTE -->
+	    <HBox styleClass="data-row" HBox.hgrow="ALWAYS" spacing="25">
+	    	
+	    	<VBox>
+	    		<Label text="Nome do Pet" styleClass="data-name" />
+	    		<TextField fx:id="nomeField" promptText="Nome do Cliente" minWidth="220"/>
+	    	</VBox>
+	    	
+	    	<VBox>
+	    		<Label text="Sexo" styleClass="data-name" />
+	    		<ComboBox fx:id="sexoField" minWidth="150" />
+	    	</VBox>
+	    	
+	    	<VBox>
+	    		<Label text="Especie" styleClass="data-name" />
+	    		<ComboBox fx:id="especieField" minWidth="250" />
+	    	</VBox>
+	    	
+	    	<VBox>
+	    		<Label text="Emergencia" styleClass="data-name" />
+	    		<ComboBox fx:id="emergenciaField" minWidth="250" />
+	    	</VBox>
+	    	
+	    	<VBox>
+	    		<Label text="Status do Paciente" styleClass="data-name" />
+	    		<ComboBox fx:id="statusField" minWidth="200" />
+	    	</VBox>
+	    	
+	    	<VBox>
+	    		<Label text="Orçamento" styleClass="data-name" />
+	    		<TextField fx:id="orcamentoField" promptText="6"  minWidth="50" maxWidth="80"/>
+	    	</VBox>	    	
+	    </HBox>
+	    
+	    <HBox styleClass="data-row" HBox.hgrow="ALWAYS" alignment="BOTTOM_LEFT" spacing="25">
+	    	<VBox>
+	    		<Label text="Observações do Animal" styleClass="data-name" />
+	    		<TextField fx:id="obsField" promptText=""  minWidth="350" minHeight="100"/>
+	    	</VBox>
+	    	
+	    	<VBox>
+	    		<Label text="Medicamentos do Animal" styleClass="data-name" />
+	    		<TextField fx:id="medicamentosField" promptText=""  minWidth="350" minHeight="100"/>
+	    	</VBox>
+	    	
+
+	    </HBox>
+	    
+	    <!-- Botão Salvar ou Voltar -->
+	    <HBox styleClass="data-row" HBox.hgrow="ALWAYS" spacing="30" alignment="BOTTOM_RIGHT">
+            <Button fx:id="btnSalvar" text="Salvar" onAction="#salvarEdicaoPet" styleClass="submit-data" >
+                <graphic>
+                    <FontIcon iconLiteral="fa-save" iconColor="black" iconSize="13"/>
+                </graphic>
+            </Button>
+            
+            <Button fx:id="btnVoltar" text="Voltar" onAction="#voltarLista" styleClass="submit-data" >
+                <graphic>
+                    <FontIcon iconLiteral="fa-rotate-left" iconColor="black" iconSize="13"/>
+                </graphic>
+            </Button>
+	    </HBox>
+	    
+	    <HBox spacing="20">
+	    	<VBox VBox.vgrow="ALWAYS">
+			    <!-- TABELA DO PET -->
+			    <Label text="Serviços do Pet" styleClass="Welcome" />
+			    <TableView fx:id="tableView" styleClass="Table" VBox.vgrow="ALWAYS" prefWidth="Infinity" minWidth="850" maxWidth="700">
+			    	<columns>
+				        <TableColumn fx:id="Id" 	 	 text="#"          		minWidth="20"  maxWidth="30"/>
+				        <TableColumn fx:id="Nome"        text="Nome" 	   		minWidth="400" maxWidth="400"/>
+				        <TableColumn fx:id="Preco"	     text="Preço" 	   		minWidth="100" maxWidth="150"/>
+			         	<TableColumn fx:id="Del" 		 text="Apagar" 	 		minWidth="30"  maxWidth="70"	/>
+			    	</columns>		
+				</TableView>
+			</VBox>
+			
+			<HBox styleClass="data-row" HBox.hgrow="ALWAYS" spacing="10">
+			
+		    	<VBox styleClass="data-padding">
+			    	<Label text="Adicionar Serviços" styleClass="data-name" />
+		    		<ComboBox fx:id="servicosBox" minWidth="250" />
+	    		</VBox>
+	    		
+	    		<VBox StyleClass="data-padding">
+		    		<Label text="Preço" styleClass="data-name" />
+		    		<TextField fx:id="precoServField" promptText="" editable="false" minWidth="80" maxWidth="120"/>
+	    		</VBox>
+	    		
+	    		<VBox styleClass="data-padding">
+	    			<Label text="" styleClass="data-name" />
+		    		<Button fx:id="btnAdd" text="adicionar" onAction="#adicionarServicos" styleClass="submit-data">
+		                <graphic>
+		                    <FontIcon iconLiteral="fa-plus" iconColor="black" iconSize="13"/>
+		                </graphic>
+		            </Button>
+	            </VBox>
+	   		 </HBox>
+		</HBox>
+    </VBox>
+</VBox>
+

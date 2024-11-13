@@ -191,7 +191,6 @@
 	-fx-padding: 10 0 10 0;
 }
 
-<<<<<<< Updated upstream
 .submit-data{
 	-fx-min-width: 100;
 	-fx-min-height: 30;
@@ -200,12 +199,14 @@
 	-fx-text-fill: #000; /* Cor do texto */
 }
 
+.data-padding{
+	-fx-padding: 50 0;
+}
 
-=======
 .TableContente{
 	-fx-hgrow: ALWAYS;
 	-fx-pref-width: Infinity;  /* Ensure the TableView uses full width */
 	-fx-padding: 50 700; 
 }
->>>>>>> Stashed changes
+
 

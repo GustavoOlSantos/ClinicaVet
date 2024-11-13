@@ -87,19 +87,22 @@ public class ClienteDaoJDBC implements ClienteDAO {
 			
 			for(int i = 0; i < cli.qtdAnimal; i++) {
 				st = conn.prepareStatement(
-						"INSERT INTO animal (idCliente, nome, sexo, tipo, emergencia, internado, orcamento, servicos ) "
-						+ "VALUES (?, ? ,?, ?, ?, ?, ?, ?)");
+						"INSERT INTO animal (idCliente, nome, sexo, tipo, status, emergencia, internado, orcamento, medicamentos, observacoes servicos ) "
+						+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 				
-				st.setInt	(1, id);								   //=> IdCliente
-				st.setString(2, cli.animal[i].getNome());			  //=> Nome Pet
-				st.setInt	(3, cli.animal[i].getIntSexo());		 //=> Sexo Pet
-				st.setInt	(4, cli.animal[i].getIntTipo());		//=> TipoPet
-				st.setInt	(5, cli.animal[i].getIntEmergencia()); //=> É emergência
-				st.setInt	(6, cli.animal[i].getIntInternado()); //=> Pet Internado
-				st.setDouble(7, cli.animal[i].getOrcamento());	 //=> Orçamento pet
+				st.setInt	(1, id);								   		//=> IdCliente
+				st.setString(2, cli.animal[i].getNome());			  	   //=> Nome Pet
+				st.setInt	(3, cli.animal[i].getIntSexo());		 	  //=> Sexo Pet
+				st.setInt	(4, cli.animal[i].getIntTipo());			 //=> TipoPet
+				st.setInt	(5, cli.animal[i].getIntSituacao());		//=> TipoPet
+				st.setInt	(6, cli.animal[i].getIntEmergencia()); 	   //=> É emergência
+				st.setInt	(7, cli.animal[i].getIntInternado()); 	  //=> Pet Internado
+				st.setDouble(8, cli.animal[i].getOrcamento());	 	 //=> Orçamento pet
+				st.setString(9, cli.animal[i].getMedicamentos());	//=> Medicamentos
+				st.setString(10, cli.animal[i].getObservacoes());  //=> Observacoes
 				
 				String intString = Arrays.toString(cli.animal[i].getServicos());
-				st.setString(8, intString);
+				st.setString(11, intString);
 				
 				st.executeUpdate();
 				conn.commit();
@@ -147,24 +150,6 @@ public class ClienteDaoJDBC implements ClienteDAO {
 			st.setInt(11, cli.getId()); 				//=> Id do Cliente
 			
 			st.executeUpdate();
-		
-			
-			for(int i = 0; i < cli.qtdAnimal; i++) {
-				st = conn.prepareStatement(
-						"UPDATE animal SET idCliente = ?, nome = ?, sexo = ?, tipo = ?, emergencia = ?, internado = ?, orcamento = ? "
-						+ "WHERE idCliente = ? AND idAnimal = ?");
-				
-				st.setInt	(1, cli.getId());					//=> IdCliente
-				st.setString(2, cli.animal[i].getNome());		//=> Nome Pet
-				st.setInt	(3, cli.animal[i].getIntSexo());	//=> Sexo Pet
-				st.setInt	(4, cli.animal[i].getIntTipo());	//=> TipoPet
-				st.setInt	(5, cli.animal[i].getIntEmergencia()); //=> É emergência
-				st.setInt	(6, cli.animal[i].getIntInternado()); //=> Pet Internado
-				st.setDouble(7, cli.animal[i].getOrcamento());	//=> Orçamento pet
-				st.setInt	(8, cli.getId());					//=> IdCliente
-				st.setInt	(9, cli.animal[i].getId());			//=> IdPet
-				st.executeUpdate();
-			}
 		}
 		catch(SQLException e) {
 			throw new DbException(e.getMessage());
@@ -442,6 +427,7 @@ public class ClienteDaoJDBC implements ClienteDAO {
 		animal.setInternado(rs.getInt("animal.internado"));
 		animal.setOrcamento(rs.getDouble("animal.orcamento"));
 		animal.setObservacoes(rs.getString("animal.observacoes"));
+		animal.setMedicamentos(rs.getString("animal.medicamentos"));
 		String intStr = rs.getString("animal.servicos");
 		
 		intStr = intStr.replaceAll(" ", "");

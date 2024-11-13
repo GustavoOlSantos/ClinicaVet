@@ -35,7 +35,7 @@ import sistem.interfaces.dao.ClienteDAO;
 import sistem.services.CpfCnpjMask;
 import sistem.services.TelefoneMask;
 
-public class editarController implements Initializable {
+public class editarClienteController implements Initializable {
 	//=> Coleta dados do MenuSaver
 	menuDataSaver menu = MainController.menu;
 	ClienteDAO clienteDAO = menu.clienteDAO;

@@ -1,12 +1,13 @@
 package sistem.entities;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import sistem.enums.AnimalEmergencia;
 import sistem.enums.AnimalInternado;
 import sistem.enums.AnimalSexo;
 import sistem.enums.AnimalTipo;
-import sistem.enums.Situacao;
 import sistem.enums.SituacaoPet;
 import sistem.exceptions.DomainException;
 
@@ -23,6 +24,7 @@ public class Animal{
 	public int[] servicos = new int[18];
 	private double orcamento;
 	private String observacoes;
+	private String medicamentos;
 	
 	public String stringServicos;
 	
@@ -99,6 +101,10 @@ public class Animal{
 		}
 	}
 	
+	public void setSexo(AnimalSexo sexo){
+		this.sexo = sexo;
+	}
+	
 	//======> Tipo
 	public void setTipo(int tipo) throws DomainException {
 		switch(tipo) {
@@ -112,6 +118,10 @@ public class Animal{
 			case 7: this.tipo = AnimalTipo.OUTROS_SILVESTRES; 	break;
 			default: throw new DomainException("Tipo Inválido de animal.");
 		}
+	}
+	
+	public void setTipo(AnimalTipo tipo){
+		this.tipo = tipo;
 	}
 	
 	public AnimalTipo getTipo() {
@@ -184,9 +194,7 @@ public class Animal{
 	public void setSituacao(SituacaoPet situacao) {
 		this.situacao = situacao;
 	}
-    
-    
-    
+      
 	
 	//======> Emergência
 	public AnimalEmergencia getEmergencia() {
@@ -211,6 +219,10 @@ public class Animal{
 			case 1: this.emergencia = AnimalEmergencia.NÃO; 		 break;
 			default: throw new DomainException("Opção Inválida para Emergência.");
 		}
+	}
+	
+	public void setEmergencia(AnimalEmergencia emergencia){
+		this.emergencia = emergencia;
 	}
 	
 	//======> Internado
@@ -247,8 +259,12 @@ public class Animal{
 		return "R$ " + this.orcamento;
 	}
 	
-	public void setOrcamento(double value){
+	public void setOrcamentoInc(double value){
 		orcamento += value;
+	}
+	
+	public void setOrcamento(double value){
+		orcamento = value;
 	}
 	
 	//======> Observações
@@ -259,19 +275,68 @@ public class Animal{
 	public String getObservacoes(){
 		return this.observacoes;
 	}
+	
+	//======> Medicamentos
+		public void setMedicamentos(String medicamentos){
+			this.medicamentos = medicamentos;
+		}
+		
+		public String getMedicamentos(){
+			return this.medicamentos;
+		}
 		
 	
 	//======> Serviços
-	public void printServicos(Servicos[] serv) {
+	public void printServicos(Object[] serv) {
 		for(Integer servicoSelecionado : this.servicos) {
 			if(servicoSelecionado >= 0 && servicoSelecionado < serv.length && servicoSelecionado != -1) {
-				System.out.println(serv[servicoSelecionado].nome + " " + "-".repeat(50 - serv[servicoSelecionado].nome.length()) + " R$" + serv[servicoSelecionado].preco);
+				System.out.println(((Servicos)serv[servicoSelecionado]).nome + " " + "-".repeat(50 - ((Servicos)serv[servicoSelecionado]).nome.length()) + " R$" + ((Servicos)serv[servicoSelecionado]).preco);
 			}
 		}
 	}
 	
 	public int[] getServicos() {
 		return servicos;
+	}
+	
+	public void addServicos(int id) {
+		for(int i = 0; i < this.servicos.length; i++) {
+			if(this.servicos[i] == -1) {
+				this.servicos[i] = id;
+				return;
+			}
+		}
+	}
+	
+	public void excluirServico(int id, Object[] serv) {
+		
+		printServicos(serv);
+		
+		for(int i = 0; i < serv.length; i++) {
+			if(this.servicos[i] == id) {
+				this.servicos[i] = -1;
+				
+				printServicos(serv);
+				return;
+			}
+		}
+	}
+	
+	public List<Servicos> getServicosList(Object[] serv){
+		List<Servicos> servList = new ArrayList<>();
+		
+		for(Integer servAtual : this.servicos) {
+			if(servAtual >= 0 && servAtual < serv.length && servAtual != -1) {
+				int id = 		((Servicos)serv[servAtual]).id;
+				String nome = 	((Servicos)serv[servAtual]).nome;
+				double preco =  ((Servicos)serv[servAtual]).preco;
+				
+				Servicos service = new Servicos(id, nome, preco);
+				servList.add(service);
+			}
+		}
+		
+		return servList;
 	}
 	
 	public void transformServicos(Object[] serv) {
