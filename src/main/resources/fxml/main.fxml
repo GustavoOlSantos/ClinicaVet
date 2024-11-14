@@ -19,10 +19,10 @@
     	<Label text="Clínica Veterinária" styleClass="header-title" />
     	
     	<HBox spacing="20">
-		    <Hyperlink text="PlaceHolder 1" styleClass="header-link"/>
+		    <!-- <Hyperlink text="PlaceHolder 1" styleClass="header-link"/>
 		    <Hyperlink text="PlaceHolder 2" styleClass="header-link"/>
 		    <Hyperlink text="PlaceHolder 3" styleClass="header-link"/>
-		    <Hyperlink text="PlaceHolder 4" styleClass="header-link"/>
+		    <Hyperlink text="PlaceHolder 4" styleClass="header-link"/> -->
 	    </HBox>
 	</HBox>
 	
