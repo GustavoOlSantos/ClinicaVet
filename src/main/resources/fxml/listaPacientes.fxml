@@ -2,9 +2,6 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.image.ImageView?>
-<?import org.kordamp.ikonli.javafx.FontIcon?>
-<?import org.kordamp.ikonli.javafx.StackedFontIcon?>
 
 <!-- 
 	• Implementar a tabela com a lista de TODOS os pacientes ATIVOS  aqui
@@ -13,43 +10,6 @@
 		• Botão para ver todos os dados, como se fosse em uma folha 
 	• Input para pesquisar um pet
 -->
-<VBox xmlns:fx="http://javafx.com/fxml" VBox.vgrow="ALWAYS" alignment="CENTER" fx:controller="sistem.vet.controllers.pacientesController">
-    <!-- <Label text="Lista clientes" styleClass="Welcome" />
-    
-    <HBox fx:id="HC" styleClass="menu-items" onMouseClicked="#ClickHistorico">
-		<FontIcon iconLiteral="fa-book" iconColor="white" iconSize="28"/>
-		<Label text="Histórico de Clientes" styleClass="menu-buttons"/>
-	</HBox> -->
-	
-	<VBox styleClass="TableContent" VBox.vgrow="ALWAYS"> 
-                 <HBox styleClass="table-header">
-                    <Label fx:id="lblTitle" text="Lista de Pets" styleClass="table-header-title" />
-
-                        <HBox HBox.hgrow="ALWAYS" alignment="BOTTOM_CENTER" spacing="10">				
-                            <HBox alignment="BOTTOM_CENTER">
-                                <TextField fx:id="buscaField" promptText="Buscar nome/CPF/CNPJ" />
-                                    <Button fx:id="buscaBtn" onAction="#buscarAnimal">
-                                        <graphic>
-                                            <FontIcon iconLiteral="fa-search" iconColor="black" iconSize="15"/>
-                                        </graphic>
-                                    </Button>
-                            </HBox>
-                        </HBox>			
-                </HBox>
-       
-        
-		<TableView fx:id="tableView" styleClass="Table" VBox.vgrow="ALWAYS" prefWidth="Infinity" minWidth="1300" maxWidth="Infinity">
-	        <columns>
-	       		<TableColumn fx:id="Id" 				text="#" 		  minWidth="20"  maxWidth="30"	/>
-	            <TableColumn fx:id="Nome"				text="Nome" 	  minWidth="100" maxWidth="150"	/>
-	            <TableColumn fx:id="Sexo"				text="Sexo" 	  minWidth="100" maxWidth="150"	/>
-	         	<TableColumn fx:id="Tipo" 				text="Tipo" 	  minWidth="50"  maxWidth="100" />
-	            <TableColumn fx:id="Emergencia" 		text="Emergencia" minWidth="50"  maxWidth="100" />
-	         	<TableColumn fx:id="Orcamento" 			text="Orcamento"  minWidth="30"  maxWidth="40"	/>
-                        <TableColumn fx:id="Status"                     text="Status do pet"  minWidth="200"  maxWidth="340"/> 
-	         	<TableColumn fx:id="Servicos" 			text="Servicos"   minWidth="30"  maxWidth="600"	/>
-	        </columns>
-	    </TableView>
-	    
-	</VBox>
+<VBox xmlns:fx="http://javafx.com/fxml" alignment="CENTER">
+    <Label text="Pacientes!" styleClass="Welcome" />
 </VBox>

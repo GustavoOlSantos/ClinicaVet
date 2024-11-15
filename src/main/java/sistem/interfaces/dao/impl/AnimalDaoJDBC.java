@@ -173,46 +173,7 @@ public class AnimalDaoJDBC implements AnimalDAO {
 			DB.closeResultSet(rs);
 		}
 	}
-        
-        @Override
-        public List<Animal> findAll() throws DomainException{
-            PreparedStatement st = null;
-		ResultSet rs = null; 
-		
-		try {
-			st = conn.prepareStatement(
-					"SELECT * "
-					+ "FROM animal ");
-                                
-					
-			
-			rs = st.executeQuery();
-			
-			List<Animal> listaAnimal = new ArrayList<>();
-			int rows = 0;
-			
-			while(rs.next()) {
-				
-				Animal animal = instAnimal(rs);	
-							
-				listaAnimal.add(animal);
-			}
-			
-			//System.out.println("Clientes Encontrados: " + rows + "\n");
-			return listaAnimal;
-					
-		}
-		catch(SQLException e) {
-			throw new DbException(e.getMessage());
-		}
-		finally{
-			DB.closeStatement(st);
-			DB.closeResultSet(rs);
-		}
-       
-        }
-        
-        
+
 	@Override	
 	public List<Animal> findInternados() throws DomainException {
 		PreparedStatement st = null;
