@@ -79,7 +79,7 @@
 	    	<VBox VBox.vgrow="ALWAYS">
 			    <!-- TABELA DO PET -->
 			    <Label text="Serviços do Pet" styleClass="Welcome" />
-			    <TableView fx:id="tableView" styleClass="Table" VBox.vgrow="ALWAYS" prefWidth="Infinity" minWidth="850" maxWidth="700">
+			    <TableView fx:id="tableView" styleClass="Table" VBox.vgrow="ALWAYS" prefWidth="Infinity" maxWidth="700">
 			    	<columns>
 				        <TableColumn fx:id="Id" 	 	 text="#"          		minWidth="20"  maxWidth="30"/>
 				        <TableColumn fx:id="Nome"        text="Nome" 	   		minWidth="400" maxWidth="400"/>

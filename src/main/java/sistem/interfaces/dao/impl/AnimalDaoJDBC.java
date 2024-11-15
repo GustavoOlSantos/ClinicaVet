@@ -175,7 +175,7 @@ public class AnimalDaoJDBC implements AnimalDAO {
 	}
         
          @Override
-        public List<Animal> findAll() throws DomainException{
+    public List<Animal> findAll() throws DomainException{
             PreparedStatement st = null;
 		ResultSet rs = null; 
 
@@ -289,7 +289,90 @@ public class AnimalDaoJDBC implements AnimalDAO {
 			DB.closeResultSet(rs);
 		}
 	}
+	
+	public List<Animal> findByNameInternado(String nome) throws DomainException {
+	      PreparedStatement st = null;
+	      ResultSet rs = null; 
+			
+	      try {
+			conn.setAutoCommit(true);
+			st = conn.prepareStatement(
+					"SELECT * "
+					+ "FROM animal "
+					+ "WHERE (animal.nome LIKE '%"+ nome +"%') AND status = 7"
+					+ "ORDER BY idAnimal");
+			
+			rs = st.executeQuery();
+	                    
+	                    List<Animal> listaAnimal = new ArrayList<>();
+			int rows = 0;
+			
+			while(rs.next()) {
+				
+				Animal animal = instAnimal(rs);	
+				rows++;
+							
+				listaAnimal.add(animal);
+			}
+			
+			if(rows == 0) {
+				throw new DomainException("Nenhum animal com o nome fornecido encontrado.");
+			}
+			
+			return listaAnimal;
+						
+	      }
+			catch(SQLException e) {
+				throw new DbException(e.getMessage());
+			}
+			finally{
+				DB.closeStatement(st);
+				DB.closeResultSet(rs);
+			}
+		}
 
+	public List<Animal> findByCliente(int id) throws DomainException {
+	      PreparedStatement st = null;
+	      ResultSet rs = null; 
+			
+	      try {
+			conn.setAutoCommit(true);
+			st = conn.prepareStatement(
+					"SELECT * "
+					+ "FROM animal "
+					+ "WHERE idCliente = " + id
+					+ " ORDER BY idAnimal");
+			
+			rs = st.executeQuery();
+	                    
+            List<Animal> listaAnimal = new ArrayList<>();
+			int rows = 0;
+			
+			while(rs.next()) {
+				
+				Animal animal = instAnimal(rs);	
+				rows++;
+							
+				listaAnimal.add(animal);
+			}
+			
+			if(rows == 0) {
+				throw new DomainException("Nenhum animal encontrado para esse cliente.");
+			}
+			
+			return listaAnimal;
+						
+	      }
+			catch(SQLException e) {
+				throw new DbException(e.getMessage());
+			}
+			finally{
+				DB.closeStatement(st);
+				DB.closeResultSet(rs);
+			}
+		}
+
+	
 	private Animal instAnimal(ResultSet rs) throws SQLException, DomainException {
 		Animal animal = new Animal();
 		animal.setId(rs.getInt("animal.idAnimal"));

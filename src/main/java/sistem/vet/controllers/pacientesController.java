@@ -67,6 +67,7 @@ public class pacientesController implements Initializable {
     @Override	//=> Atualiza a Tabela ao inicializar
     public void initialize(URL location, ResourceBundle resources) {
     	
+    	 menu.setTableWidth(tableView, 0);
     	 List<Animal> cliList = new ArrayList<>();
 
          try {

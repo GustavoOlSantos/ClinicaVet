@@ -52,6 +52,8 @@ public class verClientesController implements Initializable {
 	@FXML
 	Label orcamento;
 	@FXML
+	Label observacoes;
+	@FXML
 	Label dataCadastro;
 	@FXML
 	Label dataFinalizado;
@@ -96,7 +98,9 @@ public class verClientesController implements Initializable {
 			email.setText(cli.getEmail());
 			
 			dataCadastro.setText(cli.getDataCadastro().format(cli.timeFormat).toString());
-			dataFinalizado.setText(null);
+			
+			String dataF = cli.getDataFinalizado() == null ? null : cli.getDataFinalizado().format(cli.timeFormat).toString();  
+			dataFinalizado.setText(dataF);
 			
 			status.setText(cli.getSituacao().toString());
 			formaPg.setText(cli.getFormaPagamento().toString());
@@ -106,6 +110,8 @@ public class verClientesController implements Initializable {
 			
 			statusPg.setText(cli.getStatusPagamento().toString());
 			orcamento.setText("R$" + cli.getOrcamentoTotal());
+			
+			observacoes.setText(cli.getObservacao());
 			
 			for(Animal pet : cli.animal) {
 				Id.setCellValueFactory(new PropertyValueFactory<>("Id"));

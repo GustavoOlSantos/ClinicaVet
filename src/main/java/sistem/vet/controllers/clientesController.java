@@ -2,6 +2,7 @@ package sistem.vet.controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -92,7 +93,8 @@ public class clientesController implements Initializable {
     
     @Override	//=> Atualiza a Tabela ao inicializar
     public void initialize(URL location, ResourceBundle resources) {
-    	menu.scene.getStylesheets().add(App.class.getResource("/styles/Styles.css").toExternalForm());  
+    	
+    	menu.setTableWidth(tableView, 0);
     	listarClientesAtivos();
     	
     	//=> Checa o input de buscar cliente
@@ -228,12 +230,15 @@ public class clientesController implements Initializable {
 		                // Evitar alteração se o valor não mudou
 		                if (newValue != null && cliente.getSituacao() != newValue) {
 		                	
-		                	System.out.println(cliente);
+		                	if(newValue == Situacao.FINALIZADO) {
+		                		cliente.setDataFinalizado(LocalDateTime.now());
+		                	}
+		                	else if(newValue != Situacao.FINALIZADO && cliente.getDataFinalizado() != null){
+		                		cliente.setDataFinalizado(null);
+		                	}
 		                	
 		                    cliente.setSituacao(newValue); 
-		                    oldValue = newValue;
-		                    
-		                    System.out.println(cliente);
+		                    oldValue = newValue;		                   
 		                    
 		                    newValue = null;
 		                    try {

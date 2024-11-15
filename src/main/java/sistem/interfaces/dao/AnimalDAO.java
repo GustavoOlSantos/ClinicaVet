@@ -10,9 +10,11 @@ public interface AnimalDAO {
 	void update(Animal cli);
 	void deleteById(Integer id, Integer idCliente);
 	Animal findById(Integer id);
-        List<Animal> findAll() throws DomainException; 
+    List<Animal> findAll() throws DomainException; 
 	List<Animal> findInternados() throws DomainException;      
-        List<Animal> findByName(String nome) throws DomainException;
+    List<Animal> findByName(String nome) throws DomainException;
+    List<Animal> findByNameInternado(String nome) throws DomainException;
+    List<Animal> findByCliente(int id) throws DomainException;
                 
 }
 

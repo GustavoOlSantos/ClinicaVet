@@ -6,13 +6,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Dialog;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
+import javafx.stage.Screen;
 import sistem.entities.Servicos;
 import sistem.exceptions.DomainException;
 import sistem.interfaces.dao.AnimalDAO;
@@ -149,6 +151,19 @@ public class menuDataSaver {
                
         dialog.showAndWait(); // This will block until the dialog is closed
         return dialog.getResult();
+	}
+	
+	public void setTableWidth(TableView tableView, double widthRemover) {
+		tableView.setMinWidth(getScreenWidth() - 85 - widthRemover);
+	}
+
+	private double getScreenWidth() {
+		 Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+
+        // Get the screen width and height
+        double screenWidth = screenBounds.getWidth();
+        return screenWidth;
+        //double screenHeight = screenBounds.getHeight();
 	}
 	
 	public Boolean dialogAvisos(String Mensagem) {

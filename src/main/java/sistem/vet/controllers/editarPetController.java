@@ -90,6 +90,8 @@ public class editarPetController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		try {
 			
+			menu.setTableWidth(tableView, 500);
+			
 			idCliente = menu.getSharedId();
 			idAnimal = menu.getSharedIdPet();
 			

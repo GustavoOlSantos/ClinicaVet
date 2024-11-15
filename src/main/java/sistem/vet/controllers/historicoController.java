@@ -92,7 +92,7 @@ public class historicoController implements Initializable {
     
     @Override	//=> Atualiza a Tabela ao inicializar
     public void initialize(URL location, ResourceBundle resources) {
-    	menu.scene.getStylesheets().add(App.class.getResource("/styles/Styles.css").toExternalForm());  
+    	menu.setTableWidth(tableView, 0);
     	clickHistorico();
     	
     	//=> Checa o input de buscar cliente

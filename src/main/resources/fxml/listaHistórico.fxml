@@ -58,7 +58,7 @@
 		</HBox>
 	
 		
-		<TableView fx:id="tableView" styleClass="Table" VBox.vgrow="ALWAYS" prefWidth="Infinity" minWidth="1350" maxWidth="Infinity">
+		<TableView fx:id="tableView" styleClass="Table" VBox.vgrow="ALWAYS" prefWidth="Infinity" maxWidth="Infinity">
 	        <columns>
 	       		<TableColumn fx:id="Id" 				text="#" 		 minWidth="20" maxWidth="30"	/>
 	            <TableColumn fx:id="Nome"				text="Nome" 	 minWidth="100" maxWidth="150"	/>

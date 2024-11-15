@@ -81,6 +81,7 @@ public class internadosController implements Initializable {
     @Override	//=> Atualiza a Tabela ao inicializar
     public void initialize(URL location, ResourceBundle resources) {
     	
+    	menu.setTableWidth(tableView, 0);
     	 List<Animal> aniList = new ArrayList<>();
 
          try {
@@ -258,7 +259,7 @@ public class internadosController implements Initializable {
         List<Animal> aniList = new ArrayList<>();
 		
             try {
-                aniList = animalDAO.findByName(nome);
+                aniList = animalDAO.findByNameInternado(nome);
             } catch (DomainException e) {
             	menu.dialogAvisos("Erro: " + e.getMessage());
 

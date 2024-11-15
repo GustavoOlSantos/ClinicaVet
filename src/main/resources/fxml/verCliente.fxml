@@ -3,13 +3,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<!-- 
-	• Implementar a tabela com a lista de TODOS os clientes  aqui
-	• Tabela com os clientes ativos, cancelados e finalizados obtidos do MySQL
-		• Dados Básicos, nome, telefone, pets, status pagamento e status
-		• Botão para ver todos os dados, como se fosse em uma folha 
-	• Input para pesquisar um cliente
--->
 <VBox styleClass="modal" xmlns:fx="http://javafx.com/fxml" alignment="TOP_LEFT" fx:controller="sistem.vet.controllers.verClientesController">
 	
 	<HBox styleClass="modalHeader">
@@ -79,6 +72,11 @@
 			<HBox styleClass="infoContainer">
 				<Label text="Orçamento: " 		styleClass="infoLabel" />
 				<Label fx:id="orcamento" text="" styleClass="infoData" />
+			</HBox>
+			
+			<HBox styleClass="infoContainer">
+				<Label text="Observações: " 		styleClass="infoLabel" />
+				<Label fx:id="observacoes" text="" styleClass="infoData" />
 			</HBox>
 			
 		</VBox>

@@ -101,7 +101,8 @@ public class editarClienteController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		try {
-			
+	    	menu.setTableWidth(tableView, 0);
+	    	
 			idCliente = menu.getSharedId();
 			cliente = clienteDAO.findById(idCliente);
 			
@@ -154,7 +155,7 @@ public class editarClienteController implements Initializable {
 
 	         try {
 	        	 //=> Mudar para FindAll
-	 			aniList = animalDAO.findInternados();
+	 			aniList = animalDAO.findByCliente(cliente.getId());
 	 		 } catch (DomainException e) {
 	 			e.printStackTrace();
 	 		 }
@@ -292,7 +293,7 @@ public class editarClienteController implements Initializable {
 		List<Animal> aniList = new ArrayList<>();
 	
 	    try {
-			aniList = animalDAO.findInternados();
+	    	aniList = animalDAO.findByCliente(cliente.getId());
 		 } catch (DomainException e) {
 			e.printStackTrace();
 		 }
