@@ -8,74 +8,97 @@
 
 
 
-<VBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistem.vet.controllers.cadastroController"> 
-    
+<VBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistem.vet.controllers.cadastroController" spacing="15" alignment="CENTER">
 
-    
-<HBox HBox.hgrow="ALWAYS" alignment="BOTTOM_CENTER" spacing="25" styleClass="TableContente" >
-    <VBox spacing="15" alignment="CENTER">
-        
-        <!-- Campos do Cliente -->
-        <VBox spacing="5">
-            <Label text="Nome do Cliente" styleClass="data-name" />
-            <TextField fx:id="nomeField" promptText="Nome do Cliente" minWidth="300" minHeight="40"/>
-        </VBox>
-        
-        <VBox spacing="5">
-            <Label text="CPF/CNPJ" styleClass="data-name" />
-            <TextField fx:id="cpfField" promptText="CPF/CNPJ" minWidth="300" minHeight="40"/>
+    <!-- Contêiner para exibir os formulários lado a lado -->
+    <HBox spacing="25" alignment="TOP_CENTER" styleClass="TableContente">
+
+        <!-- Formulário do Cliente -->
+        <VBox spacing="15" alignment="CENTER">
+            <VBox spacing="5">
+                <Label text="Nome do Cliente" styleClass="data-name" />
+                <TextField fx:id="nomeField" promptText="Nome do Cliente" minWidth="300" minHeight="15"/>
+            </VBox>
+            
+            <VBox spacing="5">
+                <Label text="CPF/CNPJ" styleClass="data-name" />
+                <TextField fx:id="cpfField" promptText="CPF/CNPJ" minWidth="300" minHeight="15"/>
+            </VBox>
+
+            <VBox spacing="5">
+                <Label text="Email" styleClass="data-name" />
+                <TextField fx:id="emailField" promptText="Email" minWidth="300" minHeight="15"/>
+            </VBox>
+
+            <VBox spacing="5">
+                <Label text="Telefone" styleClass="data-name" />
+                <TextField fx:id="telefoneField" promptText="Telefone" minWidth="300" minHeight="15"/>
+            </VBox>
+
+            <VBox spacing="5">
+                <Label text="Quantidade de Animais" styleClass="data-name" />
+                <TextField fx:id="qtdAnimalField" promptText="Quantidade de Animais" minWidth="300" minHeight="15"/>
+            </VBox>
+
+            <VBox spacing="5">
+                <Label text="Forma de Pagamento" styleClass="data-name" />
+                <TextField fx:id="formaPagamentoField" promptText="Forma de Pagamento" minWidth="300" minHeight="15"/>
+            </VBox>
+
+            <VBox spacing="5">
+                <Label text="Parcelas" styleClass="data-name" />
+                <TextField fx:id="parcelasField" promptText="Número de Parcelas" minWidth="300" minHeight="15"/>
+            </VBox>
         </VBox>
 
-        <VBox spacing="5">
-            <Label text="Email" styleClass="data-name" />
-            <TextField fx:id="emailField" promptText="Email" minWidth="300" minHeight="40"/>
+        <!-- Formulário do Animal -->
+        <VBox spacing="15" alignment="CENTER">
+            <VBox spacing="5">
+                <Label text="Nome do Animal" styleClass="data-name" />
+                <TextField fx:id="nomeAnimalField" promptText="Nome do Animal" minWidth="300" minHeight="15"/>
+            </VBox>
+
+            <VBox spacing="5">
+                <Label text="Sexo" styleClass="data-name" />
+                <HBox spacing="10" alignment="CENTER">
+                    <Button fx:id="machoButton" text="Macho" minWidth="140" minHeight="15"/>
+                    <Button fx:id="femeaButton" text="Fêmea" minWidth="140" minHeight="15"/>
+                </HBox>
+            </VBox>
+
+            <VBox spacing="5">
+                <Label text="Tipo (e.g., cachorro, gato)" styleClass="data-name" />
+                <TextField fx:id="tipoField" promptText="Tipo (e.g., cachorro, gato)" minWidth="300" minHeight="15"/>
+            </VBox>
+
+            <VBox spacing="5">
+                <Label text="Emergência" styleClass="data-name" />
+                <HBox spacing="10" alignment="CENTER">
+                    <Button fx:id="simButton" text="Sim" minWidth="140" minHeight="15"/>
+                    <Button fx:id="naoButton" text="Não" minWidth="140" minHeight="15"/>
+                </HBox>
+            </VBox>
+
+            <VBox spacing="5">
+                <Label text="Orçamento" styleClass="data-name" />
+                <TextField fx:id="orcamentoField" promptText="Orçamento Estimado" minWidth="300" minHeight="15"/>
+            </VBox>
+
+            <VBox spacing="5">
+                <Label text="Observações" styleClass="data-name" />
+                <TextField fx:id="observacoesField" promptText="Observações" minWidth="300" minHeight="15"/>
+            </VBox>
+
+            <VBox spacing="5">
+                <Label text="Serviços" styleClass="data-name" />
+                <TextField fx:id="servicosField" promptText="Serviços (e.g., consulta, vacinação)" minWidth="300" minHeight="15"/>
+            </VBox>
         </VBox>
-        
-        <VBox spacing="5">
-            <Label text="Telefone" styleClass="data-name" />
-            <TextField fx:id="telefoneField" promptText="Telefone" minWidth="300" minHeight="40"/>
-        </VBox>
-        
-        <!-- Campos do Animal -->
-        <VBox spacing="5">
-            <Label text="Nome do Animal" styleClass="data-name" />
-            <TextField fx:id="nomeAnimalField" promptText="Nome do Animal" minWidth="300" minHeight="40"/>
-        </VBox>
-        
-        <!-- Botões de seleção de Sexo -->
-        <VBox spacing="5">
-            <Label text="Sexo" styleClass="data-name" />
-            <HBox spacing="10" alignment="CENTER">
-                <Button fx:id="machoButton" text="Macho" minWidth="140" minHeight="40"/>
-                <Button fx:id="femeaButton" text="Fêmea" minWidth="140" minHeight="40"/>
-            </HBox>
-        </VBox>
-        
-        <!-- Campo de seleção de Tipo -->
-        <VBox spacing="5">
-            <Label text="Tipo (e.g., cachorro, gato)" styleClass="data-name" />
-            <TextField fx:id="tipoField" promptText="Tipo (e.g., cachorro, gato)" minWidth="300" minHeight="40"/>
-        </VBox>
-        
-        <!-- Botões de Emergência -->
-        <VBox spacing="5">
-            <Label text="Emergência" styleClass="data-name" />
-            <HBox spacing="10" alignment="CENTER">
-                <Button fx:id="simButton" text="Sim" minWidth="140" minHeight="40"/>
-                <Button fx:id="naoButton" text="Não" minWidth="140" minHeight="40"/>
-            </HBox>
-        </VBox>
-        
-        <!-- Campo de Serviços -->
-        <VBox spacing="5">
-            <Label text="Serviços" styleClass="data-name" />
-            <TextField fx:id="servicosField" promptText="Serviços (e.g., consulta, vacinação)" minWidth="300" minHeight="40"/>
-        </VBox>
-        
-        <!-- Botão Salvar -->
-        <Button fx:id="btnSalvar" text="Salvar" onAction="#salvarCadastro" minWidth="300" minHeight="40"/>
-        
-    </VBox>
-</HBox>
+
+    </HBox>
+
+    <!-- Botão Salvar para ambos -->
+    <Button fx:id="btnSalvar" text="Salvar" onAction="#salvarCadastro" minWidth="300" minHeight="15"/>
 
 </VBox>
+
