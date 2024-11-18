@@ -2,13 +2,12 @@ package sistem.db;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Properties;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
 
 public class DB {
 	
@@ -20,6 +19,8 @@ public class DB {
 				Properties props = loadProperties();			//=> Carrega os dados do arquivo
 				String url = props.getProperty("dburl");		//=> Obtem a URL
 				conn = DriverManager.getConnection(url, props); //=> Realiza a Conexão
+				
+				ConnectionKeepAlive.startKeepAlive(conn);
 			}
 			catch(SQLException e) {
 				throw new DbException(e.getMessage());
