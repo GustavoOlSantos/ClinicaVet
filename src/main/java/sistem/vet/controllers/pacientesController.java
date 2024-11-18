@@ -1,6 +1,7 @@
 package sistem.vet.controllers;
 
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -59,7 +60,7 @@ public class pacientesController implements Initializable {
 	@FXML
 	Button close;
         
-        @FXML
+    @FXML
     public TextField buscaField;
 	
 	private Stage modal;
@@ -90,7 +91,6 @@ public class pacientesController implements Initializable {
         Sexo.setCellValueFactory(new PropertyValueFactory<>("sexo"));
         Tipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
         Emergencia.setCellValueFactory(new PropertyValueFactory<>("Emergencia"));
-       // Internado.setCellValueFactory(new PropertyValueFactory<>("Internado"));
         Orcamento.setCellValueFactory(new PropertyValueFactory<>("Orcamento"));
         
      // Listener do ComboBox de Status
@@ -129,6 +129,14 @@ public class pacientesController implements Initializable {
  		                // Evitar alteração se o valor não mudou
  		                if (newValue != oldValue && newValue != null) {
  		                    animal.setSituacao(newValue); 
+ 		                    
+ 		                    if(newValue == SituacaoPet.ALTA_MEDICA) {
+ 		                    	animal.setDataAlta(LocalDateTime.now());
+ 		                    }
+ 		                    else if(newValue == SituacaoPet.FALECIDO) {
+ 		                    	animal.setDataObito(LocalDateTime.now());
+ 		                    }
+ 		                    
  		                    newValue = null;
  		                    try {
  		                        animalDAO.update(animal);  // Atualize no banco de dados

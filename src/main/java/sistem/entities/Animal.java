@@ -1,5 +1,6 @@
 package sistem.entities;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,6 +26,9 @@ public class Animal{
 	private double orcamento;
 	private String observacoes;
 	private String medicamentos;
+
+	private LocalDateTime dataAlta;
+	private LocalDateTime dataObito;
 	
 	public String stringServicos;
 	
@@ -277,13 +281,33 @@ public class Animal{
 	}
 	
 	//======> Medicamentos
-		public void setMedicamentos(String medicamentos){
-			this.medicamentos = medicamentos;
-		}
+	public void setMedicamentos(String medicamentos){
+		this.medicamentos = medicamentos;
+	}
+	
+	public String getMedicamentos(){
+		return this.medicamentos;
+	}
 		
-		public String getMedicamentos(){
-			return this.medicamentos;
-		}
+	//======> Data Alta
+	public void setDataAlta(LocalDateTime date) {
+		this.dataAlta = date;
+		
+	}
+	
+	public LocalDateTime getDataAlta() {
+    	return dataAlta;
+    }
+	
+	//======> Data Obito
+	public void setDataObito(LocalDateTime date) {
+		this.dataObito = date;
+		
+	}
+	
+	public LocalDateTime getDataObito() {
+    	return dataObito;
+    }
 		
 	
 	//======> Serviços

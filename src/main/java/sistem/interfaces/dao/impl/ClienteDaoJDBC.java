@@ -55,20 +55,21 @@ public class ClienteDaoJDBC implements ClienteDAO {
 			
 			st = conn.prepareStatement(
 					"INSERT INTO cliente (nome, cpfCnpj, telefone, email, qtdAnimal, orcamentoTotal,"
-					+ " formaPagamento, parcelas, statusPagamento, situacao, dataCadastro)"
-					+ "VALUES (?, ? ,?, ?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+					+ " formaPagamento, parcelas, statusPagamento, situacao, dataCadastro, observacao)"
+					+ "VALUES (?, ? ,?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 			
 			st.setString(1, cli.getNome()); 			//=> Nome
 			st.setString(2, cli.getCpf()); 				//=> Cpf/Cnpj
 			st.setString(3, cli.getTelefone()); 		//=> Telefone
-			st.setString(4, cli.getEmail()); 		//=> Telefone
+			st.setString(4, cli.getEmail()); 			//=> Telefone
 			st.setInt(5, cli.qtdAnimal); 	   			//=> QtdAnimal
-			st.setDouble(6, cli.getOrcamentoTotal());	   	//=> OrçamentoTotal
+			st.setDouble(6, cli.getOrcamentoTotal());	//=> OrçamentoTotal
 			st.setInt(8, cli.getIntFormaPagamento());	//=> Forma de Pagamento
 			st.setInt(8, cli.parcelaPagamento);			//=> Parcelas
 			st.setInt(9, cli.getIntStatusPagamento());	//=> Status do Pagamento
-			st.setInt(10, cli.getIntSituacao());			//=> Situação do Trabalho
+			st.setInt(10, cli.getIntSituacao());		//=> Situação do Trabalho
 			st.setTimestamp(11, Timestamp.valueOf(cli.getDataCadastro())); //=> Data de Cadastro
+			st.setString(12, cli.getObservacao()); 		//=> Telefone
 			
 			int RowsAffected = st.executeUpdate();
 			
@@ -135,7 +136,8 @@ public class ClienteDaoJDBC implements ClienteDAO {
 			conn.setAutoCommit(true);
 			st = conn.prepareStatement(
 					"UPDATE cliente SET nome = ?, cpfCnpj = ?, telefone = ?, email = ?, qtdAnimal = ?, orcamentoTotal = ?,"
-					+ " formaPagamento = ?, parcelas = ?, statusPagamento = ?, situacao = ?, dataCadastro = ?"
+					+ " formaPagamento = ?, parcelas = ?, statusPagamento = ?, situacao = ?, dataCadastro = ?, dataEncerramento = ?, "
+					+ "observacao = ? "
 					+ "WHERE id = ?");
 			
 			st.setString(1, cli.getNome()); 			//=> Nome
@@ -149,7 +151,9 @@ public class ClienteDaoJDBC implements ClienteDAO {
 			st.setInt(9, cli.getIntStatusPagamento());	//=> Status do Pagamento
 			st.setInt(10, cli.getIntSituacao());			//=> Situação do Trabalho
 			st.setTimestamp(11, Timestamp.valueOf(cli.getDataCadastro())); //=> Data de Cadastro
-			st.setInt(12, cli.getId()); 				//=> Id do Cliente
+			st.setTimestamp(12, Timestamp.valueOf(cli.getDataFinalizado())); //=> Data de Cadastro
+			st.setString(13, cli.getObservacao());
+			st.setInt(14, cli.getId()); 				//=> Id do Cliente
 			
 			st.executeUpdate();
 		}
@@ -431,6 +435,8 @@ public class ClienteDaoJDBC implements ClienteDAO {
 		animal.setOrcamento(rs.getDouble("animal.orcamento"));
 		animal.setObservacoes(rs.getString("animal.observacoes"));
 		animal.setMedicamentos(rs.getString("animal.medicamentos"));
+		animal.setDataAlta(rs.getObject("animal.data_alta", LocalDateTime.class));
+		animal.setDataObito(rs.getObject("animal.data_obito", LocalDateTime.class));
 		String intStr = rs.getString("animal.servicos");
 		
 		intStr = intStr.replaceAll(" ", "");

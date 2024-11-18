@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -85,7 +86,7 @@ public class AnimalDaoJDBC implements AnimalDAO {
 			conn.setAutoCommit(true);
 			st = conn.prepareStatement(
 					"UPDATE animal SET nome = ?, sexo = ?, tipo = ?, emergencia = ?, status = ?, orcamento = ?, "
-					+ "observacoes = ?, medicamentos = ?, servicos = ? "
+					+ "observacoes = ?, medicamentos = ?, servicos = ?, data_alta = ?, data_obito = ? "
 					+ "WHERE idCliente = ? AND idAnimal = ?");
 			
 			st.setString(1, pet.getNome());			 //=> Nome Pet
@@ -100,8 +101,11 @@ public class AnimalDaoJDBC implements AnimalDAO {
 			String intString = Arrays.toString(pet.getServicos());
 			st.setString(9, intString);
 			
-			st.setInt	(10, pet.getIdCliente());	//=> IdCliente
-			st.setInt	(11, pet.getId());			//=> IdPet
+			st.setTimestamp(10, Timestamp.valueOf(pet.getDataAlta()));
+			st.setTimestamp(11, Timestamp.valueOf(pet.getDataObito()));
+			
+			st.setInt	(12, pet.getIdCliente());	//=> IdCliente
+			st.setInt	(13, pet.getId());			//=> IdPet
 			
 			st.executeUpdate();
 		}
@@ -386,6 +390,8 @@ public class AnimalDaoJDBC implements AnimalDAO {
 		animal.setOrcamento(rs.getDouble("animal.orcamento"));
 		animal.setObservacoes(rs.getString("animal.observacoes"));
 		animal.setMedicamentos(rs.getString("animal.medicamentos"));
+		animal.setDataAlta(rs.getObject("animal.data_alta", LocalDateTime.class));
+		animal.setDataObito(rs.getObject("animal.data_obito", LocalDateTime.class));
 		String intStr = rs.getString("animal.servicos");
 		
 		intStr = intStr.replaceAll(" ", "");
