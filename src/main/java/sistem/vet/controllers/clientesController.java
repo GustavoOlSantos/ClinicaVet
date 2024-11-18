@@ -216,6 +216,7 @@ public class clientesController implements Initializable {
 		
 		            comboBox.getItems().clear();
 		            comboBox.getItems().addAll(Situacao.values());
+		            comboBox.getItems().removeIf(x -> x.name() == "CANCELADO" || x.name() == "EXCLUÍDO");
 		            comboBox.setValue(cliente.getSituacao());
 		
 		            comboBox.setStyle("-fx-background-color: transparent;");

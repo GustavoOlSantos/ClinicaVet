@@ -120,6 +120,7 @@ public class editarClienteController implements Initializable {
 			statusPgField.setValue(cliente.getStatusPagamento());
 			
 			situacaoField.getItems().addAll(Situacao.values());
+			situacaoField.getItems().removeIf(x -> x.name() == "CANCELADO" || x.name() == "EXCLUÍDO");
 			situacaoField.setValue(cliente.getSituacao());
 			
 			dataCadField.setText(cliente.getDataCadastro().format(cliente.timeFormat).toString());

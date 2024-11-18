@@ -151,7 +151,10 @@ public class ClienteDaoJDBC implements ClienteDAO {
 			st.setInt(9, cli.getIntStatusPagamento());	//=> Status do Pagamento
 			st.setInt(10, cli.getIntSituacao());			//=> Situação do Trabalho
 			st.setTimestamp(11, Timestamp.valueOf(cli.getDataCadastro())); //=> Data de Cadastro
-			st.setTimestamp(12, Timestamp.valueOf(cli.getDataFinalizado())); //=> Data de Cadastro
+			
+			Timestamp dataEnd = cli.getDataFinalizado() == null ? null : Timestamp.valueOf(cli.getDataFinalizado());
+			st.setTimestamp(12, dataEnd); //=> Data de Cadastro
+			
 			st.setString(13, cli.getObservacao());
 			st.setInt(14, cli.getId()); 				//=> Id do Cliente
 			

@@ -101,8 +101,11 @@ public class AnimalDaoJDBC implements AnimalDAO {
 			String intString = Arrays.toString(pet.getServicos());
 			st.setString(9, intString);
 			
-			st.setTimestamp(10, Timestamp.valueOf(pet.getDataAlta()));
-			st.setTimestamp(11, Timestamp.valueOf(pet.getDataObito()));
+			Timestamp dataAlta = pet.getDataAlta() == null ? null : Timestamp.valueOf(pet.getDataAlta());
+			st.setTimestamp(10, dataAlta);
+			
+			Timestamp dataObito = pet.getDataObito() == null ? null : Timestamp.valueOf(pet.getDataObito());
+			st.setTimestamp(11, dataObito);
 			
 			st.setInt	(12, pet.getIdCliente());	//=> IdCliente
 			st.setInt	(13, pet.getId());			//=> IdPet
