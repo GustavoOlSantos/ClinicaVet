@@ -157,7 +157,7 @@ public class menuDataSaver {
 		tableView.setMinWidth(getScreenWidth() - 85 - widthRemover);
 	}
 
-	private double getScreenWidth() {
+	public double getScreenWidth() {
 		 Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
 
         // Get the screen width and height

@@ -21,6 +21,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.stage.Stage;
 import sistem.db.DbException;
 import sistem.entities.Animal;
 import sistem.entities.Cliente;

@@ -1,22 +1,30 @@
 package sistem.vet.controllers;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
+
+import org.kordamp.ikonli.javafx.FontIcon;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import sistem.entities.Animal;
 import sistem.entities.Cliente;
-import sistem.enums.AnimalEmergencia;
-import sistem.enums.AnimalInternado;
-import sistem.enums.AnimalSexo;
-import sistem.enums.AnimalTipo;
+import sistem.entities.Servicos;
 import sistem.exceptions.DomainException;
 import sistem.interfaces.dao.AnimalDAO;
 import sistem.interfaces.dao.ClienteDAO;
@@ -27,110 +35,158 @@ public class verAnimalController implements Initializable {
 	
 	//=> Coleta dados do MenuSaver
 	menuDataSaver menu = MainController.menu;
-        ClienteDAO clienteDAO = menu.clienteDAO;
+    ClienteDAO clienteDAO = menu.clienteDAO;
 	AnimalDAO animalDAO = menu.animalDAO;
-	//AnimalDAO animalDAO = menu.animalDAO;
 	
-	int id = menu.getSharedId();
+	List<Object> AvailableServices = Arrays.stream(menu.serv).collect(Collectors.toList());
+	int idPet = menu.getSharedIdPet();
+	int idCliente;
+	
+	@FXML
+	VBox pet_icon;
+	@FXML
+	VBox wholePageWidth;
 	
 	@FXML
 	Label nome;
 	@FXML
-	Label cpfCnpj;
+	Label sexo;
 	@FXML
-	Label telefone;
-	@FXML
-	Label email;
-	
+	Label tipo;
 	@FXML
 	Label status;
-	@FXML
-	Label formaPg;
-	@FXML
-	Label parcelas;
-	@FXML
-	Label statusPg;
-	@FXML
-	Label orcamento;
-	@FXML
-	Label dataCadastro;
-	@FXML
-	Label dataFinalizado;
-	
-	//=====> Refência da Tabela de Pets e suas Colunas
-	@FXML
-    public TableView<Animal> tableView;
-	@FXML
-    public TableColumn<Animal, String> Id;
-    @FXML
-    public TableColumn<Animal, String> Nome;
-    @FXML
-    public TableColumn<Animal, AnimalSexo> Sexo;
-    @FXML
-    public TableColumn<Animal, AnimalTipo> Tipo;
-    @FXML
-    public TableColumn<Animal, AnimalEmergencia> Emergencia;
-    @FXML
-    public TableColumn<Animal, AnimalInternado> Internado;
-    @FXML
-    public TableColumn<Animal, String> Orcamento;
-    @FXML
-    public TableColumn<Animal, String> Servicos;
 	
 	@FXML
+	Label nomeTutor;
+	@FXML
+	Label cpfCnpjTutor;
+	@FXML
+	Label telefoneTutor;
+	@FXML
+	Label emailTutor;
+	
+	
+	//=> TABELA PETS DO CLIENTE
+    @FXML
+    public TableView<Servicos> tableView;
+	@FXML
+    public TableColumn<Servicos, String> Id;
+    @FXML
+    public TableColumn<Servicos, String> Nome;
+    @FXML
+    public TableColumn<Servicos, String> Preco;
+    @FXML
+    public TableColumn<Servicos, Void> Del;
+    
 	Button close;
-	
 	private Stage modal;
     
     @Override	//=> Atualiza a Tabela ao inicializar
     public void initialize(URL location, ResourceBundle resources) {
     	
-    	Cliente cli;
-    	
         try {
-			cli = clienteDAO.findById(id);
+        	
+        	wholePageWidth.setMinWidth(1000);
+        	
+			Animal animal = animalDAO.findById(idPet);
 			
-			nome.setText(cli.getNome());
-			cpfCnpj.setText(cli.getCpf());
-			telefone.setText(cli.getTelefone());
+			idCliente = animal.getIdCliente();		
+			Cliente cli = clienteDAO.findById(idCliente);
+
 			
-			email.setText(cli.getEmail());
+			String iconLiteral = null;
+			switch (animal.getTipo()) {
+	            case GATO: 				iconLiteral = "mdi2c-cat"; break;
+	            case CACHORRO: 			iconLiteral = "mdi2d-dog"; break;
+	            case AVE: 				iconLiteral = "mdi2b-bird"; break;
+	            case COELHO: 			iconLiteral = "mdi2r-rabbit"; break;
+	            case TARTARUGA:		 	iconLiteral = "mdi2t-turtle"; break;
+	            case COBRA: 			iconLiteral = "mdi2s-snake"; break;
+	            case LAGARTO: 			iconLiteral = "mdi2p-paw"; break;
+	            case OUTROS_SILVESTRES: iconLiteral = "mdi2p-paw"; break;
+	        };
+
+	        FontIcon icon = new FontIcon(iconLiteral);
+	        icon.setIconSize(150);
+	        icon.getStyleClass().add("animal-icon");
+	        pet_icon.getChildren().add(icon);
 			
-			dataCadastro.setText(cli.getDataCadastro().format(cli.timeFormat).toString());
-			dataFinalizado.setText(null);
+	        //=> DADOS DO PET
+			nome.setText(animal.getNome());
+			sexo.setText(animal.getSexo().toString());
+			tipo.setText(animal.getTipo().toString());
+			status.setText(animal.getSituacao().toString());
 			
-			status.setText(cli.getSituacao().toString());
-			formaPg.setText(cli.getFormaPagamento().toString());
+			//=> DADOS DO TUTOR
+			nomeTutor.setText(cli.getNome());
+			cpfCnpjTutor.setText(cli.getCpf());
+			telefoneTutor.setText(cli.getTelefone());
+			emailTutor.setText(cli.getEmail());
 			
-			String parcela = cli.getParcelas() == 1 ? ", à vista" : ", " + String.valueOf(cli.getParcelas()) + " x";
-			parcelas.setText(parcela);
+			//=> DADOS CLÍNICOS DO PET
 			
-			statusPg.setText(cli.getStatusPagamento().toString());
-			orcamento.setText("R$" + cli.getOrcamentoTotal());
-			
-			for(Animal pet : cli.animal) {
-				Id.setCellValueFactory(new PropertyValueFactory<>("Id"));
-		    	Nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-		        Sexo.setCellValueFactory(new PropertyValueFactory<>("sexo"));
-		        Tipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
-		        Emergencia.setCellValueFactory(new PropertyValueFactory<>("Emergencia"));
-		        Internado.setCellValueFactory(new PropertyValueFactory<>("Internado"));
-		        Orcamento.setCellValueFactory(new PropertyValueFactory<>("OrcamentoStr"));
-		        
-		        pet.transformServicos(menu.serv);
-		        Servicos.setCellValueFactory(new PropertyValueFactory<>("StringServicos"));
-		        
-		        tableView.getItems().add(pet);
-			}
+			//=> TABELA
+			List<Servicos> servList = new ArrayList<>();
+			servList = animal.getServicosList(menu.serv);
+	        renderTable(servList);
 			
 		} catch (DomainException e) {
 			e.printStackTrace();
 		}  
         
-        close.setOnAction(e -> modal.close());
+        //close.setOnAction(e -> modal.close());
     }  
     
+	public void renderTable(List<Servicos> servicos) {
+		    
+		Id.getStyleClass().add("centered");
+		
+    	Id.setCellValueFactory(new PropertyValueFactory<>("Id"));
+    	Nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        Preco.setCellValueFactory(new PropertyValueFactory<>("precoStr"));
+        
+        //=> Cria o botão para a coluna Del
+        Del.setCellFactory(col -> new TableCell<Servicos, Void>() {
+            private final Button excluir = new Button("");
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } 
+                else {
+                    FontIcon icon = new FontIcon("fas-trash"); //=> Criar Ícone
+                    icon.setIconSize(15); 					//=> Tamanho do Ícone
+                    excluir.setGraphic(icon);		   //=> Seta o Ícone como gráfico do botão
+                    setGraphic(excluir);				  //=> Seta o Botão como gráfico da coluna
+                    setAlignment(Pos.CENTER);
+                    
+                    
+                    excluir.setMaxWidth(Double.MAX_VALUE);
+                    excluir.setPrefWidth(65); // Adjust this value as needed
+                    
+                    // Use HBox to center and size the button
+                    HBox hbox = new HBox(excluir);
+                    hbox.setAlignment(Pos.CENTER);
+                    HBox.setHgrow(excluir, Priority.ALWAYS);
+                    
+                    //=> Controller do Botão (Talvez seja removido)
+                    excluir.setOnAction(event -> {
+                        Servicos selectedServico = getTableRow().getItem();
+                        if (selectedServico != null) {
+                        	//excluirServico(selectedServico);
+                        }
+                    });
+                }
+            }
+        });
+
+        
+        tableView.getItems().addAll(servicos);
+    }
+	    
     public void setStage(Stage stage) {
-    	modal = stage;
+    	this.modal = stage;
     }
 }

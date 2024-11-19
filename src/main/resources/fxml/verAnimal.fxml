@@ -2,6 +2,9 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import org.kordamp.ikonli.javafx.StackedFontIcon?>
 
 <!-- 
 	• Implementar a tabela com a lista de TODOS os clientes  aqui
@@ -13,94 +16,88 @@
 <VBox styleClass="modal" xmlns:fx="http://javafx.com/fxml" alignment="TOP_LEFT" fx:controller="sistem.vet.controllers.verAnimalController">
 	
 	<HBox styleClass="modalHeader">
-		<Label text="Dados do Animal Internado" styleClass="infoModal" />
+		<Label text="Dados do Animal" styleClass="infoModal" />
 	</HBox>
 	
 	<HBox styleClass="modalBody" VBox.vgrow="ALWAYS">
-	
-		<VBox VBox.vgrow="ALWAYS" prefWidth="300">
-			
-			<Label text="Informações do cliente" styleClass="sectionLabel" />
 		
-			<HBox styleClass="infoContainer">
-				<Label text="Nome: " 		styleClass="infoLabel" />
-				<Label fx:id="nome" text="" styleClass="infoData" />
-			</HBox>
+		<VBox fx:id="wholePageWidth">
+			<!-- Ícone e dados do Pet -->
+			<HBox HBox.hgrow="ALWAYS">
 			
-			<HBox styleClass="infoContainer">
-				<Label text="CPF/CNPJ: " 		styleClass="infoLabel" />
-				<Label fx:id="cpfCnpj" text="" styleClass="infoData" />
-			</HBox>
-			
-			<HBox styleClass="infoContainer">
-				<Label text="Telefone: " 		styleClass="infoLabel" />
-				<Label fx:id="telefone" text="" styleClass="infoData" />
-			</HBox>
-			
-			<HBox styleClass="infoContainer">
-				<Label text="Email: " 		styleClass="infoLabel" />
-				<Label fx:id="email" text="" styleClass="infoData" />
-			</HBox>
-			
-			<HBox styleClass="infoContainer">
-				<Label text="Data de Cadastro: " 		styleClass="infoLabel" />
-				<Label fx:id="dataCadastro" text="" styleClass="infoData" />
-			</HBox>
-			
-			<HBox styleClass="infoContainer">
-				<Label text="Data de Finalização: " 		styleClass="infoLabel" />
-				<Label fx:id="dataFinalizado" text="" styleClass="infoData" />
-			</HBox>
-		
-		</VBox>
-		
-		<VBox VBox.vgrow="ALWAYS" prefWidth="300">
-			
-			
-			<Label text="Status do cliente e Pagamento" styleClass="sectionLabel" />
-			
-			<HBox styleClass="infoContainer">
-				<Label text="Status: " 		styleClass="infoLabel" />
-				<Label fx:id="status" text="" styleClass="infoData" />
-			</HBox>
-			
-			<HBox styleClass="infoContainer">
-				<Label text="Status do pagamento: " 		styleClass="infoLabel" />
-				<Label fx:id="statusPg" text="" styleClass="infoData" />
-			</HBox>
-			
-			<HBox styleClass="infoContainer">
-				<Label text="Forma de Pagamento: " 		styleClass="infoLabel" />
-				<Label fx:id="formaPg" text="" styleClass="infoData" />
+				<VBox fx:id="pet_icon"></VBox>
 				
-				<Label fx:id="parcelas" text="" styleClass="infoData" />
+				<VBox spacing="0" styleClass="top-padding">
+					<HBox styleClass="infoContainer">
+						<Label text="Nome do Paciente: " styleClass="infoLabel" />
+						<Label fx:id="nome" text="" styleClass="infoData" />
+					</HBox>
+					
+					<HBox styleClass="infoContainer">
+						<Label text="Sexo: " styleClass="infoLabel" />
+						<Label fx:id="sexo" text="" styleClass="infoData" />
+					</HBox>
+	
+					<HBox styleClass="infoContainer">
+						<Label text="Espécie: " styleClass="infoLabel" />
+						<Label fx:id="tipo" text="" styleClass="infoData" />
+					</HBox>
+					
+					<HBox styleClass="infoContainer">
+						<Label text="Status: " styleClass="infoLabel" />
+						<Label fx:id="status" text="" styleClass="infoData" />
+					</HBox>
+				</VBox>
 			</HBox>
-
-			<HBox styleClass="infoContainer">
-				<Label text="Orçamento: " 	 styleClass="infoLabel" />
-				<Label fx:id="orcamento" text="" styleClass="infoData" />
-			</HBox>
+			
+			<Separator prefWidth="Infinity" orientation="HORIZONTAL" />
+			
+			<!-- Dados breves do Tutor do pet -->
+			<VBox HBox.hgrow="ALWAYS">
+				<Label text="Tutor do animal" styleClass="sectionLabel" />
+				
+				<HBox spacing="20">
+					<HBox styleClass="infoContainer">
+						<Label text="Nome: " 		styleClass="infoLabel" />
+						<Label fx:id="nomeTutor" text="" styleClass="infoData" />
+					</HBox>
+					
+					<HBox styleClass="infoContainer">
+						<Label text="Telefone: " 		styleClass="infoLabel" />
+						<Label fx:id="telefoneTutor" text="" styleClass="infoData" />
+					</HBox>
+				</HBox>
+				
+				<HBox spacing="20">
+					<HBox styleClass="infoContainer">
+						<Label text="CPF/CNPJ: " 		styleClass="infoLabel" />
+						<Label fx:id="cpfCnpjTutor" text="" styleClass="infoData" />
+					</HBox>
+					
+					<HBox styleClass="infoContainer">
+						<Label text="Email: " 		styleClass="infoLabel" />
+						<Label fx:id="emailTutor" text="" styleClass="infoData" />
+					</HBox>
+				</HBox>
+			
+			</VBox>
+			
+			<Separator prefWidth="Infinity" orientation="HORIZONTAL" />
 			
 		</VBox>
 	</HBox>
 	
 	<VBox VBox.vgrow="ALWAYS">
-			
-		<Label text="Animais do cliente" styleClass="sectionLabel" />
-	
-		<TableView fx:id="tableView"  VBox.vgrow="ALWAYS" prefWidth="Infinity" minWidth="800" maxWidth="980">
-	        <columns>
-	       		<TableColumn fx:id="Id" 			text="#" 		  minWidth="10" maxWidth="20"	/>
-	            <TableColumn fx:id="Nome"			text="Nome" 	  minWidth="50" maxWidth="200"	/>
-	         	<TableColumn fx:id="Sexo" 			text="Sexo"	 	  minWidth="50" maxWidth="100"	/>
-	         	<TableColumn fx:id="Tipo" 			text="Tipo" 	  minWidth="50" maxWidth="80"	/>
-	         	<TableColumn fx:id="Emergencia" 	text="Emergência" minWidth="20" maxWidth="100" 	/>
-	            <TableColumn fx:id="Internado" 		text="Internado"  minWidth="20" maxWidth="100" 	/>
-	         	<TableColumn fx:id="Orcamento" 		text="Orçamento"  minWidth="50" maxWidth="100"	/>
-	         	<TableColumn fx:id="Servicos" 		text="Serviços"   minWidth="50" maxWidth="500"	/>
-	        </columns>
-	    </TableView>
-		
+	    <!-- TABELA DO PET -->
+	    <Label text="Serviços do Pet" styleClass="infoModal" />
+	    <TableView fx:id="tableView" styleClass="Table" VBox.vgrow="ALWAYS" prefWidth="Infinity" maxWidth="700">
+	    	<columns>
+		        <TableColumn fx:id="Id" 	 	 text="#"          		minWidth="20"  maxWidth="30"/>
+		        <TableColumn fx:id="Nome"        text="Nome" 	   		minWidth="400" maxWidth="400"/>
+		        <TableColumn fx:id="Preco"	     text="Preço" 	   		minWidth="100" maxWidth="150"/>
+	         	<TableColumn fx:id="Del" 		 text="Apagar" 	 		minWidth="30"  maxWidth="70"	/>
+	    	</columns>		
+		</TableView>
 	</VBox>
 	
 	<HBox styleClass="modalFooter">

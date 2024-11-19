@@ -6,7 +6,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
 import org.kordamp.ikonli.javafx.FontIcon;
+
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -281,15 +283,15 @@ public class internadosController implements Initializable {
     }
     
     public void verAnimal (Animal target){
-    
+    	
         int id = target.getId();
-		menu.setSharedId(id);
+		menu.setSharedIdPet(id);
 		
 		Stage modalStage = new Stage();
 
         // Definindo a modalidade
         modalStage.initModality(Modality.APPLICATION_MODAL);
-        modalStage.setTitle("Visualizando Animal Internado");
+        modalStage.setTitle("Visualizando Animal");
       
        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/verAnimal.fxml"));
        Scene modalScene;

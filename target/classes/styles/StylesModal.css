@@ -59,5 +59,19 @@
 	-fx-alignment: BOTTOM_RIGHT;
 }
 
+.Table{
+	-fx-pref-width: 100%;
+	-fx-vgrow: ALWAYS;
+	-fx-hgrow: ALWAYS; /* Allow the TableView to grow horizontally */
+}
+
+.centered {
+    -fx-alignment: CENTER;
+}
+
+.top-padding{
+	-fx-padding: 10 0 0 20;
+}
+
 
 

@@ -113,7 +113,11 @@
 		    <groupId>org.kordamp.ikonli</groupId>
 		    <artifactId>ikonli-fontawesome-pack</artifactId>
 		</dependency>
-    
+
+		<dependency>
+		    <groupId>org.kordamp.ikonli</groupId>
+		    <artifactId>ikonli-materialdesign2-pack</artifactId>
+		</dependency>
     </dependencies>
 
     <build>
