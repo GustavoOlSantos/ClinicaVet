@@ -42,63 +42,39 @@
 
             <VBox spacing="5">
                 <Label text="Forma de Pagamento" styleClass="data-name" />
-                <TextField fx:id="formaPagamentoField" promptText="Forma de Pagamento" minWidth="300" minHeight="15"/>
+	    		<ComboBox fx:id="formaPgField" minWidth="200" />
             </VBox>
 
             <VBox spacing="5">
                 <Label text="Parcelas" styleClass="data-name" />
                 <TextField fx:id="parcelasField" promptText="Número de Parcelas" minWidth="300" minHeight="15"/>
             </VBox>
-        </VBox>
 
-        <!-- Formulário do Animal -->
-        <VBox spacing="15" alignment="CENTER">
-            <VBox spacing="5">
-                <Label text="Nome do Animal" styleClass="data-name" />
-                <TextField fx:id="nomeAnimalField" promptText="Nome do Animal" minWidth="300" minHeight="15"/>
-            </VBox>
-
-            <VBox spacing="5">
-                <Label text="Sexo" styleClass="data-name" />
-                <HBox spacing="10" alignment="CENTER">
-                    <Button fx:id="machoButton" text="Macho" minWidth="140" minHeight="15"/>
-                    <Button fx:id="femeaButton" text="Fêmea" minWidth="140" minHeight="15"/>
-                </HBox>
-            </VBox>
-
-            <VBox spacing="5">
-                <Label text="Tipo (e.g., cachorro, gato)" styleClass="data-name" />
-                <TextField fx:id="tipoField" promptText="Tipo (e.g., cachorro, gato)" minWidth="300" minHeight="15"/>
-            </VBox>
-
-            <VBox spacing="5">
-                <Label text="Emergência" styleClass="data-name" />
-                <HBox spacing="10" alignment="CENTER">
-                    <Button fx:id="simButton" text="Sim" minWidth="140" minHeight="15"/>
-                    <Button fx:id="naoButton" text="Não" minWidth="140" minHeight="15"/>
-                </HBox>
-            </VBox>
-
-            <VBox spacing="5">
-                <Label text="Orçamento" styleClass="data-name" />
-                <TextField fx:id="orcamentoField" promptText="Orçamento Estimado" minWidth="300" minHeight="15"/>
-            </VBox>
-
+            <!-- Novo campo: Observações -->
             <VBox spacing="5">
                 <Label text="Observações" styleClass="data-name" />
-                <TextField fx:id="observacoesField" promptText="Observações" minWidth="300" minHeight="15"/>
-            </VBox>
-
-            <VBox spacing="5">
-                <Label text="Serviços" styleClass="data-name" />
-                <TextField fx:id="servicosField" promptText="Serviços (e.g., consulta, vacinação)" minWidth="300" minHeight="15"/>
+                <TextField fx:id="observacoesClienteField" promptText="Observações sobre o cliente" minWidth="300" minHeight="15"/>
             </VBox>
         </VBox>
 
+        
+
     </HBox>
+	
+	<!-- Botão cadastrar pet -->
+				<Button onAction="#cadPet"> 
+					<graphic>
+						<FontIcon iconLiteral="fa-plus" iconColor="black" iconSize="15"/>
+					</graphic>
+					Cadastrar pet
+				</Button>
 
     <!-- Botão Salvar para ambos -->
-    <Button fx:id="btnSalvar" text="Salvar" onAction="#salvarCadastro" minWidth="300" minHeight="15"/>
+    <Button fx:id="btnSalvar" text="Salvar" onAction="#salvarCadastro" styleClass="submit-data" >
+                <graphic>
+                    <FontIcon iconLiteral="fa-save" iconColor="black" iconSize="13"/>
+                </graphic>
+            </Button>
 
 </VBox>
 

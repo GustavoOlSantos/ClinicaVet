@@ -15,6 +15,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
+import sistem.entities.Animal;
 import sistem.entities.Servicos;
 import sistem.exceptions.DomainException;
 import sistem.interfaces.dao.AnimalDAO;
@@ -50,8 +51,20 @@ public class menuDataSaver {
     public Object[] serv = new Servicos[18]; //=> Array de Serviços		 (Para exibir e consultar)
     private Integer sharedId;				//=> Id do cliente 			 (Para buscas e operacões)
     private Integer sharedIdPet;		   //=> Id do animal			 (Para buscas e consultas)
-    
-    //=> Construtor (Inicialização do programa)
+    private Animal sharedAnimal;
+    public Animal getSharedAnimal() {
+    	Animal id = sharedAnimal;
+		sharedAnimal = null;
+    	return id;
+	}
+
+
+	public void setSharedAnimal(Animal sharedAnimal) {
+		this.sharedAnimal = sharedAnimal;
+	}
+
+
+	//=> Construtor (Inicialização do programa)
 	public menuDataSaver() {
 		// Cria as DAOs usando a DaoFactory
 		this.clienteDAO = DaoFactory.createClienteDao();
@@ -211,4 +224,6 @@ public class menuDataSaver {
 		public void setSharedIdPet(Integer id) {
 			this.sharedIdPet = id;
 		} 
+		
+		
 }
