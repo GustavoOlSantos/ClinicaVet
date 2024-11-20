@@ -1,14 +1,20 @@
 package sistem.vet.controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.beans.value.ChangeListener;
 
+import org.kordamp.ikonli.javafx.FontIcon;
+
+import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableCell;
@@ -16,17 +22,20 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sistem.db.DbException;
 import sistem.entities.Animal;
 import sistem.enums.AnimalEmergencia;
-import sistem.enums.AnimalInternado;
 import sistem.enums.AnimalSexo;
 import sistem.enums.AnimalTipo;
 import sistem.enums.SituacaoPet;
 import sistem.exceptions.DomainException;
 import sistem.interfaces.dao.AnimalDAO;
 import sistem.interfaces.dao.ClienteDAO;
+import sistem.vet.App;
 
 
 
@@ -56,7 +65,9 @@ public class pacientesController implements Initializable {
     public TableColumn<Animal, Double> Orcamento;
     @FXML
     public TableColumn<Animal, String> Servicos;
-	
+    public TableColumn<Animal, Void> See;
+    @FXML
+    public TableColumn<Animal, Void> Edit;
 	@FXML
 	Button close;
         
@@ -157,9 +168,81 @@ public class pacientesController implements Initializable {
          for(Animal animal : animais) {
         	animal.transformServicos(menu.serv);
         }
+         
     
         Servicos.setCellValueFactory(new PropertyValueFactory<>("StringServicos"));
+        //=> Cria o botão para a coluna See
+        See.setCellFactory(col -> new TableCell<Animal, Void>() {
+            private final Button visualizar = new Button("");
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } 
+                else {
+                    FontIcon icon = new FontIcon("fas-eye"); //=> Criar Ícone
+                    icon.setIconSize(15); 					//=> Tamanho do Ícone
+                    visualizar.setGraphic(icon);		   //=> Seta o Ícone como gráfico do botão
+                    setGraphic(visualizar);				  //=> Seta o Botão como gráfico da coluna
+                    setAlignment(Pos.CENTER);
+
+                    visualizar.setMaxWidth(Double.MAX_VALUE);
+                    visualizar.setPrefWidth(65); // Adjust this value as needed
+                    
+                    // Use HBox to center and size the button
+                    HBox hbox = new HBox(visualizar);
+                    hbox.setAlignment(Pos.CENTER);
+                    HBox.setHgrow(visualizar, Priority.ALWAYS);
+                    
+                    //=> Controller do Botão
+                    visualizar.setOnAction(event -> {
+                        Animal selectedAnimal = getTableRow().getItem();
+                        if (selectedAnimal != null) {
+                        	verAnimal(selectedAnimal);
+                        }
+                    });
+                }
+            }
+        });
         
+        //=> Cria o botão para a coluna edit
+        Edit.setCellFactory(col -> new TableCell<Animal, Void>() {
+            private final Button editar = new Button("");
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } 
+                else {
+                    FontIcon icon = new FontIcon("fa-pencil"); //=> Criar Ícone
+                    icon.setIconSize(15); 					//=> Tamanho do Ícone
+                    editar.setGraphic(icon);		   //=> Seta o Ícone como gráfico do botão
+                    setGraphic(editar);				  //=> Seta o Botão como gráfico da coluna
+                    setAlignment(Pos.CENTER);
+
+                    editar.setMaxWidth(Double.MAX_VALUE);
+                    editar.setPrefWidth(65); // Adjust this value as needed
+                    
+                    // Use HBox to center and size the button
+                    HBox hbox = new HBox(editar);
+                    hbox.setAlignment(Pos.CENTER);
+                    HBox.setHgrow(editar, Priority.ALWAYS);
+                    
+                    //=> Controller do Botão
+                    editar.setOnAction(event -> {
+                        Animal selectedAnimal = getTableRow().getItem();
+                        if (selectedAnimal != null) {
+                        	editarAnimal(selectedAnimal);
+                        }
+                    });
+                }
+            }
+        });
+    
                 
         tableView.getItems().addAll(animais);
     }
@@ -184,6 +267,41 @@ public class pacientesController implements Initializable {
             tableView.getItems().clear();
             renderTable(aniList);  
 
+             
+    
+}
+      public void verAnimal (Animal target){
+      	
+          int id = target.getId();
+  		menu.setSharedIdPet(id);
+  		
+  		Stage modalStage = new Stage();
+
+          // Definindo a modalidade
+          modalStage.initModality(Modality.APPLICATION_MODAL);
+          modalStage.setTitle("Visualizando Animal");
         
-    }
+         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/verAnimal.fxml"));
+         Scene modalScene;
+  		try {
+  			modalScene = new Scene(fxmlLoader.load(), 1000, 800);
+  			modalScene.getStylesheets().add(App.class.getResource("/styles/StylesModal.css").toExternalForm());  
+  			modalStage.setScene(modalScene);
+  			
+  			verAnimalController controller = fxmlLoader.getController();
+  			controller.setStage(modalStage);
+  			
+  		} 
+  		catch (IOException e1) {
+  			e1.printStackTrace();
+  		}
+          
+  		// Mostrando a janela modal
+          modalStage.showAndWait();
+          
+      }
+      
+      public void editarAnimal (Animal target){
+      
+      }
 }

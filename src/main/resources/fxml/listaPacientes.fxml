@@ -40,6 +40,8 @@
 	         	<TableColumn fx:id="Orcamento" 			text="Orcamento"  minWidth="30"  maxWidth="100"	/>
                 <TableColumn fx:id="Status"             text="Status do pet"  minWidth="200"  maxWidth="340"/> 
 	         	<TableColumn fx:id="Servicos" 			text="Servicos"   minWidth="400"  maxWidth="600"	/>
+	         	<TableColumn fx:id="See" 	 	 text="Abrir"           minWidth="30"   maxWidth="70"/>
+	     	    <TableColumn fx:id="Edit" 	 	 text="Editar"          minWidth="30"   maxWidth="70"/>
 	        </columns>
 	    </TableView>
 
