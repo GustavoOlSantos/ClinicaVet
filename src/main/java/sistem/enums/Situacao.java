@@ -1,7 +1,7 @@
 package sistem.enums;
 
 public enum Situacao {
-	TRABALHANDO, 
+	EM_ATENDIMENTO, 
 	FINALIZADO, 
 	CANCELADO, 
 	EXCLUÍDO

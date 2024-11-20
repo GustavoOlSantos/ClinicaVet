@@ -56,7 +56,7 @@ public class Cliente{
 		this.qtdAnimal 	= qtd;
 
 		this.animal 	= new Animal[qtd];
-		this.trabalho = Situacao.TRABALHANDO; 		 	
+		this.trabalho = Situacao.EM_ATENDIMENTO; 		 	
 		this.status = StatusPagamento.PENDENTE;
 		this.dataCadastro = LocalDateTime.now();
 		
@@ -210,7 +210,7 @@ public class Cliente{
     	int stt = -1;
     	
         switch(trabalho) {
-	        case TRABALHANDO: stt = 0; break;
+	        case EM_ATENDIMENTO: stt = 0; break;
 			case FINALIZADO: stt = 1; break;
 			case CANCELADO: stt = 2; break;
 			case EXCLUÍDO: stt = 3; break;
@@ -221,7 +221,7 @@ public class Cliente{
     
     public void setSituacao(int stts) {
     	switch(stts) {
-		    case 0: this.trabalho = Situacao.TRABALHANDO; break;
+		    case 0: this.trabalho = Situacao.EM_ATENDIMENTO; break;
 			case 1: this.trabalho = Situacao.FINALIZADO; break;
 			case 2: this.trabalho = Situacao.CANCELADO; break;
 			case 3: this.trabalho = Situacao.EXCLUÍDO; break;

@@ -130,7 +130,7 @@
                         <phase>package</phase>
                         <configuration>
                         	<target>
-                                <echo file="${project.build.directory}/runme.bat">start jlink-image\bin\javaw -jar modules\${project.artifactId}-${project.version}.jar</echo>
+                                <echo file="${project.build.directory}/runme.bat">java -jar vet-0.0.1-SNAPSHOT-shaded.jar</echo>
                             </target>
                         </configuration>
                         <goals>

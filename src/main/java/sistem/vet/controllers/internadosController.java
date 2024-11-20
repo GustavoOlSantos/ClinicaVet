@@ -314,6 +314,12 @@ public class internadosController implements Initializable {
     }
     
     public void editarAnimal (Animal target){
-    
+    	int idPet = target.getId();
+		int idCliente = target.getIdCliente();
+		
+		menu.setSharedIdPet(idPet);
+		menu.setSharedId(idCliente);
+		
+		menu.loadContent("editarPet.fxml", menu.classe); 
     }
 }

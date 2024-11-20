@@ -251,38 +251,39 @@ public class pacientesController implements Initializable {
     	modal = stage;
     }
     
-      public void buscarAnimal() {
-        
-        String nome = buscaField.getText();
-        
-        List<Animal> aniList = new ArrayList<>();
-		
-            try {
-                aniList = animalDAO.findByName(nome);
-            } catch (DomainException e) {
-            	menu.dialogAvisos("Erro: " + e.getMessage());
-                e.printStackTrace();
-            }
-
-            tableView.getItems().clear();
-            renderTable(aniList);  
-
-             
-    
-}
-      public void verAnimal (Animal target){
+	public void buscarAnimal() {
+	    
+	   String nome = buscaField.getText();
+	    
+	   List<Animal> aniList = new ArrayList<>();
+	
+	    try {
+	        aniList = animalDAO.findByName(nome);
+	    }
+	    
+	    catch (DomainException e) {
+	    	menu.dialogAvisos("Erro: " + e.getMessage());
+	        e.printStackTrace();
+	    }
+	
+	    tableView.getItems().clear();
+	    renderTable(aniList);    
+	}
+  
+	public void verAnimal (Animal target){
       	
-          int id = target.getId();
-  		menu.setSharedIdPet(id);
-  		
-  		Stage modalStage = new Stage();
+		int id = target.getId();
+		menu.setSharedIdPet(id);
+		
+		Stage modalStage = new Stage();
 
-          // Definindo a modalidade
-          modalStage.initModality(Modality.APPLICATION_MODAL);
-          modalStage.setTitle("Visualizando Animal");
+		// Definindo a modalidade
+		modalStage.initModality(Modality.APPLICATION_MODAL);
+		modalStage.setTitle("Visualizando Animal");
         
-         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/verAnimal.fxml"));
-         Scene modalScene;
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/verAnimal.fxml"));
+        Scene modalScene;
+        
   		try {
   			modalScene = new Scene(fxmlLoader.load(), 1000, 800);
   			modalScene.getStylesheets().add(App.class.getResource("/styles/StylesModal.css").toExternalForm());  
@@ -300,8 +301,14 @@ public class pacientesController implements Initializable {
           modalStage.showAndWait();
           
       }
-      
-      public void editarAnimal (Animal target){
-      
-      }
+  
+	public void editarAnimal (Animal target){	  
+		int idPet = target.getId();
+		int idCliente = target.getIdCliente();
+		
+		menu.setSharedIdPet(idPet);
+		menu.setSharedId(idCliente);
+		
+		menu.loadContent("editarPet.fxml", menu.classe); 
+	}
 }

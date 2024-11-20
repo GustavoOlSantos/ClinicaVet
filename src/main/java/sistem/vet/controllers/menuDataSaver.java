@@ -49,21 +49,12 @@ public class menuDataSaver {
     
     //====> Armazena dados que serão usados em múltiplas páginas
     public Object[] serv = new Servicos[18]; //=> Array de Serviços		 (Para exibir e consultar)
+    
+    
     private Integer sharedId;				//=> Id do cliente 			 (Para buscas e operacões)
     private Integer sharedIdPet;		   //=> Id do animal			 (Para buscas e consultas)
     private Animal sharedAnimal;
-    public Animal getSharedAnimal() {
-    	Animal id = sharedAnimal;
-		sharedAnimal = null;
-    	return id;
-	}
-
-
-	public void setSharedAnimal(Animal sharedAnimal) {
-		this.sharedAnimal = sharedAnimal;
-	}
-
-
+    
 	//=> Construtor (Inicialização do programa)
 	public menuDataSaver() {
 		// Cria as DAOs usando a DaoFactory
@@ -213,17 +204,28 @@ public class menuDataSaver {
 	} 
 	
 	//=> Obtém o Id e limpa
-		public int getSharedIdPet() {	
-			int id = sharedIdPet;
-			sharedIdPet = null;
-			
-			return id;
-		}
+	public int getSharedIdPet() {	
+		int id = sharedIdPet;
+		sharedIdPet = null;
 		
-		//=> Define o Id
-		public void setSharedIdPet(Integer id) {
-			this.sharedIdPet = id;
-		} 
-		
+		return id;
+	}
+	
+	//=> Define o Id
+	public void setSharedIdPet(Integer id) {
+		this.sharedIdPet = id;
+	} 
+	
+	
+	public Animal getSharedAnimal() {
+    	Animal id = sharedAnimal;
+		sharedAnimal = null;
+    	return id;
+	}
+	
+	public void setSharedAnimal(Animal sharedAnimal) {
+		this.sharedAnimal = sharedAnimal;
+	}
+	
 		
 }
