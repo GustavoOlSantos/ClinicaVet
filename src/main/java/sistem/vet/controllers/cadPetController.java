@@ -48,11 +48,12 @@ import javafx.scene.control.Button;
 
 public class cadPetController implements Initializable {
 	//=> Coleta dados do MenuSaver
-		menuDataSaver menu = MainController.menu;
-		ClienteDAO clienteDAO = menu.clienteDAO;
-		AnimalDAO animalDAO = menu.animalDAO;
-		Animal animal;
-		List<Object> AvailableServices = Arrays.stream(menu.serv).collect(Collectors.toList());
+	menuDataSaver menu = MainController.menu;
+	ClienteDAO clienteDAO = menu.clienteDAO;
+	AnimalDAO animalDAO = menu.animalDAO;
+	Animal animal;
+	
+	List<Object> AvailableServices = Arrays.stream(menu.serv).collect(Collectors.toList());
 		
 	private Stage modal;
     @FXML
@@ -103,6 +104,7 @@ public class cadPetController implements Initializable {
     public TableColumn<Servicos, AnimalSexo> Preco;
     @FXML
     public TableColumn<Servicos, Void> Del;
+    
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
 			
@@ -110,17 +112,21 @@ public class cadPetController implements Initializable {
 			especieField.getItems().addAll(AnimalTipo.values());
 			emergenciaField.getItems().addAll(AnimalEmergencia.values());
 			statusField.getItems().addAll(SituacaoPet.values());
-			List<Object> AvailableServices = Arrays.stream(menu.serv).collect(Collectors.toList());
+			
+			List<Object> AvailableServices = Arrays.stream(menu.serv).collect(Collectors.toList());	
 			for(Object AvServs : AvailableServices) {
 				servicosBox.getItems().add(((Servicos)AvServs).nome);
 			}
 			
 			animal = new Animal ();
-			List<Servicos> servList = new ArrayList<>();
+			
+			List<Servicos> servList = new ArrayList<>();	
 			servList = animal.getServicosList(menu.serv);
+			
 	        renderTable(servList);
 	}
-public void renderTable(List<Servicos> animais) {
+    
+    public void renderTable(List<Servicos> animais) {
 	    
 		Id.getStyleClass().add("centered");
 		
@@ -179,9 +185,7 @@ public void renderTable(List<Servicos> animais) {
 		tableView.getItems().clear();
 		renderTable(servList);  
     }
-    
-  
-   
+     
     public void excluirServico(Servicos servico) {
     	
     	boolean confirmar = menu.dialogConfirmar("excluir", "serviço");	
@@ -201,57 +205,119 @@ public void renderTable(List<Servicos> animais) {
     	
     }
 	
- public void cadPet (){
+	 public void cadPet (){
+	    	
+	       
+			
+			Stage modalStage = new Stage();
+	
+	        // Definindo a modalidade
+	        modalStage.initModality(Modality.APPLICATION_MODAL);
+	        modalStage.setTitle("Cadastrar animal");
+	      
+	       FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/cadastrarPet.fxml"));
+	       Scene modalScene;
+			try {
+				modalScene = new Scene(fxmlLoader.load(), 1000, 800);
+				modalScene.getStylesheets().add(App.class.getResource("/styles/StylesModal.css").toExternalForm());  
+				modalStage.setScene(modalScene);
+				
+				verAnimalController controller = fxmlLoader.getController();
+				controller.setStage(modalStage);
+				
+			} 
+			catch (IOException e1) {
+				e1.printStackTrace();
+			}
+	        
+			// Mostrando a janela modal
+	        modalStage.showAndWait();
+	        
+	    }
+	    
+    public void salvarCadastro() {
+    	   	
+    	List<String> camposVazios = verificarCampos();
     	
-       
-		
-		Stage modalStage = new Stage();
-
-        // Definindo a modalidade
-        modalStage.initModality(Modality.APPLICATION_MODAL);
-        modalStage.setTitle("Cadastrar animal");
-      
-       FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/cadastrarPet.fxml"));
-       Scene modalScene;
-		try {
-			modalScene = new Scene(fxmlLoader.load(), 1000, 800);
-			modalScene.getStylesheets().add(App.class.getResource("/styles/StylesModal.css").toExternalForm());  
-			modalStage.setScene(modalScene);
-			
-			verAnimalController controller = fxmlLoader.getController();
-			controller.setStage(modalStage);
-			
-		} 
-		catch (IOException e1) {
-			e1.printStackTrace();
-		}
-        
-		// Mostrando a janela modal
-        modalStage.showAndWait();
-        
+    	
+    	if (!camposVazios.isEmpty()) {
+    	    String mensagem = "Os seguintes campos não foram preenchidos:\n" + String.join(", ", camposVazios);
+    	    menu.dialogAvisos(mensagem);
+    	    
+    	    return;
+    	}
+    	
+    	animal.setNome(nomeField.getText());
+		animal.setSexo(sexoField.getValue());
+		animal.setTipo(especieField.getValue());
+		animal.setSituacao(statusField.getValue());
+		animal.setEmergencia(emergenciaField.getValue());
+		animal.setOrcamento(Double.parseDouble(orcamentoField.getText()));
+		animal.setObservacoes(observacoesField.getText());
+		  
+		menu.setSharedAnimal(animal);  
+		modal.close();
     }
     
-    public void salvarCadastro() {
-        // salvando dados cliente
-      animal.setNome(nomeField.getText());
-      animal.setSexo(sexoField.getValue());
-      animal.setTipo(especieField.getValue());
-      animal.setSituacao(statusField.getValue());
-      animal.setEmergencia(emergenciaField.getValue());
-      animal.setOrcamento(Double.parseDouble(orcamentoField.getText()));
-      animal.setObservacoes(observacoesField.getText());
-      
-      menu.setSharedAnimal(animal);  
-        
-		
-        
-        //cliente
-        // salvar dados do cliente adicionado
-        //clienteDAO.insert(null);
+    private List<String> verificarCampos(){
+    	
+    	List<String> camposVazios = new ArrayList<>();
+    	
+    	if (nomeField.getText().isBlank()) {
+    	    camposVazios.add("Nome");
+    	    nomeField.getStyleClass().add("field-error");
+    	}
+    	else {
+		    nomeField.getStyleClass().remove("field-error");
+		}
+    	
+    	if (sexoField.getValue() == null) {
+    	    camposVazios.add("Sexo");
+    	    sexoField.getStyleClass().add("field-error");
+    	}
+    	else {
+    	    sexoField.getStyleClass().remove("field-error");
+    	}
+    	
+    	if (especieField.getValue() == null) {
+    	    camposVazios.add("Espécie");
+    	    especieField.getStyleClass().add("field-error");
+    	}
+    	else {
+    		especieField.getStyleClass().remove("field-error");
+    	}
+    	
+    	if (statusField.getValue() == null) {
+    	    camposVazios.add("Status");
+    	    statusField.getStyleClass().add("field-error");
+    	}
+    	else {
+    		statusField.getStyleClass().remove("field-error");
+    	}
+    	
+    	if (emergenciaField.getValue() == null) {
+    	    camposVazios.add("Emergência");
+    	    emergenciaField.getStyleClass().add("field-error");
+    	}
+    	else {
+    		emergenciaField.getStyleClass().remove("field-error");
+    	}
+    	
+    	if (orcamentoField.getText().isBlank()) {
+    	    camposVazios.add("Orçamento");
+    	    orcamentoField.getStyleClass().add("field-error");
+    	}
+    	else {
+    		orcamentoField.getStyleClass().remove("field-error");
+    	}
+    	
+    	return camposVazios;
     }
+    
     public void setStage(Stage stage) {
     	this.modal = stage;
     }
+    
     public void adicionarServicos() {
     	String selecionado = servicosBox.getValue();
     	Object selectedServico = AvailableServices.stream()

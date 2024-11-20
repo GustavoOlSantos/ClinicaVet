@@ -78,6 +78,7 @@ public class verAnimalController implements Initializable {
     @FXML
     public TableColumn<Servicos, Void> Del;
     
+    @FXML
 	Button close;
 	private Stage modal;
     
@@ -125,6 +126,7 @@ public class verAnimalController implements Initializable {
 			
 			//=> DADOS CLÍNICOS DO PET
 			
+			
 			//=> TABELA
 			List<Servicos> servList = new ArrayList<>();
 			servList = animal.getServicosList(menu.serv);
@@ -134,7 +136,7 @@ public class verAnimalController implements Initializable {
 			e.printStackTrace();
 		}  
         
-        //close.setOnAction(e -> modal.close());
+        close.setOnAction(e -> modal.close());
     }  
     
 	public void renderTable(List<Servicos> servicos) {

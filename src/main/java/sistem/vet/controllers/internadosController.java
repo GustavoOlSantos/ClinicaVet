@@ -284,15 +284,15 @@ public class internadosController implements Initializable {
     
     public void verAnimal (Animal target){
     	
-        int id = target.getId();
+	    int id = target.getId();
 		menu.setSharedIdPet(id);
 		
 		Stage modalStage = new Stage();
-
-        // Definindo a modalidade
-        modalStage.initModality(Modality.APPLICATION_MODAL);
-        modalStage.setTitle("Visualizando Animal");
-      
+	
+	    // Definindo a modalidade
+	    modalStage.initModality(Modality.APPLICATION_MODAL);
+	    modalStage.setTitle("Visualizando Animal");
+	      
        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/verAnimal.fxml"));
        Scene modalScene;
 		try {
@@ -308,7 +308,7 @@ public class internadosController implements Initializable {
 			e1.printStackTrace();
 		}
         
-		// Mostrando a janela modal
+		// Mostrando a janela modal 
         modalStage.showAndWait();
         
     }

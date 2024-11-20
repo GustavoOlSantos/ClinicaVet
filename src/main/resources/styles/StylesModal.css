@@ -73,5 +73,11 @@
 	-fx-padding: 10 0 0 20;
 }
 
+.field-error {
+    -fx-border-color: red;
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+}
+
 
 

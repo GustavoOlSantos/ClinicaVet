@@ -1,1 +1,1 @@
-start jlink-image\bin\javaw -jar modules\vet-0.0.1-SNAPSHOT.jar
+java -jar vet-0.0.1-SNAPSHOT-shaded.jar
