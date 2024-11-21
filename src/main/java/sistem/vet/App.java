@@ -30,17 +30,17 @@ public class App extends Application {
 
     static void setRoot(String fxml) throws IOException {
         setRoot(fxml,stage.getTitle());
-    }
+    } 
 
     @FXML
     static void setRoot(String fxml, String title) throws IOException {
     	menu = new menuDataSaver();	//=> Carrega os Dados na classe
+    	
         Scene scene = new Scene(loadFXML(fxml));
-        menu.scene = scene;
-        
         scene.getStylesheets().add(App.class.getResource("/styles/Styles.css").toExternalForm());  
         
-    
+        menu.scene = scene;
+        
         stage.setTitle(title);
         stage.getIcons().add(new Image("file:src/main/resources/imgs/app-icon.png"));
         stage.setScene(scene);

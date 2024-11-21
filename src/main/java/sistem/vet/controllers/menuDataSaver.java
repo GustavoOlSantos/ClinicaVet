@@ -1,6 +1,10 @@
 package sistem.vet.controllers;
 
 import java.io.IOException;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,6 +45,7 @@ public class menuDataSaver {
     public Class classe;	//=> Registro da Classe Main
     
     public Scene scene;
+    private Deque<String> pageHistory;
     
     //====> DAOs para acesso ao banco de dados (Centralizar as DAOs)
     public ClienteDAO clienteDAO;
@@ -57,6 +62,8 @@ public class menuDataSaver {
     
 	//=> Construtor (Inicialização do programa)
 	public menuDataSaver() {
+		pageHistory = new ArrayDeque<>();
+		
 		// Cria as DAOs usando a DaoFactory
 		this.clienteDAO = DaoFactory.createClienteDao();
 		this.animalDAO = DaoFactory.createAnimalDao();
@@ -103,6 +110,23 @@ public class menuDataSaver {
 	//=> Carrega o Conteúdo na divisão setada
     public void loadContent(String fxmlFile, Class classe) {
         try {
+        	
+        	if (scene != null) {
+	        	String currentPage = (String) scene.getUserData();
+	            if (currentPage != null) {
+	                pageHistory.push(currentPage);
+	                
+	                // Convert to a List
+	                List<String> list = pageHistory.stream().collect(Collectors.toList());
+
+	                // Retain only elements with index <= 3
+	                list = list.subList(0, Math.min(4, list.size()));
+
+	                // Reconstruct the Deque
+	                pageHistory = new ArrayDeque<>(list);
+	            }
+        	}
+            
             // Clear existing content
             contentBox.getChildren().clear();
    
@@ -110,8 +134,22 @@ public class menuDataSaver {
             FXMLLoader loader = new FXMLLoader(classe.getResource("/fxml/" + fxmlFile));
             VBox newContent = loader.load();
             contentBox.getChildren().add(newContent);
+            
+            if (scene != null) {
+            	scene.setUserData(fxmlFile);
+            }
+            
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+    
+    public void goBack(){
+        if (!pageHistory.isEmpty()) {
+            String previousPage = pageHistory.pop();
+            loadContent(previousPage, classe);
+        } else {
+            dialogAvisos("Não há Página anterior para voltar.");
         }
     }
 	

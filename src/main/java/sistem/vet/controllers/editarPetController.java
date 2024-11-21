@@ -1,5 +1,6 @@
 package sistem.vet.controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -223,7 +224,7 @@ public class editarPetController implements Initializable {
     }
 		
     @FXML
-    public void salvarEdicaoPet() throws NumberFormatException, DomainException{
+    public void salvarEdicaoPet() throws NumberFormatException, DomainException, IOException{
     	
     	double oldOrcamento = animal.getOrcamento();
     	cliente.setOrcamentoInc(-(oldOrcamento));
@@ -245,7 +246,9 @@ public class editarPetController implements Initializable {
         	menu.dialogAvisos("Animal Atualizado com Sucesso!");
         	
         	menu.setSharedId(idCliente);
-        	menu.loadContent("editarCliente.fxml", menu.classe); 
+        	//menu.loadContent("editarCliente.fxml", menu.classe);
+        	menu.goBack();
+        	
     	}
     	catch(DbException e) {
     		menu.dialogAvisos("Erro: " + e.getMessage());
@@ -261,9 +264,9 @@ public class editarPetController implements Initializable {
 		renderTable(servList);  
     }
     
-    public void voltarLista() {
+    public void voltarLista(){
     	menu.setSharedId(idCliente);
-    	menu.loadContent("editarCliente.fxml", menu.classe); 
+    	menu.goBack();
     }
    
     public void excluirServico(Servicos servico) {
