@@ -8,67 +8,70 @@
 
 
 
-<VBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistem.vet.controllers.cadPetController" spacing="15" alignment="CENTER">
-
-    <!-- Contêiner para exibir os formulários lado a lado -->
-    <HBox spacing="25" alignment="TOP_CENTER" styleClass="TableContente">
-
-        
-
-        <!-- Formulário do Animal -->
-        <VBox spacing="15" alignment="CENTER">
-            <VBox spacing="5">
-                <Label text="Nome do Animal" styleClass="data-name" />
-                <TextField fx:id="nomeField" promptText="Nome do Animal" minWidth="300" minHeight="15"/>
-            </VBox>
-
-            <VBox spacing="5">
-                <Label text="Sexo" styleClass="data-name" />
-	    		<ComboBox fx:id="sexoField" minWidth="150" />
-            </VBox>
-
-            <VBox spacing="5">
-                <Label text="Especie" styleClass="data-name" />
-	    		<ComboBox fx:id="especieField" minWidth="250" />
-            </VBox>
-			<VBox>
-	    		<Label text="Status do Paciente" styleClass="data-name" />
-	    		<ComboBox fx:id="statusField" minWidth="200" />
-	    	</VBox>
-            <VBox spacing="5">
-               <Label text="Emergencia" styleClass="data-name" />
-	    		<ComboBox fx:id="emergenciaField" minWidth="250" />
-            </VBox>
-
-            <VBox spacing="5">
-                <Label text="Orçamento" styleClass="data-name" />
-                <TextField fx:id="orcamentoField" promptText="Orçamento Estimado" minWidth="300" minHeight="15"/>
-            </VBox>
-
-            <VBox spacing="5">
-                <Label text="Observações" styleClass="data-name" />
-                <TextField fx:id="observacoesField" promptText="Observações" minWidth="300" minHeight="15"/>
-            </VBox>
-
-            
-        </VBox>
-
-    </HBox>
+<VBox styleClass="modal"  xmlns:fx="http://javafx.com/fxml" fx:controller="sistem.vet.controllers.cadPetController" spacing="15" alignment="CENTER">
 	
-	  <HBox spacing="20" HBox.hgrow= "ALWAYS">
-	    	<VBox VBox.vgrow="ALWAYS">
-			    <!-- TABELA DO PET -->
-			    <Label text="Serviços do Pet" styleClass="Welcome" />
-			    <TableView fx:id="tableView" styleClass="Table" VBox.vgrow="ALWAYS" prefWidth="700" maxWidth="700"  minWidth="700">
+	<HBox styleClass="modalHeader">
+		<Label text="Cadastro de Animal" styleClass="infoModal" />
+	</HBox>
+	
+	<VBox styleClass="modalBody" VBox.vgrow="ALWAYS">
+	
+	    <!-- Contêiner para exibir os formulários lado a lado -->
+	    <HBox spacing="25" alignment="TOP_CENTER" styleClass="TableContente">
+	
+	        <!-- Formulário do Animal -->
+	        <VBox spacing="15" alignment="CENTER">
+	            <VBox spacing="5">
+	                <Label text="Nome do Animal" styleClass="infoLabel" />
+	                <TextField fx:id="nomeField" promptText="Nome do Animal" minWidth="300" minHeight="15"/>
+	            </VBox>
+	
+	            <VBox spacing="5">
+	                <Label text="Sexo" styleClass="data-name"  /><ComboBox fx:id="sexoField" minWidth="150" />
+	            </VBox>
+	
+	            <VBox spacing="5">
+	                <Label text="Especie" styleClass="data-name" />
+	                <ComboBox fx:id="especieField" minWidth="250" />
+	            </VBox>
+	            
+	            <VBox spacing ="5">
+	            	<Label text="Status do Paciente" styleClass="data-name" />
+	            	<ComboBox fx:id="statusField" minWidth="200" />
+	            </VBox>
+	           
+		    	
+	            <VBox spacing="5">
+	               <Label text="Emergencia" styleClass="data-name" />
+	               <ComboBox fx:id="emergenciaField" minWidth="250" />
+	            </VBox>
+	
+	            <VBox spacing="5">
+	                <Label text="Orçamento" styleClass="data-name" />
+	                <TextField fx:id="orcamentoField" promptText="Orçamento Estimado" minWidth="300" minHeight="15"/>
+	            </VBox>
+	
+	            <VBox spacing="5">
+	                <Label text="Observações" styleClass="data-name" />
+	                <TextArea fx:id="observacoesField" promptText="Observações" minWidth="300" minHeight="15"/>
+	            </VBox>
+	        </VBox>
+	    </HBox>
+		
+		<!-- Tabela de Serviços do Animal -->
+		<HBox spacing="20" HBox.hgrow= "ALWAYS">
+			<VBox VBox.vgrow="ALWAYS">
+			    <Label text="Serviços do Pet" styleClass="data-name" />
+			    <TableView fx:id="tableView" styleClass="Table" VBox.vgrow="ALWAYS" prefWidth="500" maxWidth="500"  minWidth="500">
 			    	<columns>
-				        <TableColumn fx:id="Id" 	 	 text="#"          		minWidth="20"  maxWidth="30"/>
-				        <TableColumn fx:id="Nome"        text="Nome" 	   		minWidth="400" maxWidth="400"/>
-				        <TableColumn fx:id="Preco"	     text="Preço" 	   		minWidth="100" maxWidth="150"/>
+				        <TableColumn fx:id="Id" 	 	 text="#"          		minWidth="20"  maxWidth="30"	/>
+				        <TableColumn fx:id="Nome"        text="Nome" 	   		minWidth="298" maxWidth="298"	/>
+				        <TableColumn fx:id="Preco"	     text="Preço" 	   		minWidth="100" maxWidth="110"	/>
 			         	<TableColumn fx:id="Del" 		 text="Apagar" 	 		minWidth="30"  maxWidth="70"	/>
 			    	</columns>		
 				</TableView>
 			</VBox>
-			
+				
 			<HBox styleClass="data-row" HBox.hgrow="ALWAYS" spacing="10">
 			
 		    	<VBox styleClass="data-padding">
@@ -78,7 +81,7 @@
 	    		
 	    		<VBox StyleClass="data-padding">
 		    		<Label text="Preço" styleClass="data-name" />
-		    		<TextField fx:id="precoServField" promptText="" editable="false" minWidth="80" maxWidth="120"/>
+		    		<TextField fx:id="precoServField" promptText="" editable="false" minWidth="80" maxWidth="110"/>
 	    		</VBox>
 	    		
 	    		<VBox styleClass="data-padding">
@@ -91,13 +94,16 @@
 	            </VBox>
 	   		 </HBox>
 		</HBox>
-
-    <!-- Botão Salvar para ambos -->
-    <Button fx:id="btnSalvar" text="Salvar" onAction="#salvarCadastro" styleClass="submit-data" >
-                <graphic>
-                    <FontIcon iconLiteral="fa-save" iconColor="black" iconSize="13"/>
-                </graphic>
-            </Button>
-
+	
+	    <!-- Botão Salvar para o Animal ou Cancelar -->
+	   	<HBox styleClass="modalFooter" spacing="10">
+			<Button fx:id="btnSalvar" text="Salvar" onAction="#salvarCadastro" styleClass="submit-data">
+		        <graphic>
+		            <FontIcon iconLiteral="fa-save" iconColor="black" iconSize="13"/>
+		        </graphic>
+		    </Button>
+		
+			<Button fx:id="close" text="cancelar" />		</HBox>
+	</VBox>
 </VBox>
 

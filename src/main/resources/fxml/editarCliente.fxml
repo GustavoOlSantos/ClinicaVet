@@ -87,7 +87,7 @@
 	    	
 	    	<VBox>
 	    		<Label text="Observações do Cliente" styleClass="data-name" />
-	    		<TextField fx:id="obsField" promptText=""  minWidth="350" minHeight="100"/>
+	    		<TextArea fx:id="obsField" promptText=""  minWidth="350" minHeight="100"/>
 	    	</VBox>
 	    	
 	    </HBox>

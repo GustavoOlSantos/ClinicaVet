@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="maven-antrun-" default="main">
   <target name="main">
-    <echo file="E:\UVA - Facul\SistemaVetJavaFX\vet\target/runme.bat">start jlink-image\bin\javaw -jar modules\vet-0.0.1-SNAPSHOT.jar</echo>
+    <echo file="E:\UVA - Facul\SistemaVetJavaFX\vet\target/runme.bat">java -jar vet-0.0.1-SNAPSHOT-shaded.jar</echo>
   </target>
 </project>

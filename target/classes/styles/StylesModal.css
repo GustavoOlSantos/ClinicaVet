@@ -73,6 +73,12 @@
 	-fx-padding: 10 0 0 20;
 }
 
+.data-name{
+	-fx-font-size: 13px; /* Tamanho do texto */
+	-fx-font-weight: bold; /* Negrito */
+	-fx-text-fill: #000; /* Cor do texto */
+}
+
 .field-error {
     -fx-border-color: red;
     -fx-border-width: 2;

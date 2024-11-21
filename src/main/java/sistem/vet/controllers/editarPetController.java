@@ -17,11 +17,11 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.stage.Stage;
 import sistem.db.DbException;
 import sistem.entities.Animal;
 import sistem.entities.Cliente;
@@ -63,9 +63,9 @@ public class editarPetController implements Initializable {
     @FXML
     public TextField orcamentoField;
     @FXML
-    public TextField obsField;
+    public TextArea obsField;
     @FXML
-    public TextField medicamentosField;
+    public TextArea medicamentosField;
     @FXML
     private ComboBox<String> servicosBox; 
     @FXML

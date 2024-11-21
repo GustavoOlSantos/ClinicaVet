@@ -111,8 +111,9 @@ public class cadastroController implements Initializable {
 		// Mostrando a janela modal
         modalStage.showAndWait();
         Animal animal = menu.getSharedAnimal(); 
-        System.out.println(animal.getNome());
-        
+        if(animal != null) {
+        	System.out.println(animal.getNome());
+        }
     }
     
     public void salvarCadastro() {

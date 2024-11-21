@@ -1,6 +1,5 @@
 package sistem.vet.controllers;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,38 +10,28 @@ import java.util.stream.Collectors;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import sistem.db.DbException;
 import sistem.entities.Animal;
 import sistem.entities.Servicos;
 import sistem.enums.AnimalEmergencia;
 import sistem.enums.AnimalSexo;
 import sistem.enums.AnimalTipo;
 import sistem.enums.FormaPagamento;
-import sistem.enums.Situacao;
 import sistem.enums.SituacaoPet;
-import sistem.enums.StatusPagamento;
-import sistem.exceptions.DomainException;
 import sistem.interfaces.dao.AnimalDAO;
 import sistem.interfaces.dao.ClienteDAO;
-import sistem.services.CpfCnpjMask;
-import sistem.services.TelefoneMask;
-import sistem.vet.App;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 
 
 
@@ -54,8 +43,10 @@ public class cadPetController implements Initializable {
 	Animal animal;
 	
 	List<Object> AvailableServices = Arrays.stream(menu.serv).collect(Collectors.toList());
-		
-	private Stage modal;
+
+	//=> FORMULÁRIO DO PET
+    @FXML
+    public TextField nomeField;
     @FXML
     private ComboBox<AnimalSexo> sexoField; 
     @FXML
@@ -67,33 +58,11 @@ public class cadPetController implements Initializable {
     @FXML
     private ComboBox<SituacaoPet> statusField; 	
     @FXML
-    private ComboBox<String> servicosBox;
-    @FXML
-    public TextField nomeField;
-    @FXML
-    public TextField precoServField;
-    @FXML
-    public TextField cpfField;
-    @FXML
-    public TextField emailField;
-    @FXML
-    public TextField telefoneField;
-    
-    @FXML
-    public TextField observacoesField;
-    @FXML
-    public ChoiceBox<String> sexoChoiceBox;
-    @FXML
-    public TextField tipoField;
-    @FXML
-    public ChoiceBox<String> emergenciaChoiceBox;
-    @FXML
     public TextField orcamentoField;
     @FXML
-    public TextField servicosField;
-    @FXML
-    public Button btnSalvar;
+    public TextArea observacoesField;
     
+    //=> TABELA DE SERVIÇOS
     @FXML
     public TableView<Servicos> tableView;
 	@FXML
@@ -104,6 +73,20 @@ public class cadPetController implements Initializable {
     public TableColumn<Servicos, AnimalSexo> Preco;
     @FXML
     public TableColumn<Servicos, Void> Del;
+    
+    //=> PREENCHER SERVIÇOS
+    @FXML
+    private ComboBox<String> servicosBox;
+    @FXML
+    public TextField precoServField;
+    
+    //=> CONTROLE DA JANELA
+    private Stage modal;
+    @FXML
+    public Button close;
+    @FXML
+    public Button btnSalvar;
+    
     
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
@@ -118,12 +101,28 @@ public class cadPetController implements Initializable {
 				servicosBox.getItems().add(((Servicos)AvServs).nome);
 			}
 			
+			servicosBox.setOnAction(event -> {
+				Object selecionado = servicosBox.getValue();
+		    	Object selectedServico = AvailableServices.stream()
+		                .filter(s -> ((Servicos)s).getNome().equals(selecionado))
+		                .findFirst()
+		                .orElse(null);
+
+				if (selectedServico != null) {
+					double preco = ((Servicos)selectedServico).getPreco();
+					precoServField.setText("R$" + ((Double) preco).toString());
+				}
+				
+	        });
+			
 			animal = new Animal ();
 			
 			List<Servicos> servList = new ArrayList<>();	
 			servList = animal.getServicosList(menu.serv);
 			
 	        renderTable(servList);
+	        
+	        close.setOnAction(e -> modal.close());
 	}
     
     public void renderTable(List<Servicos> animais) {
@@ -176,8 +175,6 @@ public class cadPetController implements Initializable {
     }
 		
     @FXML
-   
-    
     public void reloadTable() {	
     	
     	List<Servicos> servList = new ArrayList<>();
@@ -205,36 +202,6 @@ public class cadPetController implements Initializable {
     	
     }
 	
-	 public void cadPet (){
-	    	
-	       
-			
-			Stage modalStage = new Stage();
-	
-	        // Definindo a modalidade
-	        modalStage.initModality(Modality.APPLICATION_MODAL);
-	        modalStage.setTitle("Cadastrar animal");
-	      
-	       FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/cadastrarPet.fxml"));
-	       Scene modalScene;
-			try {
-				modalScene = new Scene(fxmlLoader.load(), 1000, 800);
-				modalScene.getStylesheets().add(App.class.getResource("/styles/StylesModal.css").toExternalForm());  
-				modalStage.setScene(modalScene);
-				
-				verAnimalController controller = fxmlLoader.getController();
-				controller.setStage(modalStage);
-				
-			} 
-			catch (IOException e1) {
-				e1.printStackTrace();
-			}
-	        
-			// Mostrando a janela modal
-	        modalStage.showAndWait();
-	        
-	    }
-	    
     public void salvarCadastro() {
     	   	
     	List<String> camposVazios = verificarCampos();

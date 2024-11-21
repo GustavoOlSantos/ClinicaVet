@@ -49,12 +49,12 @@
 	    <HBox styleClass="data-row" HBox.hgrow="ALWAYS" alignment="BOTTOM_LEFT" spacing="25">
 	    	<VBox>
 	    		<Label text="Observações do Animal" styleClass="data-name" />
-	    		<TextField fx:id="obsField" promptText=""  minWidth="350" minHeight="100"/>
+	    		<TextArea fx:id="obsField" promptText=""  minWidth="350" minHeight="100"/>
 	    	</VBox>
 	    	
 	    	<VBox>
 	    		<Label text="Medicamentos do Animal" styleClass="data-name" />
-	    		<TextField fx:id="medicamentosField" promptText=""  minWidth="350" minHeight="100"/>
+	    		<TextArea fx:id="medicamentosField" promptText=""  minWidth="350" minHeight="100"/>
 	    	</VBox>
 	    	
 
