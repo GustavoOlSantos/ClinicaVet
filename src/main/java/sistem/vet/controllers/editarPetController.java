@@ -68,6 +68,8 @@ public class editarPetController implements Initializable {
     @FXML
     public TextArea medicamentosField;
     @FXML
+    public TextField diagnosticoField;
+    @FXML
     private ComboBox<String> servicosBox; 
     @FXML
     public TextField precoServField;
@@ -112,6 +114,7 @@ public class editarPetController implements Initializable {
 			emergenciaField.setValue(animal.getEmergencia());
 
 			statusField.getItems().addAll(SituacaoPet.values());
+			statusField.getItems().removeIf(x -> x.name() == "NAO_LISTADO");
 			statusField.setValue(animal.getSituacao());
 			
 			orcamentoField.setText(((Double) animal.getOrcamento()).toString());
@@ -121,6 +124,8 @@ public class editarPetController implements Initializable {
 			
 			medicamentosField.setStyle("-fx-alignment: TOP_LEFT");
 			medicamentosField.setText(animal.getMedicamentos());
+			
+			diagnosticoField.setText(animal.getDiagnostico());
 			
 			List<Object> AvailableServices = Arrays.stream(menu.serv).collect(Collectors.toList());
 			for(Object AvServs : AvailableServices) {
@@ -237,6 +242,7 @@ public class editarPetController implements Initializable {
     	animal.setOrcamento(Double.parseDouble(orcamentoField.getText()));
     	animal.setObservacoes(obsField.getText());
     	animal.setMedicamentos(medicamentosField.getText());
+    	animal.setDiagnostico(diagnosticoField.getText());
     	
     	cliente.setOrcamentoInc(animal.getOrcamento());
     	

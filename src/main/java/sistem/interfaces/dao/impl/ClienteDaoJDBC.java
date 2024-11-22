@@ -438,6 +438,7 @@ public class ClienteDaoJDBC implements ClienteDAO {
 		animal.setOrcamento(rs.getDouble("animal.orcamento"));
 		animal.setObservacoes(rs.getString("animal.observacoes"));
 		animal.setMedicamentos(rs.getString("animal.medicamentos"));
+		animal.setDiagnostico(rs.getString("animal.diagnostico"));
 		animal.setDataAlta(rs.getObject("animal.data_alta", LocalDateTime.class));
 		animal.setDataObito(rs.getObject("animal.data_obito", LocalDateTime.class));
 		String intStr = rs.getString("animal.servicos");

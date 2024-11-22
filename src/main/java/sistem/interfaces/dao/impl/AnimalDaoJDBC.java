@@ -86,7 +86,7 @@ public class AnimalDaoJDBC implements AnimalDAO {
 			conn.setAutoCommit(true);
 			st = conn.prepareStatement(
 					"UPDATE animal SET nome = ?, sexo = ?, tipo = ?, emergencia = ?, status = ?, orcamento = ?, "
-					+ "observacoes = ?, medicamentos = ?, servicos = ?, data_alta = ?, data_obito = ? "
+					+ "observacoes = ?, medicamentos = ?, diagnostico = ?, servicos = ?, data_alta = ?, data_obito = ? "
 					+ "WHERE idCliente = ? AND idAnimal = ?");
 			
 			st.setString(1, pet.getNome());			 //=> Nome Pet
@@ -97,18 +97,20 @@ public class AnimalDaoJDBC implements AnimalDAO {
 			st.setDouble(6, pet.getOrcamento());	//=> Orçamento pet
 			st.setString(7, pet.getObservacoes());
 			st.setString(8, pet.getMedicamentos());
+			st.setString(9, pet.getDiagnostico());
+			
 			
 			String intString = Arrays.toString(pet.getServicos());
-			st.setString(9, intString);
+			st.setString(10, intString);
 			
 			Timestamp dataAlta = pet.getDataAlta() == null ? null : Timestamp.valueOf(pet.getDataAlta());
-			st.setTimestamp(10, dataAlta);
+			st.setTimestamp(11, dataAlta);
 			
 			Timestamp dataObito = pet.getDataObito() == null ? null : Timestamp.valueOf(pet.getDataObito());
-			st.setTimestamp(11, dataObito);
+			st.setTimestamp(12, dataObito);
 			
-			st.setInt	(12, pet.getIdCliente());	//=> IdCliente
-			st.setInt	(13, pet.getId());			//=> IdPet
+			st.setInt	(13, pet.getIdCliente());	//=> IdCliente
+			st.setInt	(14, pet.getId());			//=> IdPet
 			
 			st.executeUpdate();
 		}
@@ -393,6 +395,7 @@ public class AnimalDaoJDBC implements AnimalDAO {
 		animal.setOrcamento(rs.getDouble("animal.orcamento"));
 		animal.setObservacoes(rs.getString("animal.observacoes"));
 		animal.setMedicamentos(rs.getString("animal.medicamentos"));
+		animal.setDiagnostico(rs.getString("animal.diagnostico"));
 		animal.setDataAlta(rs.getObject("animal.data_alta", LocalDateTime.class));
 		animal.setDataObito(rs.getObject("animal.data_obito", LocalDateTime.class));
 		String intStr = rs.getString("animal.servicos");

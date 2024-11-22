@@ -25,7 +25,7 @@
 			<!-- Ícone e dados do Pet -->
 			<HBox HBox.hgrow="ALWAYS">
 			
-				<VBox fx:id="pet_icon"></VBox>
+				<VBox fx:id="pet_icon" alignment="CENTER"></VBox>
 				
 				<VBox spacing="0" styleClass="top-padding">
 					<HBox styleClass="infoContainer">
@@ -46,6 +46,23 @@
 					<HBox styleClass="infoContainer">
 						<Label text="Status: " styleClass="infoLabel" />
 						<Label fx:id="status" text="" styleClass="infoData" />
+					</HBox>
+				</VBox>
+				
+				<VBox spacing="0" styleClass="top-padding-left">
+					<HBox styleClass="infoContainer">
+						<Label text="Data de Cadastro: " styleClass="infoLabel" />
+						<Label fx:id="dataCad" text="" styleClass="infoData" />
+					</HBox>
+	
+					<HBox styleClass="infoContainer">
+						<Label text="Data do Alta: " styleClass="infoLabel" />
+						<Label fx:id="dataAlta" text="" styleClass="infoData" />
+					</HBox>
+					
+					<HBox styleClass="infoContainer">
+						<Label text="Data de Óbito: " styleClass="infoLabel" />
+						<Label fx:id="dataObito" text="" styleClass="infoData" />
 					</HBox>
 				</VBox>
 			</HBox>
@@ -84,12 +101,41 @@
 			
 			<Separator prefWidth="Infinity" orientation="HORIZONTAL" />
 			
+			<!-- Dados Clínicos do Pet -->
+			<VBox HBox.hgrow="ALWAYS">
+				<Label text="Dados Clínicos" styleClass="sectionLabel" />
+				
+				<HBox spacing="20">
+					<HBox styleClass="infoContainer">
+						<Label text="É emergência: " 		styleClass="infoLabel" />
+						<Label fx:id="emergencia" text="" styleClass="infoData"/>
+					</HBox>
+					
+					<HBox styleClass="infoContainer">
+						<Label text="Diagnóstico: " 		styleClass="infoLabel" />
+						<Label fx:id="diagnostico" text="" styleClass="infoData" />
+					</HBox>
+				</HBox>
+				
+				<HBox spacing="20">
+					<VBox styleClass="infoContainer">
+						<Label text="Medicamentos: " 		styleClass="infoLabel" />
+						<TextArea fx:id="medicamentos" text="" styleClass="infoData" minWidth="250"/>
+					</VBox>
+					
+					<VBox styleClass="infoContainer">
+						<Label text="Observações: " 		styleClass="infoLabel" />
+						<TextArea fx:id="observacoes" text="" styleClass="infoData" minWidth="450" minHeight="100"/>
+					</VBox>
+				</HBox>
+			
+			</VBox>	
 		</VBox>
 	</HBox>
 	
-	<VBox VBox.vgrow="ALWAYS">
+	<VBox VBox.vgrow="ALWAYS" >
 	    <!-- TABELA DO PET -->
-	    <Label text="Serviços do Pet" styleClass="infoModal" />
+	    <Label text="Serviços do Pet" styleClass="sectionLabel" />
 	    <TableView fx:id="tableView" styleClass="Table" VBox.vgrow="ALWAYS" prefWidth="Infinity" maxWidth="700">
 	    	<columns>
 		        <TableColumn fx:id="Id" 	 	 text="#"          		minWidth="20"  maxWidth="30"/>

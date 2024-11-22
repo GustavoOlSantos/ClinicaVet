@@ -95,6 +95,7 @@ public class cadPetController implements Initializable {
 			especieField.getItems().addAll(AnimalTipo.values());
 			emergenciaField.getItems().addAll(AnimalEmergencia.values());
 			statusField.getItems().addAll(SituacaoPet.values());
+			statusField.getItems().removeIf(x -> x.name() == "NAO_LISTADO");
 			
 			List<Object> AvailableServices = Arrays.stream(menu.serv).collect(Collectors.toList());	
 			for(Object AvServs : AvailableServices) {

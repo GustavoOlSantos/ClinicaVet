@@ -57,6 +57,11 @@
 	    		<TextArea fx:id="medicamentosField" promptText=""  minWidth="350" minHeight="100"/>
 	    	</VBox>
 	    	
+	    	<VBox>
+	    		<Label text="Diagnóstico do pet" styleClass="data-name" />
+	    		<TextField fx:id="diagnosticoField" promptText="Diagnóstico" minWidth="220"/>
+	    	</VBox>
+	    	
 
 	    </HBox>
 	    

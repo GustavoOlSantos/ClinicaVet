@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -57,6 +58,13 @@ public class verAnimalController implements Initializable {
 	Label status;
 	
 	@FXML
+	Label dataCad;
+	@FXML
+	Label dataAlta;
+	@FXML
+	Label dataObito;
+	
+	@FXML
 	Label nomeTutor;
 	@FXML
 	Label cpfCnpjTutor;
@@ -64,6 +72,15 @@ public class verAnimalController implements Initializable {
 	Label telefoneTutor;
 	@FXML
 	Label emailTutor;
+	
+	@FXML
+	Label emergencia;
+	@FXML
+	TextArea medicamentos;
+	@FXML
+	TextArea observacoes;
+	@FXML
+	Label diagnostico;
 	
 	
 	//=> TABELA PETS DO CLIENTE
@@ -96,19 +113,21 @@ public class verAnimalController implements Initializable {
 
 			
 			String iconLiteral = null;
+			int icon_size = 150;
+			
 			switch (animal.getTipo()) {
 	            case GATO: 				iconLiteral = "mdi2c-cat"; break;
 	            case CACHORRO: 			iconLiteral = "mdi2d-dog"; break;
-	            case AVE: 				iconLiteral = "mdi2b-bird"; break;
+	            case AVE: 				iconLiteral = "fas-dove"; icon_size = 100; break;
 	            case COELHO: 			iconLiteral = "mdi2r-rabbit"; break;
 	            case TARTARUGA:		 	iconLiteral = "mdi2t-turtle"; break;
 	            case COBRA: 			iconLiteral = "mdi2s-snake"; break;
-	            case LAGARTO: 			iconLiteral = "mdi2p-paw"; break;
+	            case LAGARTO: 			iconLiteral = "fas-dragon"; icon_size = 100; break;
 	            case OUTROS_SILVESTRES: iconLiteral = "mdi2p-paw"; break;
 	        };
 
 	        FontIcon icon = new FontIcon(iconLiteral);
-	        icon.setIconSize(150);
+	        icon.setIconSize(icon_size);
 	        icon.getStyleClass().add("animal-icon");
 	        pet_icon.getChildren().add(icon);
 			
@@ -125,7 +144,21 @@ public class verAnimalController implements Initializable {
 			emailTutor.setText(cli.getEmail());
 			
 			//=> DADOS CLÍNICOS DO PET
+			emergencia.setText(animal.getEmergencia().toString());
+			medicamentos.setText(animal.getMedicamentos());
+			observacoes.setText(animal.getObservacoes());
+			diagnostico.setText(animal.getDiagnostico());
 			
+			medicamentos.setEditable(false);
+			observacoes.setEditable(false);
+			
+			dataCad.setText(cli.getDataCadastro().format(cli.timeFormat).toString());
+			
+			String dataAltaF = animal.getDataAlta() == null ? null : animal.getDataAlta().format(cli.timeFormat).toString();
+			String dataObitoF = animal.getDataObito() == null ? null : animal.getDataObito().format(cli.timeFormat).toString();
+					
+			dataAlta.setText(dataAltaF);
+			dataObito.setText(dataObitoF);
 			
 			//=> TABELA
 			List<Servicos> servList = new ArrayList<>();

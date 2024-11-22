@@ -73,6 +73,10 @@
 	-fx-padding: 10 0 0 20;
 }
 
+.top-padding-left{
+	-fx-padding: 10 0 0 200;
+}
+
 .data-name{
 	-fx-font-size: 13px; /* Tamanho do texto */
 	-fx-font-weight: bold; /* Negrito */

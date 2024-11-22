@@ -26,6 +26,7 @@ public class Animal{
 	private double orcamento;
 	private String observacoes;
 	private String medicamentos;
+	private String diagnostico;
 
 	private LocalDateTime dataAlta;
 	private LocalDateTime dataObito;
@@ -305,11 +306,19 @@ public class Animal{
 		
 	}
 	
+	//======> Diagnóstico
 	public LocalDateTime getDataObito() {
     	return dataObito;
     }
-		
 	
+	public String getDiagnostico() {
+		return diagnostico;
+	}
+
+	public void setDiagnostico(String diagnostico) {
+		this.diagnostico = diagnostico;
+	}
+
 	//======> Serviços
 	public void printServicos(Object[] serv) {
 		for(Integer servicoSelecionado : this.servicos) {

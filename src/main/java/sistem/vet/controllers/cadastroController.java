@@ -36,9 +36,9 @@ import javafx.scene.control.Button;
 
 public class cadastroController implements Initializable {
 	//=> Coleta dados do MenuSaver
-		menuDataSaver menu = MainController.menu;
-		ClienteDAO clienteDAO = menu.clienteDAO;
-		AnimalDAO animalDAO = menu.animalDAO;
+	menuDataSaver menu = MainController.menu;
+	ClienteDAO clienteDAO = menu.clienteDAO;
+	AnimalDAO animalDAO = menu.animalDAO;
 
 
     @FXML
