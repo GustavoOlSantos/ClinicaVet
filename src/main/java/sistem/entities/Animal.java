@@ -38,20 +38,6 @@ public class Animal{
 		Arrays.fill(this.servicos, -1); //=> Define toda a array como não incializada
 	}
 	
-	public Animal(String nome, int tipo, int sexo) throws DomainException{
-		this.nome = nome;
-		
-		if(nome.length() == 0) {
-			throw new DomainException("O nome do Animal não pode estar vazio.");
-		}
-		
-		setSexo(sexo);
-		setTipo(tipo);
-		
-		
-		Arrays.fill(this.servicos, -1); //=> Define toda a array como não incializada
-	}
-	
 	//======> Id
 	public int getId() {
 		return id;

@@ -3,43 +3,39 @@ package sistem.vet.controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sistem.entities.Animal;
-import sistem.entities.Servicos;
+import sistem.entities.Cliente;
 import sistem.enums.AnimalEmergencia;
 import sistem.enums.AnimalSexo;
 import sistem.enums.AnimalTipo;
 import sistem.enums.FormaPagamento;
-import sistem.enums.Situacao;
 import sistem.enums.SituacaoPet;
-import sistem.enums.StatusPagamento;
 import sistem.exceptions.DomainException;
 import sistem.interfaces.dao.AnimalDAO;
 import sistem.interfaces.dao.ClienteDAO;
-import sistem.services.CpfCnpjMask;
-import sistem.services.TelefoneMask;
 import sistem.vet.App;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 
 public class cadastroController implements Initializable {
 	//=> Coleta dados do MenuSaver
 	menuDataSaver menu = MainController.menu;
 	ClienteDAO clienteDAO = menu.clienteDAO;
 	AnimalDAO animalDAO = menu.animalDAO;
-
+	
+	List<Animal> animaisCadastrados;
+	Cliente cliente;
 
     @FXML
     private ComboBox<AnimalSexo> sexoField; 
@@ -78,23 +74,23 @@ public class cadastroController implements Initializable {
 
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
-			formaPgField.getItems().addAll(FormaPagamento.values());
-			
-			
+    	
+		formaPgField.getItems().addAll(FormaPagamento.values());
+		
+		//=> Inicializar Lista de Animais
+		animaisCadastrados = new ArrayList<Animal>();
 	}
 	
- public void cadPet (){
-    	
-       
-		
-		Stage modalStage = new Stage();
+    public void cadPet (){
+    	Stage modalStage = new Stage();
 
         // Definindo a modalidade
         modalStage.initModality(Modality.APPLICATION_MODAL);
         modalStage.setTitle("Cadastrar animal");
       
-       FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/cadastrarPet.fxml"));
-       Scene modalScene;
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/cadastrarPet.fxml"));
+        Scene modalScene;
+        
 		try {
 			modalScene = new Scene(fxmlLoader.load(), 1000, 800);
 			modalScene.getStylesheets().add(App.class.getResource("/styles/StylesModal.css").toExternalForm());  
@@ -110,10 +106,8 @@ public class cadastroController implements Initializable {
         
 		// Mostrando a janela modal
         modalStage.showAndWait();
-        Animal animal = menu.getSharedAnimal(); 
-        if(animal != null) {
-        	System.out.println(animal.getNome());
-        }
+
+        animaisCadastrados.add(menu.getSharedAnimal());
     }
     
     public void salvarCadastro() {
@@ -122,17 +116,16 @@ public class cadastroController implements Initializable {
         String cpf = cpfField.getText();
         String email = emailField.getText();
         String telefone = telefoneField.getText();
-        String nomeAnimal = nomeAnimalField.getText();
-        String sexo = sexoChoiceBox.getValue();
-        String tipo = tipoField.getText();
-        String emergencia = emergenciaChoiceBox.getValue();
-        String servicos = servicosField.getText();
         
-        
-		
-        
-        //cliente
-        // salvar dados do cliente adicionado
-        //clienteDAO.insert(null);
+        //=> Transferência de Valores para o Objeto Cliente
+        try {
+			cliente = new Cliente(nomeCliente, cpf, telefone, animaisCadastrados.size());		
+			cliente.animal = animaisCadastrados.toArray(new Animal[0]);
+			
+		} 
+        catch (DomainException e) {
+			menu.dialogAvisos(e.getMessage());
+		}     
     }
+    
 }

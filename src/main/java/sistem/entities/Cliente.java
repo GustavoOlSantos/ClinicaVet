@@ -34,7 +34,8 @@ public class Cliente{
 	private LocalDateTime dataFinalizado;
 
 	public Cliente() {
-				
+		this.trabalho = Situacao.EM_ATENDIMENTO; 		 	
+		this.status = StatusPagamento.PENDENTE;
 	}
 
 	public Cliente(String nome, String cpf, String num, int qtd) throws DomainException {
