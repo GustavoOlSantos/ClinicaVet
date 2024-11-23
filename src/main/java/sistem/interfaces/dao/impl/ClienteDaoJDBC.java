@@ -64,7 +64,7 @@ public class ClienteDaoJDBC implements ClienteDAO {
 			st.setString(4, cli.getEmail()); 			//=> Telefone
 			st.setInt(5, cli.qtdAnimal); 	   			//=> QtdAnimal
 			st.setDouble(6, cli.getOrcamentoTotal());	//=> OrçamentoTotal
-			st.setInt(8, cli.getIntFormaPagamento());	//=> Forma de Pagamento
+			st.setInt(7, cli.getIntFormaPagamento());	//=> Forma de Pagamento
 			st.setInt(8, cli.parcelaPagamento);			//=> Parcelas
 			st.setInt(9, cli.getIntStatusPagamento());	//=> Status do Pagamento
 			st.setInt(10, cli.getIntSituacao());		//=> Situação do Trabalho
@@ -89,8 +89,8 @@ public class ClienteDaoJDBC implements ClienteDAO {
 			
 			for(int i = 0; i < cli.qtdAnimal; i++) {
 				st = conn.prepareStatement(
-						"INSERT INTO animal (idCliente, nome, sexo, tipo, status, emergencia, internado, orcamento, medicamentos, observacoes servicos ) "
-						+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+						"INSERT INTO animal (idCliente, nome, sexo, tipo, status, emergencia, orcamento, medicamentos, observacoes servicos ) "
+						+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 				
 				st.setInt	(1, id);								   		//=> IdCliente
 				st.setString(2, cli.animal[i].getNome());			  	   //=> Nome Pet
@@ -98,13 +98,13 @@ public class ClienteDaoJDBC implements ClienteDAO {
 				st.setInt	(4, cli.animal[i].getIntTipo());			 //=> TipoPet
 				st.setInt	(5, cli.animal[i].getIntSituacao());		//=> TipoPet
 				st.setInt	(6, cli.animal[i].getIntEmergencia()); 	   //=> É emergência
-				st.setInt	(7, cli.animal[i].getIntInternado()); 	  //=> Pet Internado
-				st.setDouble(8, cli.animal[i].getOrcamento());	 	 //=> Orçamento pet
-				st.setString(9, cli.animal[i].getMedicamentos());	//=> Medicamentos
-				st.setString(10, cli.animal[i].getObservacoes());  //=> Observacoes
+					  //=> Pet Internado
+				st.setDouble(7, cli.animal[i].getOrcamento());	 	 //=> Orçamento pet
+				st.setString(8, cli.animal[i].getMedicamentos());	//=> Medicamentos
+				st.setString(9, cli.animal[i].getObservacoes());  //=> Observacoes
 				
 				String intString = Arrays.toString(cli.animal[i].getServicos());
-				st.setString(11, intString);
+				st.setString(10, intString);
 				
 				st.executeUpdate();
 				conn.commit();

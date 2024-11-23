@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -47,6 +48,10 @@ public class cadastroController implements Initializable {
     public TextField telefoneField;
     @FXML
     public TextField orcamentoField;
+    @FXML
+    public TextArea observacoesClienteField ;
+    @FXML
+    public TextField parcelasField;
     @FXML
     private ComboBox<FormaPagamento> formaPgField; 
     @FXML
@@ -96,16 +101,27 @@ public class cadastroController implements Initializable {
         String cpf = cpfField.getText();
         String email = emailField.getText();
         String telefone = telefoneField.getText();
-        
+        FormaPagamento fpg = formaPgField.getValue();
+        int Parcelas = Integer.parseInt(parcelasField.getText());
+        String observacao = observacoesClienteField.getText();
         //=> Transferência de Valores para o Objeto Cliente
         try {
 			cliente = new Cliente(nomeCliente, cpf, telefone, animaisCadastrados.size());		
 			cliente.animal = animaisCadastrados.toArray(new Animal[0]);
+			cliente.setEmail(email);
+			cliente.setFormaPagamento(fpg);
+			cliente.setParcela(Parcelas);
+			cliente.setObservacao(observacao);
 			
+			clienteDAO.insert(cliente);
 		} 
         catch (DomainException e) {
 			menu.dialogAvisos(e.getMessage());
+		}
+        catch (IOException e) {
+			menu.dialogAvisos(e.getMessage());
 		}     
+        
     }
     
 }

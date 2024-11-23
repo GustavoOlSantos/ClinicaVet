@@ -8,7 +8,7 @@
 
 
 
-<VBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistem.vet.controllers.cadastroController" spacing="15" alignment="CENTER">
+<VBox  xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistem.vet.controllers.cadastroController" spacing="15" alignment="CENTER">
 
     <!-- Contêiner para exibir os formulários lado a lado -->
     <HBox spacing="25" alignment="TOP_CENTER" styleClass="TableContente">
@@ -35,10 +35,6 @@
                 <TextField fx:id="telefoneField" promptText="Telefone" minWidth="300" minHeight="15"/>
             </VBox>
 
-            <VBox spacing="5">
-                <Label text="Quantidade de Animais" styleClass="data-name" />
-                <TextField fx:id="qtdAnimalField" promptText="Quantidade de Animais" minWidth="300" minHeight="15"/>
-            </VBox>
 
             <VBox spacing="5">
                 <Label text="Forma de Pagamento" styleClass="data-name" />
@@ -53,7 +49,7 @@
             <!-- Novo campo: Observações -->
             <VBox spacing="5">
                 <Label text="Observações" styleClass="data-name" />
-                <TextField fx:id="observacoesClienteField" promptText="Observações sobre o cliente" minWidth="300" minHeight="15"/>
+                <TextArea fx:id="observacoesClienteField" promptText="Observações sobre o cliente" minWidth="300" minHeight="15"/>
             </VBox>
         </VBox>
 

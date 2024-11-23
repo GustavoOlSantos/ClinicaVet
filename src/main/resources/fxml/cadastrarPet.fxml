@@ -17,46 +17,50 @@
 	<VBox styleClass="modalBody" VBox.vgrow="ALWAYS">
 	
 	    <!-- Contêiner para exibir os formulários lado a lado -->
-	    <HBox spacing="25" alignment="TOP_CENTER" styleClass="TableContente">
-	
-	        <!-- Formulário do Animal -->
-	        <VBox spacing="15" alignment="CENTER">
-	            <VBox spacing="5">
-	                <Label text="Nome do Animal" styleClass="infoLabel" />
-	                <TextField fx:id="nomeField" promptText="Nome do Animal" minWidth="300" minHeight="15"/>
-	            </VBox>
-	
-	            <VBox spacing="5">
-	                <Label text="Sexo" styleClass="data-name"  /><ComboBox fx:id="sexoField" minWidth="150" />
-	            </VBox>
-	
-	            <VBox spacing="5">
-	                <Label text="Especie" styleClass="data-name" />
-	                <ComboBox fx:id="especieField" minWidth="250" />
-	            </VBox>
-	            
-	            <VBox spacing ="5">
-	            	<Label text="Status do Paciente" styleClass="data-name" />
-	            	<ComboBox fx:id="statusField" minWidth="200" />
-	            </VBox>
-	           
-		    	
-	            <VBox spacing="5">
-	               <Label text="Emergencia" styleClass="data-name" />
-	               <ComboBox fx:id="emergenciaField" minWidth="250" />
-	            </VBox>
-	
-	            <VBox spacing="5">
-	                <Label text="Orçamento" styleClass="data-name" />
-	                <TextField fx:id="orcamentoField" promptText="Orçamento Estimado" minWidth="300" minHeight="15"/>
-	            </VBox>
-	
-	            <VBox spacing="5">
-	                <Label text="Observações" styleClass="data-name" />
-	                <TextArea fx:id="observacoesField" promptText="Observações" minWidth="300" minHeight="15"/>
-	            </VBox>
-	        </VBox>
-	    </HBox>
+	   <VBox spacing="15" alignment="TOP_CENTER" styleClass="TableContente">
+
+    <!-- Primeira linha-->
+    <HBox spacing="25" alignment="CENTER">
+        <VBox spacing="5">
+            <Label text="Nome do Animal" styleClass="data-name" />
+            <TextField fx:id="nomeField" promptText="Nome do Animal" minWidth="300" minHeight="15"/>
+        </VBox>
+
+        <VBox spacing="5">
+            <Label text="Sexo" styleClass="data-name" />
+            <ComboBox fx:id="sexoField" minWidth="150" />
+        </VBox>
+
+        <VBox spacing="5">
+            <Label text="Especie" styleClass="data-name" />
+            <ComboBox fx:id="especieField" minWidth="250" />
+        </VBox>
+
+        <VBox spacing="5">
+            <Label text="Status do Paciente" styleClass="data-name" />
+            <ComboBox fx:id="statusField" minWidth="200" />
+        </VBox>
+    </HBox>
+
+    <!-- Segunda linha -->
+    <HBox spacing="25" alignment="CENTER">
+        <VBox spacing="5">
+            <Label text="Emergencia" styleClass="data-name" />
+            <ComboBox fx:id="emergenciaField" minWidth="250" />
+        </VBox>
+
+        <VBox spacing="5">
+            <Label text="Orçamento" styleClass="data-name" />
+            <TextField fx:id="orcamentoField" promptText="Orçamento Estimado" minWidth="300" minHeight="15"/>
+        </VBox>
+
+        <VBox spacing="5">
+            <Label text="Observações" styleClass="data-name" />
+            <TextArea fx:id="observacoesField" promptText="Observações" minWidth="300" minHeight="15"/>
+        </VBox>
+    </HBox>
+
+</VBox>
 		
 		<!-- Tabela de Serviços do Animal -->
 		<HBox spacing="20" HBox.hgrow= "ALWAYS">
@@ -106,4 +110,3 @@
 			<Button fx:id="close" text="cancelar" />		</HBox>
 	</VBox>
 </VBox>
-
