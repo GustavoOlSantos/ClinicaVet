@@ -65,6 +65,10 @@
 	-fx-hgrow: ALWAYS; /* Allow the TableView to grow horizontally */
 }
 
+.TableContent{
+	-fx-padding: 20 0 0 0;
+}
+
 .centered {
     -fx-alignment: CENTER;
 }

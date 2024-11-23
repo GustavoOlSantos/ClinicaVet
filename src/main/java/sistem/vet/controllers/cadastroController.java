@@ -17,6 +17,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import sistem.db.DbException;
 import sistem.entities.Animal;
 import sistem.entities.Cliente;
 import sistem.enums.AnimalEmergencia;
@@ -91,8 +92,11 @@ public class cadastroController implements Initializable {
         
 		// Mostrando a janela modal
         modalStage.showAndWait();
-
-        animaisCadastrados.add(menu.getSharedAnimal());
+        
+        Animal petCadastrado = menu.getSharedAnimal();
+        if(petCadastrado != null) {
+        	animaisCadastrados.add(petCadastrado);
+        }
     }
     
     public void salvarCadastro() {
@@ -113,12 +117,16 @@ public class cadastroController implements Initializable {
 			cliente.setParcela(Parcelas);
 			cliente.setObservacao(observacao);
 			
+			//=> Método que exibe todos os dados do cliente e de seus animais (Para debug)
+			//cliente.printClienteSheet(menu.serv);
+			
 			clienteDAO.insert(cliente);
+			menu.dialogAvisos("Cliente Cadastrado com sucesso");
 		} 
         catch (DomainException e) {
 			menu.dialogAvisos(e.getMessage());
 		}
-        catch (IOException e) {
+        catch (DbException e) {
 			menu.dialogAvisos(e.getMessage());
 		}     
         

@@ -44,7 +44,7 @@ public class ClienteDaoJDBC implements ClienteDAO {
 	}
 	
 	@Override
-	public void insert(Cliente cli) throws IOException {
+	public void insert(Cliente cli) throws DbException {
 		PreparedStatement st = null;
 		ResultSet rs = null; 
 		
@@ -89,7 +89,7 @@ public class ClienteDaoJDBC implements ClienteDAO {
 			
 			for(int i = 0; i < cli.qtdAnimal; i++) {
 				st = conn.prepareStatement(
-						"INSERT INTO animal (idCliente, nome, sexo, tipo, status, emergencia, orcamento, medicamentos, observacoes servicos ) "
+						"INSERT INTO animal (idCliente, nome, sexo, tipo, status, emergencia, orcamento, medicamentos, observacoes, servicos ) "
 						+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 				
 				st.setInt	(1, id);								   		//=> IdCliente
