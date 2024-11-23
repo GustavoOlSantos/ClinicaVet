@@ -38,18 +38,6 @@ public class cadastroController implements Initializable {
 	Cliente cliente;
 
     @FXML
-    private ComboBox<AnimalSexo> sexoField; 
-    @FXML
-    private ComboBox<AnimalTipo> especieField; 
-    @FXML
-    private ComboBox<AnimalEmergencia> emergenciaField; 
-    @FXML
-    private ComboBox<FormaPagamento> formaPgField; 
-    @FXML
-    private ComboBox<SituacaoPet> statusField; 	
-    @FXML
-    private ComboBox<String> servicosBox;
-    @FXML
     public TextField nomeField;
     @FXML
     public TextField cpfField;
@@ -58,17 +46,9 @@ public class cadastroController implements Initializable {
     @FXML
     public TextField telefoneField;
     @FXML
-    public TextField nomeAnimalField;
-    @FXML
-    public ChoiceBox<String> sexoChoiceBox;
-    @FXML
-    public TextField tipoField;
-    @FXML
     public TextField orcamentoField;
     @FXML
-    public ChoiceBox<String> emergenciaChoiceBox;
-    @FXML
-    public TextField servicosField;
+    private ComboBox<FormaPagamento> formaPgField; 
     @FXML
     public Button btnSalvar;
 
