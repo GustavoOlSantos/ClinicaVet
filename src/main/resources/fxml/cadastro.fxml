@@ -8,8 +8,10 @@
 
 
 
-<VBox  xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistem.vet.controllers.cadastroController" spacing="15" alignment="CENTER">
-
+<VBox  xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistem.vet.controllers.cadastroController" spacing="15" alignment="TOP_LEFT">
+	
+	<Label text="Cadastro de Cliente" styleClass="Welcome" />
+			
     <!-- Contêiner para exibir os formulários lado a lado -->
     <HBox spacing="25" alignment="TOP_CENTER" styleClass="TableContente">
 
@@ -52,25 +54,48 @@
                 <TextArea fx:id="observacoesClienteField" promptText="Observações sobre o cliente" minWidth="300" minHeight="15"/>
             </VBox>
         </VBox>
-
-        
-
     </HBox>
 	
-	<!-- Botão cadastrar pet -->
-				<Button onAction="#cadPet"> 
-					<graphic>
-						<FontIcon iconLiteral="fa-plus" iconColor="black" iconSize="15"/>
-					</graphic>
-					Cadastrar pet
-				</Button>
-
-    <!-- Botão Salvar para ambos -->
-    <Button fx:id="btnSalvar" text="Salvar" onAction="#salvarCadastro" styleClass="submit-data" >
-                <graphic>
-                    <FontIcon iconLiteral="fa-save" iconColor="black" iconSize="13"/>
-                </graphic>
-            </Button>
-
+	
+	
+	<VBox VBox.vgrow="ALWAYS" styleClass="TableContent">	
+		<Label text="Animais do cliente" styleClass="table-header-title" />
+	
+		<HBox spacing="20">
+			<VBox VBox.vgrow="ALWAYS">
+				<TableView fx:id="tableView" styleClass="Table" VBox.vgrow="ALWAYS" prefWidth="Infinity" maxWidth="Infinity">
+			        <columns>
+			       		<TableColumn fx:id="Id"          text="#"          		minWidth="20"   maxWidth="30"/>
+				        <TableColumn fx:id="Nome"        text="Nome" 	   		minWidth="200"  maxWidth="300"/>
+				        <TableColumn fx:id="Sexo"	 	 text="Sexo" 	   		minWidth="100"  maxWidth="150"/>
+				        <TableColumn fx:id="Tipo"        text="Espécie" 	   	minWidth="50"   maxWidth="120"/>
+				        <TableColumn fx:id="Emergencia"  text="Emergencia" 		minWidth="50"   maxWidth="100"/>
+				        <TableColumn fx:id="Orcamento" 	 text="Orcamento"  		minWidth="30"   maxWidth="100"/>
+				        <TableColumn fx:id="Status" 	 text="Status do pet"   minWidth="200"  maxWidth="340"/>
+				        <TableColumn fx:id="Servicos" 	 text="Servicos"   		minWidth="400"  maxWidth="600"/>
+				        <TableColumn fx:id="Edit" 	 	 text="Editar"          minWidth="30"   maxWidth="70"/>
+			        </columns>
+			    </TableView>
+		    </VBox>
+	    
+		    <!-- Botão cadastrar pet -->
+			<Button onAction="#cadPet"> 
+				<graphic>
+					<FontIcon iconLiteral="fa-plus" iconColor="black" iconSize="15"/>
+				</graphic>
+				Adicionar Pet
+			</Button>
+		</HBox>		
+	</VBox>
+	
+	<HBox alignment="BOTTOM_RIGHT">
+	    <!-- Botão Salvar para ambos -->
+	    <Button fx:id="btnSalvar" text="Salvar" onAction="#salvarCadastro" styleClass="submit-data" >
+	        <graphic>
+	            <FontIcon iconLiteral="fa-save" iconColor="black" iconSize="13"/>
+	        </graphic>
+	        Cadastrar
+	    </Button>
+    </HBox>
 </VBox>
 
