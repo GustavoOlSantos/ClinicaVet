@@ -186,6 +186,12 @@
 	-fx-font-weight: bold; /* Negrito */
 	-fx-text-fill: #000; /* Cor do texto */
 }
+.data-nami{
+	-fx-font-size: 13px; /* Tamanho do texto */
+	-fx-font-weight: bold; /* Negrito */
+	-fx-text-fill: #000; /* Cor do texto */
+	-fx-alignment: CENTER_RIGHT;
+}
 
 .data-row{
 	-fx-padding: 10 0 10 0;
@@ -209,4 +215,9 @@
 	-fx-padding: 50 700; 
 }
 
+.TableContenti{
+	-fx-hgrow: ALWAYS;
+	-fx-pref-width: 1600;  /* Ensure the TableView uses full width */
+	-fx-padding: 10;
+}
 

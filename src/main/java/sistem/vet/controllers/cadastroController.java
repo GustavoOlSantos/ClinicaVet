@@ -98,7 +98,7 @@ public class cadastroController implements Initializable {
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
     	
-    	menu.setTableWidth(tableView, 200);
+    	menu.setTableWidth(tableView, 550);
 		formaPgField.getItems().addAll(FormaPagamento.values());
 		
 		//=> Inicializar Lista de Animais

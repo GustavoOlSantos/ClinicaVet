@@ -13,55 +13,58 @@
 	<Label text="Cadastro de Cliente" styleClass="Welcome" />
 			
     <!-- Contêiner para exibir os formulários lado a lado -->
-    <HBox spacing="25" alignment="TOP_CENTER" styleClass="TableContente">
+    <VBox spacing="20" alignment="CENTER" >
+    <!-- Primeira HBox-->
+    <HBox spacing="15" alignment="CENTER">
+        <VBox spacing="5">
+            <Label text="Nome do Cliente" styleClass="data-name" />
+            <TextField fx:id="nomeField" promptText="Nome do Cliente" minWidth="300" minHeight="15"/>
+        </VBox>
+        
+        <VBox spacing="5">
+            <Label text="CPF/CNPJ" styleClass="data-name" />
+            <TextField fx:id="cpfField" promptText="CPF/CNPJ" minWidth="300" minHeight="15"/>
+        </VBox>
 
-        <!-- Formulário do Cliente -->
-        <VBox spacing="15" alignment="CENTER">
-            <VBox spacing="5">
-                <Label text="Nome do Cliente" styleClass="data-name" />
-                <TextField fx:id="nomeField" promptText="Nome do Cliente" minWidth="300" minHeight="15"/>
-            </VBox>
-            
-            <VBox spacing="5">
-                <Label text="CPF/CNPJ" styleClass="data-name" />
-                <TextField fx:id="cpfField" promptText="CPF/CNPJ" minWidth="300" minHeight="15"/>
-            </VBox>
+        <VBox spacing="5">
+            <Label text="Email" styleClass="data-name" />
+            <TextField fx:id="emailField" promptText="Email" minWidth="300" minHeight="15"/>
+        </VBox>
 
-            <VBox spacing="5">
-                <Label text="Email" styleClass="data-name" />
-                <TextField fx:id="emailField" promptText="Email" minWidth="300" minHeight="15"/>
-            </VBox>
-
-            <VBox spacing="5">
-                <Label text="Telefone" styleClass="data-name" />
-                <TextField fx:id="telefoneField" promptText="Telefone" minWidth="300" minHeight="15"/>
-            </VBox>
-
-
-            <VBox spacing="5">
-                <Label text="Forma de Pagamento" styleClass="data-name" />
-	    		<ComboBox fx:id="formaPgField" minWidth="200" />
-            </VBox>
-
-            <VBox spacing="5">
-                <Label text="Parcelas" styleClass="data-name" />
-                <TextField fx:id="parcelasField" promptText="Número de Parcelas" minWidth="300" minHeight="15"/>
-            </VBox>
-
-            <!-- Novo campo: Observações -->
-            <VBox spacing="5">
-                <Label text="Observações" styleClass="data-name" />
-                <TextArea fx:id="observacoesClienteField" promptText="Observações sobre o cliente" minWidth="300" minHeight="15"/>
-            </VBox>
+        <VBox spacing="5">
+            <Label text="Telefone" styleClass="data-name" />
+            <TextField fx:id="telefoneField" promptText="Telefone" minWidth="300" minHeight="15"/>
         </VBox>
     </HBox>
+
+    <!-- Segunda HBox-->
+    <HBox spacing="15" alignment="CENTER">
+        <VBox spacing="5">
+            <Label text="Forma de Pagamento" styleClass="data-name" />
+            <ComboBox fx:id="formaPgField" minWidth="200" />
+        </VBox>
+
+        <VBox spacing="5">
+            <Label text="Parcelas" styleClass="data-name" />
+            <TextField fx:id="parcelasField" promptText="Número de Parcelas" minWidth="300" minHeight="15"/>
+        </VBox>
+
+        <!-- Novo campo: Observações -->
+        <VBox spacing="5">
+            <Label text="Observações" styleClass="data-name" />
+            <TextArea fx:id="observacoesClienteField" promptText="Observações sobre o cliente" minWidth="300" minHeight="15"/>
+        </VBox>
+    </HBox>
+</VBox>
+
+
 	
 	
 	
-	<VBox VBox.vgrow="ALWAYS" styleClass="TableContent">	
+	<VBox VBox.vgrow="ALWAYS" styleClass="TableContenti">	
 		<Label text="Animais do cliente" styleClass="table-header-title" />
 	
-		<HBox spacing="20">
+		<HBox spacing="20" HBox.hgrow="ALWAYS">
 			<VBox VBox.vgrow="ALWAYS">
 				<TableView fx:id="tableView" styleClass="Table" VBox.vgrow="ALWAYS" prefWidth="Infinity" maxWidth="Infinity">
 			        <columns>
