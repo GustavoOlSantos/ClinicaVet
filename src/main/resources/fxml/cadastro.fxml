@@ -48,6 +48,12 @@
             <Label text="Parcelas" styleClass="data-name" />
             <TextField fx:id="parcelasField" promptText="Número de Parcelas" minWidth="300" minHeight="15"/>
         </VBox>
+        
+        <VBox spacing="5">
+            <Label text="Orçamento" styleClass="data-name" />
+            <TextField fx:id="orcamentoField" text="0" minWidth="300" minHeight="15"/>
+        </VBox>
+        
 
         <!-- Novo campo: Observações -->
         <VBox spacing="5">

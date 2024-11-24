@@ -152,6 +152,10 @@ public class cadastroController implements Initializable {
         if(petCadastrado != null) {
         	animaisCadastrados.add(petCadastrado);
         	renderTable(animaisCadastrados);
+        	double orcamento = Double.parseDouble(orcamentoField.getText());
+        	orcamento += petCadastrado.getOrcamento();
+        	orcamentoField.setText(""+orcamento);
+        	
         }
     }
     
@@ -281,8 +285,11 @@ public class cadastroController implements Initializable {
         String email = emailField.getText();
         String telefone = telefoneField.getText();
         FormaPagamento fpg = formaPgField.getValue();
+        Double orcamento = Double.parseDouble(orcamentoField.getText());
         int Parcelas = Integer.parseInt(parcelasField.getText());
         String observacao = observacoesClienteField.getText();
+       
+       
         //=> Transferência de Valores para o Objeto Cliente
         try {
 			cliente = new Cliente(nomeCliente, cpf, telefone, animaisCadastrados.size());		
@@ -291,7 +298,7 @@ public class cadastroController implements Initializable {
 			cliente.setFormaPagamento(fpg);
 			cliente.setParcela(Parcelas);
 			cliente.setObservacao(observacao);
-			
+			cliente.setOrcamentoTotal(orcamento);
 			//=> Método que exibe todos os dados do cliente e de seus animais (Para debug)
 			//cliente.printClienteSheet(menu.serv);
 			
