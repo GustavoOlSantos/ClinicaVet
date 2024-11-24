@@ -344,7 +344,58 @@ public class ClienteDaoJDBC implements ClienteDAO {
 		}
 	}
 
-	
+	public List<Cliente> findToday() throws DomainException {
+		PreparedStatement st = null;
+		ResultSet rs = null; 
+		
+		try {
+			st = conn.prepareStatement(
+					"SELECT cliente.*, animal.* "
+					+ "FROM cliente INNER JOIN animal "
+					+ "ON cliente.id = animal.idCliente "
+					+ "WHERE DATE(dataCadastro) = CURDATE()"
+					+ "ORDER BY id DESC");
+			
+			rs = st.executeQuery();
+			
+			List<Cliente> listaClientes = new ArrayList<Cliente>();
+			int rows = 0;
+			
+			while(rs.next()) {
+				
+				Cliente cliente = instCliente(rs);	
+				rows++;
+				
+				for(int i = 0; i < cliente.qtdAnimal; i++) {
+					cliente.animal[i] = instAnimal(rs, cliente, i);
+					
+					if(i == cliente.qtdAnimal - 1) {
+						continue;
+					}
+					
+					if(!rs.next()) {
+						break;
+					}
+					
+
+				}
+				
+				listaClientes.add(cliente);
+			}
+			
+			//System.out.println("Clientes Encontrados: " + rows + "\n");
+			return listaClientes;
+					
+		}
+		catch(SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally{
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}
+	}
+
 	@Override
 	public List<Cliente> findActive() throws DomainException {
 		PreparedStatement st = null;

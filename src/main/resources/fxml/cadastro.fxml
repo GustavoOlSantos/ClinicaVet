@@ -13,12 +13,12 @@
 	<Label text="Cadastro de Cliente" styleClass="Welcome" />
 			
     <!-- Contêiner para exibir os formulários lado a lado -->
-    <VBox spacing="20" alignment="CENTER" >
+    <VBox styleClass="TableContenti" spacing="20" alignment="TOP_LEFT" >
     <!-- Primeira HBox-->
-    <HBox spacing="15" alignment="CENTER">
+    <HBox spacing="15" alignment="TOP_LEFT">
         <VBox spacing="5">
             <Label text="Nome do Cliente" styleClass="data-name" />
-            <TextField fx:id="nomeField" promptText="Nome do Cliente" minWidth="300" minHeight="15"/>
+            <TextField fx:id="nomeField" promptText="Nome do Cliente" minWidth="300" minHeight="25"/>
         </VBox>
         
         <VBox spacing="5">
@@ -38,7 +38,7 @@
     </HBox>
 
     <!-- Segunda HBox-->
-    <HBox spacing="15" alignment="CENTER">
+    <HBox spacing="15" alignment="TOP_LEFT">
         <VBox spacing="5">
             <Label text="Forma de Pagamento" styleClass="data-name" />
             <ComboBox fx:id="formaPgField" minWidth="200" />

@@ -1,16 +1,18 @@
 package sistem.vet.controllers;
 
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import sistem.entities.Animal;
 import sistem.entities.Cliente;
 import sistem.entities.dto.animalDTO;
 import sistem.enums.AnimalEmergencia;
@@ -42,12 +44,24 @@ public class homeController implements Initializable {
     public TableColumn<animalDTO, SituacaoPet> Status;
     @FXML
     public TableColumn<animalDTO, String> NomeTutor;
-	
+    
+    @FXML
+    Label todayDate;
+	@FXML
+    Label caixaValue;
+    @FXML
+    Label AnimaisCads;
+    @FXML
+    Label ClientesCads;
     
     @Override	//=> Atualiza a Tabela ao inicializar
     public void initialize(URL location, ResourceBundle resources) {
     	
     	//menu.setTableWidth(tableView, 0);
+    	DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    	todayDate.setText(LocalDateTime.now().format(timeFormat).toString());
+    	
+    	preecherDados();
     	
     	try {
 			List<Cliente> clientes = clienteDAO.findAll(5);
@@ -110,6 +124,28 @@ public class homeController implements Initializable {
 	public void clickPacientes() {
 		menu.loadContent("listaPacientes.fxml", menu.classe); 
 		menu.leftMenu.getChildren().forEach(children -> menu.style(children, menu.PC));
+	}
+	
+	public void preecherDados() {
+		try {
+			List<Cliente> clientes = clienteDAO.findToday();
+			
+			int qtdClientes = clientes.size();
+			int qtdPets = 0;
+			double caixa = 0;
+			
+			for(Cliente cli : clientes) {
+				caixa += cli.getOrcamentoTotal();
+				qtdPets += cli.qtdAnimal;
+			}
+			
+			caixaValue.setText(""+ caixa);
+			AnimaisCads.setText(""+ qtdPets);
+			ClientesCads.setText(""+ qtdClientes);
+			
+		} catch (DomainException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@FXML

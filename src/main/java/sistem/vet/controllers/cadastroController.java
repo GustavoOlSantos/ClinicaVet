@@ -99,7 +99,24 @@ public class cadastroController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
     	
     	menu.setTableWidth(tableView, 550);
+    	
+    	parcelasField.setEditable(false);
+    	
 		formaPgField.getItems().addAll(FormaPagamento.values());
+		
+		formaPgField.valueProperty().addListener((observable, oldValue, newValue) -> {
+			switch(newValue) {
+				case CREDITO: 
+					parcelasField.setEditable(true);
+					parcelasField.setText("1");
+					break;
+				
+				default: 
+					parcelasField.setEditable(false);
+					parcelasField.setText("1");
+					break;
+			}
+		});
 		
 		//=> Inicializar Lista de Animais
 		animaisCadastrados = new ArrayList<Animal>();

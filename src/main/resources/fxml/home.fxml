@@ -11,25 +11,27 @@
     
 	<HBox>
 		
-		<!-- INPUTS DE PESQUISA -->
-	    <VBox styleClass="marginLeft" spacing="20">
+		<!-- INPUTS DE PESQUISA E TABELA DE ULTIMOS PACIENTES -->
+	    <VBox styleClass="marginLeft" spacing="60">
 	    	
-		    <VBox styleClass="darkerBox" spacing="10">
-		    
-		    	<Label text="Buscar por Cliente ou Animal" styleClass="welcome-data" />
+	    	<!-- INPUTS -->
+		    <VBox styleClass="darkerBox" spacing="30">
+		    	<VBox spacing="10">
+		    		<Label text="Buscar por Cliente ou Animal" styleClass="welcome-data" />
 	
-		    	<HBox spacing="10">
-		    		<VBox>
-			    		<Label text="Nome do Tutor" styleClass="data-name" />
-			    		<TextField fx:id="nomeField" promptText="Nome do Cliente" minWidth="300"/>
-		    		</VBox>
-		    		
-		    		<VBox>
-			    		<Label text="Nome do Animal" styleClass="data-name" />
-			    		<TextField fx:id="nomePetField" promptText="Nome do Pet"  minWidth="300"/>
-			    	</VBox>
-		    	
-		    	</HBox>
+			    	<HBox spacing="10">
+			    		<VBox>
+				    		<Label text="Nome do Tutor" styleClass="data-name" />
+				    		<TextField fx:id="nomeField" promptText="Nome do Cliente" minWidth="300"/>
+			    		</VBox>
+			    		
+			    		<VBox>
+				    		<Label text="Nome do Animal" styleClass="data-name" />
+				    		<TextField fx:id="nomePetField" promptText="Nome do Pet"  minWidth="300"/>
+				    	</VBox>
+			    	
+			    	</HBox>
+		    	</VBox>
 		    
 		    	<HBox spacing="10">
 		    		<VBox>
@@ -53,11 +55,12 @@
 		    	</HBox>
 		    </VBox>
 		    
+		    <!-- TABELA -->
 	    	<VBox styleClass="darkerBox" spacing="10">
 	    		<Label text="Últimos Pacientes Cadastrados" styleClass="welcome-data" />
 	    		
 	    		<VBox VBox.vgrow="ALWAYS">
-					<TableView fx:id="tableView" styleClass="Table" VBox.vgrow="ALWAYS" prefWidth="Infinity" maxWidth="Infinity">
+					<TableView fx:id="tableView" styleClass="Table" maxHeight="150" prefWidth="Infinity" maxWidth="Infinity">
 				        <columns>
 					        <TableColumn fx:id="NomePet"     text="Nome do Pet" 	minWidth="120"  maxWidth="250"/>
 					        <TableColumn fx:id="Sexo"	 	 text="Sexo" 	   		minWidth="50"  maxWidth="120"/>
@@ -68,16 +71,19 @@
 				    </TableView>
 			    </VBox>
 	    	</VBox>
-	    </VBox>
+	    	</VBox>
+	    
+	    
+	    
+	    
 	    
 	    
 	    <!-- BOTÕES DE AÇÃO RÁPIDA -->
-	    <VBox styleClass="marginLeftMore" spacing="30">
-	    
-	    	<VBox styleClass="darkerBox" spacing="10">
-	    		<Label text="Ações Rápidas" styleClass="welcome-data" />
-	    		
-	    		<HBox spacing="20">
+	    <VBox styleClass="marginLeftMore" spacing="30" alignment="TOP_RIGHT">
+
+			<VBox styleClass="darkerBox" spacing="10">
+				<Label text="Ações Rápidas" styleClass="welcome-data" />
+				<HBox spacing="20">
 		    		<Button styleClass="fastActionButtons" onAction="#cadCliente">
 		    			<graphic>
 		    				<VBox alignment="CENTER" spacing="5">
@@ -105,9 +111,37 @@
                     	</graphic>
 		    		</Button>
     			</HBox>
+			</VBox>
+			
+			<VBox styleClass="darkerBox" spacing="10">
+				
+				<HBox spacing="100">
+		    		<Label text="Caixa Diário" styleClass="welcome-data" />
+		    		<Label fx:id="todayDate" />
+	    		</HBox>
+	    		
+	    		<HBox spacing="20">
+		    		<VBox styleClass="caixaDiario">
+		    			
+		    			<HBox>
+			    			<Label 					  styleClass="caixaValue" text="R$ " />
+			    			<Label fx:id="caixaValue" styleClass="caixaValue" text="" />
+		    			</HBox>
+		    			
+		    			<HBox>
+			    			<Label styleClass="data-name" text="Animais Cadastrados: " />
+			    			<Label fx:id="AnimaisCads" styleClass="" text="" />
+		    			</HBox>
+		    			
+		    			<HBox>
+			    			<Label styleClass="data-name" text="Clientes Cadastrados: " />
+			    			<Label fx:id="ClientesCads" styleClass="" text="" />
+		    			</HBox>
+		    		</VBox>
+		    		
+    			</HBox>
 	    	</VBox>
 	    	
-
 	    </VBox>
     </HBox>
 </VBox>

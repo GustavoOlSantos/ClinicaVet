@@ -257,3 +257,15 @@
 	-fx-min-height: 180;
 }
 
+.caixaValue{
+	-fx-padding: 20 0 10 0;
+	-fx-font-size: 45px; /* Tamanho do texto */
+	-fx-font-weight: bold; /* Negrito */
+	-fx-text-fill: #000; /* Cor do texto */
+}
+
+.caixaDiario{
+	-fx-min-width: 80 !important;
+	-fx-min-height: 150;
+}
+
