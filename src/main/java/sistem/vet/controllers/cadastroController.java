@@ -297,6 +297,7 @@ public class cadastroController implements Initializable {
 			
 			clienteDAO.insert(cliente);
 			menu.dialogAvisos("Cliente Cadastrado com sucesso");
+			menu.goBack();
 		} 
         catch (DomainException e) {
 			menu.dialogAvisos(e.getMessage());
