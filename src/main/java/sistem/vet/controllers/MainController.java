@@ -50,7 +50,7 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     	
-    	menu.menuDataSaverFiller(contentBox, PI, LC, PC, IT, MenuBox, getClass());	//=> Carrega os Dados na classe
+    	menu.menuDataSaverFiller(contentBox, PI, LC, PC, IT, MenuBox, leftMenu, getClass());	//=> Carrega os Dados na classe
     	menu.loadContent("home.fxml", menu.classe); 								//=> Carrega o Conteúdo da Página Inicial
     							  //=> Path, Width, Height, preserveRatio, Smooth
     	LOGO.setImage(new Image("file:src/main/resources/imgs/app-icon.png", 30, 30, true, true));

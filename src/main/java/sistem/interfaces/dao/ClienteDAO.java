@@ -14,6 +14,7 @@ public interface ClienteDAO {
 	void deleteById(Integer id);
 	Cliente findById(Integer id) throws DomainException;
 	List<Cliente> findAll() throws DomainException;
+	List<Cliente> findAll(int limit) throws DomainException;
 	List<Cliente> findByNameOrCpf(String text) throws DomainException;
 	List<Cliente> findActive() throws DomainException;
 }

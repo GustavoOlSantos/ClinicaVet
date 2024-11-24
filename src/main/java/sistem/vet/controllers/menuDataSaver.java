@@ -42,6 +42,8 @@ public class menuDataSaver {
     public HBox IT;			//=> Internações
     @FXML
     public HBox MenuBox;	//=> Container do Menu
+    @FXML
+    public VBox leftMenu;
     public Class classe;	//=> Registro da Classe Main
     
     public Scene scene;
@@ -97,13 +99,14 @@ public class menuDataSaver {
 		}
 	}
 		
-	public void menuDataSaverFiller(VBox contentBox, HBox pI, HBox lC, HBox pC, HBox iT, HBox menuBox, Class classe) {
+	public void menuDataSaverFiller(VBox contentBox, HBox pI, HBox lC, HBox pC, HBox iT, HBox menuBox, VBox leftMenu, Class classe) {
 		this.contentBox = contentBox;
 		this.PI = pI;
 		this.LC = lC;
 		this.PC = pC;
 		this.IT = iT;
 		this.MenuBox = menuBox;
+		this.leftMenu = leftMenu;
 		this.classe = classe;
 	}
 	

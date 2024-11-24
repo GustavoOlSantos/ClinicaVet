@@ -2,8 +2,112 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import org.kordamp.ikonli.javafx.StackedFontIcon?>
 
-<!-- Contéudo da Página inicial (ainda não sei o que colocar) -->
-<VBox xmlns:fx="http://javafx.com/fxml" alignment="CENTER">
-    <Label text="Bem vindo, usuário!" styleClass="Welcome" />
+<VBox xmlns:fx="http://javafx.com/fxml" VBox.vgrow="ALWAYS" alignment="TOP_LEFT" fx:controller="sistem.vet.controllers.homeController">
+
+    <Label text="Bem vindo!" styleClass="Welcome" />
+    
+	<HBox>
+		
+		<!-- INPUTS DE PESQUISA -->
+	    <VBox styleClass="marginLeft" spacing="20">
+	    	
+		    <VBox styleClass="darkerBox" spacing="10">
+		    
+		    	<Label text="Buscar por Cliente ou Animal" styleClass="welcome-data" />
+	
+		    	<HBox spacing="10">
+		    		<VBox>
+			    		<Label text="Nome do Tutor" styleClass="data-name" />
+			    		<TextField fx:id="nomeField" promptText="Nome do Cliente" minWidth="300"/>
+		    		</VBox>
+		    		
+		    		<VBox>
+			    		<Label text="Nome do Animal" styleClass="data-name" />
+			    		<TextField fx:id="nomePetField" promptText="Nome do Pet"  minWidth="300"/>
+			    	</VBox>
+		    	
+		    	</HBox>
+		    
+		    	<HBox spacing="10">
+		    		<VBox>
+						<Label text="CPF/CNPJ" styleClass="data-name" />
+			    		<TextField fx:id="cpfField" promptText="Apenas Números"  minWidth="150" />
+		    		</VBox>
+		    		
+		    		<VBox>
+						<Label text="Telefone" styleClass="data-name" />
+			    		<TextField fx:id="telefoneField" promptText="Apenas Números"  minWidth="150" />
+		    		</VBox>
+		    		
+		    		<VBox styleClass="submit-align">
+			    		<Button styleClass="submit-button" onAction="#buscarCliente"> 
+			    			<graphic>
+			                    <FontIcon iconLiteral="fa-search" iconColor="black" iconSize="13" />
+			                </graphic>
+			                Pesquisar
+			    		</Button>
+		    		</VBox>
+		    	</HBox>
+		    </VBox>
+		    
+	    	<VBox styleClass="darkerBox" spacing="10">
+	    		<Label text="Últimos Pacientes Cadastrados" styleClass="welcome-data" />
+	    		
+	    		<VBox VBox.vgrow="ALWAYS">
+					<TableView fx:id="tableView" styleClass="Table" VBox.vgrow="ALWAYS" prefWidth="Infinity" maxWidth="Infinity">
+				        <columns>
+					        <TableColumn fx:id="NomePet"     text="Nome do Pet" 	minWidth="120"  maxWidth="250"/>
+					        <TableColumn fx:id="Sexo"	 	 text="Sexo" 	   		minWidth="50"  maxWidth="120"/>
+					        <TableColumn fx:id="Emergencia"  text="Emergencia" 		minWidth="50"   maxWidth="100"/>
+					        <TableColumn fx:id="Status" 	 text="Status do pet"   minWidth="100"  maxWidth="280"/>
+					        <TableColumn fx:id="NomeTutor" 	 text="Nome do Tutor"   minWidth="200"  maxWidth="300"/>
+				        </columns>
+				    </TableView>
+			    </VBox>
+	    	</VBox>
+	    </VBox>
+	    
+	    
+	    <!-- BOTÕES DE AÇÃO RÁPIDA -->
+	    <VBox styleClass="marginLeftMore" spacing="30">
+	    
+	    	<VBox styleClass="darkerBox" spacing="10">
+	    		<Label text="Ações Rápidas" styleClass="welcome-data" />
+	    		
+	    		<HBox spacing="20">
+		    		<Button styleClass="fastActionButtons" onAction="#cadCliente">
+		    			<graphic>
+		    				<VBox alignment="CENTER" spacing="5">
+		                    	<FontIcon iconLiteral="fa-plus" iconColor="black" iconSize="50"/>
+		                    	<Label text="Cadastrar Pacientes"/>
+	                    	</VBox>
+		                </graphic>
+		    		</Button>
+		    		
+		    		<Button styleClass="fastActionButtons" onAction="#clickClientes">
+		    			<graphic>
+			    			<VBox alignment="CENTER" spacing="5">
+		                    	<FontIcon iconLiteral="fas-users" iconColor="black" iconSize="50"/>
+		                    	<Label text="Ver clientes"/>
+	                    	</VBox>
+                    	</graphic>
+		    		</Button>
+		    		
+		    		<Button styleClass="fastActionButtons" onAction="#clickPacientes">
+		    			<graphic>
+			    			<VBox alignment="CENTER" spacing="5">
+		                    	<FontIcon iconLiteral="fa-paw" iconColor="black" iconSize="50"/>
+		                    	<Label text="Ver Pacientes"/>
+	                    	</VBox>
+                    	</graphic>
+		    		</Button>
+    			</HBox>
+	    	</VBox>
+	    	
+
+	    </VBox>
+    </HBox>
 </VBox>
