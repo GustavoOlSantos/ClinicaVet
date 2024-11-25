@@ -21,6 +21,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import sistem.entities.Animal;
 import sistem.entities.Servicos;
+import sistem.entities.dto.animalDTO;
 import sistem.exceptions.DomainException;
 import sistem.interfaces.dao.AnimalDAO;
 import sistem.interfaces.dao.ClienteDAO;
@@ -61,6 +62,7 @@ public class menuDataSaver {
     private Integer sharedId;				//=> Id do cliente 			 (Para buscas e operacões)
     private Integer sharedIdPet;		   //=> Id do animal			 (Para buscas e consultas)
     private Animal sharedAnimal;
+    private List<animalDTO> sharedAnimais;
     
 	//=> Construtor (Inicialização do programa)
 	public menuDataSaver() {
@@ -108,6 +110,8 @@ public class menuDataSaver {
 		this.MenuBox = menuBox;
 		this.leftMenu = leftMenu;
 		this.classe = classe;
+		
+		pageHistory.push("home.fxml");
 	}
 	
 	//=> Carrega o Conteúdo na divisão setada
@@ -267,6 +271,14 @@ public class menuDataSaver {
 	public void setSharedAnimal(Animal sharedAnimal) {
 		this.sharedAnimal = sharedAnimal;
 	}
-	
-		
+
+
+	public List<animalDTO> getSharedAnimais() {
+		return sharedAnimais;
+	}
+
+
+	public void setSharedAnimais(List<animalDTO> sharedAnimais) {
+		this.sharedAnimais = sharedAnimais;
+	}	
 }

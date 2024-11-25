@@ -1,5 +1,6 @@
 package sistem.vet.controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -8,11 +9,16 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import sistem.entities.Cliente;
 import sistem.entities.dto.animalDTO;
 import sistem.enums.AnimalEmergencia;
@@ -21,6 +27,9 @@ import sistem.enums.SituacaoPet;
 import sistem.exceptions.DomainException;
 import sistem.interfaces.dao.AnimalDAO;
 import sistem.interfaces.dao.ClienteDAO;
+import sistem.services.CpfCnpjMask;
+import sistem.services.TelefoneMask;
+import sistem.vet.App;
 
 
 
@@ -53,6 +62,15 @@ public class homeController implements Initializable {
     Label AnimaisCads;
     @FXML
     Label ClientesCads;
+    
+    @FXML
+    TextField nomeField;
+    @FXML
+    TextField nomePetField;
+    @FXML
+    TextField cpfField;
+    @FXML
+    TextField telefoneField;
     
     @Override	//=> Atualiza a Tabela ao inicializar
     public void initialize(URL location, ResourceBundle resources) {
@@ -89,9 +107,8 @@ public class homeController implements Initializable {
 		}
     		
     }
-    
-
-    
+ 
+  
     @FXML
     public void renderTable(List<animalDTO> animais) {
     	
@@ -150,20 +167,118 @@ public class homeController implements Initializable {
 	
 	@FXML
     public void buscarCliente() {
-        /*String text = buscaField.getText();
-    	text = CpfCnpjMask.Mask(text);
-    	
-    	List<Cliente> cliList = new ArrayList<>();
 		
 		try {
-			cliList = clienteDAO.findByNameOrCpf(text);
-		} catch (DomainException e) {
-			menu.dialogAvisos("Erro: " + e.getMessage());
-			e.printStackTrace();
+	        String nomeTutor = nomeField.getText();
+	        String cpf = CpfCnpjMask.Mask(cpfField.getText());
+	        String tel = telefoneField.getText().isBlank() ? "" : TelefoneMask.Mask(telefoneField.getText());
+	        String pet = nomePetField.getText();
+	        
+	        List<Cliente> clis;
+	        int code = nomeTutor.isBlank() && cpf.isBlank() && tel.isBlank() ? 0 :
+        		!nomeTutor.isBlank() && cpf.isBlank() && tel.isBlank()   ? 1 :
+    			!nomeTutor.isBlank() && !cpf.isBlank() && tel.isBlank()  ? 2 : 3 ;
+	        
+	        if(pet.isBlank()) {
+	        	
+	        	if(code == 0) {
+	        		return;
+	        	}
+	        	
+	        	clis = clienteDAO.findInHome(nomeTutor, cpf, tel, code);
+	        	List<animalDTO> animais = new ArrayList<animalDTO>();
+				
+				for(Cliente cli : clis) {
+					for(int i = 0; i < cli.qtdAnimal; i++) {
+						
+						if(cli.animal[i] != null) {
+							
+							cli.animal[i].transformServicos(menu.serv);
+							
+							animalDTO petpet = new animalDTO(cli.animal[i].getId(),
+									cli.animal[i].getIdCliente(),
+									cli.animal[i].getNome(),
+									cli.animal[i].getSexo(),
+									cli.animal[i].getSituacao(), 
+									cli.animal[i].getEmergencia(),
+									cli.animal[i].getStringServicos(),
+									cli.animal[i].getOrcamentoStr(),
+									cli.getNome());
+							
+							animais.add(petpet);
+						}					
+					}
+				}
+				
+				menu.setSharedAnimais(animais);
+				menu.loadContent("resultadoBuscaClientes.fxml", getClass());
+	        }
+	        else {
+	        	
+	        	clis = clienteDAO.findInHome(nomeTutor, cpf, tel, pet, code);
+	        	
+        		List<animalDTO> animais = new ArrayList<animalDTO>();
+				
+				for(Cliente cli : clis) {
+					for(int i = 0; i < cli.qtdAnimal; i++) {
+						
+						if(cli.animal[i] != null) {
+							
+							cli.animal[i].transformServicos(menu.serv);
+							
+							animalDTO petpet = new animalDTO(cli.animal[i].getId(),
+									cli.animal[i].getIdCliente(),
+									cli.animal[i].getNome(),
+									cli.animal[i].getSexo(),
+									cli.animal[i].getSituacao(), 
+									cli.animal[i].getEmergencia(),
+									cli.animal[i].getStringServicos(),
+									cli.animal[i].getOrcamentoStr(),
+									cli.getNome());
+							
+							animais.add(petpet);
+						}					
+					}
+				}
+				
+				if(animais.size() > 1) {
+					menu.setSharedAnimais(animais);
+					menu.loadContent("resultadoBuscaClientes.fxml", getClass());
+				}
+				else {
+		    		int id = clis.get(0).animal[0].getId();
+		    		menu.setSharedIdPet(id);
+		    		
+		    		Stage modalStage = new Stage();
+
+		    		// Definindo a modalidade
+		    		modalStage.initModality(Modality.APPLICATION_MODAL);
+		    		modalStage.setTitle("Visualizando Animal");
+		            
+		            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/verAnimal.fxml"));
+		            Scene modalScene;
+		            
+		      		try {
+		      			modalScene = new Scene(fxmlLoader.load(), 1000, 800);
+		      			modalScene.getStylesheets().add(App.class.getResource("/styles/StylesModal.css").toExternalForm());  
+		      			modalStage.setScene(modalScene);
+		      			
+		      			verAnimalController controller = fxmlLoader.getController();
+		      			controller.setStage(modalStage);
+		      			
+		      		} 
+		      		catch (IOException e1) {
+		      			e1.printStackTrace();
+		      		}
+		              
+		      		// Mostrando a janela modal
+		              modalStage.showAndWait();
+				}
+	        }
 		}
-		
-		tableView.getItems().clear();
-		renderTable(an);  */
+		catch(DomainException e) {
+			menu.dialogAvisos(e.getMessage());
+		}
     }
 	
 }

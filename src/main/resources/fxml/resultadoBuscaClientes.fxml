@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import org.kordamp.ikonli.javafx.StackedFontIcon?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" VBox.vgrow="ALWAYS" alignment="TOP_LEFT" fx:controller="sistem.vet.controllers.resultadoBusca">
+	
+	<HBox fx:id="hboxMargin">
+    	<Label text="Resultado da Busca de Clientes" styleClass="Welcome" />
+    	
+    	<HBox styleClass="buttonnn">
+    		<Button text="Voltar"  onAction="#goBack"></Button>
+		</HBox>
+	</HBox>
+    
+	<HBox>
+	    <VBox styleClass="marginLeft" spacing="60">
+	    		
+    		<VBox VBox.vgrow="ALWAYS">
+				<TableView fx:id="tableView" styleClass="Table" VBox.vgrow="ALWAYS" prefWidth="Infinity" maxWidth="Infinity">
+			        <columns>
+				        <TableColumn fx:id="NomePet"     text="Nome do Pet" 	minWidth="120"  maxWidth="250"/>
+				        <TableColumn fx:id="Sexo"	 	 text="Sexo" 	   		minWidth="50"  maxWidth="120"/>
+				        <TableColumn fx:id="Emergencia"  text="Emergencia" 		minWidth="50"   maxWidth="100"/>
+				        <TableColumn fx:id="Orcamento" 		text="Orçamento"  minWidth="50" maxWidth="100"	/>
+				        <TableColumn fx:id="Status" 	 text="Status do pet"   minWidth="100"  maxWidth="280"/>
+	         			<TableColumn fx:id="Servicos" 		text="Serviços"   minWidth="50" maxWidth="500"	/>
+				        <TableColumn fx:id="NomeTutor" 	 text="Nome do Tutor"   minWidth="200"  maxWidth="300"/>
+				        <TableColumn fx:id="See" 	 	 text="Abrir"           minWidth="30"   maxWidth="70"/>
+	        			<TableColumn fx:id="Edit" 	 	 text="Editar"          minWidth="30"   maxWidth="70"/>	
+			        </columns>
+			    </TableView>
+		    </VBox>
+    	</VBox>
+    </HBox>
+</VBox>

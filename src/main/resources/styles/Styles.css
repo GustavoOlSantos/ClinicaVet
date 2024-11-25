@@ -269,3 +269,7 @@
 	-fx-min-height: 150;
 }
 
+.buttonnn{
+	-fx-padding: 20 10 10 10; /* Espaçamento */
+}
+

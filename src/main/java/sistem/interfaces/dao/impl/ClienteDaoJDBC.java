@@ -396,7 +396,6 @@ public class ClienteDaoJDBC implements ClienteDAO {
 		}
 	}
 
-	@Override
 	public List<Cliente> findActive() throws DomainException {
 		PreparedStatement st = null;
 		ResultSet rs = null; 
@@ -434,6 +433,189 @@ public class ClienteDaoJDBC implements ClienteDAO {
 				}
 				
 				listaClientes.add(cliente);
+			}
+			
+			//System.out.println("Clientes Encontrados: " + rows + "\n");
+			return listaClientes;
+					
+		}
+		catch(SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally{
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}
+	}
+	
+	@Override
+	public List<Cliente> findInHome(String nome, String cpf, String tel, int code) throws DomainException {
+		PreparedStatement st = null;
+		ResultSet rs = null; 
+		
+		try {
+			
+			if(code == 1) {
+				st = conn.prepareStatement(
+						"SELECT cliente.*, animal.* "
+						+ "FROM cliente INNER JOIN animal "
+						+ "ON cliente.id = animal.idCliente "
+						+ "WHERE cliente.nome LIKE ?"
+						+ "ORDER BY id DESC");
+				st.setString(1, "%" + nome + "%");
+			}
+			
+			if(code == 2) {
+				st = conn.prepareStatement(
+						"SELECT cliente.*, animal.* "
+						+ "FROM cliente INNER JOIN animal "
+						+ "ON cliente.id = animal.idCliente "
+						+ "WHERE cliente.nome LIKE ? AND cpfCNpj = ?)"
+						+ "ORDER BY id DESC");
+				
+				st.setString(1, "%" + nome + "%");
+				st.setString(2, cpf);
+
+			}
+			
+			if(code == 3) {
+				st = conn.prepareStatement(
+						"SELECT cliente.*, animal.* "
+						+ "FROM cliente INNER JOIN animal "
+						+ "ON cliente.id = animal.idCliente "
+						+ "WHERE cliente.nome LIKE ? AND cpfCNpj = ? AND telefone = ?) "
+						+ "ORDER BY id DESC");
+				
+				st.setString(1, "%" + nome + "%");
+				st.setString(2, cpf);
+				st.setString(3, tel);
+			}
+
+			rs = st.executeQuery();
+			
+			List<Cliente> listaClientes = new ArrayList<Cliente>();
+			int rows = 0;
+			
+			while(rs.next()) {
+				
+				Cliente cliente = instCliente(rs);	
+				rows++;
+				
+				for(int i = 0; i < cliente.qtdAnimal; i++) {
+					cliente.animal[i] = instAnimal(rs, cliente, i);
+					
+					if(i == cliente.qtdAnimal - 1) {
+						continue;
+					}
+					
+					if(!rs.next()) {
+						break;
+					}
+					
+
+				}
+				
+				listaClientes.add(cliente);
+			}
+			
+			if(rows == 0) {
+				throw new DomainException("Nenhum animal encontrado com os parâmetros fornecidos");
+			}
+			
+			//System.out.println("Clientes Encontrados: " + rows + "\n");
+			return listaClientes;
+					
+		}
+		catch(SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally{
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}
+	}
+	
+	public List<Cliente> findInHome(String nome, String cpf, String tel, String pet, int code) throws DomainException {
+		PreparedStatement st = null;
+		ResultSet rs = null; 
+		
+		try {
+			
+			if(code == 0) {
+				st = conn.prepareStatement(
+						"SELECT cliente.*, animal.* "
+						+ "FROM cliente INNER JOIN animal "
+						+ "ON cliente.id = animal.idCliente "
+						+ "WHERE animal.nome LIKE ?"
+						+ "ORDER BY id DESC");
+				st.setString(1, "%" + pet + "%");
+			}
+			
+			if(code == 1) {
+				st = conn.prepareStatement(
+						"SELECT cliente.*, animal.* "
+						+ "FROM cliente INNER JOIN animal "
+						+ "ON cliente.id = animal.idCliente "
+						+ "WHERE cliente.nome LIKE ? AND animal.nome LIKE ?"
+						+ "ORDER BY id DESC");
+				st.setString(1, "%" + nome + "%");
+				st.setString(2, "%" + pet + "%");
+			}
+			
+			if(code == 2) {
+				st = conn.prepareStatement(
+						"SELECT cliente.*, animal.* "
+						+ "FROM cliente INNER JOIN animal "
+						+ "ON cliente.id = animal.idCliente "
+						+ "WHERE cliente.nome LIKE ? AND cpfCNpj = ? AND animal.nome LIKE ?"
+						+ "ORDER BY id DESC");
+				st.setString(1, "%" + nome + "%");
+				st.setString(2, cpf);
+				st.setString(3, "%" + pet + "%");
+			}
+			
+			if(code == 3) {
+				st = conn.prepareStatement(
+						"SELECT cliente.*, animal.* "
+						+ "FROM cliente INNER JOIN animal "
+						+ "ON cliente.id = animal.idCliente "
+						+ "WHERE cliente.nome LIKE ? AND cpfCNpj = ? AND telefone = ? OR animal.nome LIKE ?"
+						+ "ORDER BY id DESC");
+				
+				st.setString(1, "%" + nome + "%");
+				st.setString(2, cpf);
+				st.setString(3, tel);
+				st.setString(4, "%" + pet + "%");
+			}
+			rs = st.executeQuery();
+			
+			List<Cliente> listaClientes = new ArrayList<Cliente>();
+			int rows = 0;
+			
+			while(rs.next()) {
+				
+				Cliente cliente = instCliente(rs);	
+				rows++;
+				
+				for(int i = 0; i < cliente.qtdAnimal; i++) {
+					cliente.animal[i] = instAnimal(rs, cliente, i);
+					
+					if(i == cliente.qtdAnimal - 1) {
+						continue;
+					}
+					
+					if(!rs.next()) {
+						break;
+					}
+					
+
+				}
+
+				listaClientes.add(cliente);
+			}
+			
+			if(rows == 0) {
+				throw new DomainException("Nenhum animal encontrado com os parâmetros fornecidos");
 			}
 			
 			//System.out.println("Clientes Encontrados: " + rows + "\n");
@@ -528,48 +710,49 @@ public class ClienteDaoJDBC implements ClienteDAO {
 		return cliente;
 	}
 	
+	
 	private Animal instAnimal(ResultSet rs, Cliente cliente, int i) throws SQLException, DomainException {
-		Animal animal = new Animal();
-		animal.setId(rs.getInt("animal.idAnimal"));
-		animal.setIdCliente(rs.getInt("animal.idCliente"));
-		animal.setNome(rs.getString("animal.nome"));
-		animal.setSexo(rs.getInt("animal.sexo"));
-		animal.setTipo(rs.getInt("animal.tipo"));
-		animal.setSituacao(rs.getInt("animal.status"));
-		animal.setEmergencia(rs.getInt("animal.emergencia"));
-		animal.setInternado(rs.getInt("animal.internado"));
-		animal.setOrcamento(rs.getDouble("animal.orcamento"));
-		animal.setObservacoes(rs.getString("animal.observacoes"));
-		animal.setMedicamentos(rs.getString("animal.medicamentos"));
-		animal.setDiagnostico(rs.getString("animal.diagnostico"));
-		animal.setDataAlta(rs.getObject("animal.data_alta", LocalDateTime.class));
-		animal.setDataObito(rs.getObject("animal.data_obito", LocalDateTime.class));
-		String intStr = rs.getString("animal.servicos");
-		
-		intStr = intStr.replaceAll(" ", "");
-		intStr = intStr.substring(1, intStr.length() - 1);
-
-		String[] parts = intStr.split(",");
-		int[] arr = new int[parts.length];
-		
-		int j = 0;
-		for (String part : parts) {
+			Animal animal = new Animal();
+			animal.setId(rs.getInt("animal.idAnimal"));
+			animal.setIdCliente(rs.getInt("animal.idCliente"));
+			animal.setNome(rs.getString("animal.nome"));
+			animal.setSexo(rs.getInt("animal.sexo"));
+			animal.setTipo(rs.getInt("animal.tipo"));
+			animal.setSituacao(rs.getInt("animal.status"));
+			animal.setEmergencia(rs.getInt("animal.emergencia"));
+			animal.setInternado(rs.getInt("animal.internado"));
+			animal.setOrcamento(rs.getDouble("animal.orcamento"));
+			animal.setObservacoes(rs.getString("animal.observacoes"));
+			animal.setMedicamentos(rs.getString("animal.medicamentos"));
+			animal.setDiagnostico(rs.getString("animal.diagnostico"));
+			animal.setDataAlta(rs.getObject("animal.data_alta", LocalDateTime.class));
+			animal.setDataObito(rs.getObject("animal.data_obito", LocalDateTime.class));
+			String intStr = rs.getString("animal.servicos");
 			
-		    part = part.trim();
-		    
-		    if (part.startsWith("-")) {
-		        arr[j] = -1;
-		        j++;
-		        continue;
-		    }
-		    
-		    arr[j] = Integer.parseInt(part);
-		    j++;
+			intStr = intStr.replaceAll(" ", "");
+			intStr = intStr.substring(1, intStr.length() - 1);
+	
+			String[] parts = intStr.split(",");
+			int[] arr = new int[parts.length];
+			
+			int j = 0;
+			for (String part : parts) {
+				
+			    part = part.trim();
+			    
+			    if (part.startsWith("-")) {
+			        arr[j] = -1;
+			        j++;
+			        continue;
+			    }
+			    
+			    arr[j] = Integer.parseInt(part);
+			    j++;
+			}
+			
+			animal.servicos = arr;
+			
+			return animal;
 		}
-		
-		animal.servicos = arr;
-		
-		return animal;
-	}
 
 }
