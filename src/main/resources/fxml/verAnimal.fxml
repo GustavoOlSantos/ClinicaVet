@@ -64,6 +64,16 @@
 						<Label text="Data de Óbito: " styleClass="infoLabel" />
 						<Label fx:id="dataObito" text="" styleClass="infoData" />
 					</HBox>
+					
+					<HBox styleClass="infoContainer">
+						<Button onAction="#EditarPet">
+                            <graphic>
+                               <FontIcon iconLiteral="fa-pencil" iconColor="black" iconSize="15"/>
+                            </graphic>
+                            Editar Animal
+						</Button>
+					</HBox>
+					
 				</VBox>
 			</HBox>
 			

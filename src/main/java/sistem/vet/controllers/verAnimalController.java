@@ -221,6 +221,15 @@ public class verAnimalController implements Initializable {
         tableView.getItems().addAll(servicos);
     }
 	    
+	public void EditarPet (){
+		modal.close();
+		
+		menu.setSharedIdPet(idPet);
+		menu.setSharedId(idCliente);
+		
+		menu.loadContent("editarPet.fxml", menu.classe); 
+    }
+	
     public void setStage(Stage stage) {
     	this.modal = stage;
     }

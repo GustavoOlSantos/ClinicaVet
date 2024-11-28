@@ -11,8 +11,10 @@ sistem\vet\controllers\verAnimalController$2.class
 sistem\interfaces\dao\impl\ClienteDaoJDBC.class
 sistem\vet\controllers\clientesController$3.class
 sistem\vet\controllers\clientesController$6.class
+sistem\vet\controllers\cadastroController$1.class
 sistem\entities\Servicos.class
 sistem\vet\controllers\cadPetController$1.class
+sistem\vet\controllers\resultadoBusca.class
 sistem\vet\controllers\pacientesController$2.class
 sistem\vet\controllers\verAnimalController.class
 sistem\vet\controllers\historicoController$3.class
@@ -21,16 +23,20 @@ sistem\vet\controllers\internadosController$3.class
 sistem\enums\Situacao.class
 sistem\vet\controllers\clientesController.class
 sistem\entities\Cliente.class
+sistem\vet\controllers\cadastroController$3.class
 sistem\db\ConnectionKeepAlive.class
 sistem\interfaces\dao\ClienteDAO.class
 sistem\vet\controllers\pacientesController$1.class
+sistem\vet\controllers\homeController.class
 sistem\vet\controllers\clientesController$2.class
+sistem\vet\controllers\cadastroController$2.class
 sistem\vet\controllers\editarClienteController.class
 sistem\vet\controllers\editarPetController$1.class
 sistem\enums\AnimalTipo.class
 sistem\enums\FormaPagamento.class
 sistem\db\DB.class
 sistem\vet\controllers\clientesController$4.class
+sistem\vet\controllers\resultadoBusca$1.class
 sistem\exceptions\DomainException.class
 sistem\vet\App.class
 sistem\vet\controllers\internadosController$1.class
@@ -44,6 +50,7 @@ sistem\vet\controllers\cadPetController.class
 sistem\vet\controllers\clientesController$1.class
 sistem\entities\Animal$1.class
 sistem\enums\AnimalInternado.class
+sistem\vet\controllers\resultadoBusca$2.class
 sistem\vet\controllers\internadosController.class
 sistem\vet\controllers\historicoController$4.class
 sistem\db\DbException.class
@@ -51,6 +58,7 @@ sistem\enums\AnimalEmergencia.class
 sistem\vet\controllers\cadastroController.class
 sistem\enums\AnimalSexo.class
 sistem\interfaces\dao\impl\ServicosDaoJDBC.class
+sistem\entities\dto\animalDTO.class
 sistem\db\DbIntegrityException.class
 sistem\vet\controllers\editarClienteController$2.class
 sistem\vet\controllers\MainController.class

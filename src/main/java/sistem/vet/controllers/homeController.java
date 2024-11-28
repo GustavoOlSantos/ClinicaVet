@@ -175,9 +175,14 @@ public class homeController implements Initializable {
 	        String pet = nomePetField.getText();
 	        
 	        List<Cliente> clis;
-	        int code = nomeTutor.isBlank() && cpf.isBlank() && tel.isBlank() ? 0 :
-        		!nomeTutor.isBlank() && cpf.isBlank() && tel.isBlank()   ? 1 :
-    			!nomeTutor.isBlank() && !cpf.isBlank() && tel.isBlank()  ? 2 : 3 ;
+	        int code = nomeTutor.isBlank() && cpf.isBlank() && tel.isBlank() ? 0 :  //Todos Vazios
+        		!nomeTutor.isBlank() && cpf.isBlank() && tel.isBlank()   ? 1 :		// Só nome
+    			!nomeTutor.isBlank() && !cpf.isBlank() && tel.isBlank()  ? 2 : 		//Nome e Cpf
+				!nomeTutor.isBlank() && !cpf.isBlank() && !tel.isBlank() ? 3 :		// Todos preenchidos
+				!nomeTutor.isBlank() && !cpf.isBlank() && !tel.isBlank()  ? 4 :		// Nome e Telefone
+				nomeTutor.isBlank() && !cpf.isBlank() && !tel.isBlank()  ? 5 :		// Cpf e Telefone
+				nomeTutor.isBlank() && cpf.isBlank() && !tel.isBlank()   ? 6 :		// Só telefone
+				nomeTutor.isBlank() && !cpf.isBlank() && tel.isBlank()   ? 7 : null;// Só cpf
 	        
 	        if(pet.isBlank()) {
 	        	

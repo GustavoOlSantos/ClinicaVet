@@ -460,7 +460,7 @@ public class ClienteDaoJDBC implements ClienteDAO {
 						"SELECT cliente.*, animal.* "
 						+ "FROM cliente INNER JOIN animal "
 						+ "ON cliente.id = animal.idCliente "
-						+ "WHERE cliente.nome LIKE ?"
+						+ "WHERE cliente.nome LIKE ? "
 						+ "ORDER BY id DESC");
 				st.setString(1, "%" + nome + "%");
 			}
@@ -470,7 +470,7 @@ public class ClienteDaoJDBC implements ClienteDAO {
 						"SELECT cliente.*, animal.* "
 						+ "FROM cliente INNER JOIN animal "
 						+ "ON cliente.id = animal.idCliente "
-						+ "WHERE cliente.nome LIKE ? AND cpfCNpj = ?)"
+						+ "WHERE cliente.nome LIKE ? AND cpfCNpj = ? "
 						+ "ORDER BY id DESC");
 				
 				st.setString(1, "%" + nome + "%");
@@ -483,12 +483,58 @@ public class ClienteDaoJDBC implements ClienteDAO {
 						"SELECT cliente.*, animal.* "
 						+ "FROM cliente INNER JOIN animal "
 						+ "ON cliente.id = animal.idCliente "
-						+ "WHERE cliente.nome LIKE ? AND cpfCNpj = ? AND telefone = ?) "
+						+ "WHERE cliente.nome LIKE ? AND cpfCNpj = ? AND telefone = ? "
 						+ "ORDER BY id DESC");
 				
 				st.setString(1, "%" + nome + "%");
 				st.setString(2, cpf);
 				st.setString(3, tel);
+			}
+			
+			if(code == 4) {
+				st = conn.prepareStatement(
+						"SELECT cliente.*, animal.* "
+						+ "FROM cliente INNER JOIN animal "
+						+ "ON cliente.id = animal.idCliente "
+						+ "WHERE cliente.nome LIKE ? AND telefone = ? "
+						+ "ORDER BY id DESC");
+				
+				st.setString(1, "%" + nome + "%");
+				st.setString(2,  tel);
+			}
+			
+			if(code == 5) {
+				st = conn.prepareStatement(
+						"SELECT cliente.*, animal.* "
+						+ "FROM cliente INNER JOIN animal "
+						+ "ON cliente.id = animal.idCliente "
+						+ "WHERE cpfCNpj = ? AND telefone = ? "
+						+ "ORDER BY id DESC");
+				
+				st.setString(1, cpf);
+				st.setString(2, tel);
+			}
+			
+			if(code == 6) {
+				st = conn.prepareStatement(
+						"SELECT cliente.*, animal.* "
+						+ "FROM cliente INNER JOIN animal "
+						+ "ON cliente.id = animal.idCliente "
+						+ "WHERE telefone = ? "
+						+ "ORDER BY id DESC");
+				
+				st.setString(1, tel);
+			}
+			
+			if(code == 7) {
+				st = conn.prepareStatement(
+						"SELECT cliente.*, animal.* "
+						+ "FROM cliente INNER JOIN animal "
+						+ "ON cliente.id = animal.idCliente "
+						+ "WHERE cpfCNpj = ? "
+						+ "ORDER BY id DESC");
+				
+				st.setString(1, cpf);
 			}
 
 			rs = st.executeQuery();
@@ -546,7 +592,7 @@ public class ClienteDaoJDBC implements ClienteDAO {
 						"SELECT cliente.*, animal.* "
 						+ "FROM cliente INNER JOIN animal "
 						+ "ON cliente.id = animal.idCliente "
-						+ "WHERE animal.nome LIKE ?"
+						+ "WHERE animal.nome LIKE ? "
 						+ "ORDER BY id DESC");
 				st.setString(1, "%" + pet + "%");
 			}
@@ -556,7 +602,7 @@ public class ClienteDaoJDBC implements ClienteDAO {
 						"SELECT cliente.*, animal.* "
 						+ "FROM cliente INNER JOIN animal "
 						+ "ON cliente.id = animal.idCliente "
-						+ "WHERE cliente.nome LIKE ? AND animal.nome LIKE ?"
+						+ "WHERE cliente.nome LIKE ? AND animal.nome LIKE ? "
 						+ "ORDER BY id DESC");
 				st.setString(1, "%" + nome + "%");
 				st.setString(2, "%" + pet + "%");
@@ -567,7 +613,7 @@ public class ClienteDaoJDBC implements ClienteDAO {
 						"SELECT cliente.*, animal.* "
 						+ "FROM cliente INNER JOIN animal "
 						+ "ON cliente.id = animal.idCliente "
-						+ "WHERE cliente.nome LIKE ? AND cpfCNpj = ? AND animal.nome LIKE ?"
+						+ "WHERE cliente.nome LIKE ? AND cpfCNpj = ? AND animal.nome LIKE ? "
 						+ "ORDER BY id DESC");
 				st.setString(1, "%" + nome + "%");
 				st.setString(2, cpf);
@@ -579,7 +625,7 @@ public class ClienteDaoJDBC implements ClienteDAO {
 						"SELECT cliente.*, animal.* "
 						+ "FROM cliente INNER JOIN animal "
 						+ "ON cliente.id = animal.idCliente "
-						+ "WHERE cliente.nome LIKE ? AND cpfCNpj = ? AND telefone = ? OR animal.nome LIKE ?"
+						+ "WHERE cliente.nome LIKE ? AND cpfCNpj = ? AND telefone = ? OR animal.nome LIKE ? "
 						+ "ORDER BY id DESC");
 				
 				st.setString(1, "%" + nome + "%");
@@ -587,6 +633,57 @@ public class ClienteDaoJDBC implements ClienteDAO {
 				st.setString(3, tel);
 				st.setString(4, "%" + pet + "%");
 			}
+			
+			if(code == 4) {
+				st = conn.prepareStatement(
+						"SELECT cliente.*, animal.* "
+						+ "FROM cliente INNER JOIN animal "
+						+ "ON cliente.id = animal.idCliente "
+						+ "WHERE cliente.nome LIKE ? AND telefone = ?  AND animal.nome LIKE ? "
+						+ "ORDER BY id DESC");
+				
+				st.setString(1, "%" + nome + "%");
+				st.setString(2,  tel);
+				st.setString(3, "%" + pet + "%");
+			}
+			
+			if(code == 5) {
+				st = conn.prepareStatement(
+						"SELECT cliente.*, animal.* "
+						+ "FROM cliente INNER JOIN animal "
+						+ "ON cliente.id = animal.idCliente "
+						+ "WHERE cpfCNpj = ? AND telefone = ?  AND animal.nome LIKE ? "
+						+ "ORDER BY id DESC");
+				
+				st.setString(1, cpf);
+				st.setString(2, tel);
+				st.setString(3, "%" + pet + "%");
+			}
+			
+			if(code == 6) {
+				st = conn.prepareStatement(
+						"SELECT cliente.*, animal.* "
+						+ "FROM cliente INNER JOIN animal "
+						+ "ON cliente.id = animal.idCliente "
+						+ "WHERE telefone = ? AND animal.nome LIKE ? "
+						+ "ORDER BY id DESC");
+				
+				st.setString(1, tel);
+				st.setString(2, "%" + pet + "%");
+			}
+			
+			if(code == 7) {
+				st = conn.prepareStatement(
+						"SELECT cliente.*, animal.* "
+						+ "FROM cliente INNER JOIN animal "
+						+ "ON cliente.id = animal.idCliente "
+						+ "WHERE cpfCNpj = ?  AND animal.nome LIKE ? "
+						+ "ORDER BY id DESC");
+				
+				st.setString(1, cpf);
+				st.setString(2, "%" + pet + "%");
+			}
+			
 			rs = st.executeQuery();
 			
 			List<Cliente> listaClientes = new ArrayList<Cliente>();

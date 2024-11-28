@@ -1,5 +1,6 @@
 E:\UVA - Facul\SistemaVetJavaFX\vet\src\main\java\sistem\enums\AnimalSexo.java
 E:\UVA - Facul\SistemaVetJavaFX\vet\src\main\java\sistem\enums\Situacao.java
+E:\UVA - Facul\SistemaVetJavaFX\vet\src\main\java\sistem\vet\controllers\resultadoBusca.java
 E:\UVA - Facul\SistemaVetJavaFX\vet\src\main\java\sistem\db\DB.java
 E:\UVA - Facul\SistemaVetJavaFX\vet\src\main\java\sistem\entities\Animal.java
 E:\UVA - Facul\SistemaVetJavaFX\vet\src\main\java\sistem\vet\controllers\cadastroController.java
@@ -17,6 +18,7 @@ E:\UVA - Facul\SistemaVetJavaFX\vet\src\main\java\sistem\interfaces\dao\ClienteD
 E:\UVA - Facul\SistemaVetJavaFX\vet\src\main\java\sistem\db\ConnectionKeepAlive.java
 E:\UVA - Facul\SistemaVetJavaFX\vet\src\main\java\module-info.java
 E:\UVA - Facul\SistemaVetJavaFX\vet\src\main\java\sistem\interfaces\dao\impl\AnimalDaoJDBC.java
+E:\UVA - Facul\SistemaVetJavaFX\vet\src\main\java\sistem\vet\controllers\homeController.java
 E:\UVA - Facul\SistemaVetJavaFX\vet\src\main\java\sistem\vet\controllers\verClientesController.java
 E:\UVA - Facul\SistemaVetJavaFX\vet\src\main\java\sistem\vet\controllers\historicoController.java
 E:\UVA - Facul\SistemaVetJavaFX\vet\src\main\java\sistem\interfaces\dao\impl\ServicosDaoJDBC.java
@@ -34,6 +36,7 @@ E:\UVA - Facul\SistemaVetJavaFX\vet\src\main\java\sistem\enums\AnimalInternado.j
 E:\UVA - Facul\SistemaVetJavaFX\vet\src\main\java\sistem\vet\controllers\clientesController.java
 E:\UVA - Facul\SistemaVetJavaFX\vet\src\main\java\sistem\db\DbException.java
 E:\UVA - Facul\SistemaVetJavaFX\vet\src\main\java\sistem\vet\controllers\pacientesController.java
+E:\UVA - Facul\SistemaVetJavaFX\vet\src\main\java\sistem\entities\dto\animalDTO.java
 E:\UVA - Facul\SistemaVetJavaFX\vet\src\main\java\sistem\interfaces\dao\impl\ClienteDaoJDBC.java
 E:\UVA - Facul\SistemaVetJavaFX\vet\src\main\java\sistem\vet\controllers\cadPetController.java
 E:\UVA - Facul\SistemaVetJavaFX\vet\src\main\java\sistem\enums\AnimalTipo.java
