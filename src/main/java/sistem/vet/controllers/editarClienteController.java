@@ -148,7 +148,14 @@ public class editarClienteController implements Initializable {
 
 			situacaoField.setOnAction(event -> {
 	        	Situacao selecionado = situacaoField.getValue();
-	        	cliente.setSituacao(selecionado);
+	        	
+	        	if(selecionado == Situacao.FINALIZADO) {
+            		cliente.Finalizar();	
+            	}
+	        	
+	        	else {
+	        		cliente.setSituacao(selecionado);
+	        	}
 	        });
 			
 			

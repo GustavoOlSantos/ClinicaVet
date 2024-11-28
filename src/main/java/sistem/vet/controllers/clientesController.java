@@ -232,13 +232,13 @@ public class clientesController implements Initializable {
 		                if (newValue != null && cliente.getSituacao() != newValue) {
 		                	
 		                	if(newValue == Situacao.FINALIZADO) {
-		                		cliente.setDataFinalizado(LocalDateTime.now());
+		                		cliente.Finalizar();	
 		                	}
+		                	
 		                	else if(newValue != Situacao.FINALIZADO && cliente.getDataFinalizado() != null){
 		                		cliente.setDataFinalizado(null);
 		                	}
-		                	
-		                    cliente.setSituacao(newValue); 
+
 		                    oldValue = newValue;		                   
 		                    
 		                    newValue = null;

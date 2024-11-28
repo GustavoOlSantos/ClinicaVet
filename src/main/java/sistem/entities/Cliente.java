@@ -100,11 +100,11 @@ public class Cliente{
 	}
 	
 	//======> Email
-		public String getEmail() {
-			return email;
-		}
+	public String getEmail() {
+		return email;
+	}
 
-		public void setEmail(String email){
+	public void setEmail(String email){
 			this.email = email;
 		}
 	
@@ -233,7 +233,6 @@ public class Cliente{
 		this.trabalho = stts;
 	}
     
-    
     //======> Observações do Cliente
   	public void setObservacao(String obs) {
   		this.observacao = obs;
@@ -264,6 +263,12 @@ public class Cliente{
     	return dataFinalizado;
     }
     
+	
+	public void Finalizar() {
+		this.setDataFinalizado(LocalDateTime.now());
+		this.setSituacao(Situacao.FINALIZADO);
+	}
+	
     //=> Provável descarte
     public void listaEdit() {
     	System.out.println("[0] Nome: " + nome);
