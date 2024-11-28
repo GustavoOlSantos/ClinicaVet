@@ -74,9 +74,9 @@
 				<Label fx:id="orcamento" text="" styleClass="infoData" />
 			</HBox>
 			
-			<HBox styleClass="infoContainer">
+			<HBox styleClass="infoContainer" maxWidth="400">
 				<Label text="Observações: " 		styleClass="infoLabel" />
-				<Label fx:id="observacoes" text="" styleClass="infoData" />
+				<Label wrapText="true" maxWidth="200" fx:id="observacoes" text="" styleClass="infoData" />
 			</HBox>
 			
 		</VBox>
