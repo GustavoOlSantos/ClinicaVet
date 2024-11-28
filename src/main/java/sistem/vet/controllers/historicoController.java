@@ -476,7 +476,7 @@ public class historicoController implements Initializable {
 		int id = target.getId();
 		menu.setSharedId(id);
 		
-		menu.loadContent("editar.fxml", menu.classe); 
+		menu.loadContent("editarCliente.fxml", menu.classe); 
 	}
 	
 	@FXML
