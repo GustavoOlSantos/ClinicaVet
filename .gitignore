@@ -8,10 +8,12 @@ db.properties
 *.war
 *.ear
 
-# Eclipse
+# IDE Files
 .classpath
 .project
 .settings/
+.idea/
+.vscode/
 
 # Maven
 log/

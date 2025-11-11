@@ -8,7 +8,7 @@
 
 
 
-<VBox  xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistem.vet.controllers.cadastroController" spacing="15" alignment="TOP_LEFT">
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistem.controller.cadastroController" spacing="15" alignment="TOP_LEFT">
 	
 	<Label text="Cadastro de Cliente" styleClass="Welcome" />
 			

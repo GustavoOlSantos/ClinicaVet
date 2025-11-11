@@ -6,7 +6,7 @@
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 <?import org.kordamp.ikonli.javafx.StackedFontIcon?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" alignment="TOP_LEFT" fx:controller="sistem.vet.controllers.editarPetController">
+<VBox xmlns:fx="http://javafx.com/fxml" alignment="TOP_LEFT" fx:controller="sistem.controller.editarPetController">
 
     <Label text="Edição de Animal" styleClass="Welcome" />
     

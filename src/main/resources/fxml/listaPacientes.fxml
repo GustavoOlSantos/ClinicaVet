@@ -5,7 +5,7 @@
 <?import org.kordamp.ikonli.javafx.StackedFontIcon?>
 
 
-<VBox xmlns:fx="http://javafx.com/fxml" VBox.vgrow="ALWAYS" alignment="CENTER" fx:controller="sistem.vet.controllers.pacientesController">
+<VBox xmlns:fx="http://javafx.com/fxml" VBox.vgrow="ALWAYS" alignment="CENTER" fx:controller="sistem.controller.pacientesController">
     <!-- <Label text="Lista clientes" styleClass="Welcome" />
     
     <HBox fx:id="HC" styleClass="menu-items" onMouseClicked="#ClickHistorico">

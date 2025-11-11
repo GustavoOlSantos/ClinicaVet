@@ -1,17 +1,168 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
   </component>
-  <component name="RunManager">
-    <configuration name="MainApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="sistem.vet.MainApp" />
+  <component name="ChangeListManager">
+    <list default="true" id="da0b4dc9-04d5-474a-a7d5-94f666369c72" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dependency-reduced-pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/dependency-reduced-pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/db/ConnectionKeepAlive.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/model/db/ConnectionKeepAlive.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/db/DB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/model/db/DB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/db/DbException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/model/db/DbException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/db/DbIntegrityException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/model/db/DbIntegrityException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/entities/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/model/entities/Animal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/entities/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/model/entities/Cliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/entities/Servicos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/model/entities/Servicos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/entities/dto/animalDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/model/entities/dto/animalDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/enums/AnimalEmergencia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/model/enums/AnimalEmergencia.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/enums/AnimalInternado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/model/enums/AnimalInternado.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/enums/AnimalSexo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/model/enums/AnimalSexo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/enums/AnimalTipo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/model/enums/AnimalTipo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/enums/FormaPagamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/model/enums/FormaPagamento.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/enums/Situacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/model/enums/Situacao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/enums/SituacaoPet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/model/enums/SituacaoPet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/enums/StatusPagamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/model/enums/StatusPagamento.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/exceptions/DomainException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/model/exceptions/DomainException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/interfaces/dao/AnimalDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/model/dao/interfaces/AnimalDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/interfaces/dao/ClienteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/model/dao/interfaces/ClienteDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/interfaces/dao/DaoFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/model/dao/interfaces/DaoFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/interfaces/dao/ServicosDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/model/dao/interfaces/ServicosDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/interfaces/dao/impl/AnimalDaoJDBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/model/dao/impl/AnimalDaoJDBC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/interfaces/dao/impl/ClienteDaoJDBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/model/dao/impl/ClienteDaoJDBC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/interfaces/dao/impl/ServicosDaoJDBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/model/dao/impl/ServicosDaoJDBC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/services/CpfCnpjMask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/service/CpfCnpjMask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/services/TelefoneMask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/service/TelefoneMask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/vet/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/app/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/vet/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/app/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/vet/controllers/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/controller/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/vet/controllers/cadPetController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/controller/cadPetController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/vet/controllers/cadastroController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/controller/cadastroController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/vet/controllers/clientesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/controller/clientesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/vet/controllers/editarClienteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/controller/editarClienteController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/vet/controllers/editarPetController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/controller/editarPetController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/vet/controllers/historicoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/controller/historicoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/vet/controllers/homeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/controller/homeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/vet/controllers/internadosController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/controller/internadosController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/vet/controllers/menuDataSaver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/controller/menuDataSaver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/vet/controllers/pacientesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/controller/pacientesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/vet/controllers/resultadoBusca.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/controller/resultadoBusca.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/vet/controllers/verAnimalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/controller/verAnimalController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sistem/vet/controllers/verClientesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sistem/controller/verClientesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/cadastrarPet.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/cadastrarPet.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/cadastro.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/cadastro.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/editarCliente.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/editarCliente.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/editarPet.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/editarPet.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/home.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/listaClientes.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/listaClientes.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/listaHistórico.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/listaHistórico.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/listaInternados.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/listaInternados.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/listaPacientes.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/listaPacientes.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/model.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/model.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/resultadoBuscaClientes.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/resultadoBuscaClientes.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/verAnimal.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/verAnimal.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/verCliente.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/verCliente.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/antrun/build-main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/antrun/build-main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fxml/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fxml/home.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fxml/listaClientes.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fxml/listaClientes.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fxml/listaInternados.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fxml/listaInternados.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fxml/listaPacientes.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fxml/listaPacientes.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fxml/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fxml/main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fxml/model.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fxml/model.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fxml/verCliente.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fxml/verCliente.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sistem/db/DB.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sistem/db/DbException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sistem/db/DbIntegrityException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sistem/entities/Animal.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sistem/entities/Cliente.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sistem/entities/Servicos.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sistem/enums/AnimalEmergencia.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sistem/enums/AnimalInternado.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sistem/enums/AnimalSexo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sistem/enums/AnimalTipo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sistem/enums/FormaPagamento.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sistem/enums/Situacao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sistem/enums/StatusPagamento.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sistem/exceptions/DomainException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sistem/interfaces/dao/AnimalDAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sistem/interfaces/dao/ClienteDAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sistem/interfaces/dao/DaoFactory.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sistem/interfaces/dao/ServicosDAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sistem/interfaces/dao/impl/AnimalDaoJDBC.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sistem/interfaces/dao/impl/ClienteDaoJDBC.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sistem/interfaces/dao/impl/ServicosDaoJDBC.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sistem/services/CpfCnpjMask.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sistem/services/TelefoneMask.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sistem/vet/App.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sistem/vet/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sistem/vet/controllers/MainController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sistem/vet/controllers/clientesController$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sistem/vet/controllers/clientesController$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sistem/vet/controllers/clientesController$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sistem/vet/controllers/clientesController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sistem/vet/controllers/menuDataSaver.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sistem/vet/controllers/verClientesController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/modules/javafx-base-11-win.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/modules/javafx-controls-11-win.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/modules/javafx-graphics-11-win.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/modules/vet-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/modules/vet-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/original-vet-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/original-vet-0.0.1-SNAPSHOT.jar" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 0
+}]]></component>
+  <component name="ProjectId" id="35LlRjWg2voEAgVCbsQGLjHvN9y" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Application.MainApp.executor": "Run",
+    "Maven.clean package.executor": "Run",
+    "Maven.clean.executor": "Run",
+    "Maven.install.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "E:/UVA - Facul/ClinicaVet",
+    "project.structure.last.edited": "SDKs",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2"
+  }
+}]]></component>
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="sistem.app.Main" />
       <module name="vet" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="sistem.vet.*" />
+          <option name="PATTERN" value="sistem.app.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -19,8 +170,88 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="MainApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="sistem.vet.MainApp" />
+      <module name="vet" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="sistem.app.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="clean" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="cmdOptions" />
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="clean" />
+              </list>
+            </option>
+            <option name="multimoduleDir" />
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="projectsCmdOptionValues">
+              <list />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <configuration name="install" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="cmdOptions" />
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="install" />
+              </list>
+            </option>
+            <option name="multimoduleDir" />
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="projectsCmdOptionValues">
+              <list />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.MainApp" />
+      <item itemvalue="Maven.clean" />
+      <item itemvalue="Maven.install" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="Application.MainApp" />
       </list>
     </recent_temporary>
@@ -39,5 +270,37 @@
   </component>
   <component name="SvnConfiguration">
     <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="da0b4dc9-04d5-474a-a7d5-94f666369c72" name="Changes" comment="" />
+      <created>1762897227934</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1762897227934</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/sistem/app/Main.java</url>
+          <line>2</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

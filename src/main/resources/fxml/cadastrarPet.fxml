@@ -8,7 +8,7 @@
 
 
 
-<VBox styleClass="modal"  xmlns:fx="http://javafx.com/fxml" fx:controller="sistem.vet.controllers.cadPetController" spacing="15" alignment="CENTER">
+<VBox styleClass="modal" xmlns:fx="http://javafx.com/fxml" fx:controller="sistem.controller.cadPetController" spacing="15" alignment="CENTER">
 	
 	<HBox styleClass="modalHeader">
 		<Label text="Cadastro de Animal" styleClass="infoModal" />

@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox styleClass="modal" xmlns:fx="http://javafx.com/fxml" alignment="TOP_LEFT" fx:controller="sistem.vet.controllers.verClientesController">
+<VBox styleClass="modal" xmlns:fx="http://javafx.com/fxml" alignment="TOP_LEFT" fx:controller="sistem.controller.verClientesController">
 	
 	<HBox styleClass="modalHeader">
 		<Label text="Dados do Cliente cadastrado" styleClass="infoModal" />

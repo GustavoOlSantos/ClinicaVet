@@ -57,16 +57,16 @@ Este sistema é capaz de realizar todas as operações CRUD (Criar, Ler, Atualiz
 ## Estrutura do Projeto
 
 - **src/main/java**: Contém os arquivos fonte do sistema.
-  - **sistem.db**: Classes de configuração e conexão ao banco de dados.
-  - **sistem.entities**: Classes que representam as entidades do sistema.
-  - **sistem.entities.dto**: Objetos de transferência de dados (DTO).
-  - **sistem.enums**: Enumerações utilizadas no sistema.
-  - **sistem.exceptions**: Tratamento de exceções personalizadas.
+  - **sistem.model.db**: Classes de configuração e conexão ao banco de dados.
+  - **sistem.model.entities**: Classes que representam as entidades do sistema.
+  - **sistem.model.entities.dto**: Objetos de transferência de dados (DTO).
+  - **sistem.model.enums**: Enumerações utilizadas no sistema.
+  - **sistem.model.exceptions**: Tratamento de exceções personalizadas.
   - **sistem.interfaces.dao**: Interfaces para acesso aos dados.
   - **sistem.interfaces.dao.impl**: Implementações das interfaces DAO.
-  - **sistem.services**: Manipulação dos dados, como máscaras.
-  - **sistem.vet**: Classes principais do sistema.
-  - **sistem.vet.controllers**: Controladores de interface e lógica da aplicação.
+  - **sistem.service**: Manipulação dos dados, como máscaras.
+  - **sistem.app**: Classes principais do sistema.
+  - **sistem.controller**: Controladores de interface e lógica da aplicação.
   - **module-info.java**: Arquivo de módulo do Java.
 
 - **src/main/resources**: Contém recursos adicionais do sistema.

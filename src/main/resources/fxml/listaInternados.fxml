@@ -15,7 +15,7 @@
 	• Input para pesquisar um cliente
 	• Botão para Acessar o histórico de clientes
 -->
-<VBox xmlns:fx="http://javafx.com/fxml" VBox.vgrow="ALWAYS" alignment="CENTER" fx:controller="sistem.vet.controllers.internadosController">
+<VBox xmlns:fx="http://javafx.com/fxml" VBox.vgrow="ALWAYS" alignment="CENTER" fx:controller="sistem.controller.internadosController">
      
     <VBox styleClass="TableContent" VBox.vgrow="ALWAYS"> 
         

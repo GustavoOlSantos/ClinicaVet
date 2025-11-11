@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.image.ImageView?>
 
-<AnchorPane id="Welcome" prefWidth="Infinity" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.2-internal" fx:controller="sistem.vet.controllers.HomeController">
+<AnchorPane id="Welcome" prefWidth="Infinity" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.2-internal" fx:controller="sistem.controller.HomeController">
     
     <!-- header -->
     <HBox styleClass="Header" xmlns:fx="http://javafx.com/fxml" prefWidth="Infinity" alignment="CENTER_LEFT" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">

@@ -13,7 +13,7 @@
 		• Botão para ver todos os dados, como se fosse em uma folha 
 	• Input para pesquisar um cliente
 -->
-<VBox styleClass="modal" xmlns:fx="http://javafx.com/fxml" alignment="TOP_LEFT" fx:controller="sistem.vet.controllers.verAnimalController">
+<VBox styleClass="modal" xmlns:fx="http://javafx.com/fxml" alignment="TOP_LEFT" fx:controller="sistem.controller.verAnimalController">
 	
 	<HBox styleClass="modalHeader">
 		<Label text="Dados do Animal" styleClass="infoModal" />

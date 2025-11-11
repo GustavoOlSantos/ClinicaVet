@@ -5,7 +5,7 @@
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 <?import org.kordamp.ikonli.javafx.StackedFontIcon?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" VBox.vgrow="ALWAYS" alignment="TOP_LEFT" fx:controller="sistem.vet.controllers.resultadoBusca">
+<VBox xmlns:fx="http://javafx.com/fxml" VBox.vgrow="ALWAYS" alignment="TOP_LEFT" fx:controller="sistem.controller.resultadoBusca">
 	
 	<HBox fx:id="hboxMargin">
     	<Label text="Resultado da Busca de Clientes" styleClass="Welcome" />

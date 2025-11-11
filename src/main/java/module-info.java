@@ -9,10 +9,10 @@ module sistem {
     requires org.kordamp.ikonli.fontawesome;
     requires org.kordamp.ikonli.devicons;
 	requires javafx.graphics;   
-    opens sistem.vet to javafx.fxml;
-    opens sistem.vet.controllers to javafx.fxml;
-    opens sistem.entities to javafx.base; // Isso permite que javafx.base acesse o pacote sistem.entities
-    opens sistem.entities.dto to javafx.base; // Isso permite que javafx.base acesse o pacote sistem.entities
-    exports sistem.vet;
-    exports sistem.vet.controllers;
+    opens sistem.app to javafx.fxml;
+    opens sistem.controller to javafx.fxml;
+    opens sistem.model.entities to javafx.base; // Isso permite que javafx.base acesse o pacote sistem.model.entities
+    opens sistem.model.entities.dto to javafx.base; // Isso permite que javafx.base acesse o pacote sistem.model.entities
+    exports sistem.app;
+    exports sistem.controller;
 }
