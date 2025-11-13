@@ -84,7 +84,7 @@
         <dependency>
             <groupId>org.apache.xmlgraphics</groupId>
             <artifactId>batik-transcoder</artifactId>
-            <version>1.14</version>
+            <version>1.17</version>
         </dependency>
 
         <dependency>
@@ -119,45 +119,40 @@
             <artifactId>ikonli-materialdesign2-pack</artifactId>
         </dependency>
 
+        <!-- ✅ DEPENDÊNCIAS DE TESTE -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.10.2</version>
+            <scope>test</scope>
+        </dependency>
 
-        <!-- ✅ ADDED: Testing Dependencies (JUnit 5, Mockito, TestFX) -->
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>5.10.2</version>
+            <groupId>org.testfx</groupId>
+            <artifactId>testfx-junit5</artifactId>
+            <version>4.0.17</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.10.2</version>
-            <scope>test</scope>
-        </dependency>
+
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <version>5.11.0</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.testfx</groupId>
-            <artifactId>testfx-junit5</artifactId>
-            <version>4.0.16-alpha</version>
-            <scope>test</scope>
-        </dependency>
+
+        <!-- ✅ Permite testes headless (sem abrir a janela JavaFX) -->
         <dependency>
             <groupId>org.testfx</groupId>
             <artifactId>openjfx-monocle</artifactId>
             <version>jdk-11+26</version>
             <scope>test</scope>
         </dependency>
-        <!-- ✅ END Testing Dependencies -->
-
     </dependencies>
 
     <build>
         <plugins>
-            <!-- adds file to let you run program outside of IDE -->
+            <!-- 🧩 Ant run: cria o runme.bat -->
             <plugin>
                 <artifactId>maven-antrun-plugin</artifactId>
                 <executions>
@@ -175,24 +170,38 @@
                 </executions>
             </plugin>
 
-            <!-- sets up the version of Java you are running -->
+            <!-- 🧩 Compilador Java -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
+                <version>3.11.0</version>
                 <configuration>
                     <release>11</release>
                 </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.ow2.asm</groupId>
-                        <artifactId>asm</artifactId>
-                        <version>6.2.1</version>
-                    </dependency>
-                </dependencies>
+
+                <!-- ✅ Compilação dos testes (fora do sistema modular) -->
+                <executions>
+                    <execution>
+                        <id>default-testCompile</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>testCompile</goal>
+                        </goals>
+                        <configuration>
+                            <release>11</release>
+                            <compilerArgs>
+                                <!-- permite que o módulo 'sistem' leia JUnit e TestFX -->
+                                <arg>--add-reads</arg>
+                                <arg>sistem=org.junit.jupiter.api</arg>
+                                <arg>--add-reads</arg>
+                                <arg>sistem=org.testfx.junit5</arg>
+                            </compilerArgs>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
 
-            <!-- Adds the mainClass to the jar so it will run outside -->
+            <!-- 🧩 Plugin para criar JAR executável -->
             <plugin>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.1.0</version>
@@ -206,7 +215,7 @@
                 </configuration>
             </plugin>
 
-            <!-- Copies the depend FX files to your program  -->
+            <!-- 🧩 Copia dependências JavaFX -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -225,8 +234,7 @@
                 </executions>
             </plugin>
 
-
-            <!-- FAT JAR -->
+            <!-- 🧩 Criação do FAT JAR -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
@@ -246,8 +254,7 @@
                 </executions>
             </plugin>
 
-
-            <!-- ✅ ADDED: JUnit 5 Test Runner Plugin -->
+            <!-- ✅ Plugin de testes JUnit 5 (com TestFX) -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -256,8 +263,7 @@
                     <useModulePath>false</useModulePath>
                 </configuration>
             </plugin>
-            <!-- ✅ END Test Plugin -->
-
         </plugins>
     </build>
+
 </project>
