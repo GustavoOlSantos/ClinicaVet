@@ -436,10 +436,12 @@ public class clientesController implements Initializable {
 				view = 0;
 				
 				lblTitle.setText("Lista de clientes ativos");
-				
-				btnLC.setManaged(false); // Elimina o botão do Layout
-				btnLC.setVisible(false); // Esconde o botão
-				
+
+                if(btnLC != null){
+                    btnLC.setManaged(false); // Elimina o botão do Layout
+                    btnLC.setVisible(false); // Esconde o botão
+                }
+
 				btnHC.setManaged(true); // Insere o botão no Layout
 				btnHC.setVisible(true); // Exibe o botão
 			}
@@ -450,10 +452,11 @@ public class clientesController implements Initializable {
 				
 				btnLC.setManaged(true); // Insere o botão no Layout
 				btnLC.setVisible(true); // Exibe o botão
-				
-				btnHC.setManaged(false); // Elimina o botão do Layout
-				btnHC.setVisible(false); // Esconde o botão
 
+                if(btnHC != null){
+                    btnHC.setManaged(false); // Elimina o botão do Layout
+                    btnHC.setVisible(false); // Esconde o botão
+                }
 			}	
 		} 
 		catch (DomainException e) {

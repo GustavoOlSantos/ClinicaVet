@@ -5,6 +5,7 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -277,6 +278,15 @@ public class cadastroController implements Initializable {
     }
     
     public void salvarCadastro() {
+
+        List<String> camposVazios = verificarCampos();
+        if (!camposVazios.isEmpty()) {
+            String mensagem = "Os seguintes campos não foram preenchidos:\n" + String.join(", ", camposVazios);
+            menu.dialogAvisos(mensagem);
+
+            return;
+        }
+
         // salvando dados cliente
         String nomeCliente = nomeField.getText();
         String cpf = cpfField.getText();
@@ -284,7 +294,7 @@ public class cadastroController implements Initializable {
         String telefone = telefoneField.getText();
         FormaPagamento fpg = formaPgField.getValue();
         Double orcamento = Double.parseDouble(orcamentoField.getText());
-        int Parcelas = Integer.parseInt(parcelasField.getText());
+        int Parcelas = !Objects.equals(parcelasField.getText(), "") ? Integer.parseInt(parcelasField.getText()) : 0;
         String observacao = observacoesClienteField.getText();
        
        
@@ -311,6 +321,62 @@ public class cadastroController implements Initializable {
 			menu.dialogAvisos(e.getMessage());
 		}     
         
+    }
+
+    private List<String> verificarCampos(){
+
+        List<String> camposVazios = new ArrayList<>();
+
+        if (nomeField.getText().isBlank()) {
+            camposVazios.add("Nome");
+            nomeField.getStyleClass().add("field-error");
+        }
+        else {
+            nomeField.getStyleClass().remove("field-error");
+        }
+
+        if (cpfField.getText().isBlank()) {
+            camposVazios.add("CPF");
+            cpfField.getStyleClass().add("field-error");
+        }
+        else {
+            cpfField.getStyleClass().remove("field-error");
+        }
+
+        if (emailField.getText().isBlank()) {
+            camposVazios.add("Email");
+            emailField.getStyleClass().add("field-error");
+        }
+        else {
+            emailField.getStyleClass().remove("field-error");
+        }
+
+        if (telefoneField.getText().isBlank()) {
+            camposVazios.add("Telefone");
+            telefoneField.getStyleClass().add("field-error");
+        }
+        else {
+            telefoneField.getStyleClass().remove("field-error");
+        }
+
+        if (formaPgField.getValue() == null) {
+            camposVazios.add("Forma de Pagamento");
+            formaPgField.getStyleClass().add("field-error");
+        }
+        else {
+            formaPgField.getStyleClass().remove("field-error");
+        }
+
+        if (parcelasField.getText().isBlank()) {
+            camposVazios.add("Parcelas");
+            parcelasField.getStyleClass().add("field-error");
+        }
+        else {
+            parcelasField.getStyleClass().remove("field-error");
+        }
+
+
+        return camposVazios;
     }
     
 }

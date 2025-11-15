@@ -12,14 +12,26 @@ import java.util.Properties;
 public class DB {
 	
 	private static Connection conn = null;
+    private static boolean testMode = false;
+
+    public static void enableTestMode() { testMode = true; }
+    public static void disableTestMode() { testMode = false; }
 	
 	public static Connection getConnection() {
 		if(conn == null) {
 			try {
-				Properties props = loadProperties();			//=> Carrega os dados do arquivo
-				String url = props.getProperty("dburl");		//=> Obtem a URL
-				conn = DriverManager.getConnection(url, props); //=> Realiza a Conexão
-				
+
+                if (!testMode) {
+                    Properties props = loadProperties("PRD");			//=> Carrega os dados do arquivo
+                    String url = props.getProperty("dburl");		//=> Obtem a URL
+                    conn = DriverManager.getConnection(url, props); //=> Realiza a Conexão
+                }
+                else{
+                    Properties props = loadProperties("TST");			//=> Carrega os dados do arquivo
+                    String url = props.getProperty("dburl");		//=> Obtem a URL
+                    conn = DriverManager.getConnection(url, props); //=> Realiza a Conexão
+                }
+
 				ConnectionKeepAlive.startKeepAlive(conn);
 			}
 			catch(SQLException e) {
@@ -42,8 +54,17 @@ public class DB {
 		}
 	}
 	
-	private static Properties loadProperties() {
-		try (FileInputStream fs = new FileInputStream("db.properties")){
+	private static Properties loadProperties(String AMB) {
+        String DBFile;
+
+        if(AMB != "PRD"){
+            DBFile = "db-test.properties";
+        }
+        else{
+            DBFile = "db.properties";
+        }
+
+		try (FileInputStream fs = new FileInputStream(DBFile)){
 			Properties props = new Properties();
 			props.load(fs);
 			

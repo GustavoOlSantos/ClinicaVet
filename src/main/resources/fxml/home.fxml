@@ -84,7 +84,7 @@
 			<VBox styleClass="darkerBox" spacing="10">
 				<Label text="Ações Rápidas" styleClass="welcome-data" />
 				<HBox spacing="20">
-		    		<Button styleClass="fastActionButtons" onAction="#cadCliente">
+		    		<Button styleClass="fastActionButtons" fx:id="cadastrar" onAction="#cadCliente">
 		    			<graphic>
 		    				<VBox alignment="CENTER" spacing="5">
 		                    	<FontIcon iconLiteral="fa-plus" iconColor="black" iconSize="50"/>
@@ -93,7 +93,7 @@
 		                </graphic>
 		    		</Button>
 		    		
-		    		<Button styleClass="fastActionButtons" onAction="#clickClientes">
+		    		<Button styleClass="fastActionButtons" fx:id="clientes" onAction="#clickClientes">
 		    			<graphic>
 			    			<VBox alignment="CENTER" spacing="5">
 		                    	<FontIcon iconLiteral="fas-users" iconColor="black" iconSize="50"/>
@@ -102,7 +102,7 @@
                     	</graphic>
 		    		</Button>
 		    		
-		    		<Button styleClass="fastActionButtons" onAction="#clickPacientes">
+		    		<Button styleClass="fastActionButtons" fx:id="pacientes" onAction="#clickPacientes">
 		    			<graphic>
 			    			<VBox alignment="CENTER" spacing="5">
 		                    	<FontIcon iconLiteral="fa-paw" iconColor="black" iconSize="50"/>

@@ -88,7 +88,7 @@
 		    </VBox>
 	    
 		    <!-- Botão cadastrar pet -->
-			<Button onAction="#cadPet"> 
+			<Button fx:id="cadastrarPet" onAction="#cadPet">
 				<graphic>
 					<FontIcon iconLiteral="fa-plus" iconColor="black" iconSize="15"/>
 				</graphic>
