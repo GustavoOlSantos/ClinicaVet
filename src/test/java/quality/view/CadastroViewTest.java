@@ -156,7 +156,7 @@ public class CadastroViewTest extends ApplicationTest {
         clickOn("#btnAdd");
 
         // 3) VALIDA: A linha existe na tabela
-        sleep(500);
+        sleep(1200);
 //        TableView<?> tabela = lookup("#tableView").queryTableView();
 //        assertThat(tabela.getItems().size()).isGreaterThan(0);
 

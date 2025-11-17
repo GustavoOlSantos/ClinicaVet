@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 import sistem.app.App;
+import sistem.model.db.DB;
 
 import static org.testfx.api.FxAssert.*;
 import static org.testfx.matcher.control.LabeledMatchers.*;
@@ -30,6 +31,11 @@ public class HomeViewTest extends ApplicationTest {
         new App().start(stage);
     }
 
+    @BeforeAll
+    public static void setup() {
+        DB.enableTestMode();
+    }
+
     @BeforeEach
     void waitForLoad() {
         sleep(500);
@@ -50,7 +56,7 @@ public class HomeViewTest extends ApplicationTest {
     @Test
     void buscaPorAnimal() {
         verifyThat("#nomePetField", isVisible());
-        clickOn("#nomePetField").write("Apolo");
+        clickOn("#nomePetField").write("Bob");
         clickOn(".submit-button");
 
         //=> Verifica se o animal foi encontrado
@@ -60,8 +66,8 @@ public class HomeViewTest extends ApplicationTest {
                 hasText("Dados do Animal")
         ));
 
-        verifyThat("#nome", hasText("Apolo"));
-        verifyThat("#nomeTutor", hasText("Milleny Araujo"));
+        verifyThat("#nome", hasText("Bob"));
+        verifyThat("#nomeTutor", hasText("João da Silva"));
 
         sleep(1000);
     }
@@ -69,7 +75,7 @@ public class HomeViewTest extends ApplicationTest {
     @Test
     void buscaPorTutor() {
         verifyThat("#nomeField", isVisible());
-        clickOn("#nomeField").write("Milleny Araujo");
+        clickOn("#nomeField").write("João da Silva");
         clickOn(".submit-button");
 
         //=> Verifica se a lista foi encontrado
