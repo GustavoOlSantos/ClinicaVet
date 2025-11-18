@@ -10,7 +10,7 @@ Este repositório apresenta uma solução para controle de clientes, animais e s
 - **Maven**: Gerenciamento de dependências e build (versão 4.0.0).
 - **Banco de Dados MySQL**: Versão 9.0.0.
 
-<img src="https://skillicons.dev/icons?i=java,maven,eclipse,mysql,bash,github,git,css"/>
+<img src="https://skillicons.dev/icons?i=java,maven,idea,mysql,bash,github,git,css"/>
 
 ### Dependências Principais
 
