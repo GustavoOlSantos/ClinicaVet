@@ -58,7 +58,7 @@ public class cadPetController implements Initializable {
     @FXML
     private ComboBox<SituacaoPet> statusField; 	
     @FXML
-    public TextField orcamentoField;
+    public TextField orcamentoPetField;
     @FXML
     public TextArea observacoesField;
     
@@ -85,7 +85,7 @@ public class cadPetController implements Initializable {
     @FXML
     public Button close;
     @FXML
-    public Button btnSalvar;
+    public Button btnSalvarPet;
     
     
     @FXML
@@ -197,7 +197,7 @@ public class cadPetController implements Initializable {
 	    	
 	    	
 	 
-	    	orcamentoField.setText(((Double) animal.getOrcamento()).toString());
+	    	orcamentoPetField.setText(((Double) animal.getOrcamento()).toString());
 	    	reloadTable();
 		}
     	
@@ -220,7 +220,7 @@ public class cadPetController implements Initializable {
 		animal.setTipo(especieField.getValue());
 		animal.setSituacao(statusField.getValue());
 		animal.setEmergencia(emergenciaField.getValue());
-		animal.setOrcamento(Double.parseDouble(orcamentoField.getText()));
+		animal.setOrcamento(Double.parseDouble(orcamentoPetField.getText()));
 		animal.setObservacoes(observacoesField.getText());
 		  
 		menu.setSharedAnimal(animal);  
@@ -271,12 +271,12 @@ public class cadPetController implements Initializable {
     		emergenciaField.getStyleClass().remove("field-error");
     	}
     	
-    	if (orcamentoField.getText().isBlank()) {
+    	if (orcamentoPetField.getText().isBlank()) {
     	    camposVazios.add("Orçamento");
-    	    orcamentoField.getStyleClass().add("field-error");
+    	    orcamentoPetField.getStyleClass().add("field-error");
     	}
     	else {
-    		orcamentoField.getStyleClass().remove("field-error");
+    		orcamentoPetField.getStyleClass().remove("field-error");
     	}
     	
     	return camposVazios;
@@ -302,7 +302,7 @@ public class cadPetController implements Initializable {
 	    	animal.setOrcamentoInc(preco);
 	    	
 	    	
-	    	orcamentoField.setText(((Double) animal.getOrcamento()).toString());
+	    	orcamentoPetField.setText(((Double) animal.getOrcamento()).toString());
 	    	reloadTable();
 	    	
 	    	servicosBox.setValue(null);

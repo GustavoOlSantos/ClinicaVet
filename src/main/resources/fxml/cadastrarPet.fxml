@@ -51,7 +51,7 @@
 	
 	        <VBox spacing="5">
 	            <Label text="Orçamento" styleClass="data-name" />
-	            <TextField fx:id="orcamentoField" promptText="Orçamento Estimado" minWidth="300" minHeight="15"/>
+	            <TextField fx:id="orcamentoPetField" promptText="Orçamento Estimado" minWidth="300" minHeight="15"/>
 	        </VBox>
 	
 	        <VBox spacing="5">
@@ -101,7 +101,7 @@
 
 	    <!-- Botão Salvar para o Animal ou Cancelar -->
 	   	<HBox styleClass="modalFooter" spacing="10">
-			<Button fx:id="btnSalvar" text="Salvar" onAction="#salvarCadastro" styleClass="submit-data">
+			<Button fx:id="btnSalvarPet" text="Salvar" onAction="#salvarCadastro" styleClass="submit-data">
 		        <graphic>
 		            <FontIcon iconLiteral="fa-save" iconColor="black" iconSize="13"/>
 		        </graphic>

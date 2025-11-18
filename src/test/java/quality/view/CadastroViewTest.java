@@ -91,14 +91,13 @@ public class CadastroViewTest extends ApplicationTest {
 
         // ===== 6. Adicionar um Pet =====
          clickOn("#cadastrarPet");
-         sleep(500);
-         cadastrarUmPet("Rex", "Animal agressivo.");
          sleep(1000);
+         cadastrarUmPet("Rex", "Animal agressivo.");
+         sleep(1500);
 
          // ==== 7. Verifica se tabela agora possui alguma linha cadastrada
         TableView<?> tabela = lookup("#tableView").queryTableView();
         assertThat(tabela.getItems().size()).isGreaterThan(0);
-
 
         // ===== 8. Clicar no botão salvar =====
         clickOn("#btnSalvar");
@@ -161,10 +160,10 @@ public class CadastroViewTest extends ApplicationTest {
 //        assertThat(tabela.getItems().size()).isGreaterThan(0);
 
         //=> Verifica se o Orçamento Total foi calculado
-        assertThat(lookup("#orcamentoField").queryAs(TextField.class))
+        assertThat(lookup("#orcamentoPetField").queryAs(TextField.class))
                 .hasText("50.0");
 
         // Clica em salvar
-        clickOn("#btnSalvar");
+        clickOn("#btnSalvarPet");
     }
 }
