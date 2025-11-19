@@ -70,15 +70,25 @@ public class CadastroViewTest extends ApplicationTest {
         verifyThat("#tableView", isVisible());
         verifyThat("#cadastrarPet", isVisible());
         verifyThat("#btnSalvar", isVisible());
+
+        System.out.println("\n\n================== Resultado do Teste ==================");
+        System.out.println("Todos os elementos da tela de cadastro estão visíveis.");
     }
 
     @Test
     void cadastrarCliente(){
+        String nome = "João da Silva";
+        String cpf = "12345678901";
+        String email = "joao@gmail.com";
+        String telefone = "2199999-8888";
+
+        String nomePet = "Rex";
+
         // ===== 1. Digitar dados do cliente =====
-        clickOn("#nomeField").write("João da Silva");
-        clickOn("#cpfField").write("12345678901");
-        clickOn("#emailField").write("joao@gmail.com");
-        clickOn("#telefoneField").write("2199999-8888");
+        clickOn("#nomeField").write(nome);
+        clickOn("#cpfField").write(cpf);
+        clickOn("#emailField").write(email);
+        clickOn("#telefoneField").write(telefone);
 
         // ===== 2. Forma de pagamento =====
         clickOn("#formaPgField");   // Abre o ComboBox
@@ -92,7 +102,7 @@ public class CadastroViewTest extends ApplicationTest {
         // ===== 6. Adicionar um Pet =====
          clickOn("#cadastrarPet");
          sleep(1000);
-         cadastrarUmPet("Rex", "Animal agressivo.");
+         cadastrarUmPet(nomePet, "Animal agressivo.");
          sleep(1500);
 
          // ==== 7. Verifica se tabela agora possui alguma linha cadastrada
@@ -111,6 +121,12 @@ public class CadastroViewTest extends ApplicationTest {
 
         // =====Verifica Retorno a HomePage
         verifyThat(".Welcome", hasText("Bem vindo!"));
+
+        System.out.println("\n\n================== Resultado do Teste ==================");
+        System.out.println("Cliente cadastrado com sucesso!: ");
+        System.out.println("Cliente cadastrado: " +  nome);
+        System.out.println("Animal do " + nome + ": " + nomePet);
+
     }
 
     private void cadastrarUmPet(String nome, String Obs){

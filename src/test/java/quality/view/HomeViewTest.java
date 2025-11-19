@@ -51,6 +51,9 @@ public class HomeViewTest extends ApplicationTest {
         verifyThat("#acoesRapidas", isVisible());
         verifyThat("#cxDiario", isVisible());
         verifyThat(".submit-button", hasText("Pesquisar"));
+
+        System.out.println("\n\n================== Resultado do Teste ==================");
+        System.out.println("Todos os elementos da homePage estão visíveis! ");
     }
 
     @Test
@@ -70,6 +73,11 @@ public class HomeViewTest extends ApplicationTest {
         verifyThat("#nomeTutor", hasText("João da Silva"));
 
         sleep(1000);
+
+        System.out.println("\n\n================== Resultado do Teste ==================");
+        System.out.println("Animal buscado com sucesso!: ");
+        System.out.println("Animal buscado: Bob");
+        System.out.println("Tutor do animal: João da Silva");
     }
 
     @Test
@@ -89,5 +97,9 @@ public class HomeViewTest extends ApplicationTest {
         verifyThat("#NomeTutor", isVisible());
 
         sleep(1000);
+
+        System.out.println("\n\n================== Resultado do Teste ==================");
+        System.out.println("Tutor e seus animais encontrados com sucesso!: ");
+        System.out.println("Tutor encontrado: João da Silva");
     }
 }
