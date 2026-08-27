@@ -1,5 +1,3 @@
-db.properties
-
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
@@ -26,7 +24,6 @@ target/*
 
 # Compiled Files
 *.MF
-*.properties
 *.class
 bin/
 build/
