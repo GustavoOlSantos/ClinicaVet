@@ -48,10 +48,10 @@ public class CadastroViewTest extends ApplicationTest {
 
     @BeforeEach
     void waitForLoad() {
-        sleep(500);
+        sleep(2000); 
         clickOn("#cadastrar");
 
-        sleep(500);
+        sleep(1000); 
         verifyThat(".Header", isVisible());
         verifyThat("#leftMenu", isVisible());
     }

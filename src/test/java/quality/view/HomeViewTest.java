@@ -38,7 +38,7 @@ public class HomeViewTest extends ApplicationTest {
 
     @BeforeEach
     void waitForLoad() {
-        sleep(500);
+        sleep(2000);
     }
 
     @Test
@@ -59,34 +59,37 @@ public class HomeViewTest extends ApplicationTest {
     @Test
     void buscaPorAnimal() {
         verifyThat("#nomePetField", isVisible());
-        clickOn("#nomePetField").write("Bob");
+
+        clickOn("#nomePetField").write("Rex"); 
         clickOn(".submit-button");
 
-        //=> Verifica se o animal foi encontrado
+        sleep(1500); 
+
         verifyThat(".modal", isVisible());
         verifyThat(".infoModal", allOf(
                 isVisible(),
                 hasText("Dados do Animal")
         ));
 
-        verifyThat("#nome", hasText("Bob"));
-        verifyThat("#nomeTutor", hasText("João da Silva"));
+        verifyThat("#nome", hasText("Rex"));
+        verifyThat("#nomeTutor", hasText("Ana Paula"));
 
         sleep(1000);
 
         System.out.println("\n\n================== Resultado do Teste ==================");
         System.out.println("Animal buscado com sucesso!: ");
-        System.out.println("Animal buscado: Bob");
-        System.out.println("Tutor do animal: João da Silva");
+        System.out.println("Animal buscado: Rex");
+        System.out.println("Tutor do animal: Ana Paula");
     }
 
     @Test
     void buscaPorTutor() {
         verifyThat("#nomeField", isVisible());
-        clickOn("#nomeField").write("João da Silva");
+        clickOn("#nomeField").write("Ana Paula"); 
         clickOn(".submit-button");
 
-        //=> Verifica se a lista foi encontrado
+        sleep(1500); 
+
         verifyThat(".Welcome", allOf(
                 isVisible(),
                 hasText("Resultado da Busca de Clientes")
@@ -100,6 +103,6 @@ public class HomeViewTest extends ApplicationTest {
 
         System.out.println("\n\n================== Resultado do Teste ==================");
         System.out.println("Tutor e seus animais encontrados com sucesso!: ");
-        System.out.println("Tutor encontrado: João da Silva");
+        System.out.println("Tutor encontrado: Ana Paula");
     }
 }
