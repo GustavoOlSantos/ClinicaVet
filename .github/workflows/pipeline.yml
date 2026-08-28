@@ -1,0 +1,97 @@
+name: Pipeline de Build e Testes
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+
+  java-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configurar o Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: 'maven'
+
+      - name: Criar arquivo db-test.properties
+        run: |
+          mkdir -p src/test/resources
+          echo "dburl=jdbc:mysql://localhost:3307/clinica_vet?allowPublicKeyRetrieval=true&serverTimezone=UTC" > db-test.properties
+          echo "user=app" >> db-test.properties
+          echo "password=123456" >> db-test.properties
+          echo "useSSL=true" >> db-test.properties
+
+      - name: Iniciar Banco de Dados com Docker Compose
+        run: docker compose up -d
+
+      - name: Aguardar Banco de Dados
+        run: sleep 10
+
+      - name: Popular banco de dados com dados de teste
+        run: |
+          # Correção: -p123456 (tudo junto, sem espaço)
+          docker exec -i clinica_vet-mysql mysql -u app -p123456 clinica_vet -e "
+            -- 1. Insere o Cliente (ID 1)
+            INSERT INTO cliente 
+              (id, nome, cpfCnpj, telefone, email, qtdAnimal, orcamentoTotal, formaPagamento, parcelas, statusPagamento, situacao, observacao, dataCadastro) 
+            VALUES 
+              (1, 'Ana Paula', '12345678901', '21988887777', 'ana@email.com', 1, 150.00, 1, 1, 1, 1, 'Tutor para testes automatizados', NOW());
+
+            -- 2. Insere os Tipos de Animais (ID 1 e 2)
+            INSERT INTO animaltipo (id, tipo) VALUES (1, 'Cachorro'), (2, 'Gato');
+
+            -- 3. Insere o Animal vinculado ao Cliente 1 e Tipo 1
+            INSERT INTO animal 
+              (idAnimal, idCliente, nome, sexo, tipo, status, emergencia, internado, orcamento) 
+            VALUES 
+              (1, 1, 'Rex', 1, 1, 1, 0, 0, 150.00);
+
+            -- 4. Insere alguns serviços básicos
+            INSERT INTO servicos (id, nome, valor, tipo) VALUES (1, 'Consulta Geral', 150.00, 1);
+
+            -- 5. Inicializa a sequence
+            INSERT INTO categorias_seq (next_val) VALUES (1);
+          "
+      - name: Instalar o Xvfb (Monitor Virtual)
+        run: sudo apt-get update && sudo apt-get install -y xvfb
+
+      - name: Rodar todos os testes (Branca, Cinza e Preta)
+        run: xvfb-run -a -s "-screen 0 1920x1080x24" mvn test -Dtestfx.robot.sleep=500 -Dtestfx.robot.write_sleep=50
+
+  build-app:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: 'maven'
+
+      - name: Gerar build do Backend (Sem testes)
+        run: mvn clean package -DskipTests
+        working-directory: ./
+
+  docker-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build com Docker Compose
+        run: docker compose build
+  
