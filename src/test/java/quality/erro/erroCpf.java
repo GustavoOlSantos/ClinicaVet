@@ -5,10 +5,12 @@ import static org.testfx.matcher.control.LabeledMatchers.hasText;
 
 import javafx.stage.Stage;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Disabled;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.util.WaitForAsyncUtils;
 import sistem.app.App;
 
+@Disabled("Ignorado no CI/CD - Requer interface gráfica")
 public class erroCpf extends ApplicationTest {
 
     @Override

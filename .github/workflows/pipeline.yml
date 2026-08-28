@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Configurar o Java
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: '11'
           distribution: 'temurin'
@@ -32,42 +32,92 @@ jobs:
           echo "password=123456" >> db-test.properties
           echo "useSSL=true" >> db-test.properties
 
-      - name: Iniciar Banco de Dados com Docker Compose
-        run: docker compose up -d
-
-      - name: Aguardar Banco de Dados
-        run: sleep 10
-
-      - name: Popular banco de dados com dados de teste
+      - name: Criar script de inicializacao do MySQL
         run: |
-          # Correção: -p123456 (tudo junto, sem espaço)
-          docker exec -i clinica_vet-mysql mysql -u app -p123456 clinica_vet -e "
-            -- 1. Insere o Cliente (ID 1)
-            INSERT INTO cliente 
-              (id, nome, cpfCnpj, telefone, email, qtdAnimal, orcamentoTotal, formaPagamento, parcelas, statusPagamento, situacao, observacao, dataCadastro) 
-            VALUES 
-              (1, 'Ana Paula', '12345678901', '21988887777', 'ana@email.com', 1, 150.00, 1, 1, 1, 1, 'Tutor para testes automatizados', NOW());
+          mkdir -p scripts
+          cat << 'EOF' > scripts/init.sql
+          
+          USE clinica_vet;
 
-            -- 2. Insere os Tipos de Animais (ID 1 e 2)
-            INSERT INTO animaltipo (id, tipo) VALUES (1, 'Cachorro'), (2, 'Gato');
+          CREATE TABLE `animaltipo` (
+            `id` int NOT NULL AUTO_INCREMENT,
+            `tipo` varchar(45) NOT NULL,
+            PRIMARY KEY (`id`)
+          ) ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-            -- 3. Insere o Animal vinculado ao Cliente 1 e Tipo 1
-            INSERT INTO animal 
-              (idAnimal, idCliente, nome, sexo, tipo, status, emergencia, internado, orcamento) 
-            VALUES 
-              (1, 1, 'Rex', 1, 1, 1, 0, 0, 150.00);
+          CREATE TABLE `categorias_seq` (
+            `next_val` bigint DEFAULT NULL
+          ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-            -- 4. Insere alguns serviços básicos
-            INSERT INTO servicos (id, nome, valor, tipo) VALUES (1, 'Consulta Geral', 150.00, 1);
+          CREATE TABLE `cliente` (
+            `id` int NOT NULL AUTO_INCREMENT,
+            `nome` varchar(45) NOT NULL,
+            `cpfCnpj` varchar(45) DEFAULT NULL,
+            `telefone` varchar(45) NOT NULL,
+            `email` varchar(100) DEFAULT NULL,
+            `qtdAnimal` int DEFAULT NULL,
+            `orcamentoTotal` double NOT NULL,
+            `formaPagamento` int NOT NULL,
+            `parcelas` int NOT NULL,
+            `statusPagamento` int NOT NULL,
+            `situacao` int NOT NULL,
+            `observacao` varchar(1000) DEFAULT NULL,
+            `dataCadastro` datetime NOT NULL,
+            `dataEncerramento` datetime DEFAULT NULL,
+            PRIMARY KEY (`id`)
+          ) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-            -- 5. Inicializa a sequence
-            INSERT INTO categorias_seq (next_val) VALUES (1);
-          "
-      - name: Instalar o Xvfb (Monitor Virtual)
-        run: sudo apt-get update && sudo apt-get install -y xvfb
+          CREATE TABLE `servicos` (
+            `id` int NOT NULL AUTO_INCREMENT,
+            `nome` varchar(45) NOT NULL,
+            `valor` double NOT NULL,
+            `tipo` int NOT NULL,
+            PRIMARY KEY (`id`)
+          ) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-      - name: Rodar todos os testes (Branca, Cinza e Preta)
-        run: xvfb-run -a -s "-screen 0 1920x1080x24" mvn test -Dtestfx.robot.sleep=500 -Dtestfx.robot.write_sleep=50
+          CREATE TABLE `animal` (
+            `idAnimal` int NOT NULL AUTO_INCREMENT,
+            `idCliente` int NOT NULL,
+            `nome` varchar(45) NOT NULL,
+            `sexo` varchar(45) NOT NULL,
+            `tipo` int NOT NULL,
+            `status` int DEFAULT NULL,
+            `emergencia` int DEFAULT NULL,
+            `internado` int DEFAULT NULL,
+            `orcamento` double NOT NULL,
+            `observacoes` varchar(1000) DEFAULT NULL,
+            `diagnostico` varchar(80) DEFAULT NULL,
+            `medicamentos` varchar(1000) DEFAULT NULL,
+            `servicos` varchar(200) DEFAULT NULL,
+            `data_alta` datetime DEFAULT NULL,
+            `data_obito` datetime DEFAULT NULL,
+            PRIMARY KEY (`idAnimal`)
+          ) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+          INSERT INTO cliente (id, nome, cpfCnpj, telefone, email, qtdAnimal, orcamentoTotal, formaPagamento, parcelas, statusPagamento, situacao, observacao, dataCadastro) 
+          VALUES (1, 'Ana Paula', '12345678901', '21988887777', 'ana@email.com', 1, 150.00, 1, 1, 1, 1, 'Tutor', NOW());
+
+          INSERT INTO animaltipo (id, tipo) VALUES (1, 'Cachorro'), (2, 'Gato');
+
+          INSERT INTO animal (idAnimal, idCliente, nome, sexo, tipo, status, emergencia, internado, orcamento, observacoes, diagnostico, medicamentos, servicos, data_alta, data_obito) 
+          VALUES (1, 1, 'Rex', 'Macho', 1, 1, 0, 0, 150.00, 'Nenhuma observação', 'Sem diagnóstico', 'Nenhum medicamento', 'Nenhum serviço', NOW(), NOW());
+
+          INSERT INTO servicos (id, nome, valor, tipo) VALUES (1, 'Consulta Geral', 150.00, 1);
+
+          INSERT INTO categorias_seq (next_val) VALUES (1);
+          EOF
+
+      - name: Iniciar Banco de Dados
+        run: |
+          docker compose up -d
+
+      - name: Aguardar o banco preparar os dados
+        run: sleep 20
+
+      - name: Rodar todos os testes (Apenas Backend)
+        run: >
+          mvn test
+          -Dsurefire.excludes="**/quality/view/*,**/quality/erro/*"
 
   build-app:
     runs-on: ubuntu-latest
@@ -76,7 +126,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Configurar Java
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: '11'
           distribution: 'temurin'

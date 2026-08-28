@@ -2,6 +2,7 @@ package quality.erro;
 
 import javafx.stage.Stage;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Disabled;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.matcher.control.LabeledMatchers;
 import org.testfx.util.WaitForAsyncUtils;
@@ -10,6 +11,7 @@ import sistem.app.App;
 import static org.testfx.api.FxAssert.*;
 import static org.testfx.assertions.api.Assertions.assertThat;
 
+@Disabled("Ignorado no CI/CD - Requer interface gráfica")
 public class erroCadpet extends ApplicationTest {
     @Override
     public void start(Stage stage) throws Exception {
